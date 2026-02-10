@@ -1,27 +1,50 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Brand Colors */
+  --color-brand-indigo: #4B0082;
+  --color-brand-purple: #7B68EE;
+  --color-brand-teal: #20B2AA;
+  --color-brand-green: #32CD32;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* UI Colors */
+  --color-bg-app: #0F0F1A;
+  --color-bg-card: #1E1E2E;
+  --color-border: #2D2D42;
+  --color-text-primary: #F0F0F5;
+  --color-text-secondary: #A0A0B5;
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  /* Status & Accents */
+  --color-accent-blue: #00BFFF;
+  --color-status-online: #00FF00;
+  --color-status-away: #FFD700;
+  --color-status-offline: #808080;
+  --color-status-dnd: #FF4444;
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Gradients */
+  --gradient-ai: linear-gradient(135deg, #7B68EE 0%, #00BFFF 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(75, 0, 130, 0.2) 0%, transparent 40%);
+
+  /* Spacing */
+  --spacing-base: 8px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Layout */
+  --header-height: 64px;
+  --friends-bar-height: 80px;
+  --server-nav-width: 72px;
+  /* Adjusted to fit icons comfortably */
+
+  /* Animation */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+
+  /* Z-Index */
+  --z-nav: 100;
+  --z-overlay: 200;
+  --z-modal: 1000;
 }
 
 * {
@@ -30,13 +53,151 @@ body {
   margin: 0;
 }
 
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+  background-color: var(--color-bg-app);
+  color: var(--color-text-primary);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Scrollbar Utility for Webkit */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Common Utilities */
+.glass-panel {
+  background: rgba(30, 30, 46, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  background: var(--gradient-ai);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes global-shake {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
   }
+
+  25% {
+    transform: translate(-2px, 2px) rotate(-0.5deg);
+  }
+
+  50% {
+    transform: translate(2px, -2px) rotate(0.5deg);
+  }
+
+  75% {
+    transform: translate(-2px, -2px) rotate(-0.5deg);
+  }
+
+  100% {
+    transform: translate(2px, 2px) rotate(0.5deg);
+  }
+}
+
+.globalCrazyShake {
+  animation: global-shake 0.1s infinite;
+}
+
+@keyframes glitch-chromatic {
+  0% {
+    transform: translate(0);
+    filter: hue-rotate(0deg) contrast(1.2);
+  }
+
+  20% {
+    transform: translate(-5px, 2px);
+    filter: hue-rotate(90deg) contrast(1.5);
+  }
+
+  40% {
+    transform: translate(5px, -2px);
+    filter: hue-rotate(180deg) contrast(1.2);
+  }
+
+  60% {
+    transform: translate(-2px, 5px);
+    filter: hue-rotate(270deg) contrast(1.5);
+  }
+
+  80% {
+    transform: translate(2px, -5px);
+    filter: hue-rotate(360deg) contrast(1.2);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitchOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px);
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  animation: glitch-chromatic 0.2s infinite;
+}
+
+/* Global Cursed Theme Overrides */
+.globalCursedTheme {
+  --color-bg-app: #000000 !important;
+  --color-bg-card: #050000 !important;
+  --color-border: #300 !important;
+  --color-text-primary: #dfdfdf !important;
+  --color-text-secondary: #800 !important;
+  --color-brand-purple: #900 !important;
+  --color-brand-indigo: #400 !important;
+  --color-accent-blue: #f00 !important;
+  --color-status-online: #600 !important;
+}
+
+/* Ensure all panes and headers inherit the dark theme */
+.globalCursedTheme [class*="sidebar"],
+.globalCursedTheme [class*="header"],
+.globalCursedTheme [class*="Bar"],
+.globalCursedTheme header,
+.globalCursedTheme nav,
+.globalCursedTheme aside {
+  background-color: #000 !important;
+  border-color: #300 !important;
+}
+
+.globalCursedTheme.bloodyGlow {
+  box-shadow: inset 0 0 100px rgba(139, 0, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.2);
 }

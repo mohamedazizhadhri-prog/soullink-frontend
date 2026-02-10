@@ -1,0 +1,111 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(15, 15, 26, 0.4);
+}
+
+.header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-card);
+}
+
+.groupInfo h2 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.chatTimeline {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.messageMeta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.messageAuthor {
+    font-family: var(--font-mono);
+    /* Anonymous ID style */
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.aiAuthor {
+    color: var(--color-brand-purple);
+    font-style: italic;
+}
+
+.messageContent {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 14px;
+    border-radius: 4px 12px 12px 12px;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
+.messageOwn {
+    align-self: flex-end;
+}
+
+.messageOwn .messageContent {
+    background: var(--color-brand-indigo);
+    border-radius: 12px 4px 12px 12px;
+}
+
+.inputArea {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--color-bg-card);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.inputField {
+    flex: 1;
+    background: var(--color-bg-app);
+    border: 1px solid var(--color-border);
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--color-text-primary);
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: var(--color-brand-purple);
+}
+
+.tools {
+    display: flex;
+    gap: var(--spacing-sm);
+    color: var(--color-text-secondary);
+}

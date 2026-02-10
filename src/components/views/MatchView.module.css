@@ -1,0 +1,152 @@
+.container {
+    height: 100%;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.header {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.filters {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.filterBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filterBtn:hover,
+.activeFilter {
+    background: rgba(123, 104, 238, 0.2);
+    color: var(--color-brand-purple);
+    border-color: var(--color-brand-purple);
+}
+
+.cardContainer {
+    width: 100%;
+    max-width: 400px;
+    background: var(--color-bg-card);
+    border-radius: 24px;
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.avatarSilhouette {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #2D2D42 0%, #1E1E2E 100%);
+    margin-bottom: var(--spacing-md);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #444;
+}
+
+.matchScore {
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--gradient-ai);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: var(--spacing-sm);
+}
+
+.matchLabel {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.traitsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.traitTag {
+    background: rgba(32, 178, 170, 0.1);
+    color: var(--color-brand-teal);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+.actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    margin-top: auto;
+}
+
+.actionBtn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--transition-normal);
+}
+
+.btnPass {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-secondary);
+}
+
+.btnPass:hover {
+    background: rgba(255, 68, 68, 0.1);
+    color: var(--color-status-dnd);
+}
+
+.btnConnect {
+    background: var(--gradient-ai);
+    color: white;
+    box-shadow: 0 4px 15px rgba(123, 104, 238, 0.3);
+}
+
+.btnConnect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(123, 104, 238, 0.4);
+}
+
+.navControls {
+    margin-top: var(--spacing-lg);
+    display: flex;
+    gap: var(--spacing-md);
+    color: var(--color-text-secondary);
+}

@@ -1,0 +1,113 @@
+.panelContainer {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.toggleBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(30, 30, 46, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    color: var(--color-brand-purple);
+    transition: all var(--transition-normal);
+}
+
+.toggleBtn:hover {
+    transform: scale(1.05);
+    background: rgba(30, 30, 46, 0.8);
+    border-color: var(--color-brand-purple);
+}
+
+.menu {
+    background: rgba(30, 30, 46, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 220px;
+    transform-origin: bottom right;
+}
+
+.sectionTitle {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-weight: 700;
+    margin-bottom: 4px;
+    margin-top: 8px;
+}
+
+.moodGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.moodBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 6px;
+    color: var(--color-text-primary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moodBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.active {
+    background: rgba(123, 104, 238, 0.2);
+    border-color: var(--color-brand-purple);
+    color: var(--color-brand-purple);
+}
+
+.statusRow {
+    display: flex;
+    gap: 6px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pageBtn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.pageBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-primary);
+}

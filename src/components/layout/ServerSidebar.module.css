@@ -1,0 +1,80 @@
+.sidebar {
+    width: var(--server-nav-width);
+    height: 100%;
+    background-color: rgba(15, 15, 26, 0.6);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    gap: var(--spacing-md);
+    overflow-y: auto;
+}
+
+.serverIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    color: var(--color-text-secondary);
+}
+
+.serverIcon:hover,
+.active {
+    border-radius: 16px;
+    background-color: var(--color-brand-indigo);
+    color: var(--color-text-primary);
+}
+
+.pill {
+    position: absolute;
+    left: -12px;
+    width: 4px;
+    height: 0;
+    /* Hidden by default */
+    background-color: var(--color-brand-purple);
+    border-radius: 0 4px 4px 0;
+    transition: all var(--transition-fast);
+}
+
+.serverIcon:hover .pill {
+    height: 20px;
+}
+
+.active .pill {
+    height: 32px;
+    left: -12px;
+    /* Adjust based on parent padding if needed, assumed relative to icon */
+}
+
+/* Adjustments because pill needs to be outside the icon or icon needs margin */
+/* Since sidebar centers items, let's put the pill indicator relative to the item container logic if strict discord mimicry needed. */
+/* For now, simplistic approach: pill inside or no pill. */
+
+.tomeIcon {
+    background: linear-gradient(135deg, #4B0082, #7B68EE);
+    color: white;
+}
+
+.separator {
+    width: 32px;
+    height: 2px;
+    background-color: var(--color-border);
+    margin: 4px 0;
+}
+
+.createBtn {
+    color: var(--color-brand-green);
+    background-color: rgba(50, 205, 50, 0.1);
+}
+
+.createBtn:hover {
+    background-color: rgba(50, 205, 50, 0.2);
+    color: var(--color-brand-green);
+}

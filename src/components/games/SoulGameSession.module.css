@@ -1,0 +1,173 @@
+.sessionContainer {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-app);
+    color: var(--color-text-primary);
+    font-family: 'Outfit', sans-serif;
+}
+
+.topBar {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.progressContainer {
+    flex-grow: 1;
+    max-width: 300px;
+    margin: 0 2rem;
+}
+
+.progressBar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.sceneArea {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.narrative {
+    max-width: 800px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2.5rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+
+.narrativeText {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.choicesGrid {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 900px;
+}
+
+.choiceBtn {
+    padding: 1.2rem 2.5rem;
+    border-radius: 3rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-bg-card);
+    color: var(--color-text-primary);
+}
+
+.choiceBtn:hover {
+    transform: scale(1.1);
+}
+
+.reflectionArea {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.aiChat {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.novaBubble {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 1.5rem 1.5rem 1.5rem 0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.inputGroup {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.textarea {
+    flex-grow: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 1rem;
+    color: white;
+    font-family: inherit;
+    resize: none;
+    height: 60px;
+    transition: all 0.3s ease;
+}
+
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-brand-purple);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.sendBtn {
+    padding: 0 2rem;
+    background: var(--color-brand-purple);
+    color: white;
+    border-radius: 1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.sendBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.navBtn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: none;
+    color: white;
+    cursor: pointer;
+}

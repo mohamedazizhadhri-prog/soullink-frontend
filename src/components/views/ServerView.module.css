@@ -1,0 +1,144 @@
+.container {
+    height: 100%;
+    display: flex;
+    background-color: var(--color-bg-app);
+}
+
+.channelList {
+    width: 240px;
+    background-color: rgba(15, 15, 26, 0.3);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.serverHeader {
+    height: 48px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.serverHeader:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.channelGroup {
+    padding: var(--spacing-md) var(--spacing-sm);
+}
+
+.channelLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-xs);
+}
+
+.channelItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    margin-bottom: 2px;
+    transition: all var(--transition-fast);
+}
+
+.channelItem:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-primary);
+}
+
+.activeChannel {
+    background-color: rgba(123, 104, 238, 0.1);
+    color: var(--color-text-primary);
+}
+
+.chatArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-app);
+}
+
+.chatHeader {
+    height: 48px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-lg);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    gap: var(--spacing-sm);
+}
+
+.hashtag {
+    color: var(--color-text-secondary);
+}
+
+.messagesScroll {
+    flex: 1;
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.serverMessage {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.userAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    flex-shrink: 0;
+}
+
+.messageContentWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+}
+
+.timestamp {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-left: var(--spacing-sm);
+}
+
+.messageText {
+    color: var(--color-text-secondary);
+    /* Discord messages are slightly off-white unless high contrast */
+    color: rgba(240, 240, 245, 0.9);
+    line-height: 1.4;
+}
+
+.welcomeBanner {
+    background: linear-gradient(135deg, rgba(75, 0, 130, 0.2), rgba(123, 104, 238, 0.1));
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid rgba(123, 104, 238, 0.2);
+}
