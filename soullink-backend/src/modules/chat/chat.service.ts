@@ -1,0 +1,97 @@
+import { prisma } from '../../config/database.js';
+import { logger } from '../../shared/utils/logger.js';
+import { io } from '../../server.js';
+import { notificationsService } from '../notifications/notifications.service.js';
+
+export class ChatService {
+    async sendDirectMessage(senderId: string, receiverId: string, content: string, type: string = 'TEXT') {
+        try {
+            const message = await prisma.directMessage.create({
+                data: {
+                    senderId,
+                    receiverId,
+                    content,
+                    type: type as any,
+                }
+            });
+
+            // Fetch sender info for real-time broadcast and notification
+            const sender = await prisma.user.findUnique({
+                where: { id: senderId },
+                select: { id: true, displayName: true, avatarUrl: true }
+            });
+
+            // Real-time broadcast
+            if (io) {
+                io.to(`user:${receiverId}`).emit('dm:message', {
+                    message,
+                    sender
+                });
+            }
+
+            // Create notification for receiver
+            await notificationsService.createNotification(receiverId, {
+                type: 'message',
+                title: 'New Message',
+                body: `${sender?.displayName || 'Someone'} sent you a message: "${content.substring(0, 50)}${content.length > 50 ? '...' : ''}"`,
+                metadata: { senderId }
+            });
+
+            return message;
+        } catch (error) {
+            logger.error(`Failed to send DM from ${senderId} to ${receiverId}:`, error);
+            throw error;
+        }
+    }
+
+    async getConversation(userId: string, friendId: string, limit = 50, cursor?: string) {
+        return await prisma.directMessage.findMany({
+            where: {
+                OR: [
+                    { senderId: userId, receiverId: friendId },
+                    { senderId: friendId, receiverId: userId }
+                ]
+            },
+            take: limit,
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
+            orderBy: { createdAt: 'desc' },
+        });
+    }
+
+    async markAsRead(userId: string, friendId: string) {
+        return await prisma.directMessage.updateMany({
+            where: {
+                senderId: friendId,
+                receiverId: userId,
+                read: false
+            },
+            data: { read: true }
+        });
+    }
+
+    async getUnreadDMCount(userId: string) {
+        return await prisma.directMessage.count({
+            where: { receiverId: userId, read: false }
+        });
+    }
+
+    async searchMessages(userId: string, query: string, friendId?: string) {
+        return await prisma.directMessage.findMany({
+            where: {
+                OR: [
+                    { senderId: userId, receiverId: friendId },
+                    { senderId: friendId, receiverId: userId }
+                ],
+                content: {
+                    contains: query,
+                    mode: 'insensitive'
+                }
+            },
+            orderBy: { createdAt: 'desc' },
+            take: 50
+        });
+    }
+}
+
+export const chatService = new ChatService();

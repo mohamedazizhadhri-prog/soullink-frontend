@@ -1,0 +1,20 @@
+import { Router } from 'express';
+import { FriendsController } from './friends.controller.js';
+import { protect } from '../../middleware/auth.js';
+import { validate } from '../../middleware/validate.js';
+import { sendFriendRequestSchema, respondFriendRequestSchema } from './friends.schema.js';
+
+const router = Router();
+const controller = new FriendsController();
+
+router.use(protect);
+
+router.get('/', controller.listFriends);
+router.get('/pending', controller.listPendingRequests);
+router.get('/sent', controller.listSentRequests);
+
+router.post('/request', validate(sendFriendRequestSchema), controller.sendRequest);
+router.patch('/:id/respond', validate(respondFriendRequestSchema), controller.respondRequest);
+router.delete('/:id', controller.removeFriend);
+
+export default router;

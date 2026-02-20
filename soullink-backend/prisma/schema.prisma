@@ -1,0 +1,687 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ──────────────────────────────────────────────
+// ENUMS
+// ──────────────────────────────────────────────
+
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
+}
+
+enum AccountStatus {
+  PENDING_VERIFICATION  // Email/phone not verified yet
+  PENDING_FACE_VERIFY   // Face verification needed
+  PENDING_SOUL_GAME     // Must complete Episode 1
+  ACTIVE
+  SUSPENDED
+  BANNED
+  DELETED
+}
+
+enum PrivacyLevel {
+  PUBLIC
+  MATCHES_ONLY
+  FRIENDS_ONLY
+  PRIVATE
+}
+
+enum OnlineStatus {
+  ONLINE
+  AWAY
+  DO_NOT_DISTURB
+  OFFLINE
+}
+
+enum VerificationType {
+  EMAIL
+  PHONE
+  FACE_INITIAL
+  FACE_PERIODIC
+}
+
+enum MatchStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+enum MatchType {
+  ONE_TO_ONE
+  GROUP
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  FILE
+  GIF
+  SYSTEM
+}
+
+enum ChannelType {
+  TEXT
+  VOICE
+}
+
+enum ServerRole {
+  OWNER
+  ADMIN
+  MODERATOR
+  MEMBER
+}
+
+enum ReportStatus {
+  PENDING
+  UNDER_REVIEW
+  RESOLVED_WARNING
+  RESOLVED_SUSPENSION
+  RESOLVED_BAN
+  DISMISSED
+  APPEALED
+}
+
+enum ReportCategory {
+  HARASSMENT
+  SPAM
+  FAKE_IDENTITY
+  INAPPROPRIATE_CONTENT
+  HATE_SPEECH
+  UNDERAGE
+  OTHER
+}
+
+enum AppealStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum ModActionType {
+  WARNING
+  MUTE
+  SUSPENSION
+  BAN
+  UNBAN
+  CONTENT_REMOVAL
+}
+
+// ──────────────────────────────────────────────
+// USER & AUTHENTICATION (EF-001 to EF-009)
+// ──────────────────────────────────────────────
+
+model User {
+  id               String        @id @default(uuid())
+  email            String        @unique
+  phone            String        @unique
+  passwordHash     String
+  displayName      String
+  handle           String        @unique
+  bio              String?
+  avatarUrl        String?
+  role             Role          @default(USER)
+  status           AccountStatus @default(PENDING_VERIFICATION)
+  onlineStatus     OnlineStatus  @default(OFFLINE)
+  dateOfBirth      DateTime
+  emailVerified    Boolean       @default(false)
+  phoneVerified    Boolean       @default(false)
+  faceVerified     Boolean       @default(false)
+  lastFaceVerify   DateTime?
+  lastLoginAt      DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  // Facial Recognition (new)
+  faceDescriptor   Json?         // Stores the 128-float array from face-api.js
+
+  // Privacy controls (EF-007)
+  privacyProfile   PrivacyLevel  @default(PUBLIC)
+
+  // Settings
+  notificationsOn  Boolean       @default(true)
+
+  // Relations
+  verifications    Verification[]
+  loginHistory     LoginHistory[]       // EF-008
+  personalityProfile PersonalityProfile?
+  gameResponses    GameResponse[]
+  sentMatches      Match[]        @relation("SentMatches")
+  receivedMatches  Match[]        @relation("ReceivedMatches")
+  groupMatchMembers GroupMatchMember[]
+  sentFriendships  Friendship[]   @relation("SentFriendships")
+  receivedFriendships Friendship[] @relation("ReceivedFriendships")
+  messages         Message[]
+  aiConversations  AIConversation[]
+  serverMembers    ServerMember[]
+  sentReports      Report[]       @relation("Reporter")
+  receivedReports  Report[]       @relation("Reported")
+  modActions       ModAction[]    @relation("ModActionTarget")
+  modActionsBy     ModAction[]    @relation("ModActionBy")
+  appeals          Appeal[]
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+
+  @@index([email])
+  @@index([handle])
+  @@index([status])
+}
+
+model Verification {
+  id          String           @id @default(uuid())
+  userId      String
+  type        VerificationType
+  code        String?          // OTP code for email/phone
+  token       String?          // Verification token
+  verified    Boolean          @default(false)
+  expiresAt   DateTime
+  createdAt   DateTime         @default(now())
+
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, type])
+}
+
+model LoginHistory {
+  id          String   @id @default(uuid())
+  userId      String
+  ipAddress   String
+  userAgent   String
+  success     Boolean
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// ──────────────────────────────────────────────
+// PERSONALITY & SOUL GAMES (EF-010 to EF-019)
+// ──────────────────────────────────────────────
+
+model SoulGame {
+  id          String          @id @default(uuid())
+  slug        String          @unique   // e.g. "inner-crossroads"
+  title       String
+  description String
+  color       String
+  icon        String
+  mandatory   Boolean         @default(false)
+  episode     Int
+  orderIndex  Int
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  scenes      GameScene[]
+  responses   GameResponse[]
+
+  @@index([slug])
+}
+
+model GameScene {
+  id              String       @id @default(uuid())
+  gameId          String
+  sceneOrder      Int
+  text            String
+  bgImageUrl      String?
+  createdAt       DateTime     @default(now())
+
+  game            SoulGame     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  choices         GameChoice[]
+  responses       GameResponse[]
+
+  @@index([gameId])
+}
+
+model GameChoice {
+  id               String       @id @default(uuid())
+  sceneId          String
+  text             String
+  themeColor       String
+  icon             String?
+  orderIndex       Int
+
+  // Personality trait mappings (Big Five)
+  openness         Float        @default(0)
+  conscientiousness Float       @default(0)
+  extraversion     Float        @default(0)
+  agreeableness    Float        @default(0)
+  neuroticism      Float        @default(0)
+
+  // Value mappings
+  valueCategory    String?      // e.g. "ethics", "ambition", "empathy"
+  valueWeight      Float        @default(0)
+
+  scene            GameScene    @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  responses        GameResponse[]
+
+  @@index([sceneId])
+}
+
+model GameResponse {
+  id              String     @id @default(uuid())
+  userId          String
+  gameId          String
+  sceneId         String
+  choiceId        String
+  createdAt       DateTime   @default(now())
+
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game            SoulGame   @relation(fields: [gameId], references: [id])
+  scene           GameScene  @relation(fields: [sceneId], references: [id])
+  choice          GameChoice @relation(fields: [choiceId], references: [id])
+
+  @@index([userId, gameId])
+}
+
+model PersonalityProfile {
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  
+  // Big Five scores (0.0 - 1.0)
+  openness          Float    @default(0.5)
+  conscientiousness Float    @default(0.5)
+  extraversion      Float    @default(0.5)
+  agreeableness     Float    @default(0.5)
+  neuroticism       Float    @default(0.5)
+
+  interests         Json     @default("[]")  // ["philosophy", "gaming", ...]
+
+  // AI-generated insights (EF-019)
+  insights          Json     @default("[]")  // Array of insight strings
+  
+  lastCalculatedAt  DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ──────────────────────────────────────────────
+// AI COMPANION (EF-020 to EF-029)
+// ──────────────────────────────────────────────
+
+model AIConversation {
+  id            String       @id @default(uuid())
+  userId        String
+  summary       String?      // Rolling conversation summary
+  lastCheckIn   DateTime?    // EF-025: daily check-in tracking
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages      AIMessage[]
+
+  @@index([userId])
+}
+
+model AIMessage {
+  id              String         @id @default(uuid())
+  conversationId  String
+  role            String         // "user" | "assistant" | "system"
+  content         String
+  emotionDetected String?        // EF-023: emotion recognition
+  isProactive     Boolean        @default(false) // EF-022
+  createdAt       DateTime       @default(now())
+
+  conversation    AIConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+}
+
+// ──────────────────────────────────────────────
+// MATCHING (EF-030 to EF-041)
+// ──────────────────────────────────────────────
+
+model Match {
+  id                String      @id @default(uuid())
+  senderId          String
+  receiverId        String
+  type              MatchType   @default(ONE_TO_ONE)
+  status            MatchStatus @default(PENDING)
+  compatibilityScore Float     // 0-100 percentage
+  justification     Json       // EF-034: why AI suggested this
+  isAnonymous       Boolean    @default(true) // EF-035
+  identityRevealed  Boolean    @default(false) // EF-038
+  expiresAt         DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+
+  sender            User       @relation("SentMatches", fields: [senderId], references: [id])
+  receiver          User       @relation("ReceivedMatches", fields: [receiverId], references: [id])
+  conversation      MatchConversation?
+
+  @@unique([senderId, receiverId])
+  @@index([senderId, status])
+  @@index([receiverId, status])
+}
+
+model GroupMatch {
+  id          String            @id @default(uuid())
+  name        String?
+  maxSize     Int               @default(8) // 3-8 users (EF-033)
+  expiresAt   DateTime          // 24-hour session
+  isActive    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+
+  members     GroupMatchMember[]
+}
+
+model GroupMatchMember {
+  id           String     @id @default(uuid())
+  groupMatchId String
+  userId       String
+  joinedAt     DateTime   @default(now())
+
+  groupMatch   GroupMatch  @relation(fields: [groupMatchId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id])
+
+  @@unique([groupMatchId, userId])
+}
+
+model MatchConversation {
+  id        String    @id @default(uuid())
+  matchId   String    @unique
+  createdAt DateTime  @default(now())
+
+  match     Match     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  messages  MatchMessage[]
+}
+
+model MatchMessage {
+  id             String            @id @default(uuid())
+  conversationId String
+  senderId       String
+  type           MessageType       @default(TEXT)
+  content        String
+  fileUrl        String?
+  createdAt      DateTime          @default(now())
+  editedAt       DateTime?
+
+  conversation   MatchConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+}
+
+model Friendship {
+  id         String           @id @default(uuid())
+  senderId   String
+  receiverId String
+  status     FriendshipStatus @default(PENDING)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  sender     User             @relation("SentFriendships", fields: [senderId], references: [id])
+  receiver   User             @relation("ReceivedFriendships", fields: [receiverId], references: [id])
+
+  @@unique([senderId, receiverId])
+  @@index([senderId, status])
+  @@index([receiverId, status])
+}
+
+// ──────────────────────────────────────────────
+// CHAT & COMMUNICATION (EF-042 to EF-045)
+// ──────────────────────────────────────────────
+
+model DirectMessage {
+  id          String      @id @default(uuid())
+  senderId    String
+  receiverId  String
+  type        MessageType @default(TEXT)
+  content     String
+  fileUrl     String?
+  read        Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  editedAt    DateTime?
+
+  @@index([senderId, receiverId])
+  @@index([receiverId, senderId])
+}
+
+model CallLog {
+  id          String   @id @default(uuid())
+  callerId    String
+  receiverId  String
+  type        String   // "audio" | "video"
+  duration    Int?     // seconds
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+
+  @@index([callerId])
+  @@index([receiverId])
+}
+
+model ActivityRoom {
+  id          String   @id @default(uuid())
+  name        String
+  type        String   // "youtube" | "game" | "screen-share"
+  hostId      String
+  isActive    Boolean  @default(true)
+  metadata    Json     @default("{}") // YouTube URL, game config, etc.
+  createdAt   DateTime @default(now())
+}
+
+// ──────────────────────────────────────────────
+// COMMUNITY / SERVERS (EF-046 to EF-049)
+// ──────────────────────────────────────────────
+
+model Server {
+  id          String         @id @default(uuid())
+  name        String
+  description String?
+  iconUrl     String?
+  bannerUrl   String?        // New: Community banner image
+  inviteCode  String         @unique // New: For joining communities
+  isPublic    Boolean        @default(true)
+  maxMembers  Int            @default(100) // New: Capacity limit
+  ownerId     String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  channels    Channel[]
+  members     ServerMember[]
+
+  @@index([isPublic])
+  @@index([inviteCode])
+}
+
+model Channel {
+  id         String      @id @default(uuid())
+  serverId   String
+  name       String
+  type       ChannelType @default(TEXT)
+  groupName  String      // Category/group label
+  orderIndex Int         @default(0)
+  createdAt  DateTime    @default(now())
+
+  server     Server      @relation(fields: [serverId], references: [id], onDelete: Cascade)
+  messages   Message[]
+
+  @@index([serverId])
+}
+
+model ServerMember {
+  id        String     @id @default(uuid())
+  serverId  String
+  userId    String
+  role      ServerRole @default(MEMBER)
+  joinedAt  DateTime   @default(now())
+
+  server    Server     @relation(fields: [serverId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id])
+
+  @@unique([serverId, userId])
+}
+
+model Message {
+  id        String      @id @default(uuid())
+  channelId String
+  authorId  String
+  type      MessageType @default(TEXT)
+  content   String
+  fileUrl   String?
+  createdAt DateTime    @default(now())
+  editedAt  DateTime?
+
+  channel   Channel     @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  author    User        @relation(fields: [authorId], references: [id])
+
+  @@index([channelId])
+}
+
+// ──────────────────────────────────────────────
+// MODERATION & SECURITY (EF-050 to EF-057)
+// ──────────────────────────────────────────────
+
+model Report {
+  id            String         @id @default(uuid())
+  reporterId    String
+  reportedId    String
+  category      ReportCategory
+  description   String
+  evidence      Json           @default("[]") // URLs to screenshots, etc.
+  status        ReportStatus   @default(PENDING)
+  assignedModId String?
+  resolvedAt    DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  reporter      User           @relation("Reporter", fields: [reporterId], references: [id])
+  reported      User           @relation("Reported", fields: [reportedId], references: [id])
+  modActions    ModAction[]
+  appeal        Appeal?
+
+  @@index([status])
+  @@index([reportedId])
+}
+
+model ModAction {
+  id         String        @id @default(uuid())
+  reportId   String?
+  targetId   String
+  modId      String
+  action     ModActionType
+  reason     String
+  duration   Int?          // Duration in hours for suspensions
+  expiresAt  DateTime?
+  createdAt  DateTime      @default(now())
+
+  report     Report?       @relation(fields: [reportId], references: [id])
+  target     User          @relation("ModActionTarget", fields: [targetId], references: [id])
+  moderator  User          @relation("ModActionBy", fields: [modId], references: [id])
+
+  @@index([targetId])
+}
+
+model Appeal {
+  id         String       @id @default(uuid())
+  reportId   String       @unique
+  userId     String
+  reason     String
+  status     AppealStatus @default(PENDING)
+  reviewedBy String?
+  reviewedAt DateTime?
+  createdAt  DateTime     @default(now())
+
+  report     Report       @relation(fields: [reportId], references: [id])
+  user       User         @relation(fields: [userId], references: [id])
+
+  @@index([status])
+}
+
+model ShameWall {
+  id         String   @id @default(uuid())
+  userId     String
+  reason     String
+  addedAt    DateTime @default(now())
+  expiresAt  DateTime?
+}
+
+// ──────────────────────────────────────────────
+// NOTIFICATIONS
+// ──────────────────────────────────────────────
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  type      String   // "match" | "message" | "friend_request" | "report" | "system"
+  title     String
+  body      String
+  metadata  Json     @default("{}")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, read])
+}
+
+// ──────────────────────────────────────────────
+// AUDIT & ANALYTICS (EF-057 to EF-066)
+// ──────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  action     String   // "LOGIN" | "PROFILE_UPDATE" | "BAN_USER" | etc.
+  resource   String   // "User" | "Report" | "Server" | etc.
+  resourceId String?
+  metadata   Json     @default("{}")
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  user       User?    @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+model AnalyticsSnapshot {
+  id                  String   @id @default(uuid())
+  date                DateTime @unique // One per day
+  totalUsers          Int      @default(0)
+  activeUsers         Int      @default(0)
+  newUsers            Int      @default(0)
+  totalMatches        Int      @default(0)
+  successfulMatches   Int      @default(0)
+  totalMessages       Int      @default(0)
+  totalReports        Int      @default(0)
+  resolvedReports     Int      @default(0)
+  avgResponseTimeMs   Float    @default(0)
+  avgMatchScore       Float    @default(0)
+  retentionRate       Float    @default(0)
+  premiumConversions  Int      @default(0)
+  metadata            Json     @default("{}")
+  createdAt           DateTime @default(now())
+
+  @@index([date])
+}
+
+model AIModelVersion {
+  id          String   @id @default(uuid())
+  name        String
+  version     String
+  type        String   // "personality" | "matching" | "moderation" | "companion"
+  config      Json     @default("{}")
+  isActive    Boolean  @default(false)
+  deployedAt  DateTime?
+  createdAt   DateTime @default(now())
+}
