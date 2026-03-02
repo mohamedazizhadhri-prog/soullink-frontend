@@ -48,6 +48,7 @@ enum VerificationType {
   PHONE
   FACE_INITIAL
   FACE_PERIODIC
+  PASSWORD_RESET
 }
 
 enum MatchStatus {
@@ -162,6 +163,7 @@ model User {
   loginHistory     LoginHistory[]       // EF-008
   personalityProfile PersonalityProfile?
   gameResponses    GameResponse[]
+  gameProgress     SoulGameProgress[]
   sentMatches      Match[]        @relation("SentMatches")
   receivedMatches  Match[]        @relation("ReceivedMatches")
   groupMatchMembers GroupMatchMember[]
@@ -169,6 +171,7 @@ model User {
   receivedFriendships Friendship[] @relation("ReceivedFriendships")
   messages         Message[]
   aiConversations  AIConversation[]
+  novaMemory       NovaUserMemory?
   serverMembers    ServerMember[]
   sentReports      Report[]       @relation("Reporter")
   receivedReports  Report[]       @relation("Reported")
@@ -231,6 +234,7 @@ model SoulGame {
 
   scenes      GameScene[]
   responses   GameResponse[]
+  progress    SoulGameProgress[]
 
   @@index([slug])
 }
@@ -246,6 +250,7 @@ model GameScene {
   game            SoulGame     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   choices         GameChoice[]
   responses       GameResponse[]
+  currentProgress SoulGameProgress[]
 
   @@index([gameId])
 }
@@ -281,6 +286,8 @@ model GameResponse {
   gameId          String
   sceneId         String
   choiceId        String
+  responseTimeMs  Int        @default(0)
+  emotionalNote   String?
   createdAt       DateTime   @default(now())
 
   user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -312,6 +319,23 @@ model PersonalityProfile {
   updatedAt         DateTime @updatedAt
 
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SoulGameProgress {
+  id              String   @id @default(uuid())
+  userId          String
+  gameId          String
+  currentSceneId  String?  // The scene currently being viewed
+  isCompleted     Boolean  @default(false)
+  completedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game            SoulGame   @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  currentScene    GameScene? @relation(fields: [currentSceneId], references: [id])
+
+  @@unique([userId, gameId])
 }
 
 // ──────────────────────────────────────────────
@@ -685,3 +709,44 @@ model AIModelVersion {
   deployedAt  DateTime?
   createdAt   DateTime @default(now())
 }
+
+model TokenBlacklist {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+}
+
+// ──────────────────────────────────────────────
+// AI & NOVA MEMORY SYSTEM
+// ──────────────────────────────────────────────
+
+model NovaUserMemory {
+  id                 String   @id @default(uuid())
+  userId             String   @unique
+  
+  // Fast-lookup structured fields
+  nickname           String?
+  occupation         String?
+  currentMood        String?
+  emotionalTrend     String? // "improving", "declining", "stable"
+  topInterests       String[] // e.g., ["coding", "anime"]
+  lifeGoals          String[]
+  currentStruggles   String[]
+  importantPeople    String[]
+  lastTopicDiscussed String?
+  insideJokes        String[]
+  preferredTone      String?
+  trustLevel         Int      @default(0) // 0-100 scale
+  friendshipStage    String   @default("NEW") // NEW, FAMILIAR, FRIEND, CLOSE, SOULMATE
+  
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+}
+

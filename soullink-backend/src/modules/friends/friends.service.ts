@@ -75,7 +75,7 @@ export class FriendsService {
         });
     }
 
-    async listFriends(userId: string) {
+    async listFriends(userId: string, limit = 50, cursor?: string) {
         const friendships = await prisma.friendship.findMany({
             where: {
                 OR: [
@@ -83,6 +83,9 @@ export class FriendsService {
                     { receiverId: userId, status: 'ACCEPTED' }
                 ]
             },
+            take: Math.min(limit, 100),
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
             include: {
                 sender: {
                     select: {
@@ -118,12 +121,15 @@ export class FriendsService {
         });
     }
 
-    async listPendingRequests(userId: string) {
+    async listPendingRequests(userId: string, limit = 50, cursor?: string) {
         const requests = await prisma.friendship.findMany({
             where: {
                 receiverId: userId,
                 status: 'PENDING'
             },
+            take: Math.min(limit, 100),
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
             include: {
                 sender: {
                     select: {
@@ -144,12 +150,15 @@ export class FriendsService {
         }));
     }
 
-    async listSentRequests(userId: string) {
+    async listSentRequests(userId: string, limit = 50, cursor?: string) {
         const requests = await prisma.friendship.findMany({
             where: {
                 senderId: userId,
                 status: 'PENDING'
             },
+            take: Math.min(limit, 100),
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
             include: {
                 receiver: {
                     select: {

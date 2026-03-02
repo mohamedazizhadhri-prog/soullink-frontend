@@ -1,6 +1,11 @@
 import { prisma } from '../../config/database.js';
 import { AppError } from '../../middleware/errorHandler.js';
 
+// Whitelist of fields users are allowed to update on their own profile
+const ALLOWED_UPDATE_FIELDS = [
+    'displayName', 'bio', 'avatarUrl', 'privacyProfile', 'notificationsOn'
+];
+
 export class UsersService {
     async getMe(userId: string) {
         const user = await prisma.user.findUnique({
@@ -21,10 +26,22 @@ export class UsersService {
         return user;
     }
 
-    async updateMe(userId: string, data: any) {
+    async updateMe(userId: string, data: Record<string, any>) {
+        // Sanitize: only allow whitelisted fields
+        const sanitized: Record<string, any> = {};
+        for (const key of ALLOWED_UPDATE_FIELDS) {
+            if (data[key] !== undefined) {
+                sanitized[key] = data[key];
+            }
+        }
+
+        if (Object.keys(sanitized).length === 0) {
+            throw new AppError(400, 'No valid fields to update');
+        }
+
         return await prisma.user.update({
             where: { id: userId },
-            data,
+            data: sanitized,
             include: {
                 personalityProfile: true,
                 _count: {
@@ -50,10 +67,13 @@ export class UsersService {
                 onlineStatus: true,
                 createdAt: true,
                 privacyProfile: true,
-                privacyBio: true,
                 personalityProfile: {
                     select: {
-                        mbtiType: true,
+                        openness: true,
+                        conscientiousness: true,
+                        extraversion: true,
+                        agreeableness: true,
+                        neuroticism: true,
                         insights: true,
                     }
                 }
@@ -62,7 +82,7 @@ export class UsersService {
 
         if (!user) throw new AppError(404, 'User not found');
 
-        // Privacy filter (simplified)
+        // Privacy filter
         if (user.privacyProfile === 'PRIVATE') {
             throw new AppError(403, 'This profile is private');
         }
@@ -70,7 +90,7 @@ export class UsersService {
         return user;
     }
 
-    async searchUsers(query: string) {
+    async searchUsers(query: string, limit = 20, cursor?: string) {
         return await prisma.user.findMany({
             where: {
                 OR: [
@@ -88,7 +108,9 @@ export class UsersService {
                 handle: true,
                 avatarUrl: true,
             },
-            take: 20,
+            take: Math.min(limit, 50),
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
         });
     }
 }

@@ -1,4 +1,4 @@
-import { logger } from '../shared/utils/logger';
+import { logger } from '../shared/utils/logger.js';
 export class AppError extends Error {
     statusCode;
     message;
@@ -10,10 +10,29 @@ export class AppError extends Error {
     }
 }
 export const errorHandler = (err, req, res, next) => {
-    const statusCode = err instanceof AppError ? err.statusCode : 500;
-    const message = err.message || 'Internal server error';
+    let statusCode = err instanceof AppError ? err.statusCode : 500;
+    let message = err.message || 'Internal server error';
+    // Handle JWT specific errors
+    if (err && err.name === 'JsonWebTokenError') {
+        statusCode = 401;
+        message = 'Invalid token. Please log in again.';
+    }
+    else if (err && err.name === 'TokenExpiredError') {
+        statusCode = 401;
+        message = 'Your token has expired. Please log in again.';
+    }
+    else if (err && err.code === 'P1001') {
+        statusCode = 503;
+        message = 'Database connection refused. Please check if the database server is running or your connection string is correct.';
+    }
+    else if (err && err.code === 'P2024') {
+        statusCode = 503;
+        message = 'Database connection timeout. The server taking too long to respond.';
+    }
     if (statusCode === 500) {
-        logger.error(`[Unhandled Error] ${err.stack}`);
+        // Safer logging of potentially weird error objects
+        const errorDetail = err instanceof Error ? (err.stack || err.message) : JSON.stringify(err);
+        logger.error(`[Unhandled Error] Status: ${statusCode} - Detail: ${errorDetail}`);
     }
     res.status(statusCode).json({
         status: 'error',

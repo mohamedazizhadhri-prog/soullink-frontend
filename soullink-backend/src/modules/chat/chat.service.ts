@@ -2,16 +2,17 @@ import { prisma } from '../../config/database.js';
 import { logger } from '../../shared/utils/logger.js';
 import { io } from '../../server.js';
 import { notificationsService } from '../notifications/notifications.service.js';
+import { MessageType } from '@prisma/client';
 
 export class ChatService {
-    async sendDirectMessage(senderId: string, receiverId: string, content: string, type: string = 'TEXT') {
+    async sendDirectMessage(senderId: string, receiverId: string, content: string, type: MessageType = 'TEXT') {
         try {
             const message = await prisma.directMessage.create({
                 data: {
                     senderId,
                     receiverId,
                     content,
-                    type: type as any,
+                    type,
                 }
             });
 
@@ -52,7 +53,7 @@ export class ChatService {
                     { senderId: friendId, receiverId: userId }
                 ]
             },
-            take: limit,
+            take: Math.min(limit, 100),
             skip: cursor ? 1 : 0,
             cursor: cursor ? { id: cursor } : undefined,
             orderBy: { createdAt: 'desc' },
@@ -76,7 +77,7 @@ export class ChatService {
         });
     }
 
-    async searchMessages(userId: string, query: string, friendId?: string) {
+    async searchMessages(userId: string, query: string, friendId?: string, limit = 50, cursor?: string) {
         return await prisma.directMessage.findMany({
             where: {
                 OR: [
@@ -89,7 +90,9 @@ export class ChatService {
                 }
             },
             orderBy: { createdAt: 'desc' },
-            take: 50
+            take: Math.min(limit, 100),
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
         });
     }
 }

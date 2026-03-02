@@ -1,0 +1,4 @@
+﻿[
+    "src/modules/users/users.controller.ts(56,56): error TS2345: Argument of type \u0027string | string[]\u0027 is not assignable to parameter of type \u0027string\u0027.",
+    "  Type \u0027string[]\u0027 is not assignable to type \u0027string\u0027."
+]

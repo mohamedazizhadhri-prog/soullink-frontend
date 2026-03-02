@@ -27,6 +27,16 @@ export const protect = async (req: AuthRequest, res: Response, next: NextFunctio
 
         const decoded = verifyAccessToken(token);
 
+        // Check if token is blacklisted
+        const isBlacklisted = await (prisma as any).tokenBlacklist.findUnique({
+            where: { token }
+        });
+
+
+        if (isBlacklisted) {
+            throw new AppError(401, 'Token is no longer valid. Please log in again.');
+        }
+
         const user = await prisma.user.findUnique({
             where: { id: decoded.userId },
             select: { id: true, role: true, status: true, displayName: true, avatarUrl: true },

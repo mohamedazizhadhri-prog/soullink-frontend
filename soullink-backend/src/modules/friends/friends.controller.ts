@@ -8,7 +8,12 @@ const friendsService = new FriendsService();
 export class FriendsController {
     async listFriends(req: AuthRequest, res: Response, next: NextFunction) {
         try {
-            const friends = await friendsService.listFriends(req.user!.id);
+            const { limit, cursor } = req.query;
+            const friends = await friendsService.listFriends(
+                req.user!.id,
+                limit ? parseInt(limit as string) : 50,
+                cursor as string
+            );
             res.status(200).json({ status: 'success', data: { friends } });
         } catch (error) {
             next(error);
@@ -17,7 +22,12 @@ export class FriendsController {
 
     async listPendingRequests(req: AuthRequest, res: Response, next: NextFunction) {
         try {
-            const requests = await friendsService.listPendingRequests(req.user!.id);
+            const { limit, cursor } = req.query;
+            const requests = await friendsService.listPendingRequests(
+                req.user!.id,
+                limit ? parseInt(limit as string) : 50,
+                cursor as string
+            );
             res.status(200).json({ status: 'success', data: { requests } });
         } catch (error) {
             next(error);
@@ -26,7 +36,12 @@ export class FriendsController {
 
     async listSentRequests(req: AuthRequest, res: Response, next: NextFunction) {
         try {
-            const requests = await friendsService.listSentRequests(req.user!.id);
+            const { limit, cursor } = req.query;
+            const requests = await friendsService.listSentRequests(
+                req.user!.id,
+                limit ? parseInt(limit as string) : 50,
+                cursor as string
+            );
             res.status(200).json({ status: 'success', data: { requests } });
         } catch (error) {
             next(error);
@@ -38,7 +53,6 @@ export class FriendsController {
             const { receiverId } = req.body;
             const friendship = await friendsService.sendRequest(req.user!.id, receiverId);
 
-            // Real-time Socket.IO notification to receiver
             if ((req as any).io) {
                 (req as any).io.to(`user:${receiverId}`).emit('friend:request', {
                     friendship,
@@ -50,7 +64,6 @@ export class FriendsController {
                 });
             }
 
-            // Persistent Notification
             await notificationsService.createNotification(receiverId, {
                 type: 'request',
                 title: 'New Friend Request',
@@ -69,7 +82,6 @@ export class FriendsController {
             const { action } = req.body;
             const friendship = await friendsService.respondRequest(req.user!.id, req.params.id as string, action);
 
-            // Real-time Socket.IO notification to sender if accepted
             if (action === 'accept' && (req as any).io) {
                 (req as any).io.to(`user:${friendship.senderId}`).emit('friend:accepted', {
                     friendship,
@@ -81,7 +93,6 @@ export class FriendsController {
                 });
             }
 
-            // Persistent Notification if accepted
             if (action === 'accept') {
                 await notificationsService.createNotification(friendship.senderId, {
                     type: 'request_accepted',

@@ -1,0 +1,30 @@
+# Walkthrough: Phase 6 — Selective & Contextual Nova Reactions
+
+I have completed Phase 6, making Nova's reactions during Soul Games feel significantly more human, intelligent, and less "scripted."
+
+## Changes Made
+
+### 🧠 Backend: Smarter Decision Making
+- **Selective Reactions**: Updated `AIService.generateGameComment` to be selective. Nova no longer reacts to every single choice. She now evaluates the "weight" of the moment.
+- **Rich Context Injection**: When generating a comment, Nova now sees:
+    - **Timing Data**: Precise hesitation or decisiveness.
+    - **Personality Profile**: Your Big Five traits.
+    - **Recent Chat History**: The last 5 messages you exchanged before starting the game.
+    - **Long-term Memory**: Shared jokes, interests, and previous topics.
+- **Skip Logic**: The AI can now return a `skip: true` flag if the choice is unremarkable, ensuring Nova doesn't become "clingy" or repetitive.
+
+### 🎨 Frontend: Real-time & Clean UI
+- **Skip Handling**: [SoulGameSession.tsx](file:///D:/pfe/pfe%200.3/soullink-frontend/src/components/games/SoulGameSession.tsx) now honors the `skip` flag. If Nova decides to stay quiet, the comment bubble simply doesn't appear.
+- **No Scripted Fallbacks**: Removed all hardcoded/saved fallback messages. Nova's reactions are now 100% dynamic AI or nothing at all, as requested.
+- **Mood Sync**: Nova's visual mood (orb color/animation) syncs with her AI-generated commentary.
+
+## What to Expect
+
+1. **Silence is Smart**: If you answer a basic question quickly, Nova might say nothing. This is intentional.
+2. **Contextual Jokes**: If you were just talking about "watching YouTube" and then make a choice about "procrastination" in a game, Nova is now smart enough to link the two.
+3. **Hesitation Awareness**: If you take 15 seconds to answer a deep question, Nova will likely notice and offer a warm, curious observation about that specific moment.
+
+## Verification Results
+- **Build Status**: ✅ Backend `tsc` check passed.
+- **Selective Logic**: ✅ Verified AI correctly returns `skip` for normal choices and `comment` for interesting/hesitant ones.
+- **Context Integrity**: ✅ Verified chat history is correctly passed to the prompt.

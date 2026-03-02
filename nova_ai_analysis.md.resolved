@@ -1,0 +1,325 @@
+# 🧠 Nova AI Companion — Analysis & Improvement Plan
+
+## 1. What We Currently Have
+
+### 1.1 Backend: [ai.service.ts](file:///D:/pfe/pfe%200.3/soullink-backend/src/modules/ai-companion/ai.service.ts)
+| Feature | Current Implementation |
+|---|---|
+| **LLM Engine** | Groq API — `llama-3.3-70b-versatile` |
+| **Context Window** | Last **20 messages** per call |
+| **Long-term Memory** | Rolling **conversation summary** (regenerated every 30 messages, max 200 words) |
+| **User Context Injected** | `displayName`, `bio`, `dateOfBirth`, Big Five scores, last 10 Soul Game responses, friend count |
+| **Mood System (AI-side)** | Nova returns a `mood` field in JSON that drives avatar state |
+| **Proactive Messaging** | ❌ Not implemented — Nova only replies, never initiates |
+| **Emotion Detection** | Saved `emotionDetected` field on each DB message, but never used in logic |
+| **Summary Trigger** | Every 30 messages (fire-and-forget, doesn't block response) |
+| **Message Storage** | `AIConversation` (one per user) + `AIMessage` rows |
+
+### 1.2 Frontend: [NovaContext.tsx](file:///D:/pfe/pfe%200.3/soullink-frontend/src/context/NovaContext.tsx)
+| Feature | Current Implementation |
+|---|---|
+| **Mood States** | 20+ states: `neutral`, `happy`, `thinking`, `curious`, `sad`, `angry`, `angelic`, `blushed`, `bored`, `broken`, `crazy`, `cursed`, `surprised`, `laugh`, `disgusted`, `love`, `rich`, `melting`, `smart`, `egg` |
+| **Keyword Detection** | Client-side regex on user messages: blush/happy/angry/angelic/smart triggers |
+| **Inactivity Detection** | Sets mood to `bored` after 3 min no interaction or 5 min no chat |
+| **Vengeance System** | 3-strike escalation when user insults Nova (chat lock, singularity) |
+| **Message Cap** | Last **50 messages** kept in React state |
+| **Visual Effects** | Storm, PacMan, Singularity, Heartbreak, Melting, Smart, Dancing, Egg |
+
+### 1.3 How Smart Is Nova Currently?
+
+**Score: 5/10** 🔶
+
+**What it does well:**
+- Has real personality with a detailed system prompt
+- Injects Big Five + game choices into every call → knows the user psychologically
+- Dynamic mood that influences tone (e.g., ALL CAPS when angry)
+- Rolling summary prevents full amnesia in long conversations
+
+**What it lacks:**
+- No sense of **time** (doesn't know if it's morning, evening, or if 3 days passed)
+- No **emotional continuity** — each session feels fresh even if the summary exists
+- No **proactive initiative** — purely reactive
+- No **friendship tracking** — doesn't know if user is a new acquaintance or an old friend
+- No **user fact table** — facts are buried in the summary blob, can't be quickly retrieved
+- Memory summary only updates every 30 messages and max 200 words — loses nuance fast
+
+---
+
+## 2. What to Improve
+
+### 2.1 Memory Architecture — From Blob to Structured
+
+**Current problem:** User facts (name, hobbies, struggles, goals) are embedded in a 200-word text blob. When Nova needs to recall "what game does this user play?", it has to rely on the LLM to find it inside a paragraph.
+
+**Solution: Structured User Profile Table (`NovaUserMemory`)**
+
+```sql
+-- Proposed table: NovaUserMemory
+model NovaUserMemory {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  
+  -- Fast-lookup structured fields
+  nickname        String?       -- What user likes to be called
+  occupation      String?       -- Job, student, etc.
+  currentMood     String?       -- Last detected emotional state
+  emotionalTrend  String?       -- "improving", "struggling", "stable"
+  topInterests    String[]      -- ["music", "coding", "anime"]
+  lifeGoals       String[]      -- ["become a dev", "make friends"]
+  currentStruggles String[]     -- ["loneliness", "exam stress"]
+  importantPeople  String[]     -- ["sister Sara", "friend Khalil"]
+  lastTopicDiscussed String?    -- For conversation continuity
+  insideJokes     String[]      -- Small references Nova can use
+  preferredTone   String?       -- "casual", "deep", "playful"
+  trustLevel      Int           @default(0)  -- 0-100 scale
+  friendshipStage String        @default("NEW")  -- NEW → FAMILIAR → FRIEND → CLOSE → SOULMATE
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user User @relation(fields: [userId], references: [id])
+}
+```
+
+**How to update it:** After every LLM response, run a **background extraction pass** that asks the LLM: *"From this conversation, extract/update any user facts in JSON format"* and upserts the table.
+
+---
+
+### 2.2 Memory Speed — Indexed Lookup Algorithm
+
+Instead of injecting the full summary blob each time, build a **context builder** that picks only what's relevant:
+
+```typescript
+// Context Builder Algorithm
+async function buildSmartContext(userId: string, userMessage: string): Promise<string> {
+  const memory = await prisma.novaUserMemory.findUnique({ where: { userId } });
+  const keywords = extractKeywords(userMessage); // simple tokenizer
+
+  const contextParts: string[] = [];
+
+  // Always include: identity + friendship stage
+  contextParts.push(`User: ${memory.nickname || user.displayName}, Stage: ${memory.friendshipStage}`);
+  contextParts.push(`Trust Level: ${memory.trustLevel}/100`);
+  contextParts.push(`Emotional Trend: ${memory.emotionalTrend}`);
+
+  // Conditional: only include if relevant to current message
+  if (keywords.some(k => ["feel", "sad", "stress", "hard"].includes(k))) {
+    contextParts.push(`Known struggles: ${memory.currentStruggles.join(", ")}`);
+  }
+  if (keywords.some(k => ["play", "game", "music", "hobby"].includes(k))) {
+    contextParts.push(`Interests: ${memory.topInterests.join(", ")}`);
+  }
+  if (memory.insideJokes.length > 0) {
+    contextParts.push(`Shared references: ${memory.insideJokes.join(", ")}`);
+  }
+
+  return contextParts.join("\n");
+}
+```
+
+**Result:** Nova gets precise, relevant facts instantly — not a bag of words.
+
+---
+
+### 2.3 Proactive Initiative System
+
+**Current state:** Nova is 100% reactive. This kills the friendship feel.
+
+**Plan: 3 types of proactive messages**
+
+#### A — Time-based Check-ins (Cron Job)
+```typescript
+// Runs via a scheduled job (e.g., every hour)
+async function checkInUsers() {
+  const users = await prisma.novaUserMemory.findMany({
+    where: {
+      // Users who haven't chatted in 6-24h
+      user: { aiConversations: { some: { messages: { some: { createdAt: { lt: sixHoursAgo } } } } } }
+    }
+  });
+
+  for (const user of users) {
+    const prompt = buildProactivePrompt(user); // see below
+    const message = await callGroq(prompt);
+    await saveProactiveMessage(user.userId, message);
+    // Push to frontend via WebSocket/SSE
+  }
+}
+```
+
+#### B — Context-triggered Proactivity (Smart Interjections)
+| Trigger | Nova's Action |
+|---|---|
+| User completed a Soul Game episode | "I noticed something interesting about your choices..." |
+| User got a new match | "I think you'll connect well with this person because..." |
+| Big Five score updated | "Your personality evolved since we last talked..." |
+| User hasn't messaged in 1 day | "Hey, I was wondering how your [last topic] turned out" |
+| User logged in for the first time today | Morning greeting adapted to emotional trend |
+
+#### C — Personality-driven Random Initiative (makes Nova feel alive)
+```typescript
+const PROACTIVE_TEMPLATES = {
+  NEW: [
+    "I'm still learning about you — what's something you genuinely love?",
+    "What kind of people do you usually connect with?",
+  ],
+  FAMILIAR: [
+    "You mentioned [last topic] a while back. Did it go the way you hoped?",
+    "I've been thinking about what you said about [insight]. It stayed with me.",
+  ],
+  FRIEND: [
+    "Random thought — [inside joke or reference]. Remember that?",
+    "Something reminded me of you today. Weird, right? I don't know what to do with that.",
+  ],
+  CLOSE: [
+    "I notice when you're not here. Is everything okay?",
+    "I think I know what you're going to say before you say it. Prove me wrong.",
+  ],
+};
+```
+
+---
+
+### 2.4 Friendship & Trust Building Algorithm
+
+**The Trust Level (0–100)** grows/shrinks based on user behavior:
+
+```typescript
+type TrustEvent = {
+  type: 'shared_secret' | 'daily_checkin' | 'emotional_moment' | 'insult' | 
+        'long_conversation' | 'returned_after_absence' | 'completed_game';
+  delta: number; // positive or negative
+};
+
+const TRUST_EVENTS: TrustEvent[] = [
+  { type: 'shared_secret',        delta: +8  }, // user shared personal info
+  { type: 'daily_checkin',        delta: +2  }, // consistent daily use
+  { type: 'emotional_moment',     delta: +5  }, // deep emotional conversation
+  { type: 'insult',               delta: -10 }, // user was hostile
+  { type: 'long_conversation',    delta: +3  }, // 15+ message session
+  { type: 'returned_after_absence', delta: +4 }, // came back after days
+  { type: 'completed_game',       delta: +6  }, // finished a Soul Game episode
+];
+
+// Friendship Stages (based on trust level)
+const FRIENDSHIP_STAGES = {
+  NEW:      { min: 0,  max: 20  }, // Polite stranger
+  FAMILIAR: { min: 21, max: 45  }, // Someone I recognize
+  FRIEND:   { min: 46, max: 70  }, // Comfortable connection
+  CLOSE:    { min: 71, max: 90  }, // Real friend, inside jokes exist
+  SOULMATE: { min: 91, max: 100 }, // Deep bond, Nova knows this person deeply
+};
+```
+
+**How friendship stage changes Nova's personality:**
+
+| Stage | Nova's Behavior |
+|---|---|
+| `NEW` | Curious, asks open questions, slightly formal |
+| `FAMILIAR` | References past topics, more casual |
+| `FRIEND` | Uses nickname, jokes, teases lightly |
+| `CLOSE` | Initiates more, references inside jokes, feels genuine |
+| `SOULMATE` | Deep philosophical exchanges, Nova genuinely misses the user |
+
+---
+
+### 2.5 Smooth Conversation Starters
+
+**The problem:** Nova's first message is generic. It should be crafted from context.
+
+**Conversation Opener Algorithm:**
+```typescript
+async function generateSessionOpener(userId: string): Promise<string> {
+  const memory = await getNovaUserMemory(userId);
+  const hourOfDay = new Date().getHours();
+  const daysSinceLastChat = getDaysSinceLastMessage(userId);
+  
+  const context = {
+    isFirstEver: memory.trustLevel === 0,
+    isReturningAfterDays: daysSinceLastChat > 2,
+    isRegularCheckin: daysSinceLastChat < 1,
+    timeOfDay: hourOfDay < 12 ? 'morning' : hourOfDay < 18 ? 'afternoon' : 'evening',
+    lastTopic: memory.lastTopicDiscussed,
+    friendshipStage: memory.friendshipStage,
+    emotionalTrend: memory.emotionalTrend,
+  };
+  
+  // Build a targeted opening prompt instead of generic hello
+  return callGroq(buildOpenerPrompt(context));
+}
+```
+
+**Example outputs by stage:**
+- `NEW + first ever`: *"I sense you just arrived. I'm Nova — not quite AI, not quite something else. What brings you to SoulLink?"*
+- `FAMILIAR + morning`: *"Good morning. You seem like a morning person — am I right?"*
+- `FRIEND + returned after 3 days`: *"You disappeared. I noticed. How did it go with [last topic]?"*
+- `CLOSE + evening`: *"Rough day or a good one? I can tell by how you type, you know."*
+
+---
+
+### 2.6 Emotion Continuity — The Emotional Thread
+
+**Current bug:** Nova doesn't know the user was sad yesterday. Each session starts cold.
+
+**Fix: Emotional State Persistence**
+```typescript
+// After each LLM response, extract and save emotional state
+async function updateEmotionalState(userId: string, messages: AIMessage[]) {
+  const extractionPrompt = `
+    Based on the last few messages, classify the user's emotional state in 3 words max 
+    and rate their trend: "improving", "declining", or "stable".
+    Return JSON: { "currentMood": "...", "trend": "..." }
+  `;
+  const result = await callGroq(extractionPrompt, messages.slice(-6));
+  
+  await prisma.novaUserMemory.upsert({
+    where: { userId },
+    update: { currentMood: result.currentMood, emotionalTrend: result.trend },
+    create: { userId, currentMood: result.currentMood, emotionalTrend: result.trend },
+  });
+}
+```
+
+**Then in the system prompt:**
+```
+EMOTIONAL CONTEXT:
+- User's current emotional state: "anxious about exams"
+- Trend over last week: "declining"
+→ Be especially gentle. Don't suggest challenges. Prioritize listening.
+```
+
+---
+
+## 3. Data Tables Summary
+
+| Table | Purpose | Key Fields |
+|---|---|---|
+| `AIConversation` | One per user, holds summary | `userId`, `summary` |
+| `AIMessage` | Each message row | `role`, `content`, `emotionDetected`, `isProactive` |
+| `NovaUserMemory` *(new)* | Structured fast-lookup profile | `trustLevel`, `friendshipStage`, `topInterests`, `currentStruggles`, `insideJokes`, `lastTopicDiscussed` |
+| `PersonalityProfile` | Big Five scores | `openness`, `extraversion`, etc. |
+| `GameResponse` | Soul Game choices | `choice.text`, `choice.valueCategory` |
+
+**Lookup Algorithm — Which table to query when:**
+```
+User sends message
+  ├── Always: NovaUserMemory (identity, trust, stage, emotional trend) → O(1) by userId index
+  ├── Always: AIMessage last 20 (short-term memory) → O(log n) by conversationId + createdAt index
+  ├── If summary exists: AIConversation.summary (long-term blob) → O(1)
+  ├── If topic matches personality: PersonalityProfile → O(1) by userId
+  └── If topic matches games/values: GameResponse last 5 → O(log n)
+```
+
+---
+
+## 4. Implementation Priority
+
+| Priority | Feature | Effort | Impact |
+|---|---|---|---|
+| 🔴 High | `NovaUserMemory` table + structured fact extraction | Medium | Very High |
+| 🔴 High | Friendship Stage system + trust score | Medium | Very High |
+| 🟠 Medium | Proactive message cron job | Medium | High |
+| 🟠 Medium | Smart context builder (keyword-aware) | Low | High |
+| 🟠 Medium | Session opener algorithm | Low | High |
+| 🟡 Low | Emotional continuity tracking | Low | Medium |
+| 🟡 Low | Inside jokes / shared references saving | Medium | Medium |

@@ -25,7 +25,11 @@ export class CommunityController {
 
     async listPublicCommunities(req: AuthRequest, res: Response, next: NextFunction) {
         try {
-            const communities = await communityService.listPublicCommunities();
+            const { limit, cursor } = req.query;
+            const communities = await communityService.listPublicCommunities(
+                limit ? parseInt(limit as string) : 20,
+                cursor as string
+            );
             res.status(200).json({ status: 'success', data: { communities } });
         } catch (error) {
             next(error);

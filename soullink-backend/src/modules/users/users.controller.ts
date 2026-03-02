@@ -53,7 +53,8 @@ export class UsersController {
 
     async getProfile(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await usersService.getProfile(req.params.handle);
+            const handle = Array.isArray(req.params.handle) ? req.params.handle[0] : req.params.handle;
+            const user = await usersService.getProfile(handle);
             res.status(200).json({ status: 'success', data: { user } });
         } catch (error) {
             next(error);

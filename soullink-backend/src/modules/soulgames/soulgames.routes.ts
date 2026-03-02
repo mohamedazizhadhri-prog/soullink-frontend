@@ -10,6 +10,7 @@ router.get('/', protect, controller.getAllGames);
 router.get('/personality', protect, controller.getPersonalityProfile);
 router.get('/:id', protect, controller.getGameById);
 router.post('/:id/respond', protect, controller.submitResponse);
+router.post('/:id/track-view', protect, controller.trackSceneView);
 router.post('/:id/complete', protect, controller.completeGame);
 
 export default router;

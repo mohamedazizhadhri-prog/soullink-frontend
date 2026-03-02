@@ -30,7 +30,7 @@ export class CommunityService {
                             role: 'OWNER'
                         }
                     }
-                } as any,
+                },
                 include: {
                     channels: true,
                     _count: { select: { members: true } }
@@ -60,7 +60,7 @@ export class CommunityService {
         }));
     }
 
-    async listPublicCommunities() {
+    async listPublicCommunities(limit = 20, cursor?: string) {
         const servers = await prisma.server.findMany({
             where: { isPublic: true },
             select: {
@@ -70,7 +70,9 @@ export class CommunityService {
                 iconUrl: true,
                 _count: { select: { members: true } }
             },
-            take: 20
+            take: Math.min(limit, 50),
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
         });
 
         return servers.map(s => ({
@@ -81,7 +83,7 @@ export class CommunityService {
 
     async getCommunity(serverId: string) {
         const server = await prisma.server.findUnique({
-            where: { id: serverId } as any,
+            where: { id: serverId },
             include: {
                 channels: { orderBy: { orderIndex: 'asc' } },
                 _count: { select: { members: true } }
@@ -94,7 +96,7 @@ export class CommunityService {
 
     async joinByInvite(userId: string, inviteCode: string) {
         const server = await prisma.server.findUnique({
-            where: { inviteCode } as any
+            where: { inviteCode }
         });
 
         if (!server) throw new AppError(404, 'Invalid invite code');
@@ -129,7 +131,7 @@ export class CommunityService {
     async getChannelMessages(channelId: string, limit: number = 50, cursor?: string) {
         return await prisma.message.findMany({
             where: { channelId },
-            take: limit,
+            take: Math.min(limit, 100),
             skip: cursor ? 1 : 0,
             cursor: cursor ? { id: cursor } : undefined,
             orderBy: { createdAt: 'desc' },

@@ -4,7 +4,7 @@ import { hashPassword, comparePasswords } from '../../shared/utils/hash.js';
 import { generateAccessToken, generateRefreshToken } from '../../shared/utils/jwt.js';
 import { generateOTP } from '../../shared/utils/otp.js';
 import { sendSMS } from '../../shared/utils/sms.js';
-import { sendVerificationEmail } from '../../shared/utils/email.js';
+import { sendVerificationEmail, sendPasswordResetEmail } from '../../shared/utils/email.js';
 import { AppError } from '../../middleware/errorHandler.js';
 import { logger } from '../../shared/utils/logger.js';
 
@@ -101,7 +101,7 @@ export class AuthService {
         });
     }
 
-    async login(email: string, password: string) {
+    async login(email: string, password: string, ipAddress: string = 'unknown', userAgent: string = 'unknown') {
         const user = await prisma.user.findUnique({
             where: { email },
         });
@@ -120,8 +120,8 @@ export class AuthService {
         await prisma.loginHistory.create({
             data: {
                 userId: user.id,
-                ipAddress: 'unknown',
-                userAgent: 'unknown',
+                ipAddress,
+                userAgent,
                 success: true,
             },
         });
@@ -251,4 +251,81 @@ export class AuthService {
             },
         });
     }
+
+    async forgotPassword(email: string) {
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            // To prevent user enumeration, we don't throw error if user not found, 
+            // but we won't send email. 
+            return { message: 'If an account exists with this email, a reset code has been sent.' };
+        }
+
+        const otp = generateOTP();
+
+        await prisma.verification.create({
+            data: {
+                userId: user.id,
+                type: 'PASSWORD_RESET' as any,
+                code: otp,
+                expiresAt: new Date(Date.now() + 15 * 60 * 1000), // 15 mins
+            },
+        });
+
+        await sendPasswordResetEmail(email, otp);
+        logger.info(`[DEBBUG] Password reset OTP for ${email}: ${otp}`);
+
+        return { message: 'If an account exists with this email, a reset code has been sent.' };
+    }
+
+    async resetPassword(data: any) {
+        const { email, code, newPassword } = data;
+
+        const user = await prisma.user.findUnique({
+            where: { email },
+            include: {
+                verifications: {
+                    where: { type: 'PASSWORD_RESET' as any, code, verified: false },
+                    orderBy: { createdAt: 'desc' },
+                    take: 1,
+                },
+            } as any,
+        });
+
+        if (!user || !(user as any).verifications || (user as any).verifications.length === 0) {
+            throw new AppError(400, 'Invalid or expired reset code');
+        }
+
+        const verification = (user as any).verifications[0];
+        if (verification.expiresAt < new Date()) {
+            throw new AppError(400, 'Reset code expired');
+        }
+
+        const passwordHash = await hashPassword(newPassword);
+
+        await prisma.$transaction([
+            prisma.user.update({
+                where: { id: user.id },
+                data: { passwordHash },
+            }),
+            prisma.verification.update({
+                where: { id: verification.id },
+                data: { verified: true },
+            }),
+        ]);
+
+        return { message: 'Password reset successfully' };
+    }
+
+    async logout(token: string) {
+        // Decode token to find expiry
+        // For now, we'll blacklist it for 24 hours as a safe default
+        // In a more advanced version, we'd extract the 'exp' claim
+        await (prisma as any).tokenBlacklist.create({
+            data: {
+                token,
+                expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+            },
+        });
+    }
 }
+

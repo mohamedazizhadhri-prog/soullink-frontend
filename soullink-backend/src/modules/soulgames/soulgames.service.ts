@@ -1,53 +1,86 @@
-import { prisma } from '../../config/database.js';
+import { prisma as prismaClient } from '../../config/database.js';
+const prisma = prismaClient as any;
 import { AppError } from '../../middleware/errorHandler.js';
+import { logger } from '../../shared/utils/logger.js';
+import { AIService } from '../ai-companion/ai.service.js';
 
 export class SoulGamesService {
+    private aiService = new AIService();
 
     /**
      * Get all episodes with the user's completion status
      */
-    async getAllGames(userId: string) {
-        const games = await prisma.soulGame.findMany({
-            where: { isActive: true },
-            orderBy: { orderIndex: 'asc' },
-            include: {
-                _count: { select: { scenes: true } },
-            },
-        });
+    async getAllGames(userId: string, limit = 50, cursor?: string) {
+        let games = [];
+        try {
+            games = await prisma.soulGame.findMany({
+                where: { isActive: true },
+                take: Math.min(limit, 100),
+                skip: cursor ? 1 : 0,
+                cursor: cursor ? { id: cursor } : undefined,
+                orderBy: { orderIndex: 'asc' },
+                include: {
+                    _count: { select: { scenes: true } },
+                },
+            });
+        } catch (error) {
+            logger.error('[SoulGames] Error fetching games:', (error as any).message);
+            throw new AppError(500, 'Failed to fetch Soul Games list. Please try again later.');
+        }
 
-        // Get user's completed games
-        const completedGameIds = await prisma.gameResponse.findMany({
-            where: { userId },
-            select: { gameId: true },
-            distinct: ['gameId'],
-        });
-        const completedSet = new Set(completedGameIds.map(r => r.gameId));
+        // Get user's explicit progress
+        let explicitProgress: any[] = [];
+        try {
+            explicitProgress = await prisma.soulGameProgress.findMany({
+                where: { userId },
+            });
+        } catch (error) {
+            logger.warn('[SoulGames] Error fetching explicitProgress (schema mismatch?):', (error as any).message);
+        }
+        const completedGameIds = new Set(explicitProgress.filter((p: any) => p.isCompleted).map((p: any) => p.gameId));
 
-        // Get response counts per game for progress
-        const responseCounts = await prisma.gameResponse.groupBy({
-            by: ['gameId'],
-            where: { userId },
-            _count: { id: true },
-        });
-        const responseMap = new Map(responseCounts.map(r => [r.gameId, r._count.id]));
+        // Get user profile for auto-healing mandatory games
+        let user: any = null;
+        try {
+            user = await prisma.user.findUnique({
+                where: { id: userId },
+                select: { status: true, personalityProfile: true }
+            });
+        } catch (error) {
+            logger.warn('[SoulGames] Error fetching user profile for auto-heal:', (error as any).message);
+        }
 
-        return games.map((game, index) => {
+        // Get response counts per game for progress bar
+        let responseMap = new Map();
+        try {
+            const responseCounts = await prisma.gameResponse.groupBy({
+                by: ['gameId'],
+                where: { userId },
+                _count: { id: true },
+            });
+            responseMap = new Map(responseCounts.map((r: any) => [r.gameId, r._count.id]));
+        } catch (error) {
+            logger.warn('[SoulGames] Error fetching response counts:', (error as any).message);
+        }
+
+        const results = games.map((game: any) => {
             const totalScenes = game._count.scenes;
             const answered = responseMap.get(game.id) || 0;
-            const isCompleted = answered >= totalScenes && totalScenes > 0;
 
-            // Episode unlocks if: it's the first one, or the previous one is completed
-            const previousGame = index > 0 ? games[index - 1] : null;
-            const previousCompleted = previousGame
-                ? (responseMap.get(previousGame.id) || 0) >= (previousGame._count.scenes || 0) && previousGame._count.scenes > 0
-                : true;
+            // Completion Logic:
+            // 1. Explicitly marked as completed in new table
+            // 2. OR dynamic count matches (legacy fallback)
+            // 3. OR Auto-heal: If user is ACTIVE and it's a mandatory game, they MUST have finished it
+            const isCompleted = completedGameIds.has(game.id) ||
+                (answered >= totalScenes && totalScenes > 0) ||
+                (game.mandatory && user?.status === 'ACTIVE' && !!user?.personalityProfile);
 
             return {
                 id: game.id,
                 slug: game.slug,
                 title: game.title,
                 description: game.description,
-                theme: game.theme,
+                theme: (game as any).theme,
                 color: game.color,
                 icon: game.icon,
                 episode: game.episode,
@@ -55,8 +88,26 @@ export class SoulGamesService {
                 totalScenes,
                 answeredScenes: answered,
                 isCompleted,
-                isLocked: !previousCompleted && index > 0,
+                isLocked: false, // Calculated in pass 2
             };
+        });
+
+        // Pass 2: A game is locked if the previous game exists and is NOT completed
+        for (let i = 1; i < results.length; i++) {
+            results[i].isLocked = !results[i - 1].isCompleted;
+        }
+
+        return results;
+    }
+
+    /**
+     * Track which scene the user is currently viewing
+     */
+    async trackSceneView(userId: string, gameId: string, sceneId: string) {
+        return await prisma.soulGameProgress.upsert({
+            where: { userId_gameId: { userId, gameId } },
+            create: { userId, gameId, currentSceneId: sceneId },
+            update: { currentSceneId: sceneId, updatedAt: new Date() },
         });
     }
 
@@ -83,11 +134,11 @@ export class SoulGamesService {
             where: { userId, gameId },
             select: { sceneId: true, choiceId: true },
         });
-        const answeredMap = new Map(responses.map(r => [r.sceneId, r.choiceId]));
+        const answeredMap = new Map(responses.map((r: any) => [r.sceneId, r.choiceId]));
 
         return {
             ...game,
-            scenes: game.scenes.map(scene => ({
+            scenes: game.scenes.map((scene: any) => ({
                 ...scene,
                 answeredChoiceId: answeredMap.get(scene.id) || null,
             })),
@@ -163,8 +214,16 @@ export class SoulGamesService {
             throw new AppError(400, `Please answer all ${game._count.scenes} scenes before completing`);
         }
 
+        // Create or update explicit progress record
+        await prisma.soulGameProgress.upsert({
+            where: { userId_gameId: { userId, gameId } },
+            create: { userId, gameId, isCompleted: true, completedAt: new Date() },
+            update: { isCompleted: true, completedAt: new Date() },
+        });
+
         // Calculate Big Five scores from this game's responses
         const scores = this.calculateScores(responses);
+        // ... (rest of the personality profile logic)
 
         // Get or create personality profile, then merge scores
         const existingProfile = await prisma.personalityProfile.findUnique({
@@ -206,6 +265,11 @@ export class SoulGamesService {
                 data: { status: 'ACTIVE' },
             });
         }
+
+        // Trigger Proactive AI Message for game completion
+        this.aiService.generateProactiveMessage(userId, 'game_completed').catch(err =>
+            console.error('Failed to trigger proactive message:', err)
+        );
 
         // Return updated profile
         return await prisma.personalityProfile.findUnique({ where: { userId } });
