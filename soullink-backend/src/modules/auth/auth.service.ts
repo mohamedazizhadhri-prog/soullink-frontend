@@ -10,11 +10,15 @@ import { logger } from '../../shared/utils/logger.js';
 
 export class AuthService {
     async register(data: any) {
-        const { email, phone, password, displayName, handle, dateOfBirth } = data;
+        const { email, phone, password, displayName, handle, dateOfBirth, city, country, timezone } = data;
 
         const existingUser = await prisma.user.findFirst({
             where: {
-                OR: [{ email }, { phone }, { handle }],
+                OR: [
+                    ...(email ? [{ email }] : []),
+                    ...(phone ? [{ phone }] : []),
+                    { handle }
+                ],
             },
         });
 
@@ -45,8 +49,8 @@ export class AuthService {
 
         const passwordHash = await hashPassword(password);
 
-        const emailOTP = generateOTP();
-        const phoneOTP = generateOTP();
+        const emailOTP = email ? generateOTP() : null;
+        const phoneOTP = phone ? generateOTP() : null;
 
         return await prisma.$transaction(async (tx: any) => {
             const createData = {
@@ -56,6 +60,9 @@ export class AuthService {
                 displayName,
                 handle,
                 dateOfBirth: new Date(dateOfBirth),
+                city,
+                country,
+                timezone,
                 faceDescriptor: data.faceDescriptor || Prisma.DbNull,
                 status: 'PENDING_VERIFICATION',
             };
@@ -64,25 +71,28 @@ export class AuthService {
                 data: createData,
             });
 
-            // Create email verification code
-            await tx.verification.create({
-                data: {
-                    userId: user.id,
-                    type: 'EMAIL',
-                    code: emailOTP,
-                    expiresAt: new Date(Date.now() + 15 * 60 * 1000),
-                },
-            });
+            // Create verification codes based on what was provided
+            if (email && emailOTP) {
+                await tx.verification.create({
+                    data: {
+                        userId: user.id,
+                        type: 'EMAIL',
+                        code: emailOTP,
+                        expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+                    },
+                });
+            }
 
-            // Create phone verification code
-            await tx.verification.create({
-                data: {
-                    userId: user.id,
-                    type: 'PHONE',
-                    code: phoneOTP,
-                    expiresAt: new Date(Date.now() + 15 * 60 * 1000),
-                },
-            });
+            if (phone && phoneOTP) {
+                await tx.verification.create({
+                    data: {
+                        userId: user.id,
+                        type: 'PHONE',
+                        code: phoneOTP,
+                        expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+                    },
+                });
+            }
 
             // Generate tokens for auto-login
             const accessToken = generateAccessToken(user.id);
@@ -90,24 +100,27 @@ export class AuthService {
 
             // Send the actual email (we do this after transaction logically, but we can do it here if we want it to block or outside)
             // To be safe and clean, we'll call it right before returning or use a 'finally' block
+            // Send matching verification codes
             try {
-                await sendVerificationEmail(email, emailOTP);
+                if (email && emailOTP) await sendVerificationEmail(email, emailOTP);
+                if (phone && phoneOTP) await sendSMS(phone, `Your SoulLink verification code is: ${phoneOTP}`);
             } catch (err) {
-                console.error('Failed to send verification email:', err);
-                // We don't necessarily want to fail the whole registration if just the email fails
+                console.error('Failed to send verification email or SMS:', err);
             }
 
             return { user, accessToken, refreshToken };
         });
     }
 
-    async login(email: string, password: string, ipAddress: string = 'unknown', userAgent: string = 'unknown') {
-        const user = await prisma.user.findUnique({
-            where: { email },
+    async login(identifier: string, password: string, ipAddress: string = 'unknown', userAgent: string = 'unknown') {
+        const user = await prisma.user.findFirst({
+            where: {
+                OR: [{ email: identifier }, { phone: identifier }],
+            },
         });
 
         if (!user || !(await comparePasswords(password, user.passwordHash))) {
-            throw new AppError(401, 'Invalid email or password');
+            throw new AppError(401, 'Invalid email/phone or password');
         }
 
         if (user.status === 'BANNED' || user.status === 'SUSPENDED') {
@@ -129,9 +142,9 @@ export class AuthService {
         return { user, accessToken, refreshToken };
     }
 
-    async verifyEmail(email: string, code: string) {
+    async verifyEmail(identifier: string, code: string) {
         const user = await prisma.user.findUnique({
-            where: { email },
+            where: { email: identifier },
             include: {
                 verifications: {
                     where: { type: 'EMAIL', code, verified: false },
@@ -167,9 +180,9 @@ export class AuthService {
         return { message: 'Email verified successfully' };
     }
 
-    async verifyPhone(phone: string, code: string) {
+    async verifyPhone(identifier: string, code: string) {
         const user = await prisma.user.findUnique({
-            where: { phone },
+            where: { phone: identifier },
             include: {
                 verifications: {
                     where: { type: 'PHONE', code, verified: false },
@@ -252,12 +265,16 @@ export class AuthService {
         });
     }
 
-    async forgotPassword(email: string) {
-        const user = await prisma.user.findUnique({ where: { email } });
+    async forgotPassword(identifier: string) {
+        const user = await prisma.user.findFirst({
+            where: {
+                OR: [{ email: identifier }, { phone: identifier }],
+            },
+        });
         if (!user) {
             // To prevent user enumeration, we don't throw error if user not found, 
-            // but we won't send email. 
-            return { message: 'If an account exists with this email, a reset code has been sent.' };
+            // but we won't send anything. 
+            return { message: 'If an account exists, a reset code has been sent.' };
         }
 
         const otp = generateOTP();
@@ -271,17 +288,23 @@ export class AuthService {
             },
         });
 
-        await sendPasswordResetEmail(email, otp);
-        logger.info(`[DEBBUG] Password reset OTP for ${email}: ${otp}`);
+        if (user.email && identifier === user.email) {
+            await sendVerificationEmail(user.email, otp); // Reusing verification email for now or specialized reset
+        } else if (user.phone && identifier === user.phone) {
+            await sendSMS(user.phone, `Your SoulLink password reset code: ${otp}`);
+        }
+        logger.info(`[DEBUG] Password reset OTP for ${identifier}: ${otp}`);
 
-        return { message: 'If an account exists with this email, a reset code has been sent.' };
+        return { message: 'If an account exists, a reset code has been sent.' };
     }
 
     async resetPassword(data: any) {
-        const { email, code, newPassword } = data;
+        const { identifier, code, newPassword } = data;
 
-        const user = await prisma.user.findUnique({
-            where: { email },
+        const user = await prisma.user.findFirst({
+            where: {
+                OR: [{ email: identifier }, { phone: identifier }],
+            },
             include: {
                 verifications: {
                     where: { type: 'PASSWORD_RESET' as any, code, verified: false },

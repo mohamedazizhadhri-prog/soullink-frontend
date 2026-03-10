@@ -23,6 +23,7 @@ export class AuthController {
                     user: {
                         id: user.id,
                         email: user.email,
+                        phone: user.phone,
                         displayName: user.displayName,
                         handle: user.handle,
                         role: user.role,
@@ -38,11 +39,11 @@ export class AuthController {
 
     async login(req: Request, res: Response, next: NextFunction) {
         try {
-            const { email, password } = req.body;
+            const { identifier, password } = req.body;
             const ipAddress = req.ip || req.connection.remoteAddress || 'unknown';
             const userAgent = req.headers['user-agent'] || 'unknown';
 
-            const { user, accessToken, refreshToken } = await authService.login(email, password, ipAddress, userAgent);
+            const { user, accessToken, refreshToken } = await authService.login(identifier, password, ipAddress, userAgent);
 
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
@@ -54,7 +55,7 @@ export class AuthController {
             res.status(200).json({
                 status: 'success',
                 data: {
-                    user: { id: user.id, email: user.email, handle: user.handle, role: user.role },
+                    user: { id: user.id, email: user.email, phone: user.phone, handle: user.handle, role: user.role },
                     accessToken,
                 },
             });
@@ -65,8 +66,8 @@ export class AuthController {
 
     async verifyEmail(req: Request, res: Response, next: NextFunction) {
         try {
-            const { email, code } = req.body;
-            const result = await authService.verifyEmail(email, code);
+            const { identifier, code } = req.body;
+            const result = await authService.verifyEmail(identifier, code);
             res.status(200).json({ status: 'success', ...result });
         } catch (error) {
             next(error);
@@ -75,8 +76,8 @@ export class AuthController {
 
     async verifyPhone(req: Request, res: Response, next: NextFunction) {
         try {
-            const { phone, code } = req.body;
-            const result = await authService.verifyPhone(phone, code);
+            const { identifier, code } = req.body;
+            const result = await authService.verifyPhone(identifier, code);
             res.status(200).json({ status: 'success', ...result });
         } catch (error) {
             next(error);
@@ -123,7 +124,7 @@ export class AuthController {
             res.status(200).json({
                 status: 'success',
                 data: {
-                    user: { id: user.id, email: user.email, handle: user.handle, role: user.role },
+                    user: { id: user.id, email: user.email, phone: user.phone, handle: user.handle, role: user.role },
                     accessToken,
                 },
             });
@@ -134,8 +135,8 @@ export class AuthController {
 
     async forgotPassword(req: Request, res: Response, next: NextFunction) {
         try {
-            const { email } = req.body;
-            const result = await authService.forgotPassword(email);
+            const { identifier } = req.body;
+            const result = await authService.forgotPassword(identifier);
             res.status(200).json({ status: 'success', ...result });
         } catch (error) {
             next(error);
