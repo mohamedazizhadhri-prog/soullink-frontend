@@ -1991,3 +1991,254 @@
 2026-03-06 01:05:59:559 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
 2026-03-10 02:20:24:2024 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
 2026-03-10 02:20:24:2024 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-14 10:59:39:5939 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `tx.user.create()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.service.ts:70:40[39m
+
+[31m  67     status: 'PENDING_VERIFICATION',[39m
+[31m  68 };[39m
+[31m  69 console.log('Attempting to create user with data:', JSON.stringify(createData, null, 2));[39m
+[31m→ 70 const user = await tx.user.create([39m
+[31mUnique constraint failed on the fields: (`phone`)[39m
+[31m    at $n.handleRequestError (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async <anonymous> (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.service.ts:70:26)[39m
+[31m    at async Proxy._transactionWithCallback (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:8000)[39m
+[31m    at async AuthService.register (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.service.ts:55:16)[39m
+[31m    at async register (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.controller.ts:11:57)[39m
+2026-03-14 13:36:32:3632 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket QgY4gDyXLmu98HVoAAAF. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-14 13:36:32:3632 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket Ewfx_F0Jos-cN6qeAAAE. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-14 13:36:32:3632 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket dprvnigsa2GudayUAAAH. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-14 13:36:32:3632 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket GM6mMO7juXfoDtC-AAAG. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 10:06:31:631 [31merror[39m: [31mFailed to start server: Can't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 10:33:33:3333 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `tx.user.create()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.service.ts:70:40[39m
+
+[31m  67     status: 'PENDING_VERIFICATION',[39m
+[31m  68 };[39m
+[31m  69 console.log('Attempting to create user with data:', JSON.stringify(createData, null, 2));[39m
+[31m→ 70 const user = await tx.user.create([39m
+[31mUnique constraint failed on the fields: (`phone`)[39m
+[31m    at $n.handleRequestError (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async <anonymous> (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.service.ts:70:26)[39m
+[31m    at async Proxy._transactionWithCallback (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:8000)[39m
+[31m    at async AuthService.register (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.service.ts:55:16)[39m
+[31m    at async register (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.controller.ts:11:57)[39m
+2026-03-18 10:36:57:3657 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket sA0v3hxM6yH4V1XnAAAF. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 10:38:48:3848 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5674 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.[39m
+[31m    at _r.transaction (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:111:12319)[39m
+[31m    at async Proxy._transactionWithCallback (D:\pfe\pfe 0.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:8034)[39m
+[31m    at async AuthService.register (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.service.ts:55:16)[39m
+[31m    at async register (D:\pfe\pfe 0.4\soullink-backend\src\modules\auth\auth.controller.ts:11:57)[39m
+2026-03-18 10:44:32:4432 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: {"message":"Image file format webp not allowed","name":"Error","http_code":400,"storageErrors":[]}[39m
+2026-03-18 10:46:52:4652 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 10:46:53:4653 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 10:47:13:4713 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 10:47:14:4714 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 10:47:31:4731 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 10:47:32:4732 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:15:17:1517 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:15:22:1522 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:15:51:1551 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:15:55:1555 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:16:34:1634 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:16:50:1650 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:17:20:1720 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:17:21:1721 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:17:40:1740 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:17:42:1742 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:18:07:187 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:18:08:188 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:21:52:2152 [31merror[39m: [31mPresence Offline Error for 6552ac6e-b42e-4d1c-b922-11350fa34dd9: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:103:39[39m
+
+[31m  100 userSockets.delete(user.id);[39m
+[31m  101 // Last connection closed: set offline[39m
+[31m  102 try {[39m
+[31m→ 103     await prisma.user.update([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:21:53:2153 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket iFhC27HTMSFRYAPkAAAq. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:21:53:2153 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket qjFEYuEfPq4-cZnqAAAr. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:22:41:2241 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket clE-cx_wto1XMo08AAAz. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:26:24:2624 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:26:26:2626 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:26:40:2640 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:26:43:2643 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:26:59:2659 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 11:27:04:274 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 11:36:18:3618 [31merror[39m: [31mPresence Offline Error for 44200e72-adda-44f9-8eaa-cc21c67601d1: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:103:39[39m
+
+[31m  100 userSockets.delete(user.id);[39m
+[31m  101 // Last connection closed: set offline[39m
+[31m  102 try {[39m
+[31m→ 103     await prisma.user.update([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:36:18:3618 [31merror[39m: [31mPresence Offline Error for 6552ac6e-b42e-4d1c-b922-11350fa34dd9: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:103:39[39m
+
+[31m  100 userSockets.delete(user.id);[39m
+[31m  101 // Last connection closed: set offline[39m
+[31m  102 try {[39m
+[31m→ 103     await prisma.user.update([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:36:19:3619 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket DlxnCkx64KkcPHilAABW. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:36:19:3619 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket b3epBXH77zgjaoALAABX. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:36:19:3619 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket FX5Veb2mrkbZIY_kAABb. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:36:19:3619 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket KsatuCIhGGOQK4raAABc. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 11:36:19:3619 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket lwNL2ofMefF4LcAKAABd. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mD:\pfe\pfe 0.4\soullink-backend\src\server.ts:41:44[39m
+
+[31m  38 }[39m
+[31m  39 [39m
+[31m  40 try {[39m
+[31m→ 41     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-03-18 12:07:08:78 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 12:07:09:79 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 12:10:13:1013 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 12:10:15:1015 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 12:14:49:1449 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 12:14:53:1453 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m
+2026-03-18 12:15:13:1513 [31merror[39m: [31m[RAG] Failed to save memory to Pinecone: Must pass in at least 1 record to upsert.[39m
+2026-03-18 12:15:15:1515 [31merror[39m: [31m[RAG] Failed to search memories in Pinecone: The API key you provided was rejected while calling https://api.pinecone.io/indexes/nova-memory. Please check your configuration values and try again. You can find the configuration values for your project in the Pinecone developer console at https://app.pinecone.io[39m

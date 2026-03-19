@@ -55,6 +55,8 @@ Expected JSON structure:
 {
   "nickname": "string or null",
   "occupation": "string or null",
+  "city": "string or null (e.g. 'Tunis', 'Paris')",
+  "country": "string or null (e.g. 'Tunisia', 'France')",
   "currentMood": "string (e.g. 'anxious', 'happy', 'neutral')",
   "emotionalTrend": "string ('improving', 'declining', 'stable')",
   "topInterests": ["array", "of", "strings"],
@@ -107,9 +109,17 @@ Expected JSON structure:
             let memory = await (prisma as any).novaUserMemory.findUnique({ where: { userId } });
 
             if (!memory) {
+                // Seed from User table if brand new
+                const user = await prisma.user.findUnique({
+                    where: { id: userId },
+                    select: { city: true, country: true }
+                });
+
                 memory = await (prisma as any).novaUserMemory.create({
                     data: {
                         userId,
+                        city: user?.city,
+                        country: user?.country,
                         trustLevel: 0,
                         friendshipStage: "NEW"
                     }
@@ -124,6 +134,8 @@ Expected JSON structure:
                 data: {
                     nickname: extracted.nickname || memory.nickname,
                     occupation: extracted.occupation || memory.occupation,
+                    city: extracted.city || memory.city,
+                    country: extracted.country || memory.country,
                     currentMood: extracted.currentMood || memory.currentMood,
                     emotionalTrend: extracted.emotionalTrend || memory.emotionalTrend,
                     topInterests: extracted.topInterests?.length ? mergeUnique(memory.topInterests, extracted.topInterests) : memory.topInterests,

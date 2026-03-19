@@ -39,11 +39,11 @@ export class AuthController {
 
     async login(req: Request, res: Response, next: NextFunction) {
         try {
-            const { identifier, password } = req.body;
+            const { identifier, password, timezone } = req.body;
             const ipAddress = req.ip || req.connection.remoteAddress || 'unknown';
             const userAgent = req.headers['user-agent'] || 'unknown';
 
-            const { user, accessToken, refreshToken } = await authService.login(identifier, password, ipAddress, userAgent);
+            const { user, accessToken, refreshToken } = await authService.login(identifier, password, ipAddress, userAgent, timezone);
 
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,

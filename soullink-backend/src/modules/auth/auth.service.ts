@@ -52,17 +52,17 @@ export class AuthService {
         const emailOTP = email ? generateOTP() : null;
         const phoneOTP = phone ? generateOTP() : null;
 
-        return await prisma.$transaction(async (tx: any) => {
+        const result = await prisma.$transaction(async (tx: any) => {
             const createData = {
-                email,
-                phone,
+                email: email || null,
+                phone: phone || null,
                 passwordHash,
                 displayName,
                 handle,
                 dateOfBirth: new Date(dateOfBirth),
                 city,
                 country,
-                timezone,
+                timezone: timezone || 'UTC', // Ensure timezone defaults to 'UTC' if not provided
                 faceDescriptor: data.faceDescriptor || Prisma.DbNull,
                 status: 'PENDING_VERIFICATION',
             };
@@ -98,21 +98,25 @@ export class AuthService {
             const accessToken = generateAccessToken(user.id);
             const refreshToken = generateRefreshToken(user.id);
 
-            // Send the actual email (we do this after transaction logically, but we can do it here if we want it to block or outside)
-            // To be safe and clean, we'll call it right before returning or use a 'finally' block
-            // Send matching verification codes
-            try {
-                if (email && emailOTP) await sendVerificationEmail(email, emailOTP);
-                if (phone && phoneOTP) await sendSMS(phone, `Your SoulLink verification code is: ${phoneOTP}`);
-            } catch (err) {
-                console.error('Failed to send verification email or SMS:', err);
-            }
-
             return { user, accessToken, refreshToken };
+        }, {
+            timeout: 10000, // Increase to 10s for slow environments
         });
+
+        // 6. Send verification codes (OUTSIDE the database transaction)
+        // This is where it was failing before because it waited for the email/SMS API.
+        try {
+            if (email && emailOTP) await sendVerificationEmail(email as string, emailOTP);
+            if (phone && phoneOTP) await sendSMS(phone as string, `Your SoulLink verification code is: ${phoneOTP}`);
+        } catch (err) {
+            console.error('Failed to send verification email or SMS:', err);
+            // We don't throw here because the user is already created in the DB successfully.
+        }
+
+        return result;
     }
 
-    async login(identifier: string, password: string, ipAddress: string = 'unknown', userAgent: string = 'unknown') {
+    async login(identifier: string, password: string, ipAddress: string = 'unknown', userAgent: string = 'unknown', timezone: string = 'UTC') {
         const user = await prisma.user.findFirst({
             where: {
                 OR: [{ email: identifier }, { phone: identifier }],
@@ -130,14 +134,23 @@ export class AuthService {
         const accessToken = generateAccessToken(user.id);
         const refreshToken = generateRefreshToken(user.id);
 
-        await prisma.loginHistory.create({
-            data: {
-                userId: user.id,
-                ipAddress,
-                userAgent,
-                success: true,
-            },
-        });
+        await prisma.$transaction([
+            prisma.loginHistory.create({
+                data: {
+                    userId: user.id,
+                    ipAddress,
+                    userAgent,
+                    success: true,
+                },
+            }),
+            prisma.user.update({
+                where: { id: user.id },
+                data: {
+                    lastLoginAt: new Date(),
+                    timezone: timezone
+                }
+            })
+        ]);
 
         return { user, accessToken, refreshToken };
     }
@@ -247,6 +260,15 @@ export class AuthService {
         const accessToken = generateAccessToken(user.id);
         const refreshToken = generateRefreshToken(user.id);
 
+        // Update face record and login time
+        await prisma.user.update({
+            where: { id: user.id },
+            data: {
+                faceVerified: true,
+                lastLoginAt: new Date()
+            }
+        });
+
         return { user, accessToken, refreshToken };
     }
 
@@ -261,6 +283,7 @@ export class AuthService {
             data: {
                 avatarUrl: imageUrl,
                 status: 'ACTIVE',
+                faceVerified: true,
             },
         });
     }

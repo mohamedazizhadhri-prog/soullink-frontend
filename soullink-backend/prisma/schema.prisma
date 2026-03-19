@@ -737,6 +737,8 @@ model NovaUserMemory {
   // Fast-lookup structured fields
   nickname           String?
   occupation         String?
+  city               String?
+  country            String?
   currentMood        String?
   emotionalTrend     String? // "improving", "declining", "stable"
   topInterests       String[] // e.g., ["coding", "anime"]

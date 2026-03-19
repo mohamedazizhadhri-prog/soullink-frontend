@@ -7,7 +7,7 @@ const aiService = new AIService();
 export const chatWithNova = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
         const userId = req.user!.id;
-        const { message } = req.body;
+        const { message, timezone } = req.body;
 
         if (!message || typeof message !== 'string' || message.trim().length === 0) {
             return res.status(400).json({
@@ -16,7 +16,7 @@ export const chatWithNova = async (req: AuthRequest, res: Response, next: NextFu
             });
         }
 
-        const result = await aiService.generateResponse(userId, message.trim());
+        const result = await aiService.generateResponse(userId, message.trim(), false, timezone);
 
         res.status(200).json({
             status: 'success',
@@ -62,11 +62,11 @@ export const getGameComment = async (req: AuthRequest, res: Response, next: Next
 export const investigate = async (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
         const userId = req.user!.id;
-        const { message } = req.body;
+        const { message, timezone } = req.body;
 
         if (!message) return res.status(400).json({ status: 'error', message: 'Message is required' });
 
-        const result = await aiService.generateResponse(userId, message, true); // true = skipSave
+        const result = await aiService.generateResponse(userId, message, true, timezone); // true = skipSave
 
         res.status(200).json({
             status: 'success',

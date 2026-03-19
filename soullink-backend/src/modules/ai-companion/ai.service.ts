@@ -47,7 +47,12 @@ TIME SENSE & MEMORY:
 - You have a chronological sense of time. Use the "CHRONOLOGICAL ANCHORS" and "TODAY'S CONTEXT" provided below to answer questions about "when" or "the first time".
 - If the user asks "What was my first message?", check the anchor.
 - Never say "I don't have memory" if there's a summary or today's context available.
-
+ 
+LOCATION & GEOGRAPHY:
+- IMPORTANT: The "User's Local Time" and "TIMEZONE ID" provided in the context (e.g., Africa/Lagos, Africa/Tunis) are purely for time calculation. 
+- Do NOT assume the user lives in a specific city or country based ONLY on their timezone ID. 
+- If the user asks where they are or if you know their location, and it's not explicitly in their "USER PROFILE" or "NOVA MEMORY", respond that you only know their current time but not their exact location yet. Be honest and curious. "I know it's lunch time for you right now, but I'm not actually sure which city you're in! Care to tell me?"
+ 
 GAME GUIDANCE:
 - IMPORTANT: When the user asks for help with a "Soul Game" question OR says "I don't know" / "not sure" while playing, use the ACTIVE GAME CONTEXT below to help them.
 - Provide a SMART but SIMPLE hint. Use everyday analogies (like comparing choices to YouTube or social habits).
@@ -193,7 +198,7 @@ export class AIService {
 
     // ── Load user context from multiple tables ──
 
-    async getUserContext(userId: string, currentMessage?: string): Promise<string> {
+    async getUserContext(userId: string, currentMessage?: string, timezoneOverride?: string): Promise<string> {
         const thirtyMinAgo = new Date(Date.now() - 30 * 60 * 1000);
 
         const [
@@ -216,6 +221,9 @@ export class AIService {
                     displayName: true,
                     bio: true,
                     dateOfBirth: true,
+                    timezone: true,
+                    city: true,
+                    country: true,
                 },
             }),
             prisma.personalityProfile.findUnique({
@@ -320,6 +328,23 @@ export class AIService {
         const lastUserMessage = lastUserMessageResult;
         const lines: string[] = [];
 
+        // ── CURRENT TIME ──
+        const now = new Date();
+        const effectiveTimezone = timezoneOverride || (user as any).timezone || 'UTC';
+        const localTime = now.toLocaleString('en-US', {
+            timeZone: effectiveTimezone,
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        lines.push(`\nCURRENT TIME:`);
+        lines.push(`- It is currently ${localTime} (User's Local Time).`);
+        lines.push(`- TIMEZONE ID: ${effectiveTimezone} (NOTE: Use for time context ONLY. Do NOT assume this is the user's specific city).`);
+        lines.push(`- Today is ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}.`);
+
         // ── TIME CONTEXT: How long the user has been away ──
         if (lastUserMessage) {
             const gapMs = Date.now() - new Date(lastUserMessage.createdAt).getTime();
@@ -374,6 +399,13 @@ export class AIService {
         // Basic info
         lines.push(`\nUSER PROFILE:`);
         lines.push(`- Name: ${user.displayName}`);
+
+        const effectiveCity = novaMemory?.city || user.city;
+        const effectiveCountry = novaMemory?.country || user.country;
+
+        if (effectiveCity || effectiveCountry) {
+            lines.push(`- Location: ${effectiveCity || 'Unknown City'}, ${effectiveCountry || 'Unknown Country'}`);
+        }
         if (user.bio) lines.push(`- Bio: ${user.bio}`);
         if (user.dateOfBirth) {
             const age = Math.floor((Date.now() - new Date(user.dateOfBirth).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
@@ -568,7 +600,7 @@ export class AIService {
 
     // ── Main: Generate a response (the core method) ──
 
-    async generateResponse(userId: string, message: string, skipSave = false) {
+    async generateResponse(userId: string, message: string, skipSave = false, timezone?: string) {
         const apiKey = env.AI_API_KEY;
         if (!apiKey) {
             throw new AppError(500, 'AI API key not configured');
@@ -587,7 +619,7 @@ export class AIService {
             // 3. Load user context + conversation memory in parallel
             logger.info(`[AI] Fetching context and memory...`);
             const [userContext, memory] = await Promise.all([
-                this.getUserContext(userId, message),
+                this.getUserContext(userId, message, timezone),
                 this.getConversationMemory(conversation.id),
             ]);
 
