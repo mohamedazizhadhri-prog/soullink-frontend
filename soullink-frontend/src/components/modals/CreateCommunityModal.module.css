@@ -1,0 +1,236 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 1100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 480px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    z-index: 1101;
+    overflow: hidden;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: var(--spacing-xl);
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: var(--color-text-primary);
+}
+
+.header p {
+    font-size: 0.95rem;
+    color: var(--color-text-tertiary);
+    margin: 0;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.form {
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.avatarSection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.avatarPlaceholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 35%;
+    border: 2px dashed var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text-tertiary);
+    transition: all 0.2s;
+    gap: 4px;
+}
+
+.avatarPlaceholder span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.avatarPlaceholder:hover {
+    border-color: var(--color-primary-main);
+    color: var(--color-primary-main);
+    background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.05em;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+    background: var(--color-bg-app);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+    border-color: var(--color-primary-main);
+}
+
+.privacyToggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.privacyOption {
+    padding: 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.privacyOption svg {
+    margin-top: 2px;
+    color: var(--color-text-tertiary);
+}
+
+.privacyText {
+    display: flex;
+    flex-direction: column;
+}
+
+.privacyTitle {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+}
+
+.privacyDesc {
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+}
+
+.privacyOption.active {
+    border-color: var(--color-primary-main);
+    background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.privacyOption.active svg {
+    color: var(--color-primary-main);
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.backBtn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.createBtn {
+    background: var(--color-primary-main);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 10px 24px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 140px;
+}
+
+.createBtn:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+.createBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.errorMsg {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.spin {
+    animation: spinRotate 1s linear infinite;
+}
+
+@keyframes spinRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

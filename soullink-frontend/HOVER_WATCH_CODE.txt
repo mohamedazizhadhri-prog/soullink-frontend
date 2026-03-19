@@ -1,0 +1,52 @@
+// Hover-Watch System for Curious Mode
+// Add this to a useEffect in NovaAvatar.tsx
+
+useEffect(() => {
+    let hoverTimer: NodeJS.Timeout | null = null;
+
+    const handleMouseEnter = (e: Event) => {
+        const target = e.currentTarget as HTMLElement;
+
+        hoverTimer = setTimeout(() => {
+            const rect = target.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            setCuriousTarget({ x: centerX, y: centerY });
+            if (setMood) setMood('curious');
+        }, 1500);
+    };
+
+    const handleMouseLeave = () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        if (mood === 'curious') {
+            setCuriousTarget(null);
+            if (setMood) setMood('neutral');
+        }
+    };
+
+    const handleClick = () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        if (mood === 'curious') {
+            setCuriousTarget(null);
+            if (setMood) setMood('neutral');
+        }
+    };
+
+    const interactiveElements = document.querySelectorAll('button, a, [role="button"], .card, input, textarea');
+    
+    interactiveElements.forEach((el) => {
+        el.addEventListener('mouseenter', handleMouseEnter);
+        el.addEventListener('mouseleave', handleMouseLeave);
+        el.addEventListener('click', handleClick);
+    });
+
+    return () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        interactiveElements.forEach((el) => {
+            el.removeEventListener('mouseenter', handleMouseEnter);
+            el.removeEventListener('mouseleave', handleMouseLeave);
+            el.removeEventListener('click', handleClick);
+        });
+    };
+}, [mood, setMood, setCuriousTarget]);

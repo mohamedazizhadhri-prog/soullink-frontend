@@ -1,0 +1,663 @@
+.novaContainer {
+    position: relative;
+    width: var(--nova-size, 64px);
+    height: var(--nova-size, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* Ensure no overflow clipping for thought bubble and hand */
+    overflow: visible;
+    z-index: 50;
+    pointer-events: auto;
+}
+
+/* Outer Aura */
+.aura {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123, 104, 238, 0.4) 0%, rgba(0, 191, 255, 0.1) 70%, transparent 100%);
+    filter: blur(8px);
+    z-index: 1;
+}
+
+/* Main Core */
+.core {
+    position: absolute;
+    width: var(--core-size, 48px);
+    height: var(--core-size, 48px);
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 15px rgba(123, 104, 238, 0.5);
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    /* For shimmer inside core */
+}
+
+/* Sad Core Gradient */
+.sadCore {
+    background: linear-gradient(180deg, #1e293b 0%, #4b5563 100%) !important;
+    animation: coldPulse 8s infinite alternate ease-in-out;
+}
+
+@keyframes coldPulse {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+
+    100% {
+        filter: hue-rotate(15deg) brightness(0.8);
+    }
+}
+
+/* Disgusted Core */
+.disgustedCore {
+    background: linear-gradient(180deg, #84cc16 0%, #78350f 100%) !important;
+    filter: blur(0.5px) !important;
+}
+
+/* Internal Lightning Flicker */
+.lightning {
+    position: absolute;
+    inset: -30px;
+    background: radial-gradient(circle, rgba(147, 197, 253, 0.4) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    animation: lightningFlicker 10s infinite;
+}
+
+@keyframes lightningFlicker {
+
+    0%,
+    48%,
+    52%,
+    94%,
+    96%,
+    100% {
+        opacity: 0;
+    }
+
+    49%,
+    95% {
+        opacity: 1;
+    }
+
+    51%,
+    97% {
+        opacity: 0.5;
+    }
+}
+
+/* Digital Rain Particles */
+.pixel {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #94a3b8;
+    box-shadow: 0 0 2px rgba(148, 163, 184, 0.4);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Disgusted Green Bubbles */
+.disgustedBubble {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #a3e635;
+    border-radius: 50%;
+    filter: blur(1px);
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: 0 0 4px #84cc16;
+}
+
+/* Thunder Flash Overlay */
+.thunderFlash {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(15px);
+    animation: thunderFlash 12s infinite;
+}
+
+/* Disgusted Speech Bubble */
+.disgustedSpeech {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: white;
+    padding: 2px 8px;
+    border-radius: 12px 12px 12px 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: #78350f;
+    border: 1px solid #84cc16;
+    box-shadow: 2px 2px 0 rgba(120, 53, 15, 0.2);
+    pointer-events: none;
+    z-index: 20;
+    white-space: nowrap;
+}
+
+@keyframes thunderFlash {
+
+    0%,
+    44%,
+    48%,
+    94%,
+    96%,
+    98%,
+    100% {
+        opacity: 0;
+    }
+
+    45%,
+    95% {
+        opacity: 0.6;
+    }
+
+    47%,
+    97% {
+        opacity: 0.4;
+    }
+}
+
+/* Bright Center Eye */
+.eye {
+    position: absolute;
+    width: var(--eye-size, 16px);
+    height: var(--eye-size, 16px);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    z-index: 3;
+}
+
+/* Click Ripple */
+.ripple {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(123, 104, 238, 0.5);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.ashParticle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #444;
+    border-radius: 20%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.heatHaze {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(220, 38, 38, 0.2) 0%, transparent 70%);
+    filter: blur(8px);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* --- PARTY MODE / DANCE STATE --- */
+
+.discoBall {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 15% 15%;
+    background-color: #71717a;
+    box-shadow:
+        inset 0 0 15px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.2);
+    animation:
+        rainbowCycle 2s linear infinite,
+        danceSpin 4s linear infinite;
+}
+
+@keyframes rainbowCycle {
+    0% {
+        filter: hue-rotate(0deg) brightness(1.2) contrast(1.2);
+    }
+
+    100% {
+        filter: hue-rotate(360deg) brightness(1.2) contrast(1.2);
+    }
+}
+
+@keyframes danceSpin {
+    from {
+        transform: perspective(500px) rotateY(0deg);
+    }
+
+    to {
+        transform: perspective(500px) rotateY(360deg);
+    }
+}
+
+.danceBounce {
+    animation: danceBounce 0.5s infinite alternate ease-in-out;
+    /* 120 BPM = 0.5s per pulse */
+}
+
+@keyframes danceBounce {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    100% {
+        transform: scale(1.15, 0.85);
+    }
+
+    /* Squash & Stretch */
+}
+
+.starPupil {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    /* Actually a 4-pointed star is requested: 50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40% */
+}
+
+.strobeEye {
+    animation: strobeFlash 0.5s infinite step-end;
+}
+
+@keyframes strobeFlash {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.floorPulse {
+    position: absolute;
+    width: 80px;
+    height: 20px;
+    border: 2px solid #00f2ff;
+    border-radius: 50%;
+    transform: rotateX(75deg);
+    bottom: -15px;
+    z-index: 0;
+    filter: blur(4px);
+    box-shadow: 0 0 15px #00f2ff;
+    animation: floorPulseAnimate 0.5s infinite ease-out;
+}
+
+@keyframes floorPulseAnimate {
+    0% {
+        transform: rotateX(75deg) scale(0.8);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateX(75deg) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.spotlight {
+    position: absolute;
+    width: 200px;
+    height: 600px;
+    background: conic-gradient(from 150deg at 50% 0, rgba(255, 0, 255, 0.3) 0deg, transparent 60deg);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: -1;
+    transform-origin: top center;
+    top: -300px;
+}
+
+.spotlightRight {
+    composes: spotlight;
+    background: conic-gradient(from 150deg at 50% 0, rgba(0, 255, 255, 0.3) 0deg, transparent 60deg);
+    animation: sweepRight 4s infinite alternate ease-in-out;
+}
+
+.spotlightLeft {
+    composes: spotlight;
+    animation: sweepLeft 4s infinite alternate ease-in-out;
+}
+
+@keyframes sweepLeft {
+    from {
+        transform: rotate(-30deg);
+    }
+
+    to {
+        transform: rotate(30deg);
+    }
+}
+
+@keyframes sweepRight {
+    from {
+        transform: rotate(30deg);
+    }
+
+    to {
+        transform: rotate(-30deg);
+    }
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.8;
+}
+
+.confettiSquare {
+    composes: confetti;
+}
+
+.confettiCircle {
+    composes: confetti;
+    border-radius: 50%;
+}
+
+/* Wealth Particles (Rich Mode) */
+.wealthParticle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    pointer-events: none;
+    user-select: none;
+    font-size: 20px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    z-index: 5;
+}
+
+.coin {
+    composes: wealthParticle;
+    color: #ffd700;
+}
+
+.banknote {
+    composes: wealthParticle;
+}
+
+@keyframes flutterDown {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(500px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* --- SAURON MODE --- */
+
+.sauronCore {
+    background: radial-gradient(circle at center, #000000 0%, #330000 40%, #660000 100%) !important;
+    border: 2px solid #ff4500 !important;
+    box-shadow:
+        0 0 20px #ff0000,
+        inset 0 0 15px #ff4500 !important;
+}
+
+.sauronIris {
+    background: radial-gradient(circle, #ff8c00 0%, #ff0000 60%, #000000 100%) !important;
+    box-shadow: 0 0 12px #ff4500, 0 0 25px #ff0000 !important;
+}
+
+.sauronPupil {
+    position: absolute;
+    width: 25%;
+    height: 80%;
+    background: #000;
+    border-radius: 50% 50% 50% 50% / 10% 10% 10% 10%;
+    box-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.sauronFlare {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 69, 0, 0.4) 0%, transparent 70%);
+    animation: sauronPulse 2s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes sauronPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 0.8;
+    }
+}
+
+.ember {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ff8c00;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ff4500;
+    pointer-events: none;
+}
+
+.ashflake {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #333;
+    border-radius: 20%;
+    pointer-events: none;
+}
+
+.heatHazeSauron {
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(circle, rgba(255, 140, 0, 0.15) 0%, transparent 60%);
+    filter: blur(15px);
+    mix-blend-mode: color-dodge;
+    pointer-events: none;
+    animation: sauronHaze 4s infinite alternate ease-in-out;
+}
+
+@keyframes sauronHaze {
+    from {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.3;
+    }
+
+    to {
+        transform: scale(1.1) rotate(5deg);
+        opacity: 0.6;
+    }
+}
+
+/* Lidless Eye SVG Eyelids */
+.sauronEyelids {
+    position: absolute;
+    inset: -60%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Fiery Tendrils radiating from the Eye */
+.sauronTendrils {
+    position: absolute;
+    inset: -80%;
+    pointer-events: none;
+    z-index: 4;
+    animation: tendrilPulse 3s infinite ease-in-out alternate;
+}
+
+@keyframes tendrilPulse {
+    from {
+        opacity: 0.5;
+        filter: blur(1px);
+    }
+
+    to {
+        opacity: 0.9;
+        filter: blur(0px);
+    }
+}
+
+/* One Ring Inscription Ring */
+.sauronInscription {
+    position: absolute;
+    inset: -100%;
+    pointer-events: none;
+    z-index: 6;
+    animation: inscriptionRotate 30s linear infinite;
+}
+
+@keyframes inscriptionRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Gaze Beam — cone of light from eye to cursor */
+.gazeBeam {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 105;
+    mix-blend-mode: screen;
+}
+
+/* Element reaction glow when gazed upon */
+.sauronGazed {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 69, 0, 0.3) !important;
+    animation: sauronTremble 0.15s ease-in-out 3;
+}
+
+@keyframes sauronTremble {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2px, 1px);
+    }
+
+    75% {
+        transform: translate(2px, -1px);
+    }
+}
+
+/* Enhanced ember (brighter, larger, visible above vignette) */
+.sauronEmber {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ff6a00;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ff4500, 0 0 16px rgba(255, 140, 0, 0.6);
+    pointer-events: none;
+    z-index: 110;
+}
+
+/* Enhanced ash flake (slightly brighter grey for visibility) */
+.sauronAshflake {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #555;
+    border-radius: 30%;
+    pointer-events: none;
+    z-index: 110;
+    opacity: 0.7;
+}
+
+/* --- GOOD NIGHT / MOON MODE --- */
+
+.moonCore {
+    background: radial-gradient(circle at 30% 70%, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%) !important;
+    mask-image: radial-gradient(circle at 75% 25%, transparent 35%, black 45%);
+    -webkit-mask-image: radial-gradient(circle at 75% 25%, transparent 35%, black 45%);
+    box-shadow:
+        inset -4px -4px 10px rgba(0, 0, 0, 0.4),
+        inset 4px 4px 15px rgba(255, 255, 255, 0.8) !important;
+    border: none !important;
+    overflow: hidden;
+}
+
+.moonAura {
+    background: radial-gradient(circle, rgba(230, 240, 255, 0.4) 0%, rgba(123, 104, 238, 0.1) 70%, transparent 100%) !important;
+    filter: blur(15px) !important;
+}
+
+.moonCrater {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+/* Twinkling Stars for Sidebars */
+.celestialStar {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: twinkle var(--duration, 3s) infinite ease-in-out;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+        filter: blur(0.5px);
+    }
+}

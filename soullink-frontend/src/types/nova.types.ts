@@ -1,0 +1,111 @@
+import React from "react";
+
+export type NovaMood = "neutral" | "thinking" | "curious" | "confused" | "oops" | "blushed" | "angry" | "angelic" | "bored" | "broken" | "crazy" | "cursed" | "laugh" | "sad" | "disgusted" | "love" | "happy" | "rich" | "jealous" | "nod";
+export type NovaStatus = "online" | "offline";
+export type NovaEmote = "angry" | "angelic" | "blush" | "oops" | "success" | "nod" | "shake" | "lightbulb" | null;
+
+export interface NovaMessage {
+    id: string;
+    sender: 'nova' | 'user';
+    text: string;
+    timestamp: number;
+}
+
+export interface NovaStateContextType {
+    mood: NovaMood;
+    status: NovaStatus;
+    isTracking: boolean;
+    emote: NovaEmote;
+    messages: NovaMessage[];
+    pulseTrigger: number;
+    isPacManMode: boolean;
+    consumedFriendIds: (string | number)[];
+    gulpTrigger: number;
+    isCinematicMode: boolean;
+    isStormMode: boolean;
+    waterLevel: number;
+    splashTrigger: number;
+    isAscending: boolean;
+    isDead: boolean;
+    isChatDisabled: boolean;
+    deathPhase: number;
+    isHunting: boolean;
+    eatenElements: { id: string; originalRect: DOMRect; element: HTMLElement }[];
+    isSpitting: boolean;
+    huntTarget: { x: number; y: number } | null;
+    isSingularity: boolean;
+    isNuclearSingularity: boolean;
+    curiousTarget: { x: number; y: number } | null;
+    novaPosition: { x: number; y: number } | null;
+    investigationContext: { type: string; message: string } | null;
+    homePosition: { x: number; y: number } | null;
+    isKillingMachine: boolean;
+    targetingData: { x: number; y: number; width: number; height: number; text: string; elementId: string } | null;
+    isFiring: boolean;
+    isHeartbroken: boolean;
+    isMelting: boolean;
+    temperature: number;
+    isSmart: boolean;
+    isEgg: boolean;
+    isDancing: boolean;
+    isSauronMode: boolean;
+    visionRadius: number;
+    ashIntensity: number;
+    followCursorMode: boolean;
+    isNightMode: boolean;
+}
+
+export interface NovaDispatchContextType {
+    setMood: (mood: NovaMood) => void;
+    setStatus: (status: NovaStatus) => void;
+    setTracking: (tracking: boolean) => void;
+    triggerEmote: (emote: NovaEmote) => void;
+    addMessage: (text: string, sender?: 'nova' | 'user') => void;
+    setPacManMode: (val: boolean) => void;
+    setConsumedFriendIds: React.Dispatch<React.SetStateAction<(string | number)[]>>;
+    triggerPacManGulp: () => void;
+    setCinematicMode: (val: boolean) => void;
+    setStormMode: (val: boolean) => void;
+    setWaterLevel: React.Dispatch<React.SetStateAction<number>>;
+    triggerSplash: () => void;
+    setIsAscending: (val: boolean) => void;
+    setIsDead: (val: boolean) => void;
+    setChatDisabled: (val: boolean) => void;
+    setDeathPhase: (val: number) => void;
+    setIsHunting: (val: boolean) => void;
+    setEatenElements: React.Dispatch<React.SetStateAction<{ id: string; originalRect: DOMRect; element: HTMLElement }[]>>;
+    setIsSpitting: (val: boolean) => void;
+    setHuntTarget: (val: { x: number; y: number } | null) => void;
+    setIsSingularity: (val: boolean) => void;
+    setNuclearSingularity: (val: boolean) => void;
+    triggerEatInput: () => void;
+    triggerBlush: () => void;
+    setCuriousTarget: (val: { x: number; y: number } | null) => void;
+    setNovaPosition: (val: { x: number; y: number } | null) => void;
+    setInvestigationContext: (val: { type: string; message: string } | null) => void;
+    setHomePosition: (val: { x: number; y: number } | null) => void;
+    setIsKillingMachine: (val: boolean) => void;
+    setTargetingData: (val: { x: number; y: number; width: number; height: number; text: string; elementId: string } | null) => void;
+    setIsFiring: (val: boolean) => void;
+    triggerVengeance: (type: 'insult' | 'rival') => void;
+    triggerAngry: () => void;
+    triggerHappy: () => void;
+    triggerAngelic: () => void;
+    recordInteraction: () => void;
+    setIsHeartbroken: (val: boolean) => void;
+    setIsMelting: (val: boolean) => void;
+    setTemperature: React.Dispatch<React.SetStateAction<number>>;
+    setIsSmart: (val: boolean) => void;
+    setIsEgg: (val: boolean) => void;
+    triggerSmart: () => void;
+    triggerRich: () => void;
+    triggerEgg: () => void;
+    setIsDancing: (val: boolean) => void;
+    loadMessages: (msgs: NovaMessage[]) => void;
+    setIsSauronMode: (val: boolean) => void;
+    setVisionRadius: (val: number) => void;
+    setAshIntensity: (val: number) => void;
+    setFollowCursorMode: (val: boolean) => void;
+    setIsNightMode: (val: boolean) => void;
+    clearMessages: () => void;
+}
