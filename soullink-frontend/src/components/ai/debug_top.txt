@@ -1,0 +1,100 @@
+﻿"use client";
+
+import React, { useEffect, useState, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform, Variants, AnimatePresence } from "framer-motion";
+import styles from "./NovaAvatar.module.css";
+import { useNovaState, useNovaDispatch } from "@/context/NovaContext";
+import { NovaEmotes } from "./NovaEmotes";
+import { NovaThinkingState } from "./NovaThinkingState";
+import eyeballImg from "@/assets/eyeball.jpg";
+import chickenGif from "@/assets/chicken.gif";
+import { NovaBlackHole } from "./NovaBlackHole";
+
+const HEART_PATHS = {
+    circleLeft: "M 24 0 A 24 24 0 0 0 24 48 L 24 24 Z",
+    circleRight: "M 24 0 A 24 24 0 0 1 24 48 L 24 24 Z",
+    heartLeft: "M 24 42 C 10 32 0 20 0 11 C 0 5 5 0 11 0 C 15 0 19 2 24 6 L 24 42 Z",
+    heartRight: "M 24 42 C 38 32 48 20 48 11 C 48 5 43 0 37 0 C 33 0 29 2 24 6 L 24 42 Z"
+};
+
+export function NovaAvatarComponent() {
+    const {
+        mood, status, isTracking, emote, pulseTrigger, isPacManMode, gulpTrigger,
+        consumedFriendIds, isCinematicMode, waterLevel, splashTrigger,
+        isStormMode, isAscending, isDead, deathPhase, eatenElements,
+        curiousTarget, novaPosition, investigationContext, homePosition,
+        isHunting, isSpitting, huntTarget, isSingularity,
+        isKillingMachine, targetingData, isFiring,
+        isHeartbroken, isMelting, temperature, isSmart, isEgg,
+        isDancing
+    } = useNovaState();
+
+    const {
+        setMood, setIsAscending, setIsDead, setChatDisabled, setDeathPhase,
+        addMessage, triggerEmote, triggerBlush, setCuriousTarget, setNovaPosition,
+        setInvestigationContext, recordInteraction, setIsEgg, setIsDancing
+    } = useNovaDispatch();
+
+    const moodRef = useRef(mood);
+    useEffect(() => {
+        moodRef.current = mood;
+    }, [mood]);
+
+    const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+
+    // Interaction State
+    const [clickRipple, setClickRipple] = useState<{ x: number, y: number, key: number } | null>(null);
+
+    // Animation state for the pulse feedback
+    const [pulseActive, setPulseActive] = useState(0);
+
+    // Falling State for Boredom / Heartbreak
+    const fallY = useMotionValue(0);
+    const smoothFallY = useSpring(fallY, { damping: 40, stiffness: 30 });
+
+    // Broken Heart Sequence State
+    const [isCracked, setIsCracked] = useState(false);
+    const [shakeTrigger, setShakeTrigger] = useState(0);
+
+    // Crazy State logic
+    const [crazyBounce, setCrazyBounce] = useState({ x: 0, y: 0 });
+    const [crazyVelocity, setCrazyVelocity] = useState({ x: 4, y: 3 });
+    const [isRebooting, setIsRebooting] = useState(false);
+
+    // Cursed state logic
+    const [isPeeking, setIsPeeking] = useState(false);
+    const [jumpscare, setJumpscare] = useState(false);
+
+    // Confused state - digital static
+    const [staticGlitch, setStaticGlitch] = useState(false);
+
+    const [isAILoading, setIsAILoading] = useState(false);
+    const [isLunge, setIsLunge] = useState(false);
+
+    const [exorcismProgress, setExorcismProgress] = useState(0);
+    const [isHolding, setIsHolding] = useState(false);
+
+    const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const investigationTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const currentElementRef = useRef<HTMLElement | null>(null);
+
+    // Death/Ascension Timer
+    const [drownTimer, setDrownTimer] = useState(0);
+
+    // Sad state logic - Digital Rain
+    const [pixels, setPixels] = useState<{ id: number; x: number; delay: number }[]>([]);
+    // Disgusted state logic - Green Fumes
+    const [bubbles, setBubbles] = useState<{ id: number; x: number; delay: number }[]>([]);
+    // Love state logic - Floating Hearts
+    const [loveHearts, setLoveHearts] = useState<{ id: number; x: number; delay: number; scale: number; sway: number }[]>([]);
+    const [isBashful, setIsBashful] = useState(false);
+    // Melting state logic - Embers & Intensity
+    const [embers, setEmbers] = useState<{ id: number; x: number; y: number; vx: number; vy: number; scale: number; opacity: number }[]>([]);
+    const [meltingIntensity, setMeltingIntensity] = useState(0); // 0 to 1 fade-in
+    // Smart state logic - Binary Particles
+    const [binaryBits, setBinaryBits] = useState<{ id: number; x: number; y: number; char: string; delay: number }[]>([]);
+    const [isTyping, setIsTyping] = useState(false);
+
+    // Hatchling Easter Egg State
+    const [hatchPhase, setHatchPhase] = useState<'egg' | 'cracking' | 'hatched'>('egg');

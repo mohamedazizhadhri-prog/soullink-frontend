@@ -1,0 +1,222 @@
+.inputArea {
+  padding: 10px 20px 20px;
+  background: transparent;
+  width: 100%;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.replyPreview {
+  background: rgba(30, 30, 45, 0.6);
+  backdrop-filter: blur(10px);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: none;
+}
+
+.replyPreviewInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.replyUser {
+  font-weight: 600;
+  color: #818cf8;
+}
+
+.cancelReply {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.cancelReply:hover {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.attachmentPreview {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.attachmentPreview img {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 8px;
+  display: block;
+}
+
+.removeAttachment {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #f87171;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.removeAttachment:hover {
+  transform: scale(1.1);
+}
+
+.inputWrapper {
+  background: rgba(40, 40, 50, 0.4);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  min-height: 48px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 12px;
+}
+
+.inputWrapper:focus-within {
+  background: rgba(50, 50, 65, 0.6);
+  border-color: rgba(129, 140, 248, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(129, 140, 248, 0.2);
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.actionBtn:hover {
+  color: #818cf8;
+  background: rgba(129, 140, 248, 0.1);
+  transform: translateY(-1px);
+}
+
+.fileHidden {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.inputField {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.95rem;
+  padding: 8px 0;
+  outline: none;
+  max-height: 200px;
+  overflow-y: auto;
+  resize: none;
+  line-height: 1.5;
+}
+
+.inputField::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.sendBtn {
+  color: #818cf8;
+  opacity: 0.5;
+  cursor: default;
+  transition: all 0.2s;
+}
+
+.sendBtnActive {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.sendBtnActive:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.5));
+}
+
+/* Pickers */
+.pickerOverlay {
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: 12px;
+  z-index: 1000;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.emojiPicker {
+  left: 0;
+}
+
+.gifPicker {
+  left: 40px;
+  width: 350px;
+  height: 450px;
+  background: rgba(15, 15, 26, 0.95);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+}
+
+.gifHeader {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gifSearchInput {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.gifContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}

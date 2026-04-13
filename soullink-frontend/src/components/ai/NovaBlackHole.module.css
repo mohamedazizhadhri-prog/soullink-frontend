@@ -1,0 +1,139 @@
+.blackHoleContainer {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* 1. Einstein Ring (Warped Flame) */
+.einsteinRing {
+    position: absolute;
+    width: 140%;
+    height: 140%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            transparent 40%,
+            rgba(255, 140, 0, 0.2) 45%,
+            rgba(255, 200, 50, 0.6) 50%,
+            rgba(255, 100, 0, 0.2) 55%,
+            transparent 65%);
+    filter: blur(4px) contrast(180%);
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* 2. Accretion Disk (Fiery & Turbulent) */
+.accretionDisk {
+    position: absolute;
+    width: 220%;
+    height: 80%;
+    border-radius: 50%;
+    /* Fiery Conic Gradient */
+    background: conic-gradient(from 180deg at 50% 50%,
+            rgba(255, 60, 0, 0) 0%,
+            rgba(255, 100, 0, 0.4) 20%,
+            rgba(255, 180, 0, 1) 48%,
+            /* Peak brightness */
+            rgba(255, 255, 200, 1) 50%,
+            rgba(255, 140, 0, 0.8) 52%,
+            rgba(200, 50, 0, 0.3) 80%,
+            rgba(255, 60, 0, 0) 100%);
+    filter: blur(6px) drop-shadow(0 0 25px rgba(255, 100, 0, 0.6));
+    transform: rotateX(80deg) rotateZ(0deg);
+    z-index: 5;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+/* 3. Plasma Glow (Volumetric Atmosphere) */
+.volumetricHaze {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(255, 140, 0, 0.4) 0%,
+            rgba(255, 60, 0, 0.2) 40%,
+            transparent 75%);
+    filter: blur(15px);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* 4. The Event Horizon (The Void) */
+.voidSphere {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #000;
+    z-index: 20;
+    /* Fiery rim from lensing */
+    box-shadow:
+        inset 0 0 15px rgba(255, 100, 0, 0.3),
+        0 0 3px 2px rgba(255, 180, 0, 0.8);
+    overflow: hidden;
+}
+
+/* 5. Photon Sphere (Trapped Light) */
+.photonSphere {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 200, 100, 0.4);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+    z-index: 21;
+    pointer-events: none;
+}
+
+/* 6. Turbulence Overlay (Plasma Motion) */
+.turbulence {
+    position: absolute;
+    inset: -50%;
+    z-index: 10;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    filter: url(#nova-fiery-lensing);
+    opacity: 0.6;
+}
+
+/* Consumption Effects */
+.consumptionFlare {
+    position: absolute;
+    inset: -80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, #ffcc00 30%, #ff4400 60%, transparent 80%);
+    z-index: 100;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: blur(20px);
+}
+
+.lensFlare {
+    position: absolute;
+    width: 500px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #ffeedd, #ffaa00, #ff4400, #ffeedd, transparent);
+    z-index: 101;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: blur(1px);
+}
+
+.gravitationalWave {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    z-index: 5;
+    pointer-events: none;
+    box-shadow: 0 0 40px rgba(255, 200, 100, 0.6);
+}

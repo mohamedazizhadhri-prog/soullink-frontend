@@ -1,0 +1,5890 @@
+Code: 1941      Année Universitaire:   2024-2025      Université de la Manouba  École Supérieure d’Économie Numérique        Rapport  de projet de fin d'études    Présenté en vue de l'obtention du diplôme de  Licence en Business Computing  Spécialité: Business Information System      Sujet    Conception et Développement d’une application web pour le recrutement interne des stagiaires          Élaboré par:         Ayoub dabbabi      Mohamedamine benchaabene          Organisme d'accueil  Orange Tunisie      Encadré par   ESEN  M. Riadh Bouslimi     Société  M. Mohamed  Rahal   D´eclaration sur l’utilisation de
+l’Intelligence Artificielle G´en´erative
+
+Nous d´eclarons par la pr´esente avoir utilis´e des outils d’intelligence artificielle g´en´erative
+
+(IAG) comme suit :
+
+1. Reformulation : Nous avons utilis´e Quillbot pour reformuler et affiner notre
+texte, en garantissant sa clart´e et son originalit´e. Nous avons syst´ematiquement
+v´erifi´e et parfois modifi´e les r´esultats de l’IAG.
+
+2. D´ebogage de code : Nous avons utilis´e ChatGPT comme assistant de d´eveloppement
+pour identifier les erreurs potentielles, optimiser la structure du code et sugg´erer
+des am´eliorations algorithmiques. Chaque suggestion a ´et´e soigneusement ´evalu´ee
+et adapt´ee `a nos besoins sp´ecifiques.
+
+Ces outils d’IAG ont ´et´e utilis´es comme technologies de support pour am´eliorer
+notre rapport, les processus fondamentaux de recherche, de r´edaction et de r´esolution
+de probl`emes demeurant les nˆotres.
+
+2
+
+D´edicace
+
+Apr`es avoir rendu grˆace `a Dieu le tout puissant et le bienveillant.
+Je tiens `a remercier vivement tous ce qui de pr`es ou de loin ont particip´e `a
+r´ealiser ce projet.
+
+Je voudrais citer plus particuli`erement : M. RIADH BOUSLIMI, encadrant
+acad´emique `a l’ESEN, qui m’a suivi tout au long de cette p´eriode et m’a
+conseill´e sur l’orientation que celui-ci devait prendre.
+
+Par ailleurs, je remercie mon encadreur de soci´et´e M. MOHAMED RAHAL,
+pour son accueil, son assistance, son sens de former et d’informer.
+
+`A mon chere p`ere Tu es toujours `a mes cˆot´es pour me soutenir et m’encourager
+Que ce travail traduit ma gratitude et mon affection.
+
+`A ma m`ere ch´erie Ce travail est un reflet de tout l’amour que je te porte.
+
+`A mon cher fr`ere Chedli et ma sœur Siwar, qui n’ont cess´e de me conseiller,
+m’encourager et me soutenir tout au long de mes ´etudes.
+
+`A mes ami(e)s Ichrak, Sarah, Omar, Fedi, Raslen qui n’ont jamais cess´e (e) de
+me soutenir.
+
+Et finalement, sans oublier mon binˆome Ayoub Dabbabi pour son soutien moral,
+sa patience et sa compr´ehension tout au long de ce projet.
+
+MohamedAmin Benchaaben
+
+D´edicace
+
+≪La seule marche arri`ere tol´er´ee est celle de l’´elan pour sauter l’obstacle.≫
+— R.E.D.K
+
+Je d´edie ce modeste travail `a toutes les personnes qui ont ´et´e `a mes cˆot´es, de pr`es ou
+de loin, et qui ont contribu´e `a faire de ce parcours une r´eussite.
+
+`A ma ch`ere famille, pilier de ma vie, source in´epuisable de force et d’amour.
+
+`A mon cher p`ere, pour son soutien moral constant, ses sacrifices silencieux, et sa
+confiance en moi en toutes circonstances.
+
+`A ma tendre m`ere, pour son amour infini, sa patience, et sa pr´esence rassurante `a
+chaque ´etape de mon parcours.
+
+`A mes fr`eres ador´es, Taher et Iheb, pour leur soutien affectueux, leurs
+encouragements sinc`eres et leur pr´esence inconditionnelle.
+
+`A mes chers amis, pour leur bienveillance, leurs mots r´econfortants, et tous les
+moments partag´es qui m’ont aid´e `a avancer.
+
+Et enfin, `a mon binˆome et ami Mohamed Amine Ben Chaaben, pour sa
+coop´eration exemplaire, son implication sans faille et l’esprit d’´equipe qui a enrichi
+chaque moment de ce projet.
+
+Ayoub Dabbabi
+
+4
+
+Remerciements
+
+Avant d’entamer ce rapport de fin d’´etudes, nous tenons `a exprimer nos sinc`eres
+remerciements `a toutes les personnes qui nous ont accompagn´es et soutenus tout au
+long de ce projet.
+
+Nous souhaitons adresser nos plus vifs remerciements `a notre encadrant profession-
+nel, M. Mohamed Rahal, pour son accompagnement constant, sa disponibilit´e et la
+richesse de ses conseils. Son implication a ´et´e pr´ecieuse dans la r´eussite de ce travail.
+
+Nous tenons ´egalement `a exprimer notre profonde gratitude `a notre encadrant
+acad´emique, M. Riadh Bouslimi, pour sa rigueur, son ´ecoute et ses orientations
+pr´ecieuses tout au long de ce projet. Son encadrement p´edagogique nous a permis de
+structurer notre d´emarche de mani`ere claire et efficace, et de faire ´evoluer notre r´eflexion
+avec m´ethode.
+
+Nos remerciements s’´etendent `a l’ensemble des enseignants de l’´Ecole Sup´erieure
+de l’´Economie Num´erique pour la qualit´e des enseignements dispens´es, ainsi qu’aux
+membres du jury pour leur temps, leur attention et leurs remarques enrichissantes.
+
+Enfin, nous remercions chaleureusement toutes les personnes qui, de pr`es ou de loin,
+
+ont contribu´e `a la r´ealisation de ce projet.
+
+5
+
+Abstract
+
+This project was carried out as part of a Bachelor’s degree in Business Information
+Systems. It focuses on the design and development of a web application using the MERN
+stack to manage the internal recruitment of interns at Orange Tunisie – Network and
+Services Division. The main goal is to digitize the recruitment process by centralizing
+internship sessions, candidate submissions, their automated sorting based on predefined
+criteria, as well as handling complaints. The project was developed using the Scrum
+agile methodology, promoting iterative development and continuous improvement.
+
+Keywords : MERN Stack, Scrum, Recruitment, Web application, Orange Tunisie.
+
+R´esum´e
+
+Ce projet a ´et´e r´ealis´e dans le cadre de l’obtention d’une licence en Business Information
+System. Il porte sur la conception et le d´eveloppement d’une application web bas´ee sur
+la pile MERN, destin´ee `a g´erer le recrutement interne des stagiaires au sein d’Orange
+Tunisie – Direction R´eseaux et Services. L’objectif principal est de num´eriser le pro-
+cessus de recrutement `a travers la centralisation des sessions de stage, la soumission
+des candidatures, leur tri automatis´e selon des crit`eres d´efinis, ainsi que le traitement
+des r´eclamations. Le d´eveloppement a ´et´e men´e selon la m´ethodologie agile Scrum,
+favorisant une ´evolution it´erative et une am´elioration continue.
+
+Mots cl´es : MERN Stack, Scrum, Recrutement, Application web, Orange Tunisie
+
+Table des mati`eres
+
+D´edicace
+
+Introduction
+
+1 ´Etude de projet
+
+1.4
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.1
+1.2 Cadre du projet
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Pr´esentation de l’´etablissement d’accueil . . . . . . . . . . . . . . . . . .
+1.3.1 Historique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3.2 Les activit´es de l’´etablissement . . . . . . . . . . . . . . . . . . .
+1.3.3 L’organigramme d’Orange Tunisie . . . . . . . . . . . . . . . . .
+1.3.4 Direction des R´eseaux et Services (DRS) . . . . . . . . . . . . . .
+´Etude de l’existant . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4.1 Le syst`eme actuel . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4.2 Critique de l’existant . . . . . . . . . . . . . . . . . . . . . . . . .
+1.5 La solution propos´ee . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.6 Le choix de la m´ethodologie . . . . . . . . . . . . . . . . . . . . . . . . .
+1.6.1 Comparaison entre la m´ethodologie agile et la m´ethodologie clas-
+sique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.6.2 Les m´ethodes agiles
+. . . . . . . . . . . . . . . . . . . . . . . . .
+1.6.3 Framework SCRUM . . . . . . . . . . . . . . . . . . . . . . . . .
+1.7 Langage de mod´elisation . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.8 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2 Planification et architecture
+
+2.1
+2.2 Besoins fonctionnels et non fonctionnels et acteurs
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . .
+2.2.1 Les acteurs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2.2 Les besoins fonctionnels . . . . . . . . . . . . . . . . . . . . . . .
+2.2.3 Les besoins non fonctionnels . . . . . . . . . . . . . . . . . . . . .
+2.3 Diagramme de cas d’utilisation global
+. . . . . . . . . . . . . . . . . . .
+2.4 L’´equipe SCRUM . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.5 Le product backlog . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+i
+
+4
+
+1
+
+2
+2
+2
+2
+3
+4
+5
+5
+6
+6
+7
+7
+7
+
+8
+9
+10
+14
+14
+
+15
+15
+15
+15
+16
+17
+17
+18
+18
+
+CONTENTS
+
+2.6 Structure des sprints
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.6.1 Planification des sprints . . . . . . . . . . . . . . . . . . . . . . .
+2.6.2 Planning de r´ealisation du projet . . . . . . . . . . . . . . . . . .
+2.7 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3 Sprint1 : Gestion d’authentification, Gestion des sessions du stage,
+
+ii
+
+19
+19
+20
+20
+
+Gestion des Recruteurs
+3.1
+3.2 La sp´ecification fonctionnelle
+
+21
+21
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+. . . . . . . . . . . . . . . . . . . . . . . .
+21
+3.2.1 Le sprint Backlog . . . . . . . . . . . . . . . . . . . . . . . . . . .
+25
+3.2.2 Diagramme de cas d’utilisation du premier sprint . . . . . . . . .
+25
+3.3 Analyse des cas d’utilisation . . . . . . . . . . . . . . . . . . . . . . . . .
+25
+3.3.1 Analyse du cas d’utilisation ≪ s’authentifier ≫ . . . . . . . . . . .
+26
+. . . .
+3.3.2 Analyse du cas d’utilisation ≪ R´ecup´erer mot de passe ≫.
+27
+3.3.3 Analyse du cas d’utilisation ≪ Cr´eer une session du stage ≫ . . .
+28
+3.3.4 Analyse du cas d’utilisation ≪ Supprimer une session du stage ≫
+29
+3.3.5 Analyse du cas d’utilisation ≪ Consulter une session du stage ≫ .
+3.3.6 Analyse du cas d’utilisation ≪ Mettre `a jour une session du stage ≫ 30
+31
+3.3.7 Analyse du cas d’utilisation ≪ Consulter un recruteur ≫ . . . . .
+31
+3.3.8 Analyse du cas d’utilisation ≪ Cr´eer un recruteur ≫ . . . . . . .
+32
+3.3.9 Analyse du cas d’utilisation ≪ Supprimer un recruteur ≫ . . . . .
+33
+3.3.10 Analyse du cas d’utilisation ≪ Mettre `a jour d’un Recruteur ≫ .
+33
+. . . . . . . . . . . . . . . . . . . . . .
+33
+3.4.1 Conception de cas d’utilisation ≪ s’authentifier ≫ . . . . . . . . .
+3.4.2 Conception de cas d’utilisation ≪ Cr´eer une session du stage ≫ .
+35
+3.4.3 Conception de cas d’utilisation ≪ Metter `a jour une session du
+stage ≫ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+3.4 Conception des cas d’utilisations
+
+37
+3.4.4 Conception de cas d’utilisation ≪ Supprimer une session du stage ≫ 39
+3.4.5 Conception de cas d’utilisation ≪ Consultation d’une session du
+stage ≫ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4.6 Conception de cas d’utilisation ≪ Consulter un Recruteur ≫ . . .
+3.4.7 Conception de cas d’utilisation ≪ Cr´eer un Recruteur ≫ . . . . .
+3.4.8 Conception de cas d’utilisation ≪ Supprimer un Recruteur ≫ . .
+3.4.9 Conception de cas d’utilisation ≪ Mettre `a jour un Recruteur ≫ .
+3.4.10 Diagramme de classe participante du premier sprint
+. . . . . . .
+3.4.11 Diagramme de classe global du premier sprint . . . . . . . . . . .
+Impl´ementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.5.1 G´en´eration de base de donn´ees . . . . . . . . . . . . . . . . . . .
+3.5.2 Les interfaces
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.5.3 Test . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+41
+42
+43
+44
+46
+47
+48
+49
+49
+50
+52
+
+3.5
+
+CONTENTS
+
+3.5.4 Revue de Sprint
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.6 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+4 Sprint 2 : Gestion des demandes de stage, Gestion des r´eclamations,
+
+iii
+
+57
+59
+
+Gestion des analyses
+4.1
+4.2 La sp´ecification fonctionnelle
+
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+4.2.1 Le sprint Backlog . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2.2 Diagramme de cas d’utilisation du deuxi`eme sprint . . . . . . . .
+4.3 Analyse des cas d’utilisations . . . . . . . . . . . . . . . . . . . . . . . .
+
+60
+60
+60
+60
+63
+64
+4.3.1 Analyse du cas d’utilisation ≪ Soumettre une demande de stage ≫ 64
+4.3.2 Analyse de cas d’utilisation ≪ Poursuivre l’´etat d’une demande
+de stage ≫ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+65
+66
+4.3.3 Analyse de cas d’utilisation ≪ consulter une demande de stage ≫
+4.3.4 Analyse de cas d’utilisation ≪ Traitement d’une demande de stage≫ 67
+68
+4.3.5 Analyse de cas d’utilisation ≪ Consultation d’une r´eclamation ≫
+69
+4.3.6 Analyse de cas d’utilisation ≪ cr´eation d’une r´eclamation ≫ . . .
+4.3.7 Analyse de cas d’utilisation ≪ Suppression d’une r´eclamation ≫ .
+70
+4.3.8 Analyse de cas d’utilisation ≪ Modification de l’´etat d’une r´eclamation
+
+≫.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3.9 Analyse de cas d’utilisation ≪ Consultation des statistiques des
+analyses de session ≫ . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4 Conception des cas d’utilisation . . . . . . . . . . . . . . . . . . . . . . .
+4.4.1 Conception de cas d’utilisation ≪ Soumettre une demande de
+stage ≫ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4.2 Conception de cas d’utilisation ≪ Poursuivre l’´etat d’une de-
+mande demande de stage ≫ . . . . . . . . . . . . . . . . . . . . .
+
+71
+
+72
+73
+
+73
+
+75
+4.4.3 Conception de cas d’utilisation ≪ Consulter les demandes de stage ≫ 77
+4.4.4 Conception de cas d’utilisation ≪ Traitement d’une demande de
+stage ≫ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+79
+4.4.5 Conception de cas d’utilisation ≪ Consultation d’une r´eclamation ≫ 82
+83
+4.4.6 Conception de cas d’utilisation ≪ Cr´eation d’une r´eclamation ≫ .
+85
+4.4.7 Conception de cas d’utilisation ≪ Supprimer une r´eclamation ≫ .
+4.4.8 Conception de cas d’utilisation ≪ Modifier l’´etat d’une r´eclamation
+≫ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4.9 Conception de cas d’utilisation ≪ Consulter les statistiques des
+analyses de session ≫ . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4.10 Diagramme de classe participante du deuxi`eme sprint
+. . . . . .
+4.4.11 Diagramme de classe global du deuxi`eme sprint . . . . . . . . . .
+Impl´ementation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+89
+92
+93
+94
+
+87
+
+4.5
+
+CONTENTS
+
+iv
+
+4.5.1 G´en´eration de base de donn´ees . . . . . . . . . . . . . . . . . . .
+4.5.2 Les interfaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5.3 Test . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5.4 Revue de Sprint
+
+94
+94
+97
+99
+4.6 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101
+
+5 Phase de clˆoture
+
+5.1
+5.2 Environnement de travail
+
+102
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102
+. . . . . . . . . . . . . . . . . . . . . . . . . . 102
+5.2.1 Environnement mat´eriel
+. . . . . . . . . . . . . . . . . . . . . . . 102
+5.2.2 Environnement logiciel . . . . . . . . . . . . . . . . . . . . . . . . 103
+5.3 Choix technologiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 105
+5.3.1 L’architecture de la pile MERN Stack . . . . . . . . . . . . . . . 105
+5.3.2 L’architecture MVC . . . . . . . . . . . . . . . . . . . . . . . . . 107
+5.3.3 Diagramme de d´eploiement . . . . . . . . . . . . . . . . . . . . . 108
+5.3.4 Diagramme de GANTT . . . . . . . . . . . . . . . . . . . . . . . 108
+5.4 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 109
+
+Conclusion
+
+110
+
+Liste des tableaux
+
+4
+8
+12
+
+18
+18
+19
+20
+
+22
+23
+24
+25
+26
+
+1.1 Activit´es d’Orange Tunisie.
+. . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 Comparaison entre la m´ethodologie Agile et la m´ethodologie classique. .
+. . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 D´efinitions des rˆoles Scrum.
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.1 L’´equipe SCRUM.
+. . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Product Backlog (Partie 1).
+2.3 Product Backlog (Partie 2).
+. . . . . . . . . . . . . . . . . . . . . . . . .
+2.4 planification de r´ealisation du projet. . . . . . . . . . . . . . . . . . . . .
+
+≫.
+
+stage ≫.
+
+3.1 Sprint Backlog.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1 Sprint Backlog.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1 Sprint Backlog.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1 Sprint Backlog.
+3.2 Description textuelle du cas d’utilisation ≪S’authentifier≫. . . . . . . . .
+3.3 Description textuelle du cas d’utilisation ≪ R´ecup´eration de mot de passe
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+27
+3.4 Description textuelle du cas d’utilisation ≪ Cr´eer une session du stage ≫. 28
+3.5 Description textuelle du cas d’utilisation ≪ Supprimer une session du
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+29
+3.6 Description textuelle du cas d’utilisation ≪ Consulter session du stage ≫. 30
+3.7 Description textuelle du cas d’utilisation ≪ Mettre `a jour session du stage
+30
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31
+. . .
+3.8 Description textuelle du cas d’utilisation ≪ Consulter Recruteur ≫.
+31
+3.9 Description textuelle du cas d’utilisation ≪ Cr´eer un Recruteur ≫.
+. . .
+3.10 Description textuelle du cas d’utilisation ≪ Supprimer un Recruteur ≫. .
+32
+3.11 Description textuelle du cas d’utilisation ≪ Mettre `a jour un Recruteur ≫. 33
+49
+3.12 Mod`ele User.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+49
+3.13 Mod`ele Admin.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+49
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.14 Mod`ele Recruteur.
+49
+3.15 Mod`ele Stagiaire. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+49
+3.16 Mod`ele Session de Stage. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+57
+. . . . . . .
+3.17 Tableau des valeurs de Burndown Chart du premier sprint.
+59
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+3.18 calcul de v´elocit´e estim´ee.
+
+≫.
+
+v
+
+65
+
+66
+
+65
+
+64
+
+61
+62
+63
+
+mande de stage ≫.
+
+stage ≫ (Partie 2).
+
+stage ≫ (Partie 1).
+
+stage ≫ (Partie 2).
+
+stage ≫ (Partie 1).
+
+de stage ≫ (Partie 1).
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.1 Sprint Backlog.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.1 Sprint Backlog.
+4.1 Sprint Backlog.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.2 Description textuelle du cas d’utilisation ≪ Soumettre une demande de
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3 Description textuelle du cas d’utilisation ≪ Soumettre une demande de
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4 Description textuelle du cas d’utilisation ≪ Poursuivre l’´etat d’une de-
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.5 Description textuelle du cas d’utilisation ≪ Consulter les demandes de
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.6 Description textuelle du cas d’utilisation ≪ Consulter les demandes de
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.7 Description textuelle du cas d’utilisation ≪ Traitement d’une demande
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.8 Description textuelle du cas d’utilisation ≪ Traitement d’une demande
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.9 Description textuelle du cas d’utilisation ≪ Consultation d’une r´eclamation
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.10 Description textuelle du cas d’utilisation ≪ Cr´eation d’une r´eclamation
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.11 Description textuelle du cas d’utilisation ≪ Cr´eation d’une r´eclamation
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.12 Description textuelle du cas d’utilisation ≪ Suppression une r´eclamation
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.13 Description textuelle du cas d’utilisation ≪ Modification de l’´etat d’une
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.14 Description textuelle du cas d’utilisation ≪ Consultation des statistiques
+73
+des analyses de session ≫.
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+94
+. . . . . . . . . . . . . . . . . . . . . . .
+4.15 Mod`ele Les demandes de stage.
+94
+4.16 Mod`ele R´eclamation. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.17 Tableau des valeurs de Burndown Chart du deuxi`eme sprint.
+99
+. . . . . .
+4.18 calcul de v´elocit´e estim´ee . . . . . . . . . . . . . . . . . . . . . . . . . . . 101
+
+de stage ≫ (Partie 2).
+
+r´eclamation ≫.
+
+≫ (Partie 1).
+
+≫ (Partie 2).
+
+69
+
+67
+
+68
+
+72
+
+67
+
+69
+
+70
+
+71
+
+≫.
+
+≫.
+
+5.1 Environnement mat´eriel 1. . . . . . . . . . . . . . . . . . . . . . . . . . . 102
+5.2 Environnement mat´eriel 2. . . . . . . . . . . . . . . . . . . . . . . . . . . 103
+5.3 Tableau de l’environnement de logiciel. . . . . . . . . . . . . . . . . . . . 103
+5.4 planification de r´ealisation du projet. . . . . . . . . . . . . . . . . . . . . 109
+
+Table des figures
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.1 Logo d’orange.
+. . . . . . . . . . . . . . . . . . . . .
+1.2 L’organigramme d’Orange Tunisie.
+1.3 L’organigramme de la Direction des R´eseaux et Services. . . . . . . . . .
+1.4 Cycle de d´eveloppement m´ethode agile.
+. . . . . . . . . . . . . . . . . .
+1.5 Framework scrum.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.6 D´ecoupage en sprint. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2.1 Diagramme de cas d’utilisation global.
+. . . . . . . . . . . . . . . . . . .
+2.2 Planification des sprints. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+≫.
+
+stage ≫.
+
+3.1 Diagramme de cas d’utilisation du premier sprint.
+. . . . . . . . . . . .
+3.2 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ S’authentifier ≫.
+3.3 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ S’authentifier
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Cr´eer session de
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.5 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Cr´eer session
+de stage≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.6 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Mettre `a jour
+une session du stage ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.7 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Mettre `a jour
+une session du stage ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.8 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Supprimer une
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.9 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Supprimer
+une session de stage ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.10 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter session
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.11 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter
+session du stage ≫ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.12 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter Recru-
+teur ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+session de stage ≫.
+
+du stage ≫.
+
+3
+5
+6
+9
+11
+13
+
+17
+20
+
+25
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+40
+
+41
+
+41
+
+42
+
+vii
+
+TABLE DES FIGURES
+
+viii
+
+45
+
+46
+
+45
+
+44
+
+Recruteur ≫.
+
+Recruteur ≫.
+
+Recruteur ≫.
+
+3.13 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+42
+3.14 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Cr´eer Recruteur ≫. 43
+3.15 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Cr´eer un
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.16 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Supprimer Re-
+cruteur ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.17 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Supprimer
+un Recruteur ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.18 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Mettre `a jour un
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.19 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Mettre `a jour
+un Recruteur ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . .
+3.20 Diagramme de de classe participante du premier sprint.
+3.21 Diagramme de classes global du premier sprint.
+. . . . . . . . . . . . . .
+3.22 L’interface d’Authentification. . . . . . . . . . . . . . . . . . . . . . . . .
+3.23 L’interface d’inscription. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . .
+3.24 L’interface de v´erification du code.
+3.25 L’interface des sessions de stage.
+. . . . . . . . . . . . . . . . . . . . . .
+3.26 Interface de la gestion des sessions de stage. . . . . . . . . . . . . . . . .
+3.27 Interface de la page d’accueil.
+. . . . . . . . . . . . . . . . . . . . . . . .
+3.28 logo de jest. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.29 Test d’authentification. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.30 Test d’interface ≪Champ Invalide ≫.
+. . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+3.31 Test de gestion d’une session.
+. . . . . . . . . . . . . . . . . . . . .
+3.32 Test ≪ Champs obligatoire vide ≫.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.33 Postman.
+. . . . . . . . . . . . . . . .
+3.34 Test d’int´egration de consulter une session.
+3.35 Test d’int´egration de Mettre `a jour une session.
+. . . . . . . . . . . . .
+3.36 Le Diagramme de Burndown Chart du sprint 1. . . . . . . . . . . . . . .
+
+47
+48
+48
+50
+50
+51
+51
+52
+52
+53
+53
+54
+54
+55
+55
+56
+56
+58
+
+demande de stage ≫.
+
+4.1 Diagramme de cas d’utilisation du deuxi`eme sprint. . . . . . . . . . . . .
+4.2 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Soumettre une
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.3 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Soumettre
+une demande de stage ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.4 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Poursuivre l’´etat
+. . . . . . . . . . . . . . . . . . . .
+4.5 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Poursuivre
+l’´etat d’une demande demande de stage ≫. . . . . . . . . . . . . . . . . .
+
+d’une demande demande de stage ≫.
+
+64
+
+74
+
+75
+
+76
+
+77
+
+TABLE DES FIGURES
+
+ix
+
+82
+
+79
+
+78
+
+84
+
+83
+
+81
+
+80
+
+r´eclamation ≫.
+
+reclamation ≫.
+
+demande de stage ≫.
+
+demandes de stage ≫.
+
+demandes de stage ≫.
+
+d’une demande de stage ≫.
+
+4.6 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter les
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.7 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter les
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.8 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Traitement d’une
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.9 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Traitement
+. . . . . . . . . . . . . . . . . . . . . . . . .
+4.10 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consultation
+d’une r´eclamation ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.11 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consultation
+d’une r´eclamation ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.12 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Cr´eation d’une
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.13 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Cr´eation
+d’une r´eclamation ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.14 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Supprimer une
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.15 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Supprimer
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.16 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Modifier l’´etat
+d’une r´eclamation ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.17 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Modifier l’´etat
+d’une r´eclamation ≫. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4.18 Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter les
+. . . . . . . . . . . . . . . . . . .
+4.19 Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter les
+91
+. . . . . . . . . . . . . . . . . . .
+92
+4.20 Diagramme de de classe participante du deuxi`eme sprint.
+. . . . . . . .
+93
+. . . . . . . . . . . .
+4.21 Diagramme des classes global du deuxi`eme sprint.
+94
+4.22 L’interface de Cr´eation d’une r´eclamation. . . . . . . . . . . . . . . . . .
+95
+4.23 L’interface de Gestion des r´eclamations.
+. . . . . . . . . . . . . . . . . .
+95
+4.24 L’interface de soumettre une demande de stage. . . . . . . . . . . . . . .
+96
+4.25 l’interface de Traitement d’une demande de stage.
+. . . . . . . . . . . .
+97
+4.26 l’interface de Gestion des analyses.
+. . . . . . . . . . . . . . . . . . . . .
+97
+4.27 Test de modification pour l’´etat d’une r´eclamation. . . . . . . . . . . . .
+98
+4.28 Test de modification pour l’´etat d’une r´eclamation. . . . . . . . . . . . .
+4.29 Test d’int´egration de consultation des demandes de stage.
+99
+. . . . . . . .
+4.30 Le Diagramme de Burndown Chart du sprint. . . . . . . . . . . . . . . . 100
+
+statistiques des analyses de session ≫.
+
+statistiques des analyses de session ≫.
+
+une r´eclamation ≫.
+
+85
+
+89
+
+90
+
+86
+
+87
+
+88
+
+. . . . . . . . . . . . . . . . . . . . . . . 106
+5.1 Architecture Pile MERN stack.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 108
+5.2 L’architecture MVC.
+5.3 Diagramme de d´eploiement.
+. . . . . . . . . . . . . . . . . . . . . . . . 108
+5.4 Diagramme de GANTT. . . . . . . . . . . . . . . . . . . . . . . . . . . . 109
+
+Introduction G´en´erale
+
+Que ce soit pour les entreprises ou les particuliers, adopter les nouvelles technologies
+num´eriques repr´esente un investissement important. Mais cela est ´egalement devenu
+essentie pour rester dans la course, suivre les tendances digitales et offrir aux clients
+un acc`es simple et rapide `a l’information.
+
+Dans ce cadre, nous avons con¸cu une application dans le but d’automatiser la gestion
+des stagiaires au sein d’Orange Tunisie. Cette initiative a consid´erablement am´elior´e
+l’efficacit´e et l’efficience du processus de recrutement en rempla¸cant les tˆaches manuelles
+par des solutions num´eriques automatis´ees.
+
+Le chapitre initial ≪ ETUDE DE PROJET ≫ pr´esente une ´etude de projet en
+expliquant le contexte de mod´elisation propos´e et les m´ethodes utilis´ees. Par la suite,
+dans le chapitre suivant intitul´e ≪ PLANIFICATION ET ARCHITECTURE ≫, nous
+rep´erons les exigences fonctionnelles et non fonctionnelles `a l’aide de la m´ethodologie
+choisie.
+
+Nous abordons ensuite le troisi`eme chapitre ≪ Sprint1 : Gestion d’authentification,
+Gestion des sessions du stage, Gestion des Recruteurs ≫ qui repr´esente notre premier
+cycle de d´eveloppement suivi par le quatri`eme chapitre ≪ Sprint 2 : Gestion des de-
+mandes de stage, Gestion des r´eclamations, Gestion des analyses ≫ qui repr´esente le
+deuxi`eme sprint de la plateforme. Le dernier chapitre, intitul´e ≪ Phase de clˆoture ≫,
+sert de synth`ese des diff´erents outils utilis´es dans l’´elaboration et la mise au point de la
+plateforme, ainsi qu’aux technologies que nous avons incorpor´ees pour am´eliorer notre
+Projet.
+
+1
+
+1
+´Etude de projet
+
+1.1 Introduction
+
+Nous commen¸cons `a cerner le contexte g´en´eral de notre projet, ce qui nous permet de
+d´etecter les points faibles et les incoh´erences pour y rem´edier. Dans ce chapitre, il sera
+question de pr´esenter tout d’abord le cadre du projet, en passant par la pr´esentation
+g´en´erale de l’entit´e d’accueil Orange Tunisie, l’aspect fondamental de notre projet, `a
+savoir la solution `a apporter, pour finir par une br`eve pr´esentation du langage utilis´e
+et de la m´ethode adopt´ee pour la conception.
+
+1.2 Cadre du projet
+
+Dans le cadre de l’obtention de notre licence en Informatique Appliqu´ee `a la Gestion
+`a l’´Ecole Sup´erieure de l’´Economie Num´erique Manouba (ESEN), nous avons r´ealis´e
+un projet intitul´e : Conception et d´eveloppement d’une plateforme web interne pour
+l’´equipe d’Orange Tunisie, visant `a optimiser le processus de recrutement des stagiaires.
+
+1.3 Pr´esentation de l’´etablissement d’accueil
+
+Orange Tunisie est un membre du groupe Orange, un acteur mondial dans les
+services de communication. Orange Tunisie offre un large ´eventail de services, allant de
+la t´el´ephonie mobile `a l’acc`es `a Internet et `a la t´el´evision, dans le but de r´epondre aux
+besoins des clients et des entreprises en Tunisie. Orange Tunisie s’engage `a introduire
+des solutions innovantes, une large couverture r´eseau et un service client de haut niveau
+pour appuyer la croissance num´erique de la nation.
+
+2
+
+1.3. Pr´esentation de l’´etablissement d’accueil
+
+3
+
+La Figure 1.1 pr´esente le logo d’Orange.
+
+Figure 1.1 – Logo d’orange.
+
+[14]
+
+1.3.1 Historique
+
+2009 : Lancement d’Orange Tunisie
+
+En mai 2009, Orange obtient une licence de t´el´ecom en Tunisie et commence `a
+op´erer sous la marque Orange Tunisie. Orange fait son entr´ee sur le march´e tunisien
+en proposant des services de la t´el´ephonie mobile et d’internet dans tout le pays
+
+2010-2014 : Expansion et croissance
+
+Orange Tunisie ´elargit sa palette de services `a couvrir non seulement la t´el´ephonie
+mobile et l’acc`es `a internet mais encore des services de paiement mobile, les services
+de la t´el´evision et d’autres services additionnels. En outre, la compagnie investit dans
+la recherche technologique, `a savoir en en lan¸cant la 4G, avec la volont´e de r´epondre `a
+ses clients en terme d’offres plus rapides.
+
+Depuis 2020 : R´eflexion sur les nouveaux d´efis
+
+Orange Tunisie continue de optimiser ses offres commerciales et ses strat´egies marke-
+ting pour faire face `a la concurrence croissante dans le secteur des t´el´ecommunications
+en Tunisie. Par ailleurs, l’entreprise souhaite renforcer son implication au sein de la
+communaut´e locale en soutenant des causes sociales, en encourageant l’innovation tech-
+nologique locale ainsi que l’entrepreneuriat.
+
+1.3. Pr´esentation de l’´etablissement d’accueil
+
+4
+
+1.3.2 Les activit´es de l’´etablissement
+
+Orange Tunisie fournit un large ´eventail de services de communication aux individus,
+
+aux entreprises ainsi qu’aux organisations.
+
+Les informations pr´esent´ees dans le Tableau 1.1 d´emontrent les principales activit´es
+
+de la soci´et´e.
+
+Table 1.1 – Activit´es d’Orange Tunisie.
+
+Domaine d’activit´e
+
+Description
+
+— Offres pr´epay´ees et postpay´ees
+
+T´el´ephone mobile
+
+Internet haut d´ebit
+
+— Appels
+
+— SMS
+
+— ADSL
+
+— Fibre optique
+
+— 3G, 4G et 5G
+
+Services pour les entre-
+prises
+
+— T´el´ephone fixe et mobile
+
+— Connectivit´e r´eseau
+
+— Cloud computing
+
+— S´ecurit´e informatique
+
+— Paiement mobile
+
+— T´el´evision num´erique
+
+Services
+ajout´ee
+
+`a
+
+valeur
+
+— Musique en streaming
+
+— Jeux mobiles
+
+— Applications de productivit´e
+
+Projets sociaux et com-
+munautaires
+
+— Responsabilit´e sociale des entreprises
+
+— Inclusion num´erique
+
+— Partenariats pour l’´education et la sant´e
+
+— Soutien aux causes sociales
+
+1.3. Pr´esentation de l’´etablissement d’accueil
+
+5
+
+1.3.3 L’organigramme d’Orange Tunisie
+
+La Figure 1.2 repr´esente l’organigramme de l’entreprise, illustrant la r´epartition des
+
+responsabilit´es et les liens hi´erarchiques entre les diff´erentes unit´es.
+
+Figure 1.2 – L’organigramme d’Orange Tunisie.
+
+1.3.4 Direction des R´eseaux et Services (DRS)
+
+Nous avous effectu´e notre stage au sein de la DRS, l’un des 15 d´epartements
+d’Orange Tunisie. C’est dans ce cadre que s’est d´eroul´e le stage. L’organigramme ci-
+dessous montre les diff´erents services du d´epartement. L’´equipe DRS doit surveiller en
+permanence les ´equipements du r´eseau afin d’intervenir et corriger les pannes survenant,
+dans le but de fournir des services de qualit´e aux clients Orange. Par cons´equent, pour
+eux, il est n´ecessaire de disposer de statistiques de pannes tr`es d´etaill´ees, notamment
+en ce qui concerne la disponibilit´e des cellules.
+
+La Figure 1.3 repr´esente l’organigramme de la Direction des R´eseaux et Services.
+
+1.4. ´Etude de l’existant
+
+6
+
+Figure 1.3 – L’organigramme de la Direction des R´eseaux et Services.
+
+1.4
+
+´Etude de l’existant
+
+L’´evaluation de la situation actuelle est vitale pour le d´eveloppement du projet.
+Elle facilite la compr´ehension des m´ethodes existantes, met en ´evidence les lacunes et
+d´efinit les exigences n´ecessaires. Dans ce contexte, l’accent est mis sur l’´evaluation de
+la gestion du recrutement interne des stagiaires chez Orange Tunisie. L’objectif est de
+d´ecouvrir les limites du syst`eme afin de proposer une solution moderne, adapt´ee aux
+besoins de l’entreprise.
+
+`A l’heure actuelle, Orange Tunisie ne dispose pas d’un outil centralis´e pour g´erer
+le recrutement interne. Les demandes sont trait´ees de mani`ere informelle, par le biais
+de courriels ou de fichiers Excel, ce qui pose des probl`emes de suivi, de transparence
+et de visibilit´e. Cette phase analytique est donc fondamentale pour ´elaborer un outil
+optimis´e garantissant une gestion du recrutement efficace et syst´ematique.
+
+1.4.1 Le syst`eme actuel
+
+Dans le contexte actuel, les fonctionnalit´es du syst`eme de gestion du recrutement
+interne sont obscures en raison de sa fragmentation. Les managers soumettent les exi-
+gences de stage par e-mail ou via des publicit´es internes, en contournant une pla-
+teforme unifi´ee. Les candidatures sont re¸cues individuellement par les responsables,
+g´en´eralement sous forme de pi`eces jointes, et stock´ees dans des r´epertoires personnels
+ou partag´es.
+
+Il n’existe pas de portail centralis´e permettant de regrouper les offres de stage
+internes, ni de m´ecanisme permettant de suivre l’´evolution des candidatures. Chaque
+d´epartement utilise des m´ethodes de tri et d’´evaluation distinctes, ce qui complique la
+coordination et la supervision organisationnelles.
+
+1.5. La solution propos´ee
+
+7
+
+1.4.2 Critique de l’existant
+
+Une analyse met en ´evidence plusieurs lacunes dans le processus de gestion du
+
+recrutement des stagiaires. Voici les principales critiques :
+
+1) Absence de centralisation : les demandes de stage et les candidatures sont dis-
+
+pers´ees sur de multiples canaux, ce qui nuit `a une gestion efficace.
+
+2) Manque de transparence : il n’existe aucun syst`eme permettant de suivre l’´etat
+des candidatures, ce qui laisse les stagiaires et les managers mal inform´es des ´etapes du
+processus.
+
+3) Perte d’informations : le traitement manuel augmente le risque d’erreurs et
+
+d’omissions dans les demandes.
+
+4) Temps de traitement long : l’´evaluation des CV se fait sans outil d´edi´e, ce qui
+
+augmente la charge de travail de la direction et retarde les d´ecisions.
+
+5) Absence de tra¸cabilit´e : la g´en´eration de rapports statistiques et la r´ealisation
+d’analyses historiques constituent un d´efi, ce qui complique les efforts d’am´elioration
+des processus.
+
+En conclusion, l’analyse met en ´evidence les lacunes du syst`eme de recrutement
+interne actuel, qui justifient la mise en œuvre d’une approche plus structur´ee et auto-
+matis´ee pour am´eliorer les pratiques et les r´esultats.
+
+1.5 La solution propos´ee
+
+Pour am´eliorer le recrutement interne des stagiaires chez Orange Tunisie, une ap-
+plication web d´edi´ee est propos´ee. Cette plateforme permettra aux parties prenantes de
+centraliser les demandes, de g´erer les candidatures et de suivre efficacement le processus
+de recrutement.
+
+L’application facilitera l’ouverture de diff´erentes sessions de stage et g´erera les infor-
+mations et les interactions des candidats, favorisant ainsi une meilleure communication
+entre les participants et garantissant la tra¸cabilit´e des actions.
+
+Ce syst`eme automatisera les tˆaches, minimisera les erreurs de traitement manuel et
+am´eliorera l’efficacit´e du temps pour les ´equipes internes, tout en respectant les normes
+de qualit´e attendues d’une grande entreprise comme Orange Tunisie.
+
+1.6 Le choix de la m´ethodologie
+
+L’adoption d’une m´ethodologie claire est un ´el´ement cl´e dans la r´eussite de tout
+projet. Elle permet non seulement de structurer et de planifier les diff´erentes phases
+du travail, mais aussi de r´epartir les rˆoles et responsabilit´es, d’organiser les tˆaches, de
+d´efinir des objectifs pr´ecis ainsi que des crit`eres de r´eussite. Elle facilite ´egalement le
+suivi de l’avancement, le contrˆole des d´elais et du budget, et am´eliore la communication
+
+1.6. Le choix de la m´ethodologie
+
+8
+
+entre les parties prenantes. Il existe plusieurs m´ethodologies de d´eveloppement logiciel,
+chacune avec ses sp´ecificit´es, ses avantages et ses limites. Parmi les plus r´epandues, on
+retrouve la m´ethodologie classique et la m´ethodologie agile, qui adoptent des approches
+et des principes bien distincts.
+
+Dans cette section, nous allons donc pr´esenter et justifier la m´ethodologie choisie
+
+pour mener `a bien notre projet.
+
+1.6.1 Comparaison entre la m´ethodologie agile et la m´ethodologie
+
+classique
+
+Les informations pr´esent´ees dans le Tableau 1.2 mettent en ´evidence les principales
+
+diff´erences entre les deux m´ethodologies.
+
+Table 1.2 – Comparaison entre la m´ethodologie Agile et la m´ethodologie classique.
+
+Crit`ere
+
+M´ethodologie Agile
+
+M´ethodologie Classique
+
+Flexibilit´e
+changements
+
+face
+
+aux
+
+Tr`es flexible, s’adapte facilement
+aux ajustements
+
+Faible, les modifications sont dif-
+ficiles `a int´egrer
+
+Communication et col-
+laboration
+
+interaction
+
+Forte
+les
+membres de l’´equipe et les par-
+ties prenantes
+
+entre
+
+Communication plus limit´ee et
+formelle
+
+Satisfaction des clients
+
+Souvent ´elev´ee grˆace `a l’implica-
+tion continue du client
+
+Variable selon la qualit´e de la
+planification initiale
+
+Livraison des fonction-
+nalit´es
+
+Progressive et r´eguli`ere tout au
+long du projet
+
+Uniquement `a la fin du cycle de
+d´eveloppement
+
+Planification
+
+´Evolutive et ajustable selon les
+besoins
+
+Fixe d`es le d´epart, difficile `a mo-
+difier
+
+Gestion des risques
+
+´Evalu´es et trait´es en continu
+
+Organisation des phases
+
+Bas´ee sur des cycles it´eratifs
+
+Gestion des ´equipes
+
+´Equipes
+organis´ees
+
+autonomes
+
+et
+
+auto-
+
+Identifi´es
+d´ebut du projet
+
+principalement
+
+au
+
+Suivi d’un enchaˆınement de
+phases lin´eaires
+
+Structure hi´erarchique et centra-
+lis´ee
+
+Documentation
+
+All´eg´ee, centr´ee sur l’essentiel
+
+Tr`es d´etaill´ee et souvent lourde
+
+R´eactivit´e
+
+Tr`es r´eactive aux changements et
+aux retours
+
+Moins
+complexes `a int´egrer
+
+r´eactive, modifications
+
+1.6. Le choix de la m´ethodologie
+
+9
+
+1.6.2 Les m´ethodes agiles
+
+Les m´ethodes agiles sont, de mani`ere g´en´erale, destin´ees `a la gestion de projets
+informatiques. Elles reposent sur des cycles de d´eveloppement it´eratifs et adaptables,
+offrant ainsi une grande flexibilit´e pour s’ajuster `a l’´evolution constante des besoins
+des clients. L’une des forces essentielles des m´ethodes agiles r´eside dans l’implication
+directe des parties prenantes, notamment les employ´es et le client, tout au long du
+processus de d´eveloppement.
+
+Le principe consiste `a acc´el´erer la mise en service d’un logiciel en commen¸cant
+par une version minimale fonctionnelle (MVP), puis `a y int´egrer progressivement de
+nouvelles fonctionnalit´es selon les besoins qui apparaissent, `a travers des it´erations
+successives.
+
+´Ethique et structur´ee, la m´ethode agile d´emocratise l’acc`es `a une productivit´e ac-
+crue, permet une r´eduction significative des coˆuts de d´eveloppement et offre `a un niveau
+strat´egique une meilleure maˆıtrise et une plus grande clart´e dans la gestion du projet.
+
+La Figure 1.4 pr´esente la m´ethode agile.[13]
+
+Figure 1.4 – Cycle de d´eveloppement m´ethode agile.
+
+Les fondements de m´ethode agile
+
+— -Individus et interactions au lieu de processus et outils.
+
+— -Logiciel fonctionnel au lieu de documentation massive.
+
+— -Collaboration avec le client au lieu de n´egociation de contrat.
+
+— -R´eagir au changement au lieu de suivre le plan.
+
+1.6. Le choix de la m´ethodologie
+
+10
+
+Les principes fondamentaux des m´ethodes agiles
+
+Les valeurs de l’agile sont accompagn´ees de 12 grands principes qui posent les bases
+
+concr`etes de la m´ethodologie agile :
+
+1. Satisfaire le client grˆace `a des livraisons rapides et continues.
+
+2. Bien accueillir tous les changements, mˆeme tardifs.
+
+3. Livrer fr´equemment un syst`eme fonctionnel.
+
+4. Les clients et les d´eveloppeurs doivent collaborer.
+
+5. Conduire le projet autour d’´equipes motiv´ees.
+
+6. La meilleure m´ethode pour faire circuler l’information est le contact direct entre
+
+collaborateurs.
+
+7. La premi`ere mesure d’avancement est un logiciel fonctionnel.
+
+8. Le d´eveloppement doit ˆetre durable et avoir un rythme constant.
+
+9. Une bonne conception et l’excellence technique augmentent l’agilit´e.
+
+10. Simplifier au maximum.
+
+11. Les meilleures architectures, besoins et conceptions proviennent d’´equipes qui
+
+s’auto-organisent.
+
+12. L’´equipe s’am´eliore de mani`ere autonome et r´eguli`ere.
+
+[20]
+
+Exemple des m´ethodes agiles
+
+— Lean Software Development
+
+— Feature-Driven Development (FDD)
+
+— eXtreme Programming (XP)
+
+— Scrum
+
+1.6.3 Framework SCRUM
+
+Le Scrum est un framework d´edi´e `a la gestion de projet. Il est d´efini comme une
+approche dynamique et participative de la conduite et du pilotage de projet. Il a pour
+objectif d’am´eliorer la productivit´e et l’efficacit´e de l’´equipe.
+
+La Figure 1.5 pr´esente le Scrum.[4]
+
+1.6. Le choix de la m´ethodologie
+
+11
+
+Figure 1.5 – Framework scrum.
+
+Les notions de base de Scrum
+
+— User story :
+
+Une user story est une sorte de carte d’identit´e qui d´efinit la fonctionna-
+lit´e `a d´evelopper. L’objectif est de r´eduire au maximum les possibilit´es
+d’interpr´etation.
+
+— Story points :
+
+Une estimation est fournie `a chaque user story. Elle est r´ealis´ee en
+´equipe durant l’une des c´er´emonies Scrum. Estimer une user story
+consiste `a lui attribuer un nombre de points permettant d’´evaluer sa
+complexit´e.
+
+— Tˆache termin´ee :
+
+La ≪ d´efinition de termin´e ≫ est une liste de v´erifications que l’´equipe
+doit valider avec succ`es avant de d´eclarer que la fonctionnalit´e est po-
+tentiellement livrable.
+
+Intervenants de Scrum
+
+Les informations pr´esent´ees dans le Tableau 1.3 permettent de d´efinir les rˆoles du
+
+framework Scrum.
+
+1.6. Le choix de la m´ethodologie
+
+12
+
+Table 1.3 – D´efinitions des rˆoles Scrum.
+
+Acteur
+
+Le Product Owner
+
+Scrum Master
+
+L’´equipe de
+d´eveloppement
+
+Rˆole
+Il est charg´e de la gestion du Product Backlog, qu’il alimente
+avec la vision du produit en interaction avec l’´equipe de
+d´eveloppement. Il s’agit g´en´eralement d’un expert m´etier
+qui d´etermine les sp´ecifications des besoins fonctionnels et
+pr´ecise les priorit´es des fonctionnalit´es `a d´evelopper ou `a
+corriger.
+
+Il facilite la communication au sein de l’´equipe, am´eliore la
+productivit´e et vise `a maximiser le savoir-faire de l’´equipe.
+Il est responsable de la mise en œuvre de la m´ethode Scrum,
+en veillant `a l’application correcte de ses principes.
+
+Elle est responsable de transformer les besoins exprim´es par
+le Product Owner en fonctionnalit´es concr`etes. Elle com-
+bine plusieurs comp´etences et rˆoles tels que l’architecte, le
+d´eveloppeur, le testeur, le graphiste ou l’ing´enieur syst`eme.
+Le nombre de membres varie de 6 `a 10 personnes, voire jus-
+qu’`a 200 dans certains cas.
+
+Les art´efacts dans Scrum
+
+— Product Backlog :
+
+Le Product Backlog est une liste qui regroupe tous les besoins et fonc-
+tionnalit´es exprim´es par les clients, les utilisateurs ou l’´equipe Scrum.
+Ces ´el´ements sont prioris´es par le Product Owner de mani`ere continue,
+et sont r´eguli`erement affin´es.
+
+— Sprint Backlog :
+
+Le Sprint Backlog constitue le plan de travail durant le Sprint. Il est
+enti`erement g´er´e par l’´equipe de d´eveloppement.
+
+— Incr´ement Produit :
+
+Durant chaque Sprint, l’´equipe de d´eveloppement r´ealise un incr´ement
+de produit. Il s’agit de l’un des art´efacts Scrum les plus importants
+dans la culture agile.
+
+— Burndown Chart :
+
+Ce graphique exprime l’´etat de progression au cours de l’´elaboration des
+tˆaches du Sprint Backlog. Il s’agit d’une courbe qui pr´esente la charge
+de travail restante en fonction du temps. Le Burndown Chart est mis `a
+jour quotidiennement par le Scrum Master apr`es la mˆel´ee quotidienne.
+
+[15]
+
+1.6. Le choix de la m´ethodologie
+
+13
+
+Les diff´erentes activit´es de Sprint
+
+— Un Sprint :
+
+Un Sprint est un intervalle de temps de 2 `a 4 semaines au maximum
+pendant lequel un livrable du produit est ´elabor´e. Un nouveau Sprint
+d´emarre d`es que le pr´ec´edent est termin´e. Chaque Sprint a un but et
+une liste hi´erarchis´ee des exigences `a ´etablir.
+
+— La planification d’un Sprint :
+
+La planification d’un Sprint se traduit par une r´eunion de l’´equipe
+Scrum, ayant pour but de d´efinir les tˆaches `a r´ealiser et de fixer les
+objectifs du Sprint. La dur´ee de cette r´eunion est limit´ee `a 8 heures
+pour les Sprints d’un mois.
+
+— La revue de Sprint :
+
+La revue de Sprint est une r´eunion qui a lieu `a la fin de chaque Sprint.
+L’´equipe Scrum et les parties prenantes se r´eunissent pour examiner le
+livrable final, obtenir des retours et valider le travail accompli. Cette
+r´eunion dure au maximum 4 heures pour un Sprint d’un mois.
+
+— La r´etrospective du Sprint :
+
+Cette r´eunion contribue `a l’am´elioration continue du processus de d´eveloppement
+et `a l’adaptation aux ´eventuels changements. Il s’agit d’une r´eunion in-
+terne qui dure 3 heures maximum pour un Sprint d’un mois.
+
+— La mˆel´ee quotidienne :
+
+Il s’agit d’une r´eunion journali`ere de 15 minutes entre les membres
+de l’´equipe de d´eveloppement. Elle est anim´ee par le Scrum Master
+et permet de suivre l’´etat d’avancement du Sprint, de synchroniser les
+activit´es de l’´equipe et de planifier les actions pour les prochaines 24
+heures.
+
+La Figure 1.6 pr´esente le d´ecoupage des Sprints.[16]
+
+Figure 1.6 – D´ecoupage en sprint.
+
+1.7. Langage de mod´elisation
+
+14
+
+En conclusion, apr`es avoir examin´e les diff´erentes m´ethodologies de gestion de pro-
+jet, nous avons opt´e pour la m´ethodologie agile, et plus pr´ecis´ement la m´ethode Scrum,
+pour la r´ealisation de notre application.
+
+1.7 Langage de mod´elisation
+
+C’est un langage de repr´esentation destin´e en particulier `a la mod´elisation de l’ar-
+chitecture, `a la conception et `a la mise en œuvre des syst`emes logiciels complexes, aussi
+bien par leur structure que par leur comportement. UML est devenu une norme. Il pro-
+pose des diagrammes int´egr´es permettant au d´eveloppeur de construire et de repr´esenter
+les ´etats du syst`eme. UML normalise les concepts de l’objet. Il peut donc ˆetre utilis´e
+comme un moyen de communication entre les ´etapes de sp´ecification conceptuelle et
+les ´etapes de sp´ecification technique.
+
+Pour concevoir notre application, nous avons retenu UML comme langage de mod´elisation
+
+en raison de ses points forts, notamment sa lisibilit´e, sa diversit´e et sa standardisation,
+qui permettent au d´eveloppeur d’int´egrer des sch´emas graphiques et textuels normalis´es
+et r´eutilisables.
+
+1.8 Conclusion
+
+Pour conclure, cette ´etude de projet nous a permis d’avoir un aper¸cu clair et perti-
+nent de l’organisation, des processus actuels et des probl`emes qu’Orange Tunisie ren-
+contre en mati`ere de gestion du recrutement de ses stagiaires. Dans un souci d’analyse
+des outils existants, la principale limite r´eside dans le manque d’optimisation qu’une
+application web permettrait de surmonter.
+
+Avec la d´ecision de recourir `a une m´ethodologie bas´ee sur l’agilit´e, et plus pr´ecis´ement
+sur la m´ethode Scrum, nous renfor¸cons notre capacit´e `a ´evoluer de fa¸con r´eactive et
+proactive pour r´epondre aux besoins des ´equipes internes. Nous sommes prˆets `a en-
+treprendre la phase de conception de l’architecture et du d´eveloppement du logiciel,
+anim´es par l’ambition de proposer une solution in´edite et innovante pour l’optimisa-
+tion, l’encadrement et l’humanisation du processus de recrutement interne.
+
+Planification et architecture
+
+2
+
+2.1 Introduction
+
+Ce chapitre a pour but de mettre en exergue notre projet en identifiant ses acteurs,
+ainsi que les besoins fonctionnels et non fonctionnels de l’application. Par ailleurs, nous
+pr´esenterons le backlog du produit, avant de d´etailler la planification des sprints et les
+livrables. Nous dresserons ´egalement un planning d´etaill´e afin de structurer la mise en
+œuvre du projet. Celui-ci mettra en lumi`ere le fonctionnement attendu de la solution.
+
+2.2 Besoins fonctionnels et non fonctionnels et acteurs
+
+2.2.1 Les acteurs
+
+Un acteur est une personne ou une entit´e impliqu´ee de mani`ere active dans le projet.
+Les acteurs peuvent avoir des rˆoles et des responsabilit´es diff´erents en fonction de leur
+position dans le projet.
+
+Dans notre projet, on distingue trois acteurs principaux :
+
+• Admin peut :
+
+— S’authentifier, r´ecup´erer et modifier son mot de passe.
+
+— Consulter un recruteur.
+
+— Cr´eer un recruteur.
+
+— Supprimer un recruteur.
+
+— Consulter une r´eclamation.
+
+— Consulter les statistiques d’analyses d’une session.
+
+• Recruteur peut :
+
+— S’authentifier, r´ecup´erer et modifier son mot de passe.
+
+— Cr´eer, consulter, mettre `a jour et clˆoturer une session de stage.
+
+— Consulter les demandes de stage.
+
+— Accepter ou refuser une demande de stage.
+
+— Consulter et supprimer une r´eclamation.
+
+— Modifier l’´etat d’une r´eclamation.
+
+15
+
+2.2. Besoins fonctionnels et non fonctionnels et acteurs
+
+16
+
+• Stagiaire peut :
+
+— S’authentifier, r´ecup´erer et modifier son mot de passe.
+
+— Consulter une session de stage.
+
+— Soumettre une demande de stage.
+
+— Suivre l’´etat de sa demande de stage.
+
+— Cr´eer une r´eclamation.
+
+2.2.2 Les besoins fonctionnels
+
+• Gestion d’authentification :
+
+— Admin : il doit s’authentifier pour acc´eder `a l’application, r´ecup´erer son
+
+mot de passe en cas d’oubli et le modifier.
+
+— Recruteur : il doit s’authentifier pour acc´eder `a l’application, r´ecup´erer
+
+son mot de passe en cas d’oubli et le modifier.
+
+— Stagiaire : il doit s’authentifier pour acc´eder `a l’application, r´ecup´erer
+
+son mot de passe en cas d’oubli et le modifier.
+
+• Gestion des sessions de stage :
+
+— Admin : il peut consulter les statistiques des sessions.
+
+— Recruteur : il peut g´erer les sessions de stage : cr´eer, consulter, modifier
+
+et fermer une session.
+
+— Stagiaire : il peut consulter les sessions ouvertes (dates d’ouverture,
+
+date de clˆoture, crit`eres de chaque session).
+
+• Gestion des recruteurs :
+
+— Admin : il peut consulter, cr´eer, modifier et supprimer un recruteur.
+
+• Gestion des demandes de stage :
+
+— Recruteur : il peut consulter les demandes de stage, et accepter ou
+
+refuser une demande.
+
+— Stagiaire : il peut soumettre une demande de stage et suivre l’´etat de
+
+sa demande.
+
+• Gestion des r´eclamations :
+
+— Admin : il peut consulter une r´eclamation.
+
+— Recruteur : il peut consulter, supprimer une r´eclamation et modifier
+
+son ´etat.
+
+— Stagiaire : il peut cr´eer une r´eclamation.
+
+• Gestion des analyses :
+
+— Admin : il peut consulter les statistiques d’analyse d’une session.
+
+2.3. Diagramme de cas d’utilisation global
+
+17
+
+2.2.3 Les besoins non fonctionnels
+
+Les besoins non fonctionnels d´esignent l’ensemble des contraintes `a prendre en
+compte dans la conception, le d´eveloppement et le bon fonctionnement d’un syst`eme.
+
+• Performance : Aussi appel´ee temps de r´eponse, la performance est un enjeu
+essentiel dans le d´eveloppement d’une application web. Le temps de charge-
+ment des pages et la fluidit´e de navigation doivent ˆetre optimis´es afin d’assurer
+une exp´erience utilisateur rapide et efficace.
+
+• Ergonomie : L’application doit pr´esenter une interface claire, conviviale et
+facilement navigable. Un design ergonomique am´eliore l’exp´erience utilisateur
+et favorise l’accessibilit´e aux diff´erentes fonctionnalit´es.
+
+• Compatibilit´e : Dans le contexte d’une application web, il est essentiel de
+garantir le bon fonctionnement sur diff´erents types d’´ecrans (smartphone, ta-
+blette, ordinateur) et navigateurs web. Ces mesures assurent une accessibilit´e
+optimale, quel que soit le support utilis´e.
+
+2.3 Diagramme de cas d’utilisation global
+
+Le diagramme de cas d’utilisation global permet de recueillir, d’analyser et d’orga-
+
+niser les besoins, et de recenser les grandes fonctionnalit´es d’un syst`eme.
+La Figure 2.1 pr´esente le Diagramme de cas d’utilisation global.
+
+Figure 2.1 – Diagramme de cas d’utilisation global.
+
+2.4. L’´equipe SCRUM
+
+18
+
+2.4 L’´equipe SCRUM
+
+Le Tableau 2.1 repr´esente l’´equipe scrum dans ce projet.
+
+Table 2.1 – L’´equipe SCRUM.
+
+Rˆole
+Product Owner
+Scrum Master
+´Equipe de d´eveloppement MOHAMED AMIN BENCHAABEN et AYOUB DABBABI
+
+Acteur
+M. MOHAMED RAHAL
+M. RIADH BOUSLIMI
+
+2.5 Le product backlog
+
+Le Backlog du produit est une liste ordonn´ee des fonctionnalit´es du produit qui
+
+pourra ´evoluer tout au long du projet.
+
+Les Tableaux 2.2 et 2.3 repr´esente le Product Backlog.
+
+ID-F
+
+Fonctionnalit´e
+
+ID-Us User Stories
+
+Table 2.2 – Product Backlog (Partie 1).
+
+Priorit´e Estimation
+
+-jour
+
+1
+
+Authentification
+
+2
+
+Gestion des sessions de stages
+
+1.1
+
+1.2
+
+1.3
+
+2.1
+
+2.2
+
+2.3
+
+2.4
+
+En tant qu’administrateur ou utilisateur
+(recruteur / stagiaire), je veux m’authen-
+tifier via mon courriel et mon mot de
+passe en toute s´ecurit´e.
+
+En tant qu’administrateur ou utilisateur
+(recruteur / stagiaire), je veux r´ecup´erer
+mon mot de passe en cas d’oubli.
+
+En tant qu’administrateur ou utilisateur
+(recruteur / stagiaire), je veux pouvoir
+changer mon mot de passe.
+
+En tant qu’utilisateur (recruteur),
+veux cr´eer une session de stage.
+
+je
+
+En tant qu’utilisateur (recruteur / sta-
+giaire), je veux consulter une session de
+stage.
+
+je
+En tant qu’utilisateur (recruteur),
+veux mettre `a jour une session de stage.
+
+En tant qu’utilisateur (recruteur),
+veux fermer une session de stage.
+
+je
+
+´Elev´e
+
+´Elev´e
+
+´Elev´e
+
+´Elev´e
+
+´Elev´e
+
+´Elev´e
+
+´Elev´e
+
+3
+
+3
+
+3
+
+2
+
+2
+
+2
+
+2
+
+2.6. Structure des sprints
+
+19
+
+ID-F
+
+Fonctionnalit´e
+
+ID-Us User Stories
+
+Table 2.3 – Product Backlog (Partie 2).
+
+Priorit´e Estimation
+
+-jour
+
+3
+
+Gestion des recruteurs
+
+4
+
+Gestion des demandes de stage
+
+5
+
+Gestion des r´eclamations
+
+6
+
+Gestion des analyses
+
+3.1
+
+3.2
+
+3.3
+
+4.1
+
+4.2
+
+4.3
+
+4.4
+
+5.1
+
+5.2
+
+5.3
+
+5.4
+
+6.1
+
+En tant qu’administrateur,
+consulter un recruteur.
+
+je veux
+
+Moyenne
+
+En tant qu’administrateur, je veux cr´eer
+un recruteur.
+
+En tant qu’administrateur, je veux sup-
+primer un recruteur.
+
+En tant que stagiaire, je veux soumettre
+une demande de stage.
+
+En tant que stagiaire, je veux pouvoir
+suivre l’´etat de ma demande de stage.
+
+En tant que recruteur, je veux consulter
+les demandes de stage.
+
+En tant que recruteur, je veux accepter
+ou refuser une demande de stage.
+
+En tant que administrateur ou recruteur
+je veux consulter une r´eclamation.
+
+En tant que stagiaire je veux cr´eer une
+r´eclamation.
+
+En tant que recruteur je veux supprimer
+une r´eclamation.
+
+En tant que recruteur, je veux modifier
+l’´etat d’une r´eclamation.
+
+En tant qu’administrateur
+je veux
+consulter les statistiques des analyses
+d’une session.
+
+Moyenne
+
+Moyenne
+
+´Elev´e
+
+´Elev´e
+
+´Elev´e
+
+´Elev´e
+
+Moyenne
+
+Moyenne
+
+Moyenne
+
+Moyenne
+
+Faible
+
+3
+
+3
+
+3
+
+2
+
+3
+
+3
+
+4
+
+2
+
+2
+
+2
+
+2
+
+4
+
+2.6 Structure des sprints
+
+2.6.1 Planification des sprints
+
+Il est essentiel de planifier les sprints dans la m´ethodologie agile Scrum. Cette plani-
+fication inclut la d´efinition des objectifs `a atteindre, des tˆaches `a r´ealiser, des priorit´es
+`a respecter ainsi que des ressources n´ecessaires pour le sprint `a venir. L’´equipe de
+d´eveloppement collabore ´etroitement avec le Product Owner afin de d´eterminer les
+objectifs du sprint et les ´el´ements du backlog produit qui seront trait´es au cours de
+celui-ci.
+
+La Figure 2.2 pr´esente la planification des sprints de notre projet.
+
+2.7. Conclusion
+
+20
+
+Figure 2.2 – Planification des sprints.
+
+2.6.2 Planning de r´ealisation du projet
+
+Pour mener `a bien notre projet, nous avons suivi diff´erentes phases tout au long de
+
+la dur´ee du stage, lors de sa mise en œuvre.
+
+Le tableau 2.4 pr´esente la planification de r´ealisation du projet.
+
+Table 2.4 – planification de r´ealisation du projet.
+
+Nom de tˆache
+´Etude de l’existant, compr´ehension du projet et
+´elaboration d’un plan
+Sprint 1 : Lancement et fondation
+Sprint 2 : Expansion et interactivit´e
+Coordination et connexion entre les sprints
+
+Dur´ee
+20 jours
+
+D´ebut
+06/02/2024
+
+Fin
+25/02/2024
+
+26 jours
+24 jours
+30 jours
+
+26/02/2024
+25/03/2024
+18/04/2024
+
+24/03/2024
+17/04/2024
+17/05/2024
+
+2.7 Conclusion
+
+Dans ce chapitre, nous avons commenc´e par identifier les principaux acteurs im-
+pliqu´es dans le projet. Ensuite, nous avons construit le backlog produit en listant les
+besoins, qu’ils soient fonctionnels ou non fonctionnels. C’est ´egalement `a ce stade que
+nous avons amorc´e notre passage `a la m´ethode Scrum : mise en place de l’´equipe,
+d´efinition du backlog et planification des premiers sprints.
+
+Le prochain chapitre marquera le coup d’envoi du premier sprint, avec pour objectif
+
+de produire une premi`ere version du produit, d´ej`a utilisable.
+
+3
+
+Sprint1 : Gestion d’authentification,
+Gestion des sessions du stage,
+Gestion des Recruteurs
+
+3.1 Introduction
+
+Une fois que nous avions une bonne vision des besoins du projet, nous avons lanc´e
+le premier sprint en nous concentrant sur l’essentiel. Nous avons commenc´e par mettre
+en place l’authentification des utilisateurs, puis nous nous sommes attaqu´es `a la gestion
+des sessions de stage et `a celle des recruteurs. L’id´ee ´etait vraiment de poser les bases
+du projet pour avoir un socle solide sur lequel construire la suite.
+
+3.2 La sp´ecification fonctionnelle
+
+La sp´ecification fonctionnelle a un rˆole cl´e : elle permet de poser clairement ce qu’on
+attend du sprint. En prenant le temps de bien la d´efinir, l’´equipe de d´eveloppement
+met toutes les chances de son cˆot´e pour livrer un produit qui correspond vraiment aux
+besoins des utilisateurs.
+
+3.2.1 Le sprint Backlog
+
+Les informations pr´esent´ees dans le Tableau 3.1 pr´esentent le sprint Backlog.
+
+21
+
+3.2. La sp´ecification fonctionnelle
+
+22
+
+Table 3.1 – Sprint Backlog.
+
+ID User Story User Story
+
+1
+
+Authentification
+
+tant
+
+Description
+qu’ad-
+En
+ou
+ministrateur
+utilisateur
+(recru-
+teur / stagiaire),
+je
+veux m’au-
+thentifier via mon
+et mon
+courriel
+de
+passe
+mot
+apr`es
+´et´e
+avoir
+compl`etement
+connect´e
+code
+par mail.
+
+via un
+d’activation
+
+En tant qu’admi-
+nistrateur ou uti-
+lisateur,
+je veux
+r´ecup´erer mon mot
+de passe
+en cas
+d’oubli
+
+En tant qu’admi-
+nistrateur ou uti-
+lisateur,
+je veux
+changer mon mot
+de passe
+
+Tˆache ID Tˆache
+
+1.1
+
+1.2
+
+1.3
+
+1.4
+
+1.5
+
+1.6
+
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equence
+syst`eme, de
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ Authentifier ≫
+
+le
+
+cas
+Impl´ementer
+d’utilisation ≪ S’au-
+thentifier ≫
+Tester le cas d’utilisa-
+tion ≪ S’authentifier ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equence
+syst`eme, de
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ R´ecup´erer mot
+de passe ≫
+Impl´ementer
+cas
+
+le
+d’utilisation
+mot
+
+R´ecup´erer
+
+≪
+
+de passe ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equence
+syst`eme, de
+s´equence d´etaill´ee et de
+classes du cas d’utili-
+sation ≪ Changer mon
+mot de passe ≫
+
+3.2. La sp´ecification fonctionnelle
+
+23
+
+ID User Story User Story
+
+Description
+
+Tˆache ID Tˆache
+
+Table 3.1 – Sprint Backlog.
+
+1.7
+
+2.1
+
+2.2
+
+2.3
+
+2.4
+
+2.5
+
+2.6
+
+En tant qu’utilisa-
+teur (recruteur), je
+veux cr´eer une ses-
+sion de stage
+
+2
+
+Gestion des
+sessions de
+stage
+
+tant
+
+En
+lisateur,
+consulter
+session de stage
+
+qu’uti-
+je veux
+une
+
+En tant que re-
+cruteur,
+je veux
+mettre `a jour une
+session de stage
+
+le
+
+le
+
+cas
+Impl´ementer
+d’utilisation ≪ Changer
+mon mot de passe ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equence
+syst`eme, de
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ Cr´eer une session
+de stage ≫
+cas
+Impl´ementer
+d’utilisation ≪ Cr´eer
+une session de stage ≫
+Tester le cas d’utilisa-
+tion ≪ Cr´eer une session
+de stage ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equence
+syst`eme, de
+s´equence d´etaill´ee et de
+classes du cas d’utili-
+sation ≪ Consulter une
+session de stage ≫
+cas
+le
+Impl´ementer
+d’utilisation ≪ Consul-
+ter une session de stage
+
+≫
+
+´Elaborer le diagramme
+de cas d’utilisation, de
+syst`eme, de
+s´equence
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ Mettre `a jour une
+session de stage ≫
+
+3.2. La sp´ecification fonctionnelle
+
+24
+
+ID User Story User Story
+
+Description
+
+Tˆache ID Tˆache
+
+Table 3.1 – Sprint Backlog.
+
+En tant que recru-
+teur,
+je veux fer-
+mer une session de
+stage
+
+3
+
+Gestion des
+recruteurs
+
+En tant qu’admi-
+nistrateur, je veux
+consulter un recru-
+teur
+
+En tant qu’admi-
+nistrateur, je veux
+cr´eer un recruteur
+
+2.7
+
+2.8
+
+2.9
+
+3.1
+
+3.2
+
+3.3
+
+3.4
+
+3.5
+
+le
+
+le
+
+cas
+Impl´ementer
+d’utilisation ≪ Mettre
+`a jour une session de
+stage ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equence
+syst`eme, de
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ Fermer une ses-
+sion de stage ≫
+Impl´ementer
+cas
+d’utilisation ≪ Fermer
+une session de stage ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+syst`eme, de
+s´equence
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ Consulter un re-
+cruteur ≫
+Impl´ementer
+cas
+d’utilisation ≪ Consul-
+ter un recruteur ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+syst`eme, de
+s´equence
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ Cr´eer un recru-
+teur ≫
+Impl´ementer
+cas
+d’utilisation ≪ Cr´eer un
+recruteur ≫
+Tester le cas d’utilisa-
+tion ≪ Cr´eer un recru-
+teur ≫
+
+le
+
+le
+
+3.3. Analyse des cas d’utilisation
+
+25
+
+Table 3.1 – Sprint Backlog.
+
+ID User Story User Story
+
+Description
+En tant qu’admi-
+nistrateur, je veux
+supprimer un re-
+cruteur
+
+Tˆache ID Tˆache
+
+3.6
+
+3.7
+
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equence
+syst`eme, de
+s´equence d´etaill´ee et de
+classes du cas d’utilisa-
+tion ≪ Supprimer un re-
+cruteur ≫
+cas
+Impl´ementer
+d’utilisation ≪ Sup-
+recruteur
+primer
+
+un
+
+le
+
+3.2.2 Diagramme de cas d’utilisation du premier sprint
+
+La Figure 3.1 pr´esente le diagramme de cas d’utilisation de notre premier sprint.
+
+≫
+
+Figure 3.1 – Diagramme de cas d’utilisation du premier sprint.
+
+3.3 Analyse des cas d’utilisation
+
+Dans cette section, nous proc´ederons au raffinement des cas d’utilisation afin de
+
+fournir une description d´etaill´ee des diff´erents sc´enarios possibles.
+
+3.3.1 Analyse du cas d’utilisation ≪ s’authentifier ≫
+
+Nous d´ebuterons par une description textuelle du processus d’authentification, sui-
+vie d’un diagramme de s´equence syst`eme. Il convient de noter que les acteurs concern´es
+peuvent ˆetre un administrateur, un recruteur ou un stagiaire.
+
+Les informations du Tableau 3.2 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+3.3. Analyse des cas d’utilisation
+
+26
+
+Table 3.2 – Description textuelle du cas d’utilisation ≪S’authentifier≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+1
+S’authentifier
+Administrateur, Recruteur, Stagiaire
+L’utilisateur souhaite s’authentifier afin d’acc´eder `a son es-
+pace personnel.
+L’utilisateur doit poss´eder un compte valide.
+1. L’utilisateur acc`ede `a la page d’authentification.
+2. Le syst`eme affiche le formulaire de connexion.
+3. L’utilisateur saisit son courriel et son mot de passe, puis
+valide.
+4. Le syst`eme v´erifie les informations saisies.
+5. Le syst`eme redirige l’utilisateur vers son espace personnel.
+4.1 : Donn´ees incorrectes ou manquantes
+4.1.1 Le syst`eme affiche un message d’erreur.
+4.1.2 L’utilisateur est invit´e `a ressaisir les informations.
+4.1.3 Retour `a l’´etape 2 du sc´enario nominal.
+
+4.2 : Mot de passe erron´e
+4.2.1 Le syst`eme affiche un message d’erreur.
+4.2.2 L’utilisateur est invit´e `a ressaisir les informations.
+4.2.3 Retour `a l’´etape 2 du sc´enario nominal.
+
+4.3 : Plus de 3 tentatives ´echou´ees
+4.3.1 Le syst`eme bloque temporairement l’acc`es de l’utilisa-
+teur.
+4.3.2 Un message est affich´e indiquant le blocage du compte.
+L’utilisateur acc`ede `a son espace personnel s’il est authentifi´e
+avec succ`es.
+
+3.3.2 Analyse du cas d’utilisation ≪ R´ecup´erer mot de passe ≫.
+
+Nous allons commencer par d´ecrire le processus de r´ecup´eration de mot de passe.
+Il est important de noter que l’acteur peut ˆetre un administrateur, un recruteur ou un
+stagiaire.
+
+Les informations du Tableau 3.3 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+3.3. Analyse des cas d’utilisation
+
+27
+
+Table 3.3 – Description textuelle du cas d’utilisation ≪ R´ecup´eration de mot de passe
+≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+2
+R´ecup´eration de mot de passe
+Administrateur, Recruteur, Stagiaire
+L’utilisateur demande `a r´einitialiser son mot de passe en cas
+d’oubli. Un lien de r´einitialisation est envoy´e par e-mail.
+L’utilisateur doit cliquer sur le lien ≪ Mot de passe oubli´e
+≫ depuis la page de connexion.
+1. L’utilisateur clique sur ≪ Mot de passe oubli´e ≫.
+2. Le syst`eme affiche un formulaire de saisie d’adresse e-mail.
+3. L’utilisateur entre son adresse e-mail et valide.
+4. Le syst`eme v´erifie l’existence de cette adresse dans sa base
+de donn´ees.
+5. Si l’e-mail est valide, un lien de r´einitialisation est envoy´e.
+6. L’utilisateur clique sur le lien re¸cu par e-mail.
+7. Le syst`eme affiche un formulaire de nouveau mot de passe.
+8. L’utilisateur saisit et confirme son nouveau mot de passe.
+9. Le syst`eme enregistre le nouveau mot de passe et confirme
+la r´eussite de l’op´eration.
+4.1 : Adresse e-mail invalide ou non trouv´ee
+4.1.1 Le syst`eme affiche un message d’erreur.
+4.1.2 L’utilisateur est invit´e `a v´erifier l’adresse ou `a contacter
+un administrateur.
+4.1.3 Retour `a l’´etape 2 du sc´enario nominal.
+L’utilisateur peut se connecter avec son nouveau mot de
+passe.
+
+3.3.3 Analyse du cas d’utilisation ≪ Cr´eer une session du stage ≫
+
+Nous allons commencer par d´ecrire le processus de cr´eation d’une session de stage.
+
+L’acteur concern´e est le recruteur.
+
+Les informations du Tableau 3.4 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+3.3. Analyse des cas d’utilisation
+
+28
+
+Table 3.4 – Description textuelle du cas d’utilisation ≪ Cr´eer une session du stage ≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+Pr´econdition
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+3
+Cr´eer une session du stage
+Utilisateur : (Recruteur)
+L’utilisateur demande de cr´eer une session du stage.
+L’utilisateur doit ˆetre authentifi´e et connect´e.
+1. L’utilisateur demande l’acc`es `a la gestion des sessions.
+2. L’utilisateur affiche la liste des sessions.
+3. L’utilisateur demande l’acc`es `a l’ajout de session.
+4. Le syst`eme affiche le formulaire d’ajout.
+5. L’utilisateur remplit le formulaire et valide.
+6. Le syst`eme v´erifie l’existence des donn´ees.
+7. Le syst`eme cr´ee la session de stage.
+4.1 : Les donn´ees saisies sont incorrectes ou man-
+quantes
+4.1.1 Le syst`eme affiche un message d’erreur.
+4.1.2 Demande `a l’administrateur de reinitialiser la saisie.
+Le cas d’utilisation reprend `a l’´etape 2 du sc´enario nominal.
+
+4.2 : Le champ est erron´e
+4.2.1 Le syst`eme affiche un message d’erreur.
+4.2.2 Demande `a l’utilisateur de reprendre `a l’´etape 2 du
+sc´enario nominal.
+Nouvelle session de stage ajout´ee.
+
+3.3.4 Analyse du cas d’utilisation ≪ Supprimer une session du stage
+
+≫
+
+Nous allons commencer par d´ecrire le processus de suppression d’une session du
+
+stage. L’acteur concern´e est le recruteur.
+
+Les informations du Tableau 3.5 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+3.3. Analyse des cas d’utilisation
+
+29
+
+Table 3.5 – Description textuelle du cas d’utilisation ≪ Supprimer une session du
+stage ≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+4
+Supprimer une session du stage
+Utilisateur : (Recruteur)
+Le recruteur souhaite supprimer une session de stage exis-
+tante depuis l’interface de gestion des sessions.
+Le recruteur doit ˆetre authentifi´e, connect´e, et avoir acc`es
+aux droits de suppression.
+1. Le recruteur acc`ede `a la gestion des sessions.
+2. Le syst`eme affiche la liste des sessions existantes.
+3. Le recruteur s´electionne la session `a supprimer.
+4. Le syst`eme demande une confirmation de suppression.
+5. Le recruteur confirme la suppression.
+6. Le syst`eme supprime la session s´electionn´ee.
+7. Le syst`eme met `a jour la liste des sessions.
+3.1 : La session s´electionn´ee n’existe plus
+3.1.1 Le syst`eme affiche un message d’erreur.
+3.1.2 Retour `a l’´etape 2 du sc´enario nominal.
+
+5.1 : Le recruteur annule la suppression
+5.1.1 Le syst`eme annule l’op´eration.
+5.1.2 Retour `a l’´etape 2 du sc´enario nominal.
+La session de stage est supprim´ee du syst`eme si l’op´eration
+est confirm´ee.
+
+3.3.5 Analyse du cas d’utilisation ≪ Consulter une session du stage ≫
+
+Nous allons commencer par d´ecrire le processus de consultation d’une session de
+
+stage. Les acteurs concern´es peuvent ˆetre un recruteur ou un stagiaire.
+
+Les informations du Tableau 3.6 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+3.3. Analyse des cas d’utilisation
+
+30
+
+Table 3.6 – Description textuelle du cas d’utilisation ≪ Consulter session du stage ≫.
+
+ID
+Nom
+Acteurs primaires
+Acteurs secondaires
+Description
+Pr´econdition
+Sc´enario nominal
+
+5
+Consulter session du stage
+Utilisateur : (Stagiaire / Recruteur)
+Le syst`eme
+L’utilisateur demande de consulter une session de stage.
+L’utilisateur doit ˆetre authentifi´e et connect´e.
+1. L’utilisateur demande l’acc`es `a la gestion des sessions.
+2. Le syst`eme affiche la liste des sessions.
+3. L’utilisateur s´electionne une session.
+4. Le syst`eme affiche les informations d´etaill´ees de la session
+s´electionn´ee.
+
+Sc´enarios alternatifs Aucun sc´enario alternatif ou exception sp´ecifi´e.
+Postcondition
+
+L’utilisateur peut consulter les informations d´etaill´ees d’une
+session de stage.
+
+3.3.6 Analyse du cas d’utilisation ≪ Mettre `a jour une session du stage
+
+≫
+
+Nous allons commencer par d´ecrire le processus de mise `a jour d’une session de
+
+stage. L’acteur concern´e est le recruteur.
+
+Les informations du Tableau 3.7 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+Table 3.7 – Description textuelle du cas d’utilisation ≪ Mettre `a jour session du stage
+≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+Pr´econdition
+Sc´enario nominal
+
+6
+Mettre `a jour session du stage
+Utilisateur : (Recruteur)
+L’utilisateur demande de mettre `a jour la session de stage.
+L’utilisateur doit ˆetre authentifi´e et connect´e.
+1. L’utilisateur demande l’acc`es `a la gestion des sessions.
+2. Le syst`eme affiche la liste des sessions.
+3. L’utilisateur modifie l’´etat d’une session.
+4. Le syst`eme met `a jour l’´etat de la session de stage.
+
+Sc´enarios alternatifs Aucun sc´enario alternatif.
+Postcondition
+
+La session de stage est modifi´ee.
+
+3.3. Analyse des cas d’utilisation
+
+31
+
+3.3.7 Analyse du cas d’utilisation ≪ Consulter un recruteur ≫
+
+Nous allons commencer par d´ecrire le processus de consultation des recruteurs.
+
+L’acteur concern´e est l’administrateur.
+
+Les informations du Tableau 3.8 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+Table 3.8 – Description textuelle du cas d’utilisation ≪ Consulter Recruteur ≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+Pr´econdition
+Sc´enario nominal
+
+7
+Consulter Recruteur
+Utilisateur : (Admin)
+L’utilisateur demande de consulter la liste des recruteurs.
+L’utilisateur doit ˆetre authentifi´e et connect´e.
+1. L’utilisateur demande l’acc`es `a la gestion des recruteurs.
+2. Le syst`eme affiche la liste des recruteurs.
+3. L’utilisateur s´electionne un recruteur dans la liste.
+4. Le syst`eme affiche les informations d´etaill´ees du recruteur
+s´electionn´e.
+
+Sc´enarios alternatifs Aucun sc´enario alternatif.
+Postcondition
+
+L’utilisateur peut consulter les informations d´etaill´ees d’un
+recruteur.
+
+3.3.8 Analyse du cas d’utilisation ≪ Cr´eer un recruteur ≫
+
+Nous allons commencer par d´ecrire le processus de cr´eation d’un recruteur. L’acteur
+
+concern´e est l’administrateur.
+
+Les informations du Tableau 3.9 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+Table 3.9 – Description textuelle du cas d’utilisation ≪ Cr´eer un Recruteur ≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+Pr´econdition
+Sc´enario nominal
+
+8
+Cr´eer un Recruteur
+Utilisateur : Admin
+L’utilisateur demande d’ajouter un recruteur.
+L’utilisateur doit ˆetre authentifi´e et connect´e.
+1. L’utilisateur demande l’acc`es `a la liste des recruteurs.
+2. Le syst`eme affiche la liste des recruteurs.
+3. L’utilisateur demande l’acc`es `a l’ajout d’un recruteur.
+4. Le syst`eme affiche le formulaire d’ajout.
+5. L’utilisateur remplit le formulaire et le valide.
+6. Le syst`eme v´erifie l’existence et la validit´e des donn´ees.
+7. Le syst`eme ajoute le recruteur avec succ`es.
+
+3.3. Analyse des cas d’utilisation
+
+32
+
+Sc´enarios alternatifs
+
+Postcondition
+
+6.1 : Donn´ees saisies incorrectes ou manquantes
+6.1.1 Le syst`eme affiche un message d’erreur.
+6.1.2 L’administrateur est invit´e `a recommencer la saisie.
+Le cas d’utilisation reprend `a l’´etape 2 du sc´enario nominal.
+
+6.2 : Donn´ees invalides d´etect´ees
+6.2.1 Le syst`eme affiche un message d’erreur.
+6.2.2 L’administrateur est invit´e `a recommencer la saisie. Le
+cas d’utilisation reprend `a l’´etape 2 du sc´enario nominal.
+Le recruteur est ajout´e avec succ`es au syst`eme.
+
+3.3.9 Analyse du cas d’utilisation ≪ Supprimer un recruteur ≫
+
+Nous allons commencer par d´ecrire le processus de suppression d’un recruteur. L’ac-
+
+teur concern´e est l’administrateur.
+
+Les informations du Tableau 3.10 d´ecrivent ce cas d’utilisation de mani`ere tex-
+
+tuelle.
+
+Table 3.10 – Description textuelle du cas d’utilisation ≪ Supprimer un Recruteur ≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+Pr´econdition
+Sc´enario nominal
+
+Sc´enarios alternatifs
+et exceptions
+
+Postcondition
+
+9
+Supprimer un Recruteur
+Utilisateur : Admin
+L’utilisateur demande de supprimer un recruteur.
+L’utilisateur doit ˆetre authentifi´e et connect´e.
+1. L’utilisateur demande l’acc`es `a la gestion des recruteurs.
+2. Le syst`eme affiche la liste des recruteurs.
+3. L’utilisateur s´electionne un recruteur et demande sa sup-
+pression.
+4. Le syst`eme v´erifie l’existence du recruteur.
+5. Le syst`eme supprime le recruteur avec succ`es.
+4.1 : L’utilisateur annule la suppression
+4.1.1 Le syst`eme affiche un message indiquant que la sup-
+pression a ´et´e annul´ee.
+4.1.2 L’utilisateur est invit´e `a reprendre l’op´eration. Le cas
+d’utilisation reprend `a l’´etape 2 du sc´enario nominal.
+Le recruteur est supprim´e avec succ`es.
+
+3.4. Conception des cas d’utilisations
+
+33
+
+3.3.10 Analyse du cas d’utilisation ≪ Mettre `a jour d’un Recruteur ≫
+
+Nous allons commencer par d´ecrire le processus de mise `a jour d’un recruteur. Il
+
+est important de noter que l’acteur peut ˆetre un administrateur.
+
+Les informations du Tableau 3.11 d´ecrivent ce cas d’utilisation de mani`ere tex-
+
+tuelle.
+
+Table 3.11 – Description textuelle du cas d’utilisation ≪ Mettre `a jour un Recruteur
+≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+10
+Mettre `a jour un Recruteur
+Utilisateur : (Admin)
+L’utilisateur demande de mettre `a jour les informations d’un
+recruteur.
+L’utilisateur doit ˆetre authentifi´e et connect´e.
+1. L’utilisateur acc`ede `a la gestion des recruteurs.
+2. Le syst`eme affiche la liste des recruteurs.
+3. L’utilisateur s´electionne un recruteur `a modifier.
+4. Le syst`eme affiche le formulaire avec les informations exis-
+tantes.
+5. L’utilisateur modifie les donn´ees et valide.
+6. Le syst`eme v´erifie et enregistre les modifications.
+6.1 : Donn´ees saisies incompl`etes ou invalides.
+6.1.1 Le syst`eme affiche un message d’erreur.
+6.1.2 L’utilisateur est invit´e `a corriger les informations.
+6.1.3 Retour `a l’´etape 4 du sc´enario nominal.
+Les informations du recruteur sont mises `a jour avec succ`es.
+
+3.4 Conception des cas d’utilisations
+
+3.4.1 Conception de cas d’utilisation ≪ s’authentifier ≫
+
+3.4. Conception des cas d’utilisations
+
+34
+
+La Figure 3.2 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ s’authentifier ≫ .
+
+Figure 3.2 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ S’authentifier ≫.
+
+La Figure 3.3 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ s’authentifier ≫ .
+
+3.4. Conception des cas d’utilisations
+
+35
+
+Figure 3.3 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ S’authentifier
+≫.
+
+3.4.2 Conception de cas d’utilisation ≪ Cr´eer une session du stage ≫
+
+La Figure 3.4 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ Cr´eer session de stage ≫.
+
+3.4. Conception des cas d’utilisations
+
+36
+
+Figure 3.4 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Cr´eer session de
+stage ≫.
+
+La Figure 3.5 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ Cr´eer session de stage ≫.
+
+3.4. Conception des cas d’utilisations
+
+37
+
+Figure 3.5 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Cr´eer session
+de stage≫.
+
+3.4.3 Conception de cas d’utilisation ≪ Metter `a jour une session du
+
+stage ≫
+
+La Figure 3.6 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ mettre `a jour une session du stage ≫.
+
+3.4. Conception des cas d’utilisations
+
+38
+
+Figure 3.6 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Mettre `a jour
+une session du stage ≫.
+
+La Figure 3.7 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ mettre `a jour une session du stage ≫.
+
+3.4. Conception des cas d’utilisations
+
+39
+
+Figure 3.7 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Mettre `a jour
+une session du stage ≫.
+
+3.4.4 Conception de cas d’utilisation ≪ Supprimer une session du
+
+stage ≫
+
+La Figure 3.8 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Sup-
+
+primer une session de stage ≫.
+
+3.4. Conception des cas d’utilisations
+
+40
+
+Figure 3.8 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Supprimer une
+session de stage ≫.
+
+La Figure 3.9 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ Supprimer une session de stage ≫.
+
+Figure 3.9 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Supprimer
+une session de stage ≫.
+
+3.4. Conception des cas d’utilisations
+
+41
+
+3.4.5 Conception de cas d’utilisation ≪ Consultation d’une session du
+
+stage ≫
+
+La Figure 3.10 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ Consulter session du stage ≫.
+
+Figure 3.10 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter session
+du stage ≫.
+
+La Figure 3.11 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ Consulter session du stage ≫.
+
+Figure 3.11 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter
+session du stage ≫
+
+3.4. Conception des cas d’utilisations
+
+42
+
+3.4.6 Conception de cas d’utilisation ≪ Consulter un Recruteur ≫
+
+La Figure 3.12 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ Consulter Recruteur ≫.
+
+Figure 3.12 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter Re-
+cruteur ≫.
+
+La Figure 3.13 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ Consulter Recruteur ≫.
+
+Figure 3.13 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter
+Recruteur ≫.
+
+3.4. Conception des cas d’utilisations
+
+43
+
+3.4.7 Conception de cas d’utilisation ≪ Cr´eer un Recruteur ≫
+
+La Figure 3.14 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ Cr´eer Recruteur ≫.
+
+Figure 3.14 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Cr´eer Recruteur
+≫.
+
+La Figure 3.15 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ Cr´eer un Recruteur ≫.
+
+3.4. Conception des cas d’utilisations
+
+44
+
+Figure 3.15 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Cr´eer un
+Recruteur ≫.
+
+3.4.8 Conception de cas d’utilisation ≪ Supprimer un Recruteur ≫
+
+La Figure 3.16 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ Supprimer Recruteur ≫.
+
+3.4. Conception des cas d’utilisations
+
+45
+
+Figure 3.16 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Supprimer
+Recruteur ≫.
+
+La Figure 3.17 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ Supprimer un Recruteur ≫.
+
+Figure 3.17 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Supprimer
+un Recruteur ≫.
+
+3.4. Conception des cas d’utilisations
+
+46
+
+3.4.9 Conception de cas d’utilisation ≪ Mettre `a jour un Recruteur ≫
+
+La Figure 3.18 pr´esente le Diagramme de s´equence Syst`eme de cas d’utilisation
+
+≪ Mettre `a jour un Recruteur ≫.
+
+Figure 3.18 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Mettre `a jour
+un Recruteur ≫.
+
+La Figure 3.19 pr´esente le Diagramme de s´equence d´etaill´e pour le cas d’utilisation
+
+≪ Mettre `a jour un Recruteur ≫.
+
+3.4. Conception des cas d’utilisations
+
+47
+
+Figure 3.19 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Mettre `a
+jour un Recruteur ≫.
+
+3.4.10 Diagramme de classe participante du premier sprint
+
+La Figure 3.20 pr´esente Diagramme de classe participante du premier sprint.
+
+3.4. Conception des cas d’utilisations
+
+48
+
+Figure 3.20 – Diagramme de de classe participante du premier sprint.
+
+3.4.11 Diagramme de classe global du premier sprint
+
+La Figure 3.21 pr´esente Diagramme de classes global du premier sprint.
+
+Figure 3.21 – Diagramme de classes global du premier sprint.
+
+3.5. Impl´ementation
+
+49
+
+3.5 Impl´ementation
+
+3.5.1 G´en´eration de base de donn´ees
+
+Champ
+id
+email
+mdp
+nom
+pr´enom
+image
+role
+
+Champ
+id-user
+
+Champ
+id-user
+
+Champ
+id-user
+
+Table 3.12 – Mod`ele User.
+
+Type
+entier
+string
+string
+string
+string
+string
+enum
+
+Contraintes
+PRIMARY KEY
+UNIQUE, NOT NULL
+NOT NULL
+—
+—
+—
+”admin”, ”recruteur”, ”stagiaire”
+
+Table 3.13 – Mod`ele Admin.
+
+Type
+entier
+
+Contraintes
+Cl´e ´etrang`ere vers la table user
+
+Table 3.14 – Mod`ele Recruteur.
+
+Type
+entier
+
+Contraintes
+Cl´e ´etrang`ere vers la table user
+
+Table 3.15 – Mod`ele Stagiaire.
+
+Type
+entier
+
+Contraintes
+Cl´e ´etrang`ere vers la table user
+
+Champ
+id
+titre
+date de d´ebut
+date de fin
+description
+image
+etat
+
+location
+
+Table 3.16 – Mod`ele Session de Stage.
+
+Type
+entier
+string
+date
+date
+string
+string
+enum
+
+string
+
+Contraintes
+PRIMARY KEY
+—
+—
+—
+—
+—
+”En cours”, ”Ferm´ee”, ”N’a pas en-
+core commenc´e”
+—
+
+3.5. Impl´ementation
+
+3.5.2 Les interfaces
+
+L’authentification d’utilisateur :
+
+La Figure 3.22 pr´esente l’Interface Authentification .
+
+50
+
+Figure 3.22 – L’interface d’Authentification.
+
+L’interface d’inscription :
+
+La Figure 3.23 pr´esente L’interface d’inscription .
+
+Figure 3.23 – L’interface d’inscription.
+
+3.5. Impl´ementation
+
+51
+
+Saisir le code de confirmation de l’acc`es par l’utilisateur :
+
+La Figure 3.24 pr´esente L’interface v´erification code .
+
+Figure 3.24 – L’interface de v´erification du code.
+
+L’interface des sessions de stage :
+
+La Figure 3.25 pr´esente L’interface des sessions de stage.
+
+Figure 3.25 – L’interface des sessions de stage.
+
+L’interface ajout session :
+
+La Figure 3.26 pr´esente l’interface ajout session.
+
+3.5. Impl´ementation
+
+52
+
+Figure 3.26 – Interface de la gestion des sessions de stage.
+
+L’interface page d’accueil :
+
+La Figure 3.27 pr´esente L’interface page d’accueil.
+
+Figure 3.27 – Interface de la page d’accueil.
+
+3.5.3 Test
+
+Les tests unitaires :
+
+Jest est un framework de test JavaScript de qualit´e qui met l’accent sur la simpli-
+cit´e.Il fonctionne avec les projets utilisant : Babel, TypeScript, Node, React, Angular,
+Vue et plus encore.[9]
+
+3.5. Impl´ementation
+
+53
+
+La figure 3.28 pr´esente le logo de Jest.
+
+Figure 3.28 – logo de jest.
+
+Les tests unitaires de cas d’utilisation ≪ S’authentifier ≫ :
+
+La Figure 3.29 pr´esente test authentification.
+
+Figure 3.29 – Test d’authentification.
+
+La Figure 3.30 pr´esente test Interface ≪Champ Invalide ≫.
+
+3.5. Impl´ementation
+
+54
+
+Figure 3.30 – Test d’interface ≪Champ Invalide ≫.
+
+Les tests unitaires de cas d’utilisation ≪ cr´eer session de stage ≫ :
+
+La Figure 3.31 pr´esente test de gestion d’une session.
+
+Figure 3.31 – Test de gestion d’une session.
+
+La Figure 3.32 pr´esente Test ”Champs obligatoire vide ”.
+
+3.5. Impl´ementation
+
+55
+
+Figure 3.32 – Test ≪ Champs obligatoire vide ≫.
+
+Les tests d’int´egration :
+
+Nous utilisons le framework open source Postman pour r´ealiser des tests d’int´egration
+et v´erifier le bon fonctionnement d’une partie sp´ecifique du code. `A cette ´etape, nous
+allons pr´esenter quelques tests d’int´egration.
+
+La figure pr´esente 3.33 le logo de Postman.
+
+Figure 3.33 – Postman.
+
+3.5. Impl´ementation
+
+Les tests :
+
+56
+
+Figure 3.34 – Test d’int´egration de consulter une session.
+
+Figure 3.35 – Test d’int´egration de Mettre `a jour une session.
+
+3.5. Impl´ementation
+
+57
+
+3.5.4 Revue de Sprint
+
+≪Une r´eunion de revue du sprint est une c´er´emonie fondamentale du d´eveloppement
+Agile, en particulier dans le framework Scrum. Elle marque la fin d’un sprint, g´en´eralement
+une p´eriode de deux `a quatre semaines, au cours de laquelle l’´equipe de d´eveloppement
+propose des fonctionnalit´es produit suppl´ementaires potentiellement livrables.≫[3]
+
+Burndown chart :
+
+≪C’est un indicateur de mesure qui montre le travail restant sur une p´eriode donn´ee.
+Il permet de suivre le projet dans le temps afin de contrˆoler sa livraison dans les d´elais
+souhait´es. Sur l’axe X s’affiche le nombre de jours que dure le sprint. Sur l’axe Y s’affiche
+l’effort en terme de story-points (ou de tickets) de l’´equipe. ≫[19]
+
+Table 3.17 – Tableau des valeurs de Burndown Chart du premier sprint.
+
+DAY
+
+Hours
+
+Remaining
+
+Planned Actual Planned Actual
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+0
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+0
+
+1
+
+12
+
+2
+
+11
+
+3
+
+9
+
+2
+
+13
+
+1
+
+8
+
+10
+
+3
+
+7
+
+2
+
+12
+
+1
+
+10
+
+160
+
+154
+
+148
+
+142
+
+136
+
+130
+
+124
+
+118
+
+112
+
+106
+
+100
+
+94
+
+88
+
+82
+
+76
+
+70
+
+64
+
+58
+
+160
+
+159
+
+147
+
+145
+
+134
+
+131
+
+122
+
+120
+
+107
+
+106
+
+98
+
+88
+
+85
+
+78
+
+76
+
+64
+
+63
+
+53
+
+3.5. Impl´ementation
+
+58
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+10
+
+2
+
+11
+
+1
+
+13
+
+2
+
+9
+
+1
+
+10
+
+4
+
+52
+
+46
+
+40
+
+34
+
+28
+
+22
+
+16
+
+10
+
+0
+
+51
+
+40
+
+39
+
+26
+
+24
+
+15
+
+14
+
+4
+
+0
+
+La Figure 3.36 pr´esente Le Diagramme de Burndown Chart du sprint 1.
+
+Figure 3.36 – Le Diagramme de Burndown Chart du sprint 1.
+
+Calcul de v´elocit´e
+
+≪Dans un environnement Agile, le concept de v´elocit´e est utilis´e pour mesurer la
+quantit´e de travail qui peut ˆetre accomplie sur une p´eriode de temps donn´ee. La v´elocit´e
+est le calcul de la quantit´e de travail r´eelle qu’une ´equipe peut effectuer au cours d’un
+seul sprint. En ´evaluant la quantit´e de travail que l’´equipe a effectu´e lors des sprints
+pr´ec´edents, il sera possible d’estimer la quantit´e de travail qu’il sera possible d’accomplir
+lors des sprints suivants.≫[18]
+
+3.6. Conclusion
+
+59
+
+Table 3.18 – calcul de v´elocit´e estim´ee.
+
+ID User Story Estimation
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+3
+3
+3
+2
+2
+2
+2
+3
+3
+3
+
+3.6 Conclusion
+
+Durant de ce chapitre,nous avons analys´e, con¸cu et impl´ement´e notre premier sprint,
+ce qui nous a permis de construire une version de notre plateforme qui pourrait ˆetre
+livr´ee.Le prochain chapitre nous allons nous concentrer sur le deuxi`eme sprint, qui
+repr´esente la gestion des demandes de stage,gestion des r´eclamations, gestiondes ana-
+lyses.
+
+4
+
+Sprint 2 : Gestion des demandes de
+stage, Gestion des r´eclamations,
+Gestion des analyses
+
+4.1 Introduction
+
+Durant ce sprint, nous avons suivi la mˆeme d´emarche que celle adopt´ee lors du
+premier sprint. Ce sprint a pour objectif la mise en œuvre des fonctionnalit´es li´ees `a la
+gestion des demandes de stage, des r´eclamations, ainsi qu’`a la gestion des analyses.
+
+4.2 La sp´ecification fonctionnelle
+
+La sp´ecification fonctionnelle d´efinie pour ce sprint articule les principales fonction-
+nalit´es `a ex´ecuter, en se concentrant sp´ecifiquement sur la gestion des demandes de
+stage, des r´eclamations et des analyses. Ce document facilite l’´elucidation du compor-
+tement anticip´e du syst`eme en ce qui concerne chaque caract´eristique.
+
+Ce segment pr´esente une collection de cas d’utilisation accompagn´ee d’un sch´ema
+complet. Ces composants constituent les ´el´ements fondamentaux de la conception tech-
+nique et de la mise en œuvre ult´erieure.
+
+4.2.1 Le sprint Backlog
+
+Les informations pr´esent´ees dans le Tableau 4.1 correspondent au Sprint Backlog
+du sprint 2. Ce tableau regroupe les fonctionnalit´es pr´evues, les user stories associ´ees,
+ainsi que les tˆaches d´efinies pour chaque fonctionnalit´e retenue durant ce sprint.
+
+60
+
+4.2. La sp´ecification fonctionnelle
+
+61
+
+Table 4.1 – Sprint Backlog.
+
+ID User Story User Story
+
+1
+
+Gestion des
+demandes de
+stage
+
+Description
+En tant que sta-
+veux
+giaire,
+je
+soumettre
+une
+demande de stage.
+
+En tant que sta-
+giaire, je veux pou-
+suivre l’´etat
+voir
+de ma demande de
+stage.
+
+En tant que re-
+je veux
+cruteur,
+consulter
+les de-
+mandes de stage.
+
+T`ache ID Tˆache
+
+1.1
+
+1.2
+
+1.3
+
+1.4
+
+1.5
+
+1.6
+
+1.7
+
+≪
+
+le
+
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equences syst`eme, de
+s´equences d´etaill´ees et
+de classes du cas d’uti-
+lisation ≪soumettre une
+demande de stage≫
+cas
+Impl´ementer
+d’utilisation
+sou-
+mettre une demande de
+stage ≫
+Tester le cas d’utilisa-
+tion ≪ soumettre une
+demande de stage ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equences syst`eme, de
+s´equences d´etaill´ees et
+de classes du cas d’utili-
+sation ≪ suivre l’´etat ≫
+Impl´ementer
+cas
+d’utilisation ≪ suivre
+l’´etat ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equences syst`eme, de
+s´equences d´etaill´ees et
+de classes du cas d’uti-
+lisation ≪ consulter les
+demandes de stage ≫
+Impl´ementer
+cas
+d’utilisation ≪ consul-
+les demandes de
+ter
+stage ≫
+
+le
+
+le
+
+4.2. La sp´ecification fonctionnelle
+
+62
+
+Table 4.1 – Sprint Backlog.
+
+ID User Story User Story
+
+Description
+En tant que recru-
+teur, je veux accep-
+ter ou refuser une
+demande de stage.
+
+tant
+
+En
+ministrateur
+recruteur,
+consulter
+r´eclamation.
+
+qu’ad-
+ou
+je veux
+une
+
+2
+
+Gestion des
+r´eclamations
+
+En tant que sta-
+giaire, je veux cr´eer
+une r´eclamation.
+
+T`ache ID Tˆache
+
+1.8
+
+1.9
+
+2.1
+
+2.2
+
+2.3
+
+2.4
+
+2.5
+
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equences syst`eme, de
+s´equences d´etaill´ees et
+de classes du cas d’uti-
+lisation ≪ changer l’´etat
+
+≫
+
+le
+
+le
+
+cas
+Impl´ementer
+d’utilisation ≪ changer
+l’´etat ≫
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equences syst`eme, de
+s´equences d´etaill´ees et
+de classes du cas d’uti-
+lisation ≪ consulter une
+r´eclamation ≫
+Impl´ementer
+cas
+d’utilisation ≪consulter
+une r´eclamation ≫
+Tester le cas d’utilisa-
+tion ≪ consulter une
+r´eclamation ≫
+´Elaborer le diagramme
+de
+d’utilisation,
+de s´equences syst`eme,
+de s´equences d´etaill´ees
+et de classes du cas
+d’utilisation≪ cr´eer une
+r´eclamation≫
+Impl´ementer
+cas
+d’utilisation ≪ cr´eer
+une r´eclamation ≫
+
+cas
+
+le
+
+4.2. La sp´ecification fonctionnelle
+
+63
+
+Table 4.1 – Sprint Backlog.
+
+ID User Story User Story
+
+Description
+En tant que re-
+je veux
+cruteur,
+supprimer
+une
+r´eclamation.
+
+En tant que recru-
+teur, je veux mo-
+difier l’´etat d’une
+r´eclamation.
+
+3
+
+Gestion des
+analyses
+
+En tant qu’admi-
+nistrateur, je veux
+consulter les statis-
+tiques des analyses
+d’une session.
+
+T`ache ID Tˆache
+
+2.6
+
+2.7
+
+2.8
+
+2.9
+
+3.1
+
+3.2
+
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equences syst`eme, de
+s´equences d´etaill´ees et
+de classes du cas d’utili-
+sation ≪ supprimer une
+r´eclamation ≫
+Impl´ementer
+d’utilisation
+mer une
+
+cas
+le
+≪suppri-
+r´eclamation
+
+≫
+
+´Elaborer le diagramme
+de cas d’utilisation, de
+s´equences syst`eme, de
+s´equences d´etaill´ees et
+de classes du cas d’utili-
+sation ≪ modifier l’´etat
+d’une r´eclamation ≫
+Impl´ementer
+cas
+d’utilisation ≪ modifier
+l’´etat d’une r´eclamation
+
+le
+
+≫
+
+cas
+
+´Elaborer le diagramme
+d’utilisation
+de
+≪ consulter les statis-
+tiques des analyses≫
+
+le
+
+Impl´ementer
+cas
+d’utilisation ≪ consul-
+ter les statistiques des
+analyses ≫
+
+4.2.2 Diagramme de cas d’utilisation du deuxi`eme sprint
+
+La Figure 4.1 pr´esente le diagramme de cas d’utilisation de notre deuxi`eme sprint.
+
+4.3. Analyse des cas d’utilisations
+
+64
+
+Figure 4.1 – Diagramme de cas d’utilisation du deuxi`eme sprint.
+
+4.3 Analyse des cas d’utilisations
+
+Dans cette section, nous r´ecapitulons les cas d’utilisation li´es `a ce sprint. Ils concernent
+
+la gestion des demandes de stage, des r´eclamations et des analyses.
+
+4.3.1 Analyse du cas d’utilisation ≪ Soumettre une demande de stage
+
+≫
+
+Nous allons commencer par d´ecrire le processus soumettre une demande de stage `a
+
+travers une description textuelle.
+
+Les informations pr´esent´ees dans les Tableaux 4.2 et 4.3 d´emontrent la description
+
+textuelle du cas d’utilisation ≪ Soumettre une demande de stage ≫.
+
+Table 4.2 – Description textuelle du cas d’utilisation ≪ Soumettre une demande de
+stage ≫ (Partie 1).
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+
+1
+Soumettre une demande de stage
+Stagiaire
+L’utilisateur souhaite soumettre une demande de stage via
+le formulaire pr´evu `a cet effet. Le syst`eme permet de remplir
+les informations n´ecessaires, d’ajouter un CV et d’envoyer
+la demande.
+L’utilisateur doit ˆetre authentifi´e. Une session de stage doit
+ˆetre ouverte.
+
+4.3. Analyse des cas d’utilisations
+
+65
+
+Table 4.3 – Description textuelle du cas d’utilisation ≪ Soumettre une demande de
+stage ≫ (Partie 2).
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+1. L’utilisateur acc`ede `a la page des sessions ouvertes.
+2. Le syst`eme affiche les sessions disponibles.
+3. L’utilisateur s´electionne une session.
+4. Le syst`eme affiche le formulaire de demande de stage.
+5. L’utilisateur remplit les champs requis et joint son CV.
+6. L’utilisateur valide la demande.
+7. Le syst`eme enregistre la demande et affiche une confirma-
+tion.
+4.1 : Aucune session disponible
+4.1.1 Le syst`eme informe qu’aucune session n’est ouverte.
+
+5.1 : Champs manquants ou invalides
+5.1.1 Le syst`eme affiche un message d’erreur.
+5.1.2 L’utilisateur corrige les informations.
+5.1.3 Retour `a l’´etape 5 du sc´enario nominal.
+
+Postcondition
+
+6.1 : Erreur lors de l’envoi
+6.1.1 Le syst`eme affiche un message d’´echec.
+6.1.2 L’utilisateur peut r´eessayer l’envoi.
+La demande de stage est enregistr´ee et en attente de traite-
+ment.
+
+4.3.2 Analyse de cas d’utilisation ≪ Poursuivre l’´etat d’une demande
+
+de stage ≫
+
+Le processus ≪ poursuivre l’´etat d’une demande de stage ≫ sera expliqu´e textuelle-
+ment. Ce cas d’utilisation est sp´ecialement con¸cu pour le stagiaire qui souhaite suivre
+l’´etat de sa demande de stage soumise.
+
+Les informations du Tableau 4.4 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+Table 4.4 – Description textuelle du cas d’utilisation ≪ Poursuivre l’´etat d’une de-
+mande de stage ≫.
+
+ID
+Nom
+Acteurs primaires
+
+2
+Poursuivre l’´etat d’une demande de stage
+Stagiaire
+
+4.3. Analyse des cas d’utilisations
+
+66
+
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+L’utilisateur souhaite consulter l’´etat de sa demande de
+stage apr`es l’avoir soumise. Le syst`eme affiche les informa-
+tions de suivi li´ees `a la demande (en attente, accept´ee, re-
+fus´ee).
+L’utilisateur doit ˆetre authentifi´e et avoir d´ej`a soumis une
+demande de stage.
+1. L’utilisateur acc`ede `a la page de suivi.
+2. Le syst`eme affiche la liste de ses demandes.
+3. L’utilisateur s´electionne une demande.
+4. Le syst`eme affiche l’´etat actuel de la demande (en cours,
+accept´ee, refus´ee).
+2.1 : Aucune demande trouv´ee
+2.1.1 Le syst`eme affiche un message indiquant qu’aucune
+demande n’a ´et´e trouv´ee.
+
+4.1 : Probl`eme de chargement
+4.1.1 Le syst`eme affiche un message d’erreur.
+4.1.2 L’utilisateur peut recharger la page ou r´eessayer plus
+tard.
+L’´etat de la demande est consult´e avec succ`es.
+
+4.3.3 Analyse de cas d’utilisation ≪ consulter une demande de stage
+
+≫
+
+Nous allons maintenant d´ecrire le processus ≪ Consulter les demandes de stage ≫ `a
+travers une description textuelle. Ce cas d’utilisation concerne le recruteur, qui souhaite
+acc´eder aux demandes soumises afin de les examiner et les traiter.
+
+Les informations des Tableaux 4.5 et 4.6 d´ecrivent ce cas d’utilisation de mani`ere
+
+textuelle.
+
+Table 4.5 – Description textuelle du cas d’utilisation ≪ Consulter les demandes de
+stage ≫ (Partie 1).
+
+ID
+Nom
+Acteurs primaires
+Description
+
+3
+Consulter les demandes de stage
+Recruteur
+Le recruteur souhaite consulter les demandes de stage sou-
+mises afin d’en analyser le contenu, filtrer les profils, et
+prendre une d´ecision.
+
+4.3. Analyse des cas d’utilisations
+
+67
+
+Table 4.6 – Description textuelle du cas d’utilisation ≪ Consulter les demandes de
+stage ≫ (Partie 2).
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+L’utilisateur doit ˆetre authentifi´e et avoir acc`es aux sessions
+contenant des demandes.
+1. Le recruteur acc`ede `a la page de gestion des demandes.
+2. Le syst`eme affiche la liste des demandes de stage soumises.
+3. Le recruteur s´electionne une demande.
+4. Le syst`eme affiche les d´etails de la demande et le CV du
+candidat.
+5. Le recruteur peut consulter ou appliquer un filtre bas´e sur
+le score du profil.
+2.1 : Aucune demande disponible
+2.1.1 Le syst`eme informe qu’aucune demande n’a ´et´e
+soumise.
+
+4.1 : Fichier CV inaccessible
+4.1.1 Le syst`eme affiche une erreur de chargement du
+document.
+4.1.2 L’utilisateur peut r´eessayer ou passer `a une autre
+demande.
+Les demandes de stage sont consult´ees et prˆetes `a ˆetre
+´evalu´ees ou filtr´ees.
+
+4.3.4 Analyse de cas d’utilisation ≪ Traitement d’une demande de
+
+stage≫
+
+Dans cette section, nous pr´esentons le processus ≪ Traitement d’une demande de
+stage ≫ sous forme de description textuelle. Ce cas d’utilisation permet au recruteur
+d’accepter ou de refuser une demande d´epos´ee par un stagiaire.
+
+Les informations des Tableaux 4.7 et 4.8 d´ecrivent ce cas d’utilisation de mani`ere
+
+textuelle.
+
+Table 4.7 – Description textuelle du cas d’utilisation ≪ Traitement d’une demande de
+stage ≫ (Partie 1).
+
+ID
+Nom
+Acteurs primaires
+
+4
+Traitement d’une demande de stage
+Recruteur
+
+4.3. Analyse des cas d’utilisations
+
+68
+
+Table 4.8 – Description textuelle du cas d’utilisation ≪ Traitement d’une demande de
+stage ≫ (Partie 2).
+
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+Le recruteur souhaite analyser une demande de stage afin de
+l’accepter ou de la refuser. Le syst`eme permet de modifier
+l’´etat de la demande en fonction de la d´ecision prise.
+Le recruteur doit ˆetre authentifi´e et avoir acc`es `a des de-
+mandes valides.
+
+1. Le recruteur acc`ede `a la page des demandes de stage.
+2. Le syst`eme affiche les demandes disponibles.
+3. Le recruteur s´electionne une demande `a traiter.
+4. Le syst`eme affiche les d´etails de la demande.
+5. Le recruteur clique sur ≪ Accepter ≫ ou ≪ Refuser ≫.
+6. Le syst`eme enregistre la d´ecision et met `a jour l’´etat de
+la demande.
+7. Une notification est envoy´ee au stagiaire.
+2.1 : Aucune demande disponible
+2.1.1 Le syst`eme affiche un message informant qu’aucune
+demande n’est disponible pour cette session.
+2.1.2 L’utilisateur est invit´e `a revenir ult´erieurement ou `a
+consulter une autre session.
+
+3.1 : Aucune demande s´electionn´ee
+3.1.1 Le syst`eme affiche un message invitant `a choisir une
+demande.
+
+6.1 : ´Echec de l’enregistrement
+6.1.1 Le syst`eme affiche un message d’erreur.
+6.1.2 L’utilisateur peut r´eessayer ou annuler l’action.
+La d´ecision est enregistr´ee, et l’´etat de la demande est mis
+`a jour.
+
+4.3.5 Analyse de cas d’utilisation ≪ Consultation d’une r´eclamation ≫
+
+Dans cette section, nous pr´esentons le cas d’utilisation ≪ Consulter une r´eclamation
+≫ sous forme de description textuelle. Cette fonctionnalit´e est destin´ee aux administra-
+teurs et aux recruteurs souhaitant acc´eder aux r´eclamations d´epos´ees.
+
+Les informations du Tableau 4.9 d´ecrivent ce cas d’utilisation de mani`ere textuelle.
+
+4.3. Analyse des cas d’utilisations
+
+69
+
+Table 4.9 – Description textuelle du cas d’utilisation ≪ Consultation d’une r´eclamation
+≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+5
+Consultation d’une r´eclamation
+Administrateur, Recruteur
+L’utilisateur souhaite consulter une r´eclamation d´epos´ee
+afin d’en prendre connaissance, l’´evaluer ou la traiter si
+n´ecessaire. Le syst`eme affiche les informations d´etaill´ees de
+la r´eclamation.
+L’utilisateur doit ˆetre authentifi´e et disposer des droits
+d’acc`es aux r´eclamations.
+1. L’utilisateur acc`ede `a l’espace de gestion des r´eclamations.
+2. Le syst`eme affiche la liste des r´eclamations existantes.
+3. L’utilisateur s´electionne une r´eclamation.
+4. Le syst`eme affiche les d´etails de la r´eclamation.
+2.1 : Aucune r´eclamation disponible
+2.1.1 Le syst`eme informe qu’aucune r´eclamation n’a ´et´e
+enregistr´ee.
+
+4.1 : Erreur de chargement
+4.1.1 Le syst`eme affiche un message d’erreur.
+4.1.2 L’utilisateur est invit´e `a r´eessayer.
+Les d´etails de la r´eclamation sont consult´es avec succ`es.
+
+Postcondition
+
+4.3.6 Analyse de cas d’utilisation ≪ cr´eation d’une r´eclamation ≫
+
+Dans cette section, nous d´ecrivons le cas d’utilisation ≪ Cr´eer une r´eclamation ≫ sous
+forme textuelle. Ce processus concerne le stagiaire souhaitant signaler un probl`eme ou
+formuler une demande via une r´eclamation.
+
+Les informations des Tableaux 4.10 et ??4.104.10 d´ecrivent ce cas d’utilisa-
+
+tion de mani`ere textuelle.
+
+Table 4.10 – Description textuelle du cas d’utilisation ≪ Cr´eation d’une r´eclamation
+≫ (Partie 1).
+
+ID
+Nom
+Acteurs primaires
+
+6
+cr´eation d’une r´eclamation
+Stagiaire
+
+4.3. Analyse des cas d’utilisations
+
+70
+
+Table 4.11 – Description textuelle du cas d’utilisation ≪ Cr´eation d’une r´eclamation
+≫ (Partie 2).
+
+Description
+
+Pr´econdition
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+L’utilisateur souhaite soumettre une r´eclamation `a
+travers un formulaire afin de signaler un probl`eme
+ou poser une question `a l’administration. Le syst`eme
+enregistre la r´eclamation.
+L’utilisateur doit ˆetre authentifi´e.
+1. L’utilisateur acc`ede `a la page de cr´eation d’une
+r´eclamation.
+2. Le syst`eme affiche le formulaire de saisie.
+3. L’utilisateur remplit les champs n´ecessaires (ob-
+jet, message, etc.).
+4. L’utilisateur valide la r´eclamation.
+5. Le syst`eme enregistre la r´eclamation et affiche une
+confirmation.
+3.1 : Champs obligatoires manquants
+3.1.1 Le syst`eme affiche un message d’erreur.
+3.1.2 L’utilisateur compl`ete les champs requis.
+3.1.3 Retour `a l’´etape 3 du sc´enario nominal.
+La r´eclamation est enregistr´ee et ajout´ee `a la liste
+des r´eclamations consultables.
+
+4.3.7 Analyse de cas d’utilisation ≪ Suppression d’une r´eclamation ≫
+
+Dans cette section, nous d´ecrivons le cas d’utilisation ≪ Suppression
+d’une r´eclamation ≫ `a travers une description textuelle. Cette fonctionna-
+lit´e permet `a l’administrateur ou au recruteur de supprimer une r´eclamation
+jug´ee non pertinente ou d´ej`a trait´ee.
+
+Les informations du Tableau 4.12 d´ecrivent ce cas d’utilisation de mani`ere
+
+textuelle.
+
+4.3. Analyse des cas d’utilisations
+
+71
+
+Table 4.12 – Description textuelle du cas d’utilisation ≪ Suppression une r´eclamation
+≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+7
+Supprimer une r´eclamation
+Administrateur, Recruteur
+L’utilisateur souhaite supprimer une r´eclamation
+enregistr´ee, soit parce qu’elle a ´et´e trait´ee, soit
+parce qu’elle est jug´ee invalide. Le syst`eme supprime
+d´efinitivement la r´eclamation s´electionn´ee.
+L’utilisateur doit ˆetre authentifi´e et disposer des
+droits d’acc`es aux r´eclamations.
+1. L’utilisateur acc`ede `a la liste des r´eclamations.
+2. Le syst`eme affiche toutes les r´eclamations dispo-
+nibles.
+3. L’utilisateur s´electionne une r´eclamation `a sup-
+primer.
+4. Le syst`eme affiche un message de confirmation.
+5. L’utilisateur confirme la suppression.
+6. Le syst`eme supprime la r´eclamation et affiche un
+message de succ`es.
+3.1 : Aucune r´eclamation s´electionn´ee
+3.1.1 Le syst`eme invite l’utilisateur `a s´electionner
+une r´eclamation.
+
+6.1 : ´Echec de la suppression
+6.1.1 Le syst`eme affiche un message d’erreur.
+6.1.2 L’utilisateur peut r´eessayer ou annuler l’action.
+La r´eclamation est supprim´ee de la base de donn´ees.
+
+4.3.8 Analyse de cas d’utilisation ≪ Modification de l’´etat d’une r´eclamation
+
+≫.
+
+Dans cette section, nous d´ecrivons le cas d’utilisation ≪ Modification
+l’´etat d’une r´eclamation ≫ sous forme de description textuelle. Cette action
+permet au recruteur de mettre `a jour le statut d’une r´eclamation en fonction
+de son traitement ou de sa r´esolution.
+
+Les informations du Tableau 4.13 d´ecrivent ce cas d’utilisation de mani`ere
+
+textuelle.
+
+4.3. Analyse des cas d’utilisations
+
+72
+
+Table 4.13 – Description textuelle du cas d’utilisation ≪ Modification de l’´etat d’une
+r´eclamation ≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+8
+Modifier l’´etat d’une r´eclamation
+Recruteur
+L’utilisateur souhaite mettre `a jour l’´etat d’une
+r´eclamation d´ej`a enregistr´ee (ex. : en cours, trait´ee,
+r´esolue) afin d’assurer un bon suivi de son traite-
+ment.
+L’utilisateur doit ˆetre authentifi´e et avoir acc`es `a la
+liste des r´eclamations.
+1. L’utilisateur acc`ede `a la section des r´eclamations.
+2. Le syst`eme affiche la liste des r´eclamations exis-
+tantes.
+3. L’utilisateur s´electionne une r´eclamation `a mettre
+`a jour.
+4. Le syst`eme affiche les d´etails de la r´eclamation.
+5. L’utilisateur choisit un nouvel ´etat depuis une
+liste.
+6. Le syst`eme enregistre le nouvel ´etat et affiche un
+message de confirmation.
+3.1 : Aucune r´eclamation s´electionn´ee
+3.1.1 Le syst`eme affiche un message invitant `a
+choisir une r´eclamation.
+
+6.1 : ´Echec de la mise `a jour
+6.1.1 Le syst`eme affiche un message d’erreur.
+6.1.2 L’utilisateur peut
+l’op´eration.
+L’´etat de la r´eclamation est modifi´e et enregistr´e
+avec succ`es.
+
+r´eessayer ou annuler
+
+4.3.9 Analyse de cas d’utilisation ≪ Consultation des statistiques des
+
+analyses de session ≫
+
+Dans cette section, nous d´ecrivons le cas d’utilisation ≪ Consultation des
+statistiques des analyses de session ≫ sous forme de description textuelle.
+Cette fonctionnalit´e permet `a l’administrateur d’acc´eder `a des indicateurs
+cl´es li´es aux sessions de stage, dans le but de faciliter le suivi global du
+
+4.4. Conception des cas d’utilisation
+
+73
+
+processus.
+
+Les informations du Tableau 4.14 d´ecrivent ce cas d’utilisation de mani`ere
+
+textuelle.
+
+Table 4.14 – Description textuelle du cas d’utilisation ≪ Consultation des statistiques
+des analyses de session ≫.
+
+ID
+Nom
+Acteurs primaires
+Description
+
+Pr´econdition
+
+Sc´enario nominal
+
+Sc´enarios alternatifs
+
+Postcondition
+
+les
+
+souhaite consulter
+
+9
+Consulter les statistiques des analyses de session
+Administrateur
+statistiques
+L’utilisateur
+g´en´er´ees `a partir des donn´ees des sessions de stage
+(nombre de demandes, taux d’acceptation, score
+moyen, etc.). Le syst`eme affiche un tableau ou un
+graphique synth´etisant ces donn´ees.
+L’utilisateur doit ˆetre authentifi´e et avoir les droits
+d’acc`es aux statistiques.
+1. L’utilisateur acc`ede `a la section ”Statistiques”.
+2. Le syst`eme affiche la liste des sessions pass´ees.
+3. L’utilisateur s´electionne une session.
+4. Le syst`eme affiche les statistiques correspondantes
+(graphique, pourcentage, histogramme, etc.).
+2.1 : Aucune session disponible
+2.1.1 Le syst`eme affiche un message indiquant
+qu’aucune session n’a encore ´et´e enregistr´ee.
+
+L’utilisateur
+
+4.1 : Erreur de chargement des donn´ees
+4.1.1 Le syst`eme affiche un message d’erreur.
+4.1.2
+ult´erieurement.
+Les statistiques de la session s´electionn´ee sont af-
+fich´ees correctement.
+
+r´eessayer
+
+invit´e
+
+est
+
+`a
+
+4.4 Conception des cas d’utilisation
+
+4.4.1 Conception de cas d’utilisation ≪ Soumettre une demande de
+
+stage ≫
+
+La Figure 4.2 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Soumettre une demande de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+74
+
+Figure 4.2 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Soumettre une
+demande de stage ≫.
+
+La Figure 4.3 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Soumettre une demande de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+75
+
+Figure 4.3 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Soumettre
+une demande de stage ≫.
+
+4.4.2 Conception de cas d’utilisation ≪ Poursuivre l’´etat d’une de-
+
+mande demande de stage ≫
+
+La Figure 4.4 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Poursuivre l’´etat d’une demande demande de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+76
+
+Figure 4.4 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Poursuivre l’´etat
+d’une demande demande de stage ≫.
+
+La Figure 4.5 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Poursuivre l’´etat d’une demande demande de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+77
+
+Figure 4.5 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Poursuivre
+l’´etat d’une demande demande de stage ≫.
+
+4.4.3 Conception de cas d’utilisation ≪ Consulter les demandes de
+
+stage ≫
+
+La Figure 4.6 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Consulter les demandes de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+78
+
+Figure 4.6 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter les
+demandes de stage ≫.
+
+La Figure 4.7 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Consulter les demandes de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+79
+
+Figure 4.7 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter les
+demandes de stage ≫.
+
+4.4.4 Conception de cas d’utilisation ≪ Traitement d’une demande de
+
+stage ≫
+
+La Figure 4.8 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Traitement d’une demande de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+80
+
+Figure 4.8 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Traitement d’une
+demande de stage ≫.
+
+La Figure 4.9 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Traitement d’une demande de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+81
+
+Figure 4.9 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Traitement
+d’une demande de stage ≫.
+
+4.4. Conception des cas d’utilisation
+
+82
+
+4.4.5 Conception de cas d’utilisation ≪ Consultation d’une r´eclamation
+
+≫
+
+La Figure 4.10 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Consultation d’une r´eclamation ≫.
+
+Figure 4.10 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consultation
+d’une r´eclamation ≫.
+
+La Figure 4.11 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Consultation d’une r´eclamation ≫.
+
+4.4. Conception des cas d’utilisation
+
+83
+
+Figure 4.11 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consultation
+d’une r´eclamation ≫.
+
+4.4.6 Conception de cas d’utilisation ≪ Cr´eation d’une r´eclamation ≫
+
+La Figure 4.12 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Cr´eation d’une r´eclamation ≫.
+
+4.4. Conception des cas d’utilisation
+
+84
+
+Figure 4.12 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Cr´eation d’une
+reclamation ≫.
+
+La Figure 4.13 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Cr´eation d’une r´eclamation ≫.
+
+4.4. Conception des cas d’utilisation
+
+85
+
+Figure 4.13 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Cr´eation
+d’une r´eclamation ≫.
+
+4.4.7 Conception de cas d’utilisation ≪ Supprimer une r´eclamation ≫
+
+La Figure 4.14 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Supprimer une r´eclamation ≫.
+
+4.4. Conception des cas d’utilisation
+
+86
+
+Figure 4.14 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Supprimer une
+r´eclamation ≫.
+
+La Figure 4.15 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Supprimer une r´eclamation ≫.
+
+4.4. Conception des cas d’utilisation
+
+87
+
+Figure 4.15 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Supprimer
+une r´eclamation ≫.
+
+4.4.8 Conception de cas d’utilisation ≪ Modifier l’´etat d’une r´eclamation
+
+≫
+
+La Figure 4.16 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Modifier l’´etat d’une r´eclamation ≫.
+
+4.4. Conception des cas d’utilisation
+
+88
+
+Figure 4.16 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Modifier l’´etat
+d’une r´eclamation ≫.
+
+La Figure 4.17 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Modifier l’´etat d’une r´eclamation ≫.
+
+4.4. Conception des cas d’utilisation
+
+89
+
+Figure 4.17 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Modifier
+l’´etat d’une r´eclamation ≫.
+
+4.4.9 Conception de cas d’utilisation ≪ Consulter les statistiques des
+
+analyses de session ≫
+
+La Figure 4.18 pr´esente le Diagramme de s´equence Syst`eme de cas d’uti-
+
+lisation ≪ Consulter les statistiques des analyses de session ≫.
+
+4.4. Conception des cas d’utilisation
+
+90
+
+Figure 4.18 – Diagramme de s´equence Syst`eme de cas d’utilisation ≪ Consulter les
+statistiques des analyses de session ≫.
+
+La Figure 4.19 pr´esente le Diagramme de s´equence d´etaill´e pour le cas
+
+d’utilisation ≪ Consulter les statistiques des analyses de session ≫.
+
+4.4. Conception des cas d’utilisation
+
+91
+
+Figure 4.19 – Diagramme de s´equence d´etaill´e pour le cas d’utilisation ≪ Consulter
+les statistiques des analyses de session ≫.
+
+4.4. Conception des cas d’utilisation
+
+92
+
+4.4.10 Diagramme de classe participante du deuxi`eme sprint
+
+La Figure 4.20 pr´esente Diagramme de classe participante du deuxi`eme
+
+sprint.
+
+Figure 4.20 – Diagramme de de classe participante du deuxi`eme sprint.
+
+4.4. Conception des cas d’utilisation
+
+93
+
+4.4.11 Diagramme de classe global du deuxi`eme sprint
+
+La Figure 4.21 pr´esente Diagramme de classes global du deuxi`eme sprint.
+
+Figure 4.21 – Diagramme des classes global du deuxi`eme sprint.
+
+4.5. Impl´ementation
+
+94
+
+4.5 Impl´ementation
+
+4.5.1 G´en´eration de base de donn´ees
+
+Champ
+session
+name
+email
+cv
+score
+status
+
+Champ
+titre
+description
+status
+
+Table 4.15 – Mod`ele Les demandes de stage.
+
+Type
+entier
+string
+string
+string
+entier
+enum
+
+Contraintes
+Cl´e ´etrang`ere vers la table Session
+—
+—
+—
+—
+—
+
+Table 4.16 – Mod`ele R´eclamation.
+
+Type
+string
+string
+enum
+
+Contraintes
+—
+—
+—
+
+4.5.2 Les interfaces
+
+Gestion des r´eclamations :
+
+La Figure 4.22 pr´esente l’interface de Cr´eation d’une r´eclamation.
+
+Figure 4.22 – L’interface de Cr´eation d’une r´eclamation.
+
+4.5. Impl´ementation
+
+95
+
+La Figure 4.24 pr´esente l’interface de Gestion des r´eclamations.
+
+Figure 4.23 – L’interface de Gestion des r´eclamations.
+
+Gestion des demandes de stage :
+
+La Figure 4.24 pr´esente l’interface de soumettre une demande de stage.
+
+Figure 4.24 – L’interface de soumettre une demande de stage.
+
+4.5. Impl´ementation
+
+96
+
+La Figure 4.25 pr´esente l’interface de traitement d’une demande de stage.
+
+Figure 4.25 – l’interface de Traitement d’une demande de stage.
+
+Gestion des analyses :
+
+La Figure 4.26 pr´esente l’interface de Gestion des analyses.
+
+4.5. Impl´ementation
+
+97
+
+Figure 4.26 – l’interface de Gestion des analyses.
+
+4.5.3 Test
+
+Les tests unitaires :
+
+Les tests unitaires de cas d’utilisation ≪ Modifier l’´etat d’une r´eclamation
+
+≫.
+
+Les Figures 4.27 et 4.28 pr´esentent le test pour modifier l’´etat d’une
+
+r´eclamation.
+
+Figure 4.27 – Test de modification pour l’´etat d’une r´eclamation.
+
+4.5. Impl´ementation
+
+98
+
+Figure 4.28 – Test de modification pour l’´etat d’une r´eclamation.
+
+Les tests d’int´egration :
+
+La figure 4.29 pr´esente le test d’int´egration de consultation des demandes
+
+de stage.
+
+4.5. Impl´ementation
+
+99
+
+Figure 4.29 – Test d’int´egration de consultation des demandes de stage.
+
+4.5.4 Revue de Sprint
+
+Burndown chart :
+
+Table 4.17 – Tableau des valeurs de Burndown Chart du deuxi`eme sprint.
+
+DAY
+
+Hours
+
+Remaining
+
+Planned Actual Planned Actual
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+0
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+0
+
+3
+
+11
+
+2
+
+10
+
+4
+
+9
+
+3
+
+10
+
+5
+
+145
+
+139
+
+133
+
+127
+
+121
+
+115
+
+109
+
+103
+
+97
+
+91
+
+145
+
+142
+
+131
+
+129
+
+119
+
+115
+
+106
+
+103
+
+93
+
+88
+
+4.5. Impl´ementation
+
+100
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+6
+
+7
+
+7
+
+6
+
+6
+
+5
+
+6
+
+6
+
+3
+
+7
+
+2
+
+9
+
+4
+
+7
+
+6
+
+7
+
+7
+
+85
+
+79
+
+73
+
+67
+
+61
+
+55
+
+49
+
+43
+
+37
+
+31
+
+25
+
+19
+
+13
+
+7
+
+0
+
+81
+
+75
+
+69
+
+64
+
+58
+
+52
+
+49
+
+42
+
+40
+
+31
+
+27
+
+20
+
+14
+
+7
+
+0
+
+La Figure 4.30 pr´esente Le Diagramme de Burndown Chart du sprint 2
+
+Figure 4.30 – Le Diagramme de Burndown Chart du sprint.
+
+4.6. Conclusion
+
+Calcul de v´elocit´e :
+
+101
+
+Table 4.18 – calcul de v´elocit´e estim´ee .
+
+ID User Story Estimation
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+2
+3
+3
+4
+2
+2
+2
+2
+4
+
+4.6 Conclusion
+
+Pendant ce chapitre, nous avons concentr´e nos efforts sur la progression
+de notre deuxi`eme sprint afin de produire un ´el´ement de notre plateforme
+qui pourrait ˆetre livr´e. Dans le chapitre suivant, nous pr´esenterons les res-
+sources que nous avons utilis´ees pour accomplir notre projet.
+
+5
+
+Phase de clˆoture
+
+5.1 Introduction
+
+La phase de clˆoture est l’´etape finale du cycle d’´elaboration du logiciel
+avec Scrum. En effet, dans ce chapitre, un bilan doit ˆetre ´etabli pour en
+tirer des enseignements. Concernant l’environnement mat´eriel et logiciel,
+nous avons utilis´e et d´evelopp´e des outils que nous avons choisis. Nous com-
+mencerons par la description de l’environnement de d´eveloppement mat´eriel
+et logiciel, puis nous expliquerons les choix technologiques. En conclusion,
+nous pr´esenterons la direction du projet.
+
+5.2 Environnement de travail
+
+Dans cette partie, nous allons vous pr´esenter les dispositifs physiques et
+
+num´eriques que nous avons employ´es pour mener `a bien ce projet.
+
+5.2.1 Environnement mat´eriel
+
+Nous avons employ´e deux ordinateurs portables pour cr´eer notre appli-
+
+cation.
+
+Les tableaux 5.1 et 5.2 pr´esentent les caract´eristiques des environnements
+
+mat´eriels.
+
+Table 5.1 – Environnement mat´eriel 1.
+
+Caract´eristiques
+
+Processeur
+Taille disque dur
+Capacit´e m´emoire RAM 16,00 Go
+Syst`eme d’exploitation Windows 11 Famille Unilingue, processeur x64
+Propri´etaire
+
+AMD Ryzen 5 5600H with Radeon Graphics 3.30 GHz
+464 Go
+
+Mohamed Amine Ben Chaaben
+
+102
+
+5.2. Environnement de travail
+
+103
+
+Table 5.2 – Environnement mat´eriel 2.
+
+Caract´eristiques
+
+Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz 1.80 GHz
+Processeur
+Taille disque dur
+476 Go
+Capacit´e m´emoire RAM 12,0 Go
+Syst`eme d’exploitation Windows 10 Famille, processeur x64
+Propri´etaire
+
+Ayoub Dabbabi
+
+5.2.2 Environnement logiciel
+
+Le tableau 5.3 pr´esente l’environnement de logiciel.
+
+Table 5.3 – Tableau de l’environnement de logiciel.
+
+Nom du logiciel
+
+Logo
+
+Visual Studio Code
+
+Node.js
+
+Postman
+
+Description
+Visual Studio Code est un ´editeur de
+code open-source d´evelopp´e par Micro-
+soft, supportant un tr`es grand nombre de
+langages grˆace `a des extensions. Il pro-
+pose l’autocompl´etion, la coloration syn-
+taxique, le d´ebogage et les commandes
+Git.[8]
+Node.js permet d’ex´ecuter du JavaScript
+cˆot´e serveur, et peut ˆetre utilis´e dans des
+applications avec bases de donn´ees, la plus
+populaire ´etant MySQL. Ce n’est ni un
+framework ni un serveur `a proprement
+parler. Node.js est souvent confondu avec
+ce dernier car il permet de cr´eer des appli-
+cations en temps r´eel, o`u le serveur trans-
+met des informations au client.[10]
+Postman est un logiciel qui permet d’ap-
+peler et de tester une API. Nous al-
+lons examiner les bases de Postman pour
+d´ebuter avec cette solution de qualit´e.[6]
+
+5.2. Environnement de travail
+
+104
+
+MongoDB
+
+StarUML
+
+Excel
+
+Word
+
+Canva
+
+React JS
+
+MongoDB est une base de donn´ees
+NoSQL open-source. Puisqu’il
+s’agit
+d’une base non relationnelle, elle peut
+traiter des donn´ees structur´ees, semi-
+structur´ees
+et non structur´ees. Elle
+utilise un mod`ele de donn´ees orient´e
+document et un langage de requˆete non
+structur´e.[17]
+StarUML est un logiciel de mod´elisation
+UML qui offre une interface graphique
+conviviale et des fonctionnalit´es puis-
+santes pour la cr´eation de diff´erents types
+de diagrammes UML.[25]
+Microsoft Excel est un logiciel produit
+par Microsoft qui permet aux utilisateurs
+d’organiser, de formater et de calculer des
+donn´ees `a l’aide de formules `a travers un
+tableur. Il fait partie de la suite Microsoft
+Office et est compatible avec les autres ap-
+plications de la suite.[23]
+Microsoft Word est un logiciel de trai-
+largement
+tement de texte commercial
+utilis´e, con¸cu par Microsoft. Il fait par-
+tie de la suite de productivit´e Microsoft
+Office, mais peut ´egalement ˆetre acquis
+s´epar´ement.[24]
+Canva est un site Internet permettant de
+cr´eer et de personnaliser des designs pour
+tout type de projet, de fa¸con simple et in-
+tuitive. Il s’av`ere tr`es utile, surtout pour
+ceux qui n’ont pas de comp´etences gra-
+phiques particuli`eres.[21]
+React
+(´egalement appel´e React.js ou
+ReactJS) est une biblioth`eque JavaScript
+open-source destin´ee `a la cr´eation d’inter-
+faces utilisateurs. Elle est maintenue par
+Meta (anciennement Facebook) ainsi que
+par une communaut´e de d´eveloppeurs et
+d’entreprises depuis 2013.[27]
+
+5.3. Choix technologiques
+
+105
+
+Express JS
+
+HTML
+
+CSS
+
+Express.js est un framework permettant
+de construire des applications web bas´ees
+sur Node.js 5.3. Il est devenu le stan-
+dard pour le d´eveloppement de serveurs
+en Node.js. L’auteur original, TJ Holo-
+waychuck, le d´ecrit comme un serveur ins-
+pir´e de Sinatra, relativement minimaliste,
+mais extensible via des plugins.[26]
+L’HyperText Markup Language (HTML)
+d´esigne un langage informatique descrip-
+tif. Il s’agit d’un format de donn´ees utilis´e
+dans l’univers d’Internet pour la mise en
+forme des pages web. Il permet d’´ecrire de
+l’hypertexte et d’int´egrer des ressources
+multim´edias dans un contenu.[11]
+CSS est l’acronyme de ≪ Cascading Style
+Sheets ≫, ce qui signifie ≪ feuille de style
+en cascade ≫. Il s’agit d’un langage infor-
+matique permettant de mettre en forme
+des pages web (HTML ou XML). Ce lan-
+gage se compose de fichiers CSS (.css)
+contenant des r`egles de mise en forme.[2]
+
+5.3 Choix technologiques
+
+Pour bien appr´ehender notre application, il est essentiel de comprendre
+son architecture. Dans cette section, nous pr´esenterons en d´etail la structure
+de la pile MERN ainsi que le sch´ema de d´eploiement associ´e.
+
+5.3.1 L’architecture de la pile MERN Stack
+
+La pile MERN est un ensemble de technologies permettant un d´eveloppement
+
+d’applications plus rapide. Elle est largement utilis´ee par les d´eveloppeurs
+du monde entier. L’objectif fondamental de l’utilisation de cette pile est de
+cr´eer des applications utilisant uniquement JavaScript. En effet, les quatre
+technologies qui composent cette pile technologique sont toutes bas´ees sur
+JavaScript.[7]
+
+G´en´eralement, une pile MERN Stack comprend un frontend, un backend
+et une base de donn´ees, et constitue ce qu’on appelle une pile technologique
+
+5.3. Choix technologiques
+
+106
+
+compl`ete.
+
+• Database :
+
+— Collection : Organisez vos donn´ees en collections MongoDB selon
+
+leur structure logique.
+
+• Frontend :
+
+— Components : Divisez votre application en composants r´eutilisables
+
+pour en faciliter la gestion et la maintenance.
+
+• Backend :
+
+— Controller : Impl´ementez la logique m´etier de chaque point de
+
+terminaison dans des contrˆoleurs.
+
+— Routes : D´efinissez les points de terminaison de votre API REST
+
+pour r´epondre aux requˆetes des clients.
+
+— Model : Cr´eez des sch´emas et des mod`eles MongoDB pour inter-
+
+agir avec la base de donn´ees.
+
+— Middlewares : Utilisez les middlewares d’Express.js pour g´erer des
+fonctionnalit´es telles que l’authentification, les autorisations, la va-
+lidation des donn´ees, etc.
+
+La Figure 5.1 pr´esente l’architecture de la pile MERN Stack.
+
+Figure 5.1 – Architecture Pile MERN stack.
+
+[7]
+
+5.3. Choix technologiques
+
+107
+
+5.3.2 L’architecture MVC
+
+MVC, ou mod`ele-vue-contrˆoleur (Model-View-Controller en anglais), est
+ce qu’on appelle un mod`ele d’architecture logicielle. Ce type d’architecture,
+aujourd’hui tr`es r´epandu dans les projets d’applications web, doit son succ`es
+notamment `a sa forte maintenabilit´e et `a sa facilit´e d’utilisation en travail
+collaboratif.[22]
+
+Voyons maintenant, plus en d´etail, comment s’organise ce pattern de
+conception en d´ecoupant ses trois composantes : le mod`ele, la vue et le
+contrˆoleur.
+Mod`ele :
+Le mod`ele, ou model, repr´esente les donn´ees utilis´ees dans l’application
+web. C’est ici que sont stock´ees les donn´ees, ainsi que tout ce qui permet de
+les modifier (getters, setters, etc.), que ce soit en local ou `a distance (base
+de donn´ees). Il s’agit litt´eralement de mod`eles de donn´ees.[22]
+
+Vue :
+La vue, ou view, est l’interface graphique de l’application. C’est `a travers
+elle que s’effectuent les interactions entre l’utilisateur et la logique m´etier.
+Elle ne contient presque aucune logique (contrairement `a certaines archi-
+tectures concurrentes du MVC dont nous parlerons plus loin). Son objectif
+est de construire, `a partir des r´eponses du serveur, une interface destin´ee `a
+l’utilisateur.[22]
+Contrˆoleur :
+Le contrˆoleur, ou controller, est l’´el´ement qui contient la logique m´etier.
+C’est ici que se trouvent la plupart des algorithmes, des calculs, etc. Il consti-
+tue aussi l’interm´ediaire principal entre la vue et le mod`ele. Par exemple,
+la vue soumet un formulaire au contrˆoleur, qui en g`ere la validation via du
+code m´etier, puis demande au mod`ele de modifier les donn´ees dans la base
+de donn´ees.[22]
+
+La Figure 5.2 pr´esente l’architecture MVC.[5]
+
+5.3. Choix technologiques
+
+108
+
+Figure 5.2 – L’architecture MVC.
+
+5.3.3 Diagramme de d´eploiement
+
+Dans le contexte du langage de mod´elisation unifi´e (UML), un dia-
+gramme de d´eploiement fait partie de la cat´egorie des diagrammes struc-
+turels, car il d´ecrit un aspect du syst`eme mˆeme. Dans le cas pr´esent, le
+diagramme de d´eploiement d´ecrit le d´eploiement physique des informations
+g´en´er´ees par le logiciel sur des composants mat´eriels. On appelle arte-
+fact l’information qui est g´en´er´ee par le logiciel. Attention, ne confondez
+cette utilisation du terme avec celle qui existe dans d’autres approches de
+mod´elisation comme le BPMN.[12]
+
+La Figure 5.3 pr´esente le Diagramme de d´eploiement. .
+
+Figure 5.3 – Diagramme de d´eploiement.
+
+5.3.4 Diagramme de GANTT
+
+Le diagramme de Gantt est un outil essentiel pour tout chef de projet,
+qu’il soit exp´eriment´e ou d´ebutant. Ce paragraphe est con¸cu pour appro-
+fondir la compr´ehension de cet outil crucial, en expliquant son rˆole dans
+l’atteinte des objectifs du projet. Un projet sans un tableau clair des tˆaches
+
+5.4. Conclusion
+
+109
+
+est difficile `a concevoir, et le diagramme de Gantt remplit cette fonction
+avec efficacit´e. Il permet une visualisation imm´ediate de toutes les tˆaches
+et de leur ´etat d’avancement.[1]
+
+Le tableau 5.4 pr´esente la planification de r´ealisation du projet.
+
+Table 5.4 – planification de r´ealisation du projet.
+
+Nom de tˆache
+´Etude de l’existant, compr´ehension du projet et
+´elaboration d’un plan
+Sprint 1 : Lancement et fondation
+Sprint 2 : Expansion et interactivit´e
+Coordination et connexion entre les sprints
+
+Dur´ee
+20 jours
+
+D´ebut
+06/02/2024
+
+Fin
+25/02/2024
+
+26 jours
+24 jours
+30 jours
+
+26/02/2024
+25/03/2024
+18/04/2024
+
+24/03/2024
+17/04/2024
+17/05/2024
+
+La Figure 5.4 pr´esente le diagramme de Gantt.
+
+Figure 5.4 – Diagramme de GANTT.
+
+5.4 Conclusion
+
+Dans ce chapitre, nous avons pr´esent´e notre environnement mat´eriel et
+logiciel ainsi que les outils de d´eveloppement adopt´es. Nous arrivons donc
+`a la fin de notre rapport, que nous clˆoturons par une conclusion g´en´erale.
+
+Conclusion
+
+Ce travail s’inscrit dans le cadre de l’obtention de la licence en Informa-
+tique de Gestion, sp´ecialit´e Business Information System. Il a ´et´e r´ealis´e au
+sein d’Orange Tunisie – Direction R´eseaux et Services, et avait pour objec-
+tif de concevoir et d´evelopper une application web d´edi´ee `a la gestion du
+recrutement interne des stagiaires.
+
+`A travers une analyse approfondie de l’existant, nous avons identifi´e les
+limitations d’un processus manuel et fragment´e. En r´eponse, nous avons
+propos´e et mis en œuvre une solution moderne bas´ee sur la pile MERN,
+centralisant la gestion des sessions de stage, la soumission des candidatures,
+le tri automatis´e selon les crit`eres des recruteurs, ainsi que la gestion des
+r´eclamations et des statistiques.
+
+La conduite du projet selon la m´ethodologie agile Scrum nous a permis
+de structurer les tˆaches en sprints, de favoriser l’adaptabilit´e, et de livrer
+une solution fonctionnelle de mani`ere progressive. Cette exp´erience nous a
+permis de renforcer notre compr´ehension du travail en ´equipe, des outils de
+gestion de projet, ainsi que des bonnes pratiques de d´eveloppement web.
+
+Bien que les objectifs initiaux aient ´et´e atteints, des axes d’am´elioration
+restent envisageables. Parmi les perspectives futures, on peut envisager
+l’int´egration de tableaux de bord dynamiques pour les recruteurs et les
+administrateurs, ou encore le d´eveloppement d’une version mobile de l’ap-
+plication.
+
+Ainsi, ce projet nous a offert une opportunit´e pr´ecieuse de mettre en
+pratique nos acquis acad´emiques dans un contexte professionnel r´eel, tout
+en apportant une valeur ajout´ee concr`ete `a l’entreprise d’accueil.
+
+110
+
+Webographie
+
+[1] asana. GANT. 2025. url : https://asana.com/fr/resources/gantt-chart-
+
+basics (visit´e le 10/05/2025).
+
+[2] atinternet. css. 2025. url : https://www.atinternet.com/glossaire/css/
+
+(visit´e le 06/04/2025).
+
+[3] atlassian. revue sprint. 2025. url : https://www.atlassian.com/fr/agile/
+
+scrum/sprint-reviews (visit´e le 20/03/2025).
+
+[4] blog. sprints. 2025. url : https://blog.myagilepartner.fr/wp- content/
+
+uploads/2017/01/Untitled-Diagram.png (visit´e le 15/03/2025).
+
+[5] code. mvc. 2025. url : https://code-garage-strapi-bucket-production.
+cellar - c2 . services . clever - cloud . com / MVC _ 3d1d885667 . jpg (visit´e le
+15/05/2025).
+
+[6] eewee. postman. 2025. url : https://www.eewee.fr/postman- cest- quoi/
+
+(visit´e le 05/04/2025).
+
+[7] feaseo. mern. 2025. url : https://www.feaseo.com/fr/mern- stack.html
+
+(visit´e le 06/04/2025).
+
+[8] framalibre. vscode. 2025. url : https://framalibre.org/notices/visual-
+
+studio-code.html (visit´e le 05/04/2025).
+
+[9]
+
+jestjs. jestjs. 2025. url : https://jestjs.io/fr/ (visit´e le 10/05/2025).
+
+[10]
+
+[11]
+
+journaldune. nodejs. 2025. url : https://www.journaldunet.fr/web-tech/
+dictionnaire-du-webmastering/1445306-node-js-definition-simple-et-
+utilisation-pratique/ (visit´e le 05/04/2025).
+
+journaldunet. html. 2025. url : https : / / www . journaldunet . fr / web -
+tech/dictionnaire- du- webmastering/1203255- html- hypertext- markup-
+langage-definition-traduction/ (visit´e le 06/04/2025).
+
+[12] lucidchart. diagramme-de-deploiement. 2025. url : https://www.lucidchart.
+com/pages/fr/diagramme-de-deploiement-uml (visit´e le 08/05/2025).
+
+[13] mercator. methode agile. 2025. url : https://www.mercator.eu/attachments/
+
+1000000289/methode_agile.jpg (visit´e le 15/03/2025).
+
+[14] orange. orange. 2025. url : https://www.orange.tn/ (visit´e le 15/03/2025).
+
+111
+
+WEBOGRAPHIE
+
+112
+
+[15] blog gestion de projet. artefacts scrum. 2025. url : https://blog-gestion-
+
+de-projet.com/definition-des-artefacts-scrum/ (visit´e le 17/03/2025).
+
+[16]
+
+chef de projet. sprints. 2025. url : https://chef-de-projet.fr/wp-content/
+uploads/2021/05/Sprint.png (visit´e le 15/03/2025).
+
+[17] purestorage. mongodb. 2025. url : https : / / www . purestorage . com / fr /
+
+knowledge/what-is-mongodb.html (visit´e le 05/04/2025).
+
+[18] qrpinternational. v´elocit´e. 2025. url : https://www.qrpinternational.fr/
+blog/methode-agile/quest-ce-que-la-velocite-dans-un-environnement-
+agile/ (visit´e le 02/04/2025).
+
+[19]
+
+scrum-league. Le Burndown Chart. 2025. url : https://scrum-league.org/
+tribune/autres-notions-scrum/le-burndown-chart/ (visit´e le 20/03/2025).
+
+[20] SoftFluent. Les 12 principes du manifeste agile. 2025. url : https://www.
+
+softfluent.fr/blog/12-principes-du-manifeste-agile/ (visit´e le 17/03/2025).
+
+[21]
+
+stampaprint. canva. 2025. url : https : / / www . stampaprint . fr / blog /
+communication/quest-cest-canva-guide-rapide-apprendre-a-lutiliser
+(visit´e le 06/04/2025).
+
+[22] talks. mvc. 2025. url : https://talks.freelancerepublik.com/comprendre-
+
+utiliser-architecture-mvc/ (visit´e le 15/05/2025).
+
+[23] theastrologypage. excel. 2025. url : https://fr.theastrologypage.com/
+
+microsoft-excel (visit´e le 05/04/2025).
+
+[24] theastrologypage. word. 2025. url : https://fr.theastrologypage.com/
+
+microsoft-word (visit´e le 05/04/2025).
+
+[25] tresfacile. staruml. 2025. url : https://www.tresfacile.net/le-logiciel-
+
+de-modelisation-startuml/ (visit´e le 05/04/2025).
+
+[26] wikipedia. express. 2025. url : https://fr.wikipedia.org/wiki/Express.js
+
+(visit´e le 06/04/2025).
+
+[27] wikipedia. react. 2025. url : https://fr.wikipedia.org/wiki/React (visit´e
+
+le 05/04/2025).
+
+

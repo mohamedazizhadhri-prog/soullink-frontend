@@ -1,0 +1,183 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{caption}
+\geometry{margin=2cm}
+
+\definecolor{headerblue}{RGB}{30, 80, 160}
+\definecolor{rowgray}{RGB}{240, 242, 248}
+
+\begin{document}
+
+\chapter*{Product Backlog --- SoulLink}
+
+Le Product Backlog est une liste ordonnée des fonctionnalités du produit qui pourra évoluer tout au long du projet.
+
+% ─────────────────────────────────────────────────────────────────────────────
+%  PARTIE 1 — Authentification & Profil
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{center}
+\captionof{table}{Product Backlog (Partie~1).}
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{|p{1cm}|p{3.2cm}|p{1.2cm}|p{7.2cm}|p{1.8cm}|p{1.8cm}|}
+\hline
+\rowcolor{headerblue}
+\color{white}\textbf{ID-F} & \color{white}\textbf{Fonctionnalité} & \color{white}\textbf{ID-Us} & \color{white}\textbf{User Story} & \color{white}\textbf{Priorité} & \color{white}\textbf{Est. (j)} \\
+\hline
+\multirow{8}{*}{1} & \multirow{8}{*}{Authentification}
+  & 1.1 & En tant qu'utilisateur, je veux m'inscrire avec mon e-mail, mon numéro de téléphone et un mot de passe en toute sécurité. & Élevé & 3 \\ \cline{3-6}
+  & & 1.2 & En tant qu'utilisateur, je veux me connecter via e-mail/mot de passe avec rate-limiting contre les attaques par force brute. & Élevé & 2 \\ \cline{3-6}
+  & & 1.3 & En tant qu'utilisateur, je veux vérifier mon e-mail via un code OTP. & Élevé & 2 \\ \cline{3-6}
+  & & 1.4 & En tant qu'utilisateur, je veux vérifier mon numéro de téléphone via un code OTP. & Élevé & 2 \\ \cline{3-6}
+  & & 1.5 & En tant qu'utilisateur, je veux réinitialiser mon mot de passe en cas d'oubli via un lien e-mail. & Élevé & 2 \\ \cline{3-6}
+  & & 1.6 & En tant qu'utilisateur, je veux me connecter par reconnaissance faciale (Face Login). & Élevé & 4 \\ \cline{3-6}
+  & & 1.7 & En tant qu'utilisateur, je veux enregistrer mon empreinte faciale (Face Enroll) pour activer la biométrie. & Élevé & 3 \\ \cline{3-6}
+  & & 1.8 & En tant qu'utilisateur, je veux me déconnecter de la plateforme en toute sécurité (blacklist du token). & Élevé & 1 \\
+\hline
+\multirow{7}{*}{2} & \multirow{7}{*}{\makecell[l]{Gestion du\\Profil\\Utilisateur}}
+  & 2.1 & En tant qu'utilisateur, je veux consulter mon propre profil (informations, avatar, bannière, bio). & Élevé & 2 \\ \cline{3-6}
+  & & 2.2 & En tant qu'utilisateur, je veux mettre à jour mes informations de profil (nom, bio, ville, pays, fuseau horaire). & Élevé & 2 \\ \cline{3-6}
+  & & 2.3 & En tant qu'utilisateur, je veux uploader et modifier ma photo de profil (avatar). & Élevé & 2 \\ \cline{3-6}
+  & & 2.4 & En tant qu'utilisateur, je veux uploader et modifier ma bannière de profil. & Moyenne & 1 \\ \cline{3-6}
+  & & 2.5 & En tant qu'utilisateur, je veux configurer la confidentialité de mon profil (PUBLIC, FRIENDS\_ONLY, MATCHES\_ONLY, PRIVATE). & Élevé & 2 \\ \cline{3-6}
+  & & 2.6 & En tant qu'utilisateur, je veux consulter le profil public d'un autre utilisateur via son handle. & Élevé & 2 \\ \cline{3-6}
+  & & 2.7 & En tant qu'utilisateur, je veux rechercher d'autres utilisateurs par nom ou handle. & Moyenne & 2 \\
+\hline
+\end{longtable}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+%  PARTIE 2 — Soul Games & Matching
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{center}
+\captionof{table}{Product Backlog (Partie~2).}
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{|p{1cm}|p{3.2cm}|p{1.2cm}|p{7.2cm}|p{1.8cm}|p{1.8cm}|}
+\hline
+\rowcolor{headerblue}
+\color{white}\textbf{ID-F} & \color{white}\textbf{Fonctionnalité} & \color{white}\textbf{ID-Us} & \color{white}\textbf{User Story} & \color{white}\textbf{Priorité} & \color{white}\textbf{Est. (j)} \\
+\hline
+\multirow{6}{*}{3} & \multirow{6}{*}{\makecell[l]{Soul Games\\(Évaluation de\\Personnalité)}}
+  & 3.1 & En tant qu'utilisateur, je veux accéder à la liste des Soul Games disponibles. & Élevé & 2 \\ \cline{3-6}
+  & & 3.2 & En tant qu'utilisateur, je veux jouer à un Soul Game en naviguant entre scènes et en choisissant une réponse. & Élevé & 4 \\ \cline{3-6}
+  & & 3.3 & En tant qu'utilisateur, je veux suivre ma progression dans un Soul Game (scène en cours, achevé ou non). & Élevé & 2 \\ \cline{3-6}
+  & & 3.4 & En tant qu'utilisateur, je veux compléter un Soul Game et déclencher le calcul de mon profil Big Five. & Élevé & 3 \\ \cline{3-6}
+  & & 3.5 & En tant qu'utilisateur, je veux consulter mon profil de personnalité (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism). & Élevé & 2 \\ \cline{3-6}
+  & & 3.6 & En tant qu'utilisateur, je veux voir les commentaires d'humeur de l'IA Nova après chaque scène. & Moyenne & 2 \\
+\hline
+\multirow{6}{*}{4} & \multirow{6}{*}{\makecell[l]{Matching\\(Mise en\\Relation)}}
+  & 4.1 & En tant qu'utilisateur, je veux définir mes préférences de matching (intention, intérêts, tranche d'âge). & Élevé & 3 \\ \cline{3-6}
+  & & 4.2 & En tant qu'utilisateur, je veux consulter les catégories d'intérêts disponibles (style Pinterest). & Élevé & 1 \\ \cline{3-6}
+  & & 4.3 & En tant qu'utilisateur, je veux recevoir des suggestions de matches générées par l'algorithme (score Big Five + intérêts). & Élevé & 5 \\ \cline{3-6}
+  & & 4.4 & En tant qu'utilisateur, je veux accepter (LIKE) ou refuser (PASS) une suggestion de match. & Élevé & 2 \\ \cline{3-6}
+  & & 4.5 & En tant qu'utilisateur, je veux consulter la liste de mes matches actifs (mutuels). & Élevé & 2 \\ \cline{3-6}
+  & & 4.6 & En tant qu'utilisateur, je veux communiquer de manière anonyme avec un match avant la révélation d'identité. & Élevé & 3 \\
+\hline
+\end{longtable}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+%  PARTIE 3 — Amis & Messagerie Directe
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{center}
+\captionof{table}{Product Backlog (Partie~3).}
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{|p{1cm}|p{3.2cm}|p{1.2cm}|p{7.2cm}|p{1.8cm}|p{1.8cm}|}
+\hline
+\rowcolor{headerblue}
+\color{white}\textbf{ID-F} & \color{white}\textbf{Fonctionnalité} & \color{white}\textbf{ID-Us} & \color{white}\textbf{User Story} & \color{white}\textbf{Priorité} & \color{white}\textbf{Est. (j)} \\
+\hline
+\multirow{5}{*}{5} & \multirow{5}{*}{\makecell[l]{Système\\d'Amis}}
+  & 5.1 & En tant qu'utilisateur, je veux envoyer une demande d'amitié à un autre utilisateur. & Élevé & 2 \\ \cline{3-6}
+  & & 5.2 & En tant qu'utilisateur, je veux consulter mes demandes d'amitié reçues et envoyées. & Élevé & 1 \\ \cline{3-6}
+  & & 5.3 & En tant qu'utilisateur, je veux accepter ou refuser une demande d'amitié. & Élevé & 1 \\ \cline{3-6}
+  & & 5.4 & En tant qu'utilisateur, je veux supprimer un ami de ma liste d'amis. & Moyenne & 1 \\ \cline{3-6}
+  & & 5.5 & En tant qu'utilisateur, je veux consulter ma liste d'amis actuelle. & Élevé & 1 \\
+\hline
+\multirow{6}{*}{6} & \multirow{6}{*}{\makecell[l]{Messagerie\\Directe (DM)}}
+  & 6.1 & En tant qu'utilisateur, je veux envoyer un message texte à un ami. & Élevé & 2 \\ \cline{3-6}
+  & & 6.2 & En tant qu'utilisateur, je veux envoyer des fichiers et images dans une conversation directe. & Moyenne & 2 \\ \cline{3-6}
+  & & 6.3 & En tant qu'utilisateur, je veux répondre à un message spécifique (reply thread). & Moyenne & 2 \\ \cline{3-6}
+  & & 6.4 & En tant qu'utilisateur, je veux épingler un message important dans une conversation. & Faible & 1 \\ \cline{3-6}
+  & & 6.5 & En tant qu'utilisateur, je veux marquer une conversation comme lue. & Moyenne & 1 \\ \cline{3-6}
+  & & 6.6 & En tant qu'utilisateur, je veux rechercher des messages dans une conversation. & Faible & 2 \\
+\hline
+\end{longtable}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+%  PARTIE 4 — Communautés (Serveurs)
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{center}
+\captionof{table}{Product Backlog (Partie~4).}
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{|p{1cm}|p{3.2cm}|p{1.2cm}|p{7.2cm}|p{1.8cm}|p{1.8cm}|}
+\hline
+\rowcolor{headerblue}
+\color{white}\textbf{ID-F} & \color{white}\textbf{Fonctionnalité} & \color{white}\textbf{ID-Us} & \color{white}\textbf{User Story} & \color{white}\textbf{Priorité} & \color{white}\textbf{Est. (j)} \\
+\hline
+\multirow{11}{*}{7} & \multirow{11}{*}{\makecell[l]{Communautés\\(Serveurs)}}
+  & 7.1 & En tant qu'utilisateur, je veux créer une communauté avec nom, description, icône et bannière. & Élevé & 3 \\ \cline{3-6}
+  & & 7.2 & En tant qu'utilisateur, je veux découvrir et rejoindre des communautés publiques. & Élevé & 2 \\ \cline{3-6}
+  & & 7.3 & En tant qu'utilisateur, je veux rejoindre une communauté privée via un code d'invitation. & Élevé & 2 \\ \cline{3-6}
+  & & 7.4 & En tant qu'utilisateur, je veux quitter une communauté. & Moyenne & 1 \\ \cline{3-6}
+  & & 7.5 & En tant qu'administrateur de communauté, je veux créer, modifier et supprimer des canaux. & Élevé & 3 \\ \cline{3-6}
+  & & 7.6 & En tant qu'utilisateur, je veux envoyer des messages texte et des fichiers dans un canal de communauté. & Élevé & 3 \\ \cline{3-6}
+  & & 7.7 & En tant qu'administrateur, je veux gérer les rôles des membres (OWNER, ADMIN, MODERATOR, MEMBER). & Élevé & 3 \\ \cline{3-6}
+  & & 7.8 & En tant qu'administrateur, je veux bannir ou exclure un membre. & Moyenne & 2 \\ \cline{3-6}
+  & & 7.9 & En tant qu'administrateur, je veux mettre un membre en timeout temporaire. & Moyenne & 2 \\ \cline{3-6}
+  & & 7.10 & En tant qu'administrateur, je veux configurer les permissions des canaux et consulter les journaux d'audit. & Moyenne & 3 \\ \cline{3-6}
+  & & 7.11 & En tant qu'administrateur, je veux régénérer le code d'invitation de la communauté. & Faible & 1 \\
+\hline
+\end{longtable}
+\end{center}
+
+% ─────────────────────────────────────────────────────────────────────────────
+%  PARTIE 5 — Nova IA & Notifications & Modération
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{center}
+\captionof{table}{Product Backlog (Partie~5).}
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{|p{1cm}|p{3.2cm}|p{1.2cm}|p{7.2cm}|p{1.8cm}|p{1.8cm}|}
+\hline
+\rowcolor{headerblue}
+\color{white}\textbf{ID-F} & \color{white}\textbf{Fonctionnalité} & \color{white}\textbf{ID-Us} & \color{white}\textbf{User Story} & \color{white}\textbf{Priorité} & \color{white}\textbf{Est. (j)} \\
+\hline
+\multirow{7}{*}{8} & \multirow{7}{*}{\makecell[l]{Compagnon IA\\--- Nova}}
+  & 8.1 & En tant qu'utilisateur, je veux converser avec Nova pour recevoir un soutien émotionnel et des conseils. & Élevé & 5 \\ \cline{3-6}
+  & & 8.2 & En tant qu'utilisateur, je veux consulter l'historique de mes conversations avec Nova. & Élevé & 2 \\ \cline{3-6}
+  & & 8.3 & En tant qu'utilisateur, je veux que Nova mémorise mes informations (prénom, humeur, objectifs, intérêts). & Élevé & 4 \\ \cline{3-6}
+  & & 8.4 & En tant qu'utilisateur, je veux que Nova adapte ses réponses à mon profil de personnalité Big Five. & Élevé & 3 \\ \cline{3-6}
+  & & 8.5 & En tant qu'utilisateur, je veux bénéficier d'un check-in proactif quotidien de Nova. & Moyenne & 2 \\ \cline{3-6}
+  & & 8.6 & En tant qu'utilisateur, je veux obtenir un commentaire de Nova sur mes choix après une scène de jeu. & Moyenne & 2 \\ \cline{3-6}
+  & & 8.7 & En tant qu'utilisateur, je veux voir l'avatar animé de Nova avec différents états d'humeur. & Moyenne & 4 \\
+\hline
+\multirow{5}{*}{9} & \multirow{5}{*}{Notifications}
+  & 9.1 & En tant qu'utilisateur, je veux recevoir des notifications pour les événements clés (match, demande d'ami, message). & Élevé & 3 \\ \cline{3-6}
+  & & 9.2 & En tant qu'utilisateur, je veux consulter mes notifications avec statut lu/non lu. & Élevé & 1 \\ \cline{3-6}
+  & & 9.3 & En tant qu'utilisateur, je veux marquer toutes les notifications comme lues en un clic. & Moyenne & 1 \\ \cline{3-6}
+  & & 9.4 & En tant qu'utilisateur, je veux supprimer une notification spécifique. & Faible & 1 \\ \cline{3-6}
+  & & 9.5 & En tant qu'utilisateur, je veux voir le compteur de notifications non lues dans la barre de navigation. & Moyenne & 1 \\
+\hline
+\multirow{8}{*}{10} & \multirow{8}{*}{\makecell[l]{Modération \&\\Administration}}
+  & 10.1 & En tant qu'utilisateur, je veux signaler un autre utilisateur pour comportement inapproprié. & Élevé & 3 \\ \cline{3-6}
+  & & 10.2 & En tant que modérateur, je veux consulter les signalements en attente et les prendre en charge. & Élevé & 3 \\ \cline{3-6}
+  & & 10.3 & En tant que modérateur, je veux appliquer une action (avertissement, suspension, bannissement, suppression). & Élevé & 3 \\ \cline{3-6}
+  & & 10.4 & En tant que modérateur, je veux lever ou ajuster une action de modération (unban). & Moyenne & 2 \\ \cline{3-6}
+  & & 10.5 & En tant qu'utilisateur sanctionné, je veux soumettre un appel (Appeal) pour contester une décision. & Moyenne & 2 \\ \cline{3-6}
+  & & 10.6 & En tant qu'administrateur, je veux consulter les statistiques globales (utilisateurs, matches, messages, signalements). & Moyenne & 4 \\ \cline{3-6}
+  & & 10.7 & En tant qu'administrateur, je veux suivre les snapshots analytics journaliers. & Faible & 2 \\ \cline{3-6}
+  & & 10.8 & En tant qu'administrateur, je veux gérer les versions du modèle IA (déploiement, activation). & Faible & 2 \\
+\hline
+\end{longtable}
+\end{center}
+
+\end{document}

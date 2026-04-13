@@ -1,0 +1,2376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SoulLink - PFE Technical Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#6c63ff;--pd:#4f46c0;--t:#1e1e2e;--b:#e5e7eb;--s:#f9fafb;--w:#fff;--sb:#1e1e2e;--sa:#cba6f7;--sh:rgba(203,166,247,.12);--cg:linear-gradient(135deg,#1e1e2e,#313244);--r:10px;--sw:280px;--f:'Inter',-apple-system,sans-serif;--m:'Roboto Mono',monospace;--d:'Playfair Display',Georgia,serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);font-size:15px;line-height:1.8;color:var(--t);background:var(--w);display:flex;min-height:100vh}
+#toc-sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sw);background:var(--sb);overflow-y:auto;padding-bottom:40px;z-index:100;box-shadow:4px 0 24px rgba(0,0,0,.25)}
+#toc-sidebar::-webkit-scrollbar{width:4px}
+#toc-sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px}
+.toc-logo{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px}
+.toc-logo-title{font-family:var(--d);font-size:1.4rem;color:#cba6f7}
+.toc-logo-sub{font-size:.7rem;color:rgba(205,214,244,.4);margin-top:4px;text-transform:uppercase;letter-spacing:.1em}
+.toc-section-label{font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(205,214,244,.35);padding:14px 24px 6px}
+#toc-sidebar nav ul{list-style:none}
+#toc-sidebar nav ul li a{display:block;padding:7px 24px;font-size:.8rem;color:#cdd6f4;text-decoration:none;border-left:2px solid transparent;transition:all .2s;line-height:1.4}
+#toc-sidebar nav ul li a:hover,#toc-sidebar nav ul li a.active{background:var(--sh);color:var(--sa);border-left-color:var(--sa)}
+.toc-chapter>a{font-weight:600!important;font-size:.84rem!important;color:#cba6f7!important;padding-top:12px!important}
+.toc-sub>a{padding-left:36px!important;color:rgba(205,214,244,.75)!important}
+.toc-sub2>a{padding-left:48px!important;font-size:.77rem!important;color:rgba(205,214,244,.5)!important}
+#main-content{margin-left:var(--sw);flex:1;padding:0 60px 80px;max-width:calc(100% - var(--sw))}
+.report-cover{background:var(--cg);color:#fff;padding:80px 60px;margin:0 -60px 60px;text-align:center;position:relative;overflow:hidden}
+.report-cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(108,99,255,.3),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(255,101,132,.2),transparent 50%)}
+.report-cover>*{position:relative;z-index:1}
+.cover-badge{display:inline-block;background:rgba(108,99,255,.3);border:1px solid rgba(108,99,255,.6);color:#c0b5ff;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:24px}
+.report-cover h1{font-family:var(--d);font-size:2.8rem;color:#fff;margin:0 0 12px;line-height:1.2;border:none;text-transform:none;padding:0}
+.cover-subtitle{font-size:1.05rem;color:rgba(255,255,255,.65);margin:0}
+.cover-meta{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;margin-top:32px}
+.cover-meta-item{text-align:center}
+.cover-meta-item .label{font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);margin-bottom:4px}
+.cover-meta-item .value{font-size:.85rem;color:rgba(255,255,255,.8);font-weight:500}
+.chapter-banner{background:var(--cg);color:#fff;padding:48px 56px;margin:60px -60px 48px;position:relative;overflow:hidden}
+.chapter-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(108,99,255,.35),transparent 60%)}
+.chapter-banner>*{position:relative;z-index:1}
+.chapter-banner h1{font-family:var(--d);font-size:2rem;color:#fff;border:none;text-transform:none;padding:0;margin:0;line-height:1.3}
+.chapter-banner .chapter-sub{margin-top:10px;font-size:.8rem;color:rgba(255,255,255,.45)}
+h1{font-family:var(--d);font-size:1.9rem;color:var(--t);border-bottom:3px solid var(--p);padding-bottom:14px;margin:64px 0 20px;line-height:1.3;text-transform:none}
+h2{font-size:1.3rem;font-weight:700;color:#1e1e2e;margin:44px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--b);position:relative}
+h2::before{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--p)}
+h3{font-size:1.08rem;font-weight:600;color:#313244;margin:28px 0 10px}
+p{margin-bottom:.95em}
+ul,ol{padding-left:1.8em;margin:.6em 0 .95em}
+li{margin-bottom:.35em;line-height:1.7}
+.steps-list{counter-reset:steps;list-style:none;padding-left:0}
+.steps-list li{padding:12px 16px 12px 52px;background:var(--s);border-left:3px solid var(--p);border-radius:0 var(--r) var(--r) 0;margin-bottom:10px;position:relative;counter-increment:steps}
+.steps-list li::before{content:counter(steps);position:absolute;left:12px;top:50%;transform:translateY(-50%);background:var(--p);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700}
+.table-caption{font-weight:600;font-size:.82rem;color:var(--pd);text-transform:uppercase;letter-spacing:.06em;margin:28px 0 8px;border-left:3px solid var(--p);padding-left:10px}
+table{width:100%;border-collapse:collapse;margin:0 0 28px;font-size:.875rem;border-radius:var(--r);overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+thead tr{background:linear-gradient(90deg,#1e1e2e,#313244)}
+th{padding:12px 16px;font-weight:600;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:#cba6f7;text-align:left}
+td{padding:10px 16px;border-bottom:1px solid var(--b);vertical-align:top}
+tbody tr:nth-child(even){background:var(--s)}
+tbody tr:hover{background:rgba(108,99,255,.04)}
+td:first-child{font-weight:500;color:var(--pd)}
+pre{background:#282a36;color:#f8f8f2;padding:20px 24px;border-radius:var(--r);overflow-x:auto;font-family:var(--m);font-size:.82rem;line-height:1.65;margin:20px 0}
+code{background:rgba(108,99,255,.08);color:var(--pd);padding:2px 7px;border-radius:5px;font-family:var(--m);font-size:.85em;border:1px solid rgba(108,99,255,.15)}
+pre code{background:none;color:inherit;padding:0;border:none}
+.ps-note{background:linear-gradient(135deg,#fef9c3,#fefce8);border-left:4px solid #eab308;padding:16px 20px;margin:22px 0;border-radius:0 var(--r) var(--r) 0;font-size:.87rem;color:#713f12}
+.ps-note strong{color:#92400e}
+hr{border:none;border-top:1px solid var(--b);margin:44px 0}
+td.prio-critical{color:#dc2626;font-weight:700}
+td.prio-high{color:#d97706;font-weight:600}
+td.prio-medium{color:#0891b2}
+td.prio-low{color:#6b7280}
+#scroll-top{position:fixed;bottom:28px;right:28px;background:var(--p);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 16px rgba(108,99,255,.4);display:none;align-items:center;justify-content:center;z-index:200;transition:all .2s}
+#scroll-top:hover{background:var(--pd);transform:translateY(-2px)}
+#scroll-top.visible{display:flex}
+@media(max-width:900px){
+  #toc-sidebar{transform:translateX(-280px);transition:transform .3s;width:280px}
+  #toc-sidebar.open{transform:translateX(0)}
+  #main-content{margin-left:0;max-width:100%;padding:0 20px 60px}
+  .chapter-banner{margin:44px -20px 32px;padding:36px 24px}
+  .report-cover{padding:50px 20px;margin:0 -20px 44px}
+}
+@media print{#toc-sidebar,#scroll-top{display:none}#main-content{margin-left:0;max-width:100%;padding:0}}
+</style>
+</head>
+<body>
+<nav id="toc-sidebar"><div class="toc-logo"><div class="toc-logo-title">SoulLink</div><div class="toc-logo-sub">Technical Report</div></div><div class="toc-section-label">Contents</div><nav><ul></ul></nav></nav>
+<div id="main-content">
+<div class="report-cover">
+<div class="cover-badge">PFE Report &mdash; Academic Year 2025&ndash;2026</div>
+<h1>SoulLink</h1>
+<p class="cover-subtitle">Web Platform for Authentic Human Connections</p>
+<hr style="border-color:rgba(255,255,255,.15);margin:28px 0">
+<div class="cover-meta">
+<div class="cover-meta-item"><div class="label">Language</div><div class="value">English</div></div>
+<div class="cover-meta-item"><div class="label">Methodology</div><div class="value">Agile &mdash; Scrum</div></div>
+<div class="cover-meta-item"><div class="label">Modeling</div><div class="value">UML</div></div>
+<div class="cover-meta-item"><div class="label">Source</div><div class="value">Verified vs Code &amp; CDC</div></div>
+</div></div>
+<p>â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”<br />
+CHAPTER 1 : PROJECT STUDY<br />
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”</p>
+<hh2 id="1-1-introduction">1.1  Introduction</hh2>
+<p>This chapter lays the foundation for the SoulLink project by presenting its<br />
+context, its motivation, and the methodology chosen to carry it out. We begin<br />
+by identifying the problem that SoulLink aims to solve, then we study the<br />
+existing landscape of digital social platforms. We then present the SoulLink<br />
+solution and justify the technical and organizational choices made by the<br />
+development team. Finally, we describe the modeling language and the<br />
+development methodology adopted throughout the project.</p>
+<hr />
+<hh2 id="1-2-project-context-and-background">1.2  Project Context and Background</hh2>
+<p>The digital revolution has profoundly changed the way people interact. Social<br />
+networks and online platforms have connected billions of users across the world.<br />
+Yet, paradoxically, digital socialization has failed to cureâ€”and has in many<br />
+cases worsenedâ€”the epidemic of loneliness and shallow human connection that<br />
+characterizes modern life.</p>
+<p>As stated in the Cahier des Charges for SoulLink (Version 1.0):</p>
+<p>"SoulLink est une plateforme revolutionnaire concue pour faciliter des<br />
+   connexions humaines authentiques qui transcendent les profils superficiels,<br />
+   les titres professionnels ou les interÃªts communs."<br />
+   (Source: cdc_extracted.txt, Section 1.1)</p>
+<p>Most current social platforms suffer from a critical design flaw: they are<br />
+optimized for engagement metricsâ€”likes, comments, and screen timeâ€”rather than<br />
+for the quality of human relationships. Users are matched based on photos and<br />
+superficial interests, identity fraud (catfishing) is rampant, and the jump<br />
+from a digital interaction to a real-world friendship almost never happens<br />
+organically.</p>
+<p>SoulLink was created to solve this. It is a web application that leverages<br />
+artificial intelligence, psychological profiling, and biometric verification<br />
+to facilitate deep, authentic human connectionsâ€”connections that can grow<br />
+beyond the screen into real-life relationships.</p>
+<hr />
+<hh2 id="1-3-presentation-of-the-soullink-project">1.3  Presentation of the SoulLink Project</hh2>
+<hh3 id="1-3-1-project-description">1.3.1  Project Description</hh3>
+<p>SoulLink is a full-stack web platform built to combat social isolation by<br />
+intelligently connecting people based on psychological compatibility rather<br />
+than superficial criteria. The platform proposes a unique pathway for each<br />
+user:</p>
+<p>Step 1 â€” Secure Registration<br />
+    The user creates an account with an email address or phone number and a<br />
+    password. The system enforces an age check (18+ years old, verified in<br />
+    auth.schema.ts via Zod validation). A 6-digit OTP code is sent by email<br />
+    or SMS to verify the user's contact details (source: auth.service.ts,<br />
+    functions: register(), verifyEmail()).</p>
+<p>Step 2 â€” Biometric Identity Verification<br />
+    During signup, the user must enroll their face using the browser camera.<br />
+    The Face-api.js library generates a 128-dimensional descriptor vector, which<br />
+    is stored in the user's PostgreSQL record (schema.prisma: User.faceDescriptor<br />
+    Json?). This prevents identity duplication (threshold: Euclidean distance<br />
+    &lt; 0.45) and enables future facial login (loginWithFace(), threshold: 0.6).</p>
+<p>Step 3 â€” Personality Discovery (Soul Games)<br />
+    After verification, the user completes mandatory Soul Gamesâ€”a series of<br />
+    interactive, episodic narrative games. Each scene presents a choice; the<br />
+    user's responses calculate their Big Five (OCEAN) personality scores<br />
+    (openness, conscientiousness, extraversion, agreeableness, neuroticism),<br />
+    stored in the PersonalityProfile model (soulgames.service.ts: completeGame()).</p>
+<p>Step 4 â€” AI Companion (Nova)<br />
+    Each user is assigned Nova, a personal AI companion powered by the Groq<br />
+    LLM API (model: llama-3.3-70b-versatile). Nova has persistent memory stored<br />
+    in the NovaUserMemory PostgreSQL model and vector memory in Pinecone. Nova<br />
+    adapts her mood and tone dynamically according to 20+ emotional states<br />
+    (nova.prompt.ts) and proactively initiates conversations.</p>
+<p>Step 5 â€” Intelligent Matching<br />
+    Once a personality profile exists, the system proposes anonymous matches<br />
+    with other compatible users. Initial conversations are anonymous, and identity<br />
+    can be progressively revealed. Both 1-to-1 and group matches (3-8 users,<br />
+    24h sessions) are supported (schema.prisma: Match, GroupMatch models).</p>
+<p>Step 6 â€” Community and Communication<br />
+    Users can join or create community servers with multiple channels, send<br />
+    direct messages, share GIFs (Giphy), images (Cloudinary), and communicate<br />
+    via a real-time Socket.IO layer. The platform exposes a rich chat interface<br />
+    with emoji picker, file sharing, GIF search, pinned messages, and reply<br />
+    threads (community.service.ts, chat.service.ts).</p>
+<hh3 id="1-3-2-project-vision">1.3.2  Project Vision</hh3>
+<p>From the Cahier des Charges:</p>
+<p>"La vision de SoulLink est de creer un monde ou la technologie facilite des<br />
+   connexions humaines authentiques, ou les personnes rencontrent d'autres<br />
+   personnes qui les comprennent veritablement, et ou les interactions<br />
+   numeriques evoluent naturellement vers des relations significatives dans la<br />
+   vie reelle."<br />
+   (Source: cdc_extracted.txt, Section 1.2)</p>
+<p>In short: SoulLink is not another social network. It is a platform whose<br />
+ultimate goal is to make itself unnecessaryâ€”to help users build real<br />
+friendships and connections beyond the screen.</p>
+<hr />
+<hh2 id="1-4-study-of-the-existing-solutions">1.4  Study of the Existing Solutions</hh2>
+<hh3 id="1-4-1-analysis-of-existing-platforms">1.4.1  Analysis of Existing Platforms</hh3>
+<p>Before designing SoulLink, a thorough analysis of existing platforms was<br />
+conducted to identify their strengths and weaknesses.</p>
+<p>Table 1.1 â€“ Comparative Analysis of Existing Social/Matching Platforms</p>
+<table><thead>
+<tr>
+<th style="text-align: left;">Platform</th>
+<th style="text-align: left;">Strengths</th>
+<th style="text-align: left;">Weaknesses (relevant to SoulLink)</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Platform</th>
+<th style="text-align: left;">Strengths</th>
+<th style="text-align: left;">Weaknesses (relevant to SoulLink)</th>
+</tr><tr>
+<td style="text-align: left;">Tinder / Bumble</td>
+<td style="text-align: left;">Location-based matching, large user base, simple UX.</td>
+<td style="text-align: left;">Matching based on photos only. High catfishing rate. Superficial. Optimized for swipes, not bonds.</td>
+</tr><tr>
+<td style="text-align: left;">Discord</td>
+<td style="text-align: left;">Rich community features, real-time chat, voice, roles, servers.</td>
+<td style="text-align: left;">No personality-based matching. No AI companion. No identity verification. Anonymous to a fault.</td>
+</tr><tr><td style="text-align: left;">Character.AI</td><td style="text-align: left;">Advanced AI conversational companions. Engaging personality-based experience.</td><td style="text-align: left;">Not a social platform. No matching. No real user connections. No community. Purely virtual.</td></tr></tbody></table>
+<hh3 id="1-4-2-critique-of-existing-solutions">1.4.2  Critique of Existing Solutions</hh3>
+<p>The analysis of existing platforms reveals five critical and recurring<br />
+limitations, as explicitly identified in the Cahier des Charges (Section 1.3):</p>
+<ol>
+<li>
+<p>SUPERFICIAL CONNECTIONS<br />
+     Existing platforms match users based on photos, job titles, or basic<br />
+     listed hobbies. They have no mechanism to understand the user's actual<br />
+     psychological profile, values, or emotional world.</p>
+</li>
+<li>
+<p>ENGAGEMENT-OPTIMIZED ALGORITHMS<br />
+     Platforms like Facebook and Instagram are designed to maximize time spent<br />
+     on the platform, not to generate meaningful human bonds. This creates a<br />
+     perverse incentive that actively works against authentic connection.</p>
+</li>
+<li>
+<p>LACK OF REAL-WORLD TRANSITION<br />
+     Digital interactions almost never evolve into real friendships. There is<br />
+     no progression systemâ€”no mechanism that guides users from a digital chat<br />
+     toward a real-world meeting.</p>
+</li>
+<li>
+<p>INABILITY TO UNDERSTAND PERSONALITY<br />
+     No major platform currently uses advanced AI or structured psychological<br />
+     evaluation to truly understand who a user is. The closest attempt<br />
+     (OkCupid) uses static questionnaires, not interactive games.</p>
+</li>
+<li>
+<p>IDENTITY FRAUD (CATFISHING)<br />
+     The absence of identity verification on virtually all social platforms<br />
+     leads to widespread fraud and a fundamental erosion of trust. Users have<br />
+     no guarantee that the person they are speaking to is who they claim to be.</p>
+</li>
+</ol>
+<hr />
+<hh2 id="1-5-the-proposed-solution">1.5  The Proposed Solution</hh2>
+<p>SoulLink addresses each of the five identified limitations directly:</p>
+<p>Table 1.2 â€“ SoulLink Solutions vs. Identified Problems</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Problem</th>
+<th style="text-align: left;">SoulLink Solution (Source file)</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Problem</th>
+<th style="text-align: left;">SoulLink Solution (Source file)</th>
+</tr><tr>
+<td style="text-align: left;">Superficial connections</td>
+<td style="text-align: left;">Big Five OCEAN psychological profiling via Soul Games (soulgames.service.ts: completeGame())</td>
+</tr><tr>
+<td style="text-align: left;">Engagement-first algorithms</td>
+<td style="text-align: left;">Matching algorithm based on psychological compatibility, not screen time (schema.prisma: Match model, compatibilityScore, justification fields)</td>
+</tr><tr>
+<td style="text-align: left;">No real-world transition</td>
+<td style="text-align: left;">Anonymous-to-identity progressive connection system; community servers for shared activities (schema.prisma: Match.identityRevealed Boolean)</td>
+</tr><tr>
+<td style="text-align: left;">No personality understanding</td>
+<td style="text-align: left;">Nova AI companion with persistent memory (Pinecone + PostgreSQL), emotional state detection, proactive check-ins (ai.service.ts, nova.prompt.ts)</td>
+</tr><tr>
+<td style="text-align: left;">Identity fraud / catfishing</td>
+<td style="text-align: left;">Mandatory biometric facial enrollment at signup using Face-api.js. 128-float descriptor stored in PostgreSQL. Duplicate face detection (threshold 0.45). Periodic re-verification via FACE_PERIODIC verification type (schema.prisma, auth.service.ts: register())</td>
+</tr></tbody></table>
+<p>The SoulLink platform is delivered as a full-stack web application:</p>
+<p>Backend  : Node.js + Express + TypeScript API running on port 4000<br />
+             - 8 registered API route groups (app.ts: /api/auth, /api/users,<br />
+               /api/ai, /api/soulgames, /api/friends, /api/communities,<br />
+               /api/notifications, /api/chat)<br />
+             - Real-time layer via Socket.IO (server.ts)<br />
+             - Database: PostgreSQL on Neon cloud (30+ models in schema.prisma)<br />
+             - ORM: Prisma 5.22</p>
+<p>Frontend : Next.js 16 with React 19, TypeScript, Framer Motion animations<br />
+             - App Router with two route groups: (auth) and (main)<br />
+             - 12+ functional pages<br />
+             - Real-time communication via socket.io-client</p>
+<hr />
+<hh2 id="1-6-project-file-by-file-architecture-reference">1.6  Project File-by-File Architecture Reference</hh2>
+<p>The following table explains the role of every key file in the project,<br />
+verified by direct inspection of the source code.</p>
+<hr />
+<hh2 id="backend-soullink-backend-src">BACKEND â€” /soullink-backend/src/</hh2>
+<table><thead>
+<tr>
+<th>FILE</th>
+<th>ROLE</th>
+</tr>
+</thead><tbody><tr>
+<th>FILE</th>
+<th>ROLE</th>
+</tr><tr>
+<td>index.ts</td>
+<td>Entry point. Creates HTTP server and starts Express app.</td>
+</tr><tr><td>app.ts</td><td>Registers all route groups, middleware (Helmet, CORS, Rate Limiter, Cookie Parser, JSON parser, Socket.IO).</td></tr><tr><td>server.ts</td><td>Configures Socket.IO server with JWT auth middleware. Manages user presence (ONLINE/OFFLINE via userSockets Map). Handles real-time events: join:community, dm:typing.</td></tr></tbody></table>
+<p>-- modules/auth/ --------------------------------------------------------------<br />
+auth.routes.ts                                | Declares all authentication API endpoints:<br />
+                                              | POST /register, /login, /login-face, /verify-email,<br />
+                                              | /verify-phone, /logout, /forgot-password,<br />
+                                              | /reset-password, /face-enroll (protected).<br />
+auth.schema.ts                                | Zod validation schemas for all auth endpoints.<br />
+                                              | Enforces: password min 8 chars, age 18+, email format,<br />
+                                              | handle regex [a-zA-Z0-9._], faceDescriptor array.<br />
+auth.service.ts                               | Core authentication business logic:<br />
+                                              | register(): Creates user, checks face duplication (0.45),<br />
+                                              |   sends OTP via email/SMS, stores faceDescriptor in DB.<br />
+                                              | login(): Validates credentials, generates JWT pair.<br />
+                                              | loginWithFace(): Euclidean match against all face<br />
+                                              |   descriptors (threshold 0.6). No external DB.<br />
+                                              | forgotPassword(): Generates 6-digit OTP, stores as<br />
+                                              |   PASSWORD_RESET Verification, sends via email or SMS.<br />
+                                              | resetPassword(): Validates OTP, hashes new password.<br />
+                                              | verifyEmail() / verifyPhone(): OTP code verification,<br />
+                                              |   updates emailVerified / phoneVerified flags.<br />
+                                              |   After email verification â†’ sets status to<br />
+                                              |   PENDING_FACE_VERIFY or ACTIVE.<br />
+                                              | logout(): Adds JWT token to TokenBlacklist (24h TTL).<br />
+                                              | enrollFace(): Updates avatarUrl and sets faceVerified=true.<br />
+auth.controller.ts                            | HTTP controller layer. Wraps service calls, reads<br />
+                                              | request body/headers, sends JSON responses.<br />
+auth.types.ts                                 | TypeScript types for auth module.</p>
+<p>-- modules/ai-companion/ -------------------------------------------------------<br />
+ai.service.ts                                 | Main Nova AI service. Orchestrates memory (context,<br />
+                                              | Pinecone vectors, PostgreSQL NovaUserMemory),<br />
+                                              | LLM calls (Groq), and proactive messages.<br />
+nova.prompt.ts                                | System prompt for Nova. Defines:<br />
+                                              | - Nova's personality (warm, empathetic, mysterious)<br />
+                                              | - 20 emotional states (neutral, happy, curious, sad,<br />
+                                              |   angry, blushed, love, jealous, rich, glitched, etc.)<br />
+                                              | - JSON response format: { response, mood }<br />
+llm.service.ts                                | Wraps Groq API calls (model: llama-3.3-70b-versatile).<br />
+vector.service.ts                             | Manages Pinecone vector DB for Nova's long-term memory.<br />
+                                              | Stores conversation embeddings for semantic search.<br />
+embedding.service.ts                          | Generates text embeddings via Cohere API for Pinecone.<br />
+memory.service.ts                             | Manages NovaUserMemory model updates in PostgreSQL.<br />
+context.service.ts                            | Assembles the full context for each Nova response:<br />
+                                              | user profile, soul game history, Pinecone memories.<br />
+ai.cron.ts                                    | Scheduled jobs (node-cron): proactive check-ins,<br />
+                                              | periodic messages from Nova.<br />
+ai.routes.ts / ai.controller.ts               | REST API for Nova: POST /chat, GET /history, etc.</p>
+<p>-- modules/soulgames/ ----------------------------------------------------------<br />
+soulgames.service.ts                          | Full Soul Games logic:<br />
+                                              | getAllGames(): Lists episodes with completion status,<br />
+                                              |   response counts, and progressive locking (each episode<br />
+                                              |   must be completed before the next unlocks).<br />
+                                              | getGameById(): Returns a game with all scenes/choices<br />
+                                              |   and the user's existing answers.<br />
+                                              | submitResponse(): Upsert user response for a scene.<br />
+                                              | completeGame(): Validates all scenes answered,<br />
+                                              |   calculates Big Five OCEAN scores from choice weights,<br />
+                                              |   merges with existing PersonalityProfile (50/50 weight),<br />
+                                              |   upgrades user to ACTIVE if mandatory episode,<br />
+                                              |   triggers Nova proactive message.<br />
+                                              | getPersonalityProfile(): Returns user's Big Five scores.</p>
+<p>-- modules/community/ ----------------------------------------------------------<br />
+community.service.ts                          | Most complex service (31KB). Handles:<br />
+                                              | Server CRUD (create, read, update, delete),<br />
+                                              | Channel management (text and voice channels),<br />
+                                              | Message sending, editing, deleting, pinning, replies,<br />
+                                              | Member management (join, leave, kick, roles),<br />
+                                              | Server bans, mutes, invites with unique codes.<br />
+community.routes.ts / community.controller.ts | REST API for community operations.</p>
+<p>-- modules/chat/ ----------------------------------------------------------------<br />
+chat.service.ts                               | Direct Message (DM) operations:<br />
+                                              | sendMessage(): Creates a DM between two users.<br />
+                                              | getConversation(): Paginated DM history.<br />
+                                              | markAsRead(), editMessage(), deleteMessage().<br />
+                                              | pinMessage() / unpinMessage().<br />
+chat.routes.ts / chat.controller.ts           | REST API for DM operations.</p>
+<p>-- modules/friends/ ------------------------------------------------------------<br />
+friends.service.ts                            | Friend system logic:<br />
+                                              | sendRequest(): Sends a friendship request.<br />
+                                              | acceptRequest() / rejectRequest()<br />
+                                              | blockUser() / unblockUser()<br />
+                                              | getFriendList(): Returns accepted friends with<br />
+                                              |   online status.<br />
+                                              | getIncomingRequests(): Pending friend requests.<br />
+                                              | removeFriend(): Deletes friendship record.</p>
+<p>-- modules/users/ ---------------------------------------------------------------<br />
+users.controller.ts                           | Profile management endpoints:<br />
+                                              | GET/PUT /profile, GET /users/:id,<br />
+                                              | PATCH /privacy, GET /search (by handle).<br />
+                                              | Also handles LoginHistory and settings updates.</p>
+<p>-- modules/notifications/ -------------------------------------------------------<br />
+notifications.routes.ts                       | REST API for push notifications:<br />
+                                              | GET /notifications (list), PATCH /:id/read,<br />
+                                              | DELETE /:id.</p>
+<p>-- modules/matching/ ------------------------------------------------------------<br />
+matching.routes.ts                            | Routes for the intelligent matching system<br />
+                                              | (1-to-1 and group matches based on OCEAN scores).</p>
+<p>-- modules/personality/ ---------------------------------------------------------<br />
+personality.routes.ts                         | Routes to read/update the user's Big Five profile.</p>
+<p>-- modules/moderation/ ----------------------------------------------------------<br />
+moderation.routes.ts                          | Routes for the moderation system: reports, appeals,<br />
+                                              | mod actions (warn, suspend, ban, unban).</p>
+<p>-- middleware/ ------------------------------------------------------------------<br />
+auth.ts                                       | protect() middleware: validates JWT access token,<br />
+                                              | checks TokenBlacklist, attaches user to req.<br />
+validate.ts                                   | Generic Zod validation middleware factory.<br />
+upload.ts                                     | Multer + Cloudinary configuration for file uploads.<br />
+rateLimit.ts                                  | API-wide and auth-specific rate limiters (express-<br />
+                                              | rate-limit). Auth: stricter limits to prevent brute force.<br />
+errorHandler.ts                               | Global Express error handler. Returns structured JSON<br />
+                                              | error responses with status code and message.</p>
+<p>-- config/ ----------------------------------------------------------------------<br />
+database.ts                                   | Prisma Client singleton initialization.<br />
+env.ts                                        | Environment variable validation and typed config export.<br />
+cors.ts                                       | CORS policy restricted to FRONTEND_URL env variable.</p>
+<p>-- prisma/ ----------------------------------------------------------------------<br />
+schema.prisma                                 | Full PostgreSQL database schema. 30+ models including:<br />
+                                              | User, Verification, LoginHistory, SoulGame, GameScene,<br />
+                                              | GameChoice, GameResponse, PersonalityProfile,<br />
+                                              | SoulGameProgress, AIConversation, AIMessage,<br />
+                                              | Match, GroupMatch, MatchConversation, MatchMessage,<br />
+                                              | Friendship, DirectMessage, Server, Channel,<br />
+                                              | ServerMember, ServerBan, ServerMute, Message,<br />
+                                              | Report, ModAction, Appeal, ShameWall, Notification,<br />
+                                              | AuditLog, AnalyticsSnapshot, AIModelVersion,<br />
+                                              | TokenBlacklist, NovaUserMemory.<br />
+seed-soul-games.ts                            | Database seeder. Populates SoulGame, GameScene,<br />
+                                              | and GameChoice records for all episodes.</p>
+<hr />
+<hh2 id="frontend-soullink-frontend-src">FRONTEND â€” /soullink-frontend/src/</hh2>
+<table><thead>
+<tr>
+<th>FILE / DIRECTORY</th>
+<th>ROLE</th>
+</tr>
+</thead><tbody><tr>
+<th>FILE / DIRECTORY</th>
+<th>ROLE</th>
+</tr><tr><td>app/(auth)/login/page.tsx</td><td>Login page with email/phone+password form and Facebook-level animated Nova companion sidebar.</td></tr><tr><td>app/(auth)/signup/page.tsx</td><td>Multi-step signup page: Step 1: Display Name, Handle, City, Country, DOB (18+) Step 2: Email or Phone + Password (toggle selector) Step 3: Facial enrollment (FaceRecognition component) Step 4: OTP verification (6-digit code) After success: cinematic Nova animation â†’ redirect.</td></tr></tbody></table>
+<p>components/auth/FaceRecognition.tsx           | Biometric capture component.<br />
+                                              | Loads Face-api.js models from CDN (TinyFaceDetector,<br />
+                                              | FaceLandmark68, FaceRecognitionNet).<br />
+                                              | Captures 128-float descriptor from live webcam.<br />
+                                              | Mode: "enroll" (signup) or "verify" (login).<br />
+components/auth/AuthNovaBubble.tsx            | Nova orb displayed during auth steps.<br />
+                                              | Reacts to scanning/success states.<br />
+components/auth/NovaLoginTransition.tsx       | Cinematic explosion animation when auth succeeds.</p>
+<p>app/(main)/dm/page.tsx et sous-pages          | Direct Message page (conversation list + chat view).<br />
+app/(main)/friends/page.tsx                   | Friends list, pending requests, search by handle.<br />
+app/(main)/match/page.tsx                     | Match discovery / match conversation page.<br />
+app/(main)/communities/page.tsx               | Community discovery and browser.<br />
+app/(main)/server/[id]/[channelId]/page.tsx   | Dynamic server + channel page (Discord-style).<br />
+app/(main)/game/[id]/page.tsx                 | Soul Game episode player (scene-by-scene choices).<br />
+app/(main)/games/page.tsx                     | Soul Games library (episode selector with lock state).<br />
+app/(main)/profile/page.tsx                   | User profile view/edit with Big Five radar chart.<br />
+app/(main)/settings/page.tsx                  | Account settings (privacy, notifications, theme).<br />
+app/(main)/notifications/page.tsx             | Notifications center.</p>
+<p>components/layout/                            | App shell components:<br />
+  HomeSidebar.tsx                             |   Left navigation (friends, DMs, servers).<br />
+  ServerSidebar.tsx                           |   Server-specific channel list.<br />
+  MainLayout.tsx                              |   Root layout with sidebar + main content area.</p>
+<p>components/chat/<br />
+  MessageInput.tsx + .module.css              | Rich message input: text, emoji picker, GIF search<br />
+                                              | (Giphy API), file attachment.<br />
+  MessageList.tsx                             | Scrollable message feed with replies and edit history.</p>
+<p>components/community/<br />
+  MemberListPanel.tsx                         | Right sidebar showing server members + online status.<br />
+  CommunitySettingsPanel.tsx                  | Admin panel for server settings, roles, bans.</p>
+<p>components/ai/NovaAvatar/<br />
+  index.tsx                                   | Animated Nova orb (Three.js or CSS). Renders<br />
+                                              | different visual states per mood (happy, sad, etc.).<br />
+  hooks/useNovaMoodParticles.ts               | Particle system hook for Nova's mood effects.</p>
+<p>components/views/<br />
+  DirectMessageView.tsx                       | Full DM conversation UI with message bubbles.<br />
+  ServerView.tsx                              | Server + channel message feed.<br />
+  SettingsView.tsx                            | Settings panel component.<br />
+  ProfileView.tsx                             | User profile display with personality insights.</p>
+<p>components/modals/<br />
+  InviteFriendsModal.tsx                      | Share server invite link modal.<br />
+  CreateChannelModal.tsx                      | Create a new channel inside a server.<br />
+  EditChannelModal.tsx                        | Edit channel name and settings.</p>
+<p>services/<br />
+  chatService.ts                              | Axios API calls for DM/chat operations.<br />
+  (other service files)                       | API abstraction layer for each backend module.</p>
+<p>lib/api.ts                                    | Axios instance with base URL (NEXT_PUBLIC_API_URL),<br />
+                                              | auto-attaches Bearer token from localStorage.</p>
+<hr />
+<hh2 id="1-7-methodology-agile-scrum">1.7  Methodology â€“ Agile Scrum</hh2>
+<p>The SoulLink project was developed using the Agile Scrum methodology. Scrum was<br />
+chosen for the following reasons:</p>
+<p>â€¢ Adaptability: The project requirements, while defined in the Cahier des<br />
+    Charges, include cutting-edge technologies (LLM integration, biometric auth,<br />
+    real-time matching) that benefit from an iterative approach.</p>
+<p>â€¢ Continuous Delivery: Scrum sprints produce working increments of the<br />
+    product every 2-4 weeks, allowing for immediate feedback and adjustment.</p>
+<p>â€¢ Risk Management: Identifying and completing high-priority features first<br />
+    (authentication, personality profiling) reduces project risk.</p>
+<p>Table 1.3 â€“ Comparison: Agile Scrum vs. Waterfall Methodology</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Criterion</th>
+<th style="text-align: left;">Waterfall</th>
+<th style="text-align: left;">Agile / Scrum (Chosen)</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Criterion</th>
+<th style="text-align: left;">Waterfall</th>
+<th style="text-align: left;">Agile / Scrum (Chosen)</th>
+</tr><tr>
+<td style="text-align: left;">Flexibility to change</td>
+<td style="text-align: left;">Very limited</td>
+<td style="text-align: left;">High â€“ changes welcomed</td>
+</tr><tr>
+<td style="text-align: left;">Delivery model</td>
+<td style="text-align: left;">One final delivery</td>
+<td style="text-align: left;">Incremental sprints</td>
+</tr><tr>
+<td style="text-align: left;">Risk management</td>
+<td style="text-align: left;">Risks detected late</td>
+<td style="text-align: left;">Risks identified per sprint</td>
+</tr><tr>
+<td style="text-align: left;">Client collaboration</td>
+<td style="text-align: left;">Limited, mostly upfront</td>
+<td style="text-align: left;">Continuous throughout project</td>
+</tr><tr>
+<td style="text-align: left;">Team organization</td>
+<td style="text-align: left;">Hierarchical, siloed</td>
+<td style="text-align: left;">Cross-functional, self-managed</td>
+</tr><tr>
+<td style="text-align: left;">Suitability for this project</td>
+<td style="text-align: left;">Low (requirements evolve)</td>
+<td style="text-align: left;">High (AI/real-time complexity)</td>
+</tr></tbody></table>
+<p>The Scrum Framework chosen organizes work as follows:</p>
+<p>Roles</p>
+<hr />
+<p>â€¢ Product Owner : Defines and prioritizes the Product Backlog.<br />
+                    Represents the client/stakeholder.<br />
+  â€¢ Scrum Master  : Facilitates Scrum events. Removes blockers.<br />
+                    Ensures Scrum principles are respected.<br />
+  â€¢ Dev Team      : Cross-functional team responsible for design,<br />
+                    development, and testing of each sprint increment.</p>
+<p>Artifacts</p>
+<hr />
+<p>â€¢ Product Backlog  : Full ordered list of project features and requirements.<br />
+                       Maintained and prioritized by the Product Owner.<br />
+  â€¢ Sprint Backlog   : Subset of Product Backlog items selected for a sprint,<br />
+                       broken down into implementation tasks.<br />
+  â€¢ Product Increment: Working, tested software delivered at end of each sprint.<br />
+  â€¢ Burndown Chart   : Visual tracking of remaining work within a sprint.</p>
+<p>Sprint Activities</p>
+<hr />
+<p>â€¢ Sprint Planning   : Team selects items from backlog, defines tasks.<br />
+  â€¢ Daily Scrum       : 15-minute daily sync meeting.<br />
+  â€¢ Sprint Review     : Demo of working increment to stakeholders.<br />
+  â€¢ Sprint Retrospective: Team reflection for continuous improvement.</p>
+<hr />
+<hh2 id="1-8-modeling-language-uml">1.8  Modeling Language â€“ UML</hh2>
+<p>The project uses UML (Unified Modeling Language) as its standard modeling<br />
+language. UML was chosen because:</p>
+<p>â€¢ It is an international standard (ISO/IEC 19501) widely recognized in the<br />
+    academic and professional software engineering community.<br />
+  â€¢ It provides a unified set of notations for both structural elements (class<br />
+    diagrams, component diagrams) and behavioral elements (use case diagrams,<br />
+    sequence diagrams, activity diagrams).<br />
+  â€¢ It bridges the gap between high-level business requirements and technical<br />
+    implementation, making it ideal for documentation in PFE reports.</p>
+<p>UML diagrams used in this report include:<br />
+  â€¢ Use Case Diagrams    : to describe system actors and their interactions<br />
+  â€¢ Sequence Diagrams    : to detail the step-by-step flow of each use case<br />
+  â€¢ Class Diagrams       : to represent the data model (derived from schema.prisma)<br />
+  â€¢ Deployment Diagram   : to illustrate the physical architecture</p>
+<hr />
+<hh2 id="1-9-conclusion">1.9  Conclusion</hh2>
+<p>This chapter has established the complete foundation for the SoulLink project.<br />
+We identified the core problemâ€”the failure of digital social platforms to<br />
+create authentic, psychologically grounded human connectionsâ€”and demonstrated<br />
+how SoulLink directly addresses each of the five critical limitations of<br />
+existing solutions.</p>
+<p>The project architecture was verified file-by-file against the actual source<br />
+code. Every technical claim in this chapter (authentication flows, facial<br />
+recognition thresholds, personality scoring algorithms, AI model identity) has<br />
+been confirmed from its corresponding source file.</p>
+<p>The choice of Agile Scrum as the development methodology, combined with UML<br />
+as the modeling language, provides the organizational and technical framework<br />
+for a rigorous, iterative development process. Chapter 2 will build on this<br />
+foundation by defining all system actors, functional requirements, and the<br />
+complete Product Backlog before detailing the sprint planning.</p>
+
+<hh2 id="2-1-introduction">2.1  Introduction</hh2>
+<p>This chapter defines the complete planning and architectural foundation for the<br />
+SoulLink project. We begin by identifying all system actors and their roles,<br />
+then formalize both the functional and non-functional requirements derived from<br />
+the Cahier des Charges. We then present the global use case diagram, the Scrum<br />
+team composition, and the complete Product Backlog. Finally, we present the<br />
+sprint planning schedule that governs the three development iterations of this<br />
+project.</p>
+<hr />
+<hh2 id="2-2-system-actors-and-requirements">2.2  System Actors and Requirements</hh2>
+<hh3 id="2-2-1-system-actors">2.2.1  System Actors</hh3>
+<p>SoulLink involves four distinct actors, each with a well-defined role inside the<br />
+system. The following table was derived directly from the Cahier des Charges<br />
+(Section 4) and verified against the Role enum and AccountStatus enum in schema.prisma.</p>
+<p>Table 2.1 â€“ System Actors</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Actor</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Source (verified)</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Actor</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Source (verified)</th>
+</tr><tr>
+<td style="text-align: left;">Standard User</td>
+<td style="text-align: left;">Any person aged 18+ who registers on SoulLink. After</td>
+<td style="text-align: left;">schema.prisma: Role.USER</td>
+</tr><tr><td style="text-align: left;">(SoulLinker)</td><td style="text-align: left;">completing authentication, Face ID, and Soul Games, the user becomes ACTIVE and can match, chat, and join communities.</td><td style="text-align: left;">AccountStatus: ACTIVE</td></tr><tr><td style="text-align: left;">Moderator</td><td style="text-align: left;">A trusted user with elevated permissions. Manages reports, applies sanctions (warn/suspend/ban), reviews appeals, and maintains platform safety.</td><td style="text-align: left;">schema.prisma: Role.MODERATOR ModAction, Report, Appeal models</td></tr><tr><td style="text-align: left;">Administrator</td><td style="text-align: left;">Full system access. Manages all user accounts, moderators, AI model versions, system config, and reviews audit logs.</td><td style="text-align: left;">schema.prisma: Role.ADMIN AuditLog, AIModelVersion models</td></tr><tr><td style="text-align: left;">Nova (AI Actor)</td><td style="text-align: left;">The personal AI companion assigned to each user. Initiates proactive conversations, responds to emotional states, maintains long-term memory via PostgreSQL + Pinecone. Powered by Groq LLM.</td><td style="text-align: left;">ai.service.ts nova.prompt.ts NovaUserMemory model vector.service.ts</td></tr></tbody></table>
+<hr />
+<hh3 id="2-2-2-functional-requirements">2.2.2  Functional Requirements</hh3>
+<p>The following functional requirements are extracted from the Cahier des Charges<br />
+(Section 5, EF-001 to EF-075) and organized by domain. Each requirement has been<br />
+cross-referenced with the actual project implementation.</p>
+<p>Table 2.2 â€“ Functional Requirements</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Priority</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Priority</th>
+</tr><tr>
+<td style="text-align: left;">EF-001</td>
+<td style="text-align: left;">Allow new user to register with email and/or phone number.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-002</td>
+<td style="text-align: left;">Require email/phone OTP verification before account activation.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-003</td>
+<td style="text-align: left;">Require mandatory biometric facial verification at signup.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-004</td>
+<td style="text-align: left;">Support periodic face re-verification for suspicious accounts.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-005</td>
+<td style="text-align: left;">Allow user to create, view, edit, and delete their profile.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-006</td>
+<td style="text-align: left;">Maintain a dynamic profile that evolves with user activity.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-007</td>
+<td style="text-align: left;">Allow user to configure privacy levels per info layer.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-008</td>
+<td style="text-align: left;">Keep a login history for traceability and security.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-009</td>
+<td style="text-align: left;">Allow account recovery via forgotten password (OTP).</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-010</td>
+<td style="text-align: left;">Offer interactive episodic Soul Games for personality discovery.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-011</td>
+<td style="text-align: left;">Make Episode 1 of Soul Games mandatory during onboarding.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-012</td>
+<td style="text-align: left;">Integrate Big Five (OCEAN) and MBTI-inspired assessments.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-013</td>
+<td style="text-align: left;">Analyze behavioral patterns through gameplay choices.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-014</td>
+<td style="text-align: left;">Discover user value system through narrative game choices.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-015</td>
+<td style="text-align: left;">Offer branching narratives based on user choices.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-016</td>
+<td style="text-align: left;">Present moral/ethical decision scenarios to users.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-017</td>
+<td style="text-align: left;">Track emotional responses during gameplay.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-018</td>
+<td style="text-align: left;">Allow users to track episode progress and completion status.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-019</td>
+<td style="text-align: left;">Generate personalized personality insights from game data.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-020</td>
+<td style="text-align: left;">Assign a personal AI companion (Nova) to each user at signup.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-021</td>
+<td style="text-align: left;">Enable Nova to hold contextual conversations referencing memory.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-022</td>
+<td style="text-align: left;">Enable Nova to proactively initiate conversations.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-023</td>
+<td style="text-align: left;">Enable Nova to detect and respond to user emotional states.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-024</td>
+<td style="text-align: left;">Enable Nova to track user personal growth over time.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-025</td>
+<td style="text-align: left;">Enable Nova to perform daily check-ins with the user.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-026</td>
+<td style="text-align: left;">Enable Nova to recognize user habits and patterns.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-027</td>
+<td style="text-align: left;">Enable Nova to provide philosophical guidance.</td>
+<td style="text-align: left;" class="prio-low">Low</td>
+</tr><tr>
+<td style="text-align: left;">EF-028</td>
+<td style="text-align: left;">Enable Nova to assist users in self-discovery.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-029</td>
+<td style="text-align: left;">Enable Nova to recommend relevant community servers.</td>
+<td style="text-align: left;" class="prio-low">Low</td>
+</tr><tr>
+<td style="text-align: left;">EF-030</td>
+<td style="text-align: left;">Use psychology-based matching algorithm (OCEAN compatibility).</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-031</td>
+<td style="text-align: left;">Match based on shared interests from game data.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-032</td>
+<td style="text-align: left;">Match based on real-time online availability.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-033</td>
+<td style="text-align: left;">Support group matches of 3-8 users for 24h sessions.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-034</td>
+<td style="text-align: left;">Provide justification explaining each AI-suggested match.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-035</td>
+<td style="text-align: left;">Allow matched users to chat anonymously initially.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-036</td>
+<td style="text-align: left;">Allow matched users to escalate to audio calls.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-037</td>
+<td style="text-align: left;">Allow matched users to escalate to video calls.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-038</td>
+<td style="text-align: left;">Allow progressive identity reveal at the user's own pace.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-039</td>
+<td style="text-align: left;">Allow matched users to do shared activities (YouTube, games).</td>
+<td style="text-align: left;" class="prio-low">Low</td>
+</tr><tr>
+<td style="text-align: left;">EF-040</td>
+<td style="text-align: left;">Allow adding matched users as friends (mutual approval).</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-041</td>
+<td style="text-align: left;">Allow user discovery by searching a unique handle or user ID.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-042</td>
+<td style="text-align: left;">Provide rich text chat with emoji, GIF, and file support.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-043</td>
+<td style="text-align: left;">Integrate audio/video call functionality.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-044</td>
+<td style="text-align: left;">Support screen sharing for collaborative activities.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-045</td>
+<td style="text-align: left;">Provide activity rooms (shared YouTube, gaming sessions).</td>
+<td style="text-align: left;" class="prio-low">Low</td>
+</tr><tr>
+<td style="text-align: left;">EF-046</td>
+<td style="text-align: left;">Allow creation and management of public community servers.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-047</td>
+<td style="text-align: left;">Allow creation and management of private community servers.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-048</td>
+<td style="text-align: left;">Support role management in servers (owner, admin, mod, member).</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-049</td>
+<td style="text-align: left;">Provide server-level content moderation tools.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-050</td>
+<td style="text-align: left;">Verify user age (18+) at registration.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-051</td>
+<td style="text-align: left;">Provide a multi-level reporting system.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-052</td>
+<td style="text-align: left;">Maintain a "Shame Wall" for publicly sanctioned users.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-053</td>
+<td style="text-align: left;">Use AI-assisted moderation to detect toxic behavior.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-054</td>
+<td style="text-align: left;">Provide a moderator dashboard for managing reports.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-055</td>
+<td style="text-align: left;">Allow reported users to appeal moderation decisions.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-056</td>
+<td style="text-align: left;">Allow moderators to manage appeals and disputes.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-057</td>
+<td style="text-align: left;">Maintain security audit logs for all critical actions.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-058</td>
+<td style="text-align: left;">Provide an interactive analytics dashboard for all modules.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-059</td>
+<td style="text-align: left;">Calculate and display user engagement metrics.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-060</td>
+<td style="text-align: left;">Calculate and display platform-level metrics.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-061</td>
+<td style="text-align: left;">Calculate and display performance metrics.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-062</td>
+<td style="text-align: left;">Calculate and display security metrics.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-063</td>
+<td style="text-align: left;">Calculate and display business metrics (premium conversions).</td>
+<td style="text-align: left;" class="prio-low">Low</td>
+</tr><tr>
+<td style="text-align: left;">EF-064</td>
+<td style="text-align: left;">Provide interactive data visualizations.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-065</td>
+<td style="text-align: left;">Provide trend analysis over time.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-066</td>
+<td style="text-align: left;">Provide predictive insights based on collected data.</td>
+<td style="text-align: left;" class="prio-low">Low</td>
+</tr><tr>
+<td style="text-align: left;">EF-067</td>
+<td style="text-align: left;">Allow admins to perform CRUD on users and moderators.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-068</td>
+<td style="text-align: left;">Allow admins to manage suspended and banned accounts.</td>
+<td style="text-align: left;" class="prio-critical">Critical</td>
+</tr><tr>
+<td style="text-align: left;">EF-069</td>
+<td style="text-align: left;">Allow admins to configure system settings.</td>
+<td style="text-align: left;" class="prio-high">High</td>
+</tr><tr>
+<td style="text-align: left;">EF-074</td>
+<td style="text-align: left;">Allow admins to manage AI model versions (deploy/rollback).</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr><tr>
+<td style="text-align: left;">EF-075</td>
+<td style="text-align: left;">Allow admins to manage platform updates.</td>
+<td style="text-align: left;" class="prio-medium">Medium</td>
+</tr></tbody></table>
+<hr />
+<hh3 id="2-2-3-non-functional-requirements">2.2.3  Non-Functional Requirements</hh3>
+<p>The following non-functional requirements are extracted from the Cahier des<br />
+Charges (Section 6) and govern the quality and operational constraints of the system.</p>
+<p>Table 2.3 â€“ Non-Functional Requirements</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Category</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">ID</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Category</th>
+</tr><tr>
+<td style="text-align: left;">ENF-Perf-001</td>
+<td style="text-align: left;">Chat response time &lt; 200ms for 95% of requests.</td>
+<td style="text-align: left;">Performance</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Perf-002</td>
+<td style="text-align: left;">Initial page load &lt; 3 seconds on standard broadband.</td>
+<td style="text-align: left;">Performance</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Perf-003</td>
+<td style="text-align: left;">Match suggestions generated in &lt; 5 seconds.</td>
+<td style="text-align: left;">Performance</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Perf-004</td>
+<td style="text-align: left;">Audio/video call latency &lt; 150ms.</td>
+<td style="text-align: left;">Performance</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Perf-005</td>
+<td style="text-align: left;">Support 10,000+ simultaneous users without degradation.</td>
+<td style="text-align: left;">Performance/Scalability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Perf-006</td>
+<td style="text-align: left;">Critical DB queries execute in &lt; 500ms for 99% of cases.</td>
+<td style="text-align: left;">Performance</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-001</td>
+<td style="text-align: left;">All communications must be end-to-end encrypted (E2EE).</td>
+<td style="text-align: left;">Security</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-002</td>
+<td style="text-align: left;">Personal data stored encrypted at rest.</td>
+<td style="text-align: left;">Security</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-003</td>
+<td style="text-align: left;">Multi-factor authentication implemented.</td>
+<td style="text-align: left;">Security</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-004</td>
+<td style="text-align: left;">Protection against SQLi, XSS, CSRF attacks.</td>
+<td style="text-align: left;">Security</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-005</td>
+<td style="text-align: left;">Passwords hashed with bcrypt, min. 8 chars enforced.</td>
+<td style="text-align: left;">Security</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-006</td>
+<td style="text-align: left;">Daily automated backups of critical data.</td>
+<td style="text-align: left;">Security/Reliability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-007</td>
+<td style="text-align: left;">Full audit trail of admin actions and sensitive data access.</td>
+<td style="text-align: left;">Security</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Sec-008</td>
+<td style="text-align: left;">Biometric data processed per GDPR (not reversibly stored).</td>
+<td style="text-align: left;">Security/Legal</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Fiab-001</td>
+<td style="text-align: left;">System availability: 99.5% uptime (&lt; 3.65 days downtime/y).</td>
+<td style="text-align: left;">Reliability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Fiab-002</td>
+<td style="text-align: left;">Automatic recovery from failure in &lt; 15 minutes.</td>
+<td style="text-align: left;">Reliability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Fiab-003</td>
+<td style="text-align: left;">Zero data loss in case of system failure.</td>
+<td style="text-align: left;">Reliability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Fiab-004</td>
+<td style="text-align: left;">Critical transactions (account creation, match) are atomic.</td>
+<td style="text-align: left;">Reliability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Disp-001</td>
+<td style="text-align: left;">System accessible 24/7 except planned maintenance.</td>
+<td style="text-align: left;">Availability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Disp-002</td>
+<td style="text-align: left;">Maintenance windows announced 48h in advance, max 4h/month.</td>
+<td style="text-align: left;">Availability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Disp-003</td>
+<td style="text-align: left;">Compatible with Chrome, Firefox, Safari, Edge.</td>
+<td style="text-align: left;">Availability/Compat.</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Usab-001</td>
+<td style="text-align: left;">New user can register and start using core features &lt; 10min.</td>
+<td style="text-align: left;">Usability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Usab-002</td>
+<td style="text-align: left;">Clear, actionable error messages provided everywhere.</td>
+<td style="text-align: left;">Usability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Usab-003</td>
+<td style="text-align: left;">Responsive UI for desktop, tablet, and mobile.</td>
+<td style="text-align: left;">Usability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Usab-004</td>
+<td style="text-align: left;">WCAG 2.1 Level AA accessibility compliance.</td>
+<td style="text-align: left;">Usability/Accessibility</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Port-001</td>
+<td style="text-align: left;">Deployable on cloud providers (AWS, Azure, GCP).</td>
+<td style="text-align: left;">Portability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Port-002</td>
+<td style="text-align: left;">WebRTC standard used for audio/video calls.</td>
+<td style="text-align: left;">Interoperability</td>
+</tr><tr>
+<td style="text-align: left;">ENF-Port-003</td>
+<td style="text-align: left;">Data exportable in JSON/CSV formats.</td>
+<td style="text-align: left;">Interoperability</td>
+</tr></tbody></table>
+<hr />
+<hh2 id="2-3-global-use-case-diagram">2.3  Global Use Case Diagram</hh2>
+<p>The following use case diagram represents all system actors and their primary<br />
+interactions with the SoulLink platform. It covers all three development<br />
+sprints.</p>
+<div class="ps-note"><strong>Note:</strong> INSERT UML USE CASE DIAGRAM IMAGE HERE 
+Draw this diagram using StarUML, PlantUML, Lucidchart, or draw.io. 
+The diagram should show 4 actors: SoulLinker, Moderator, Administrator, Nova 
+SoulLinker use cases: S'inscrire, S'authentifier, Facial Auth, Recover Password, 
+     Play Soul Game, View Personality Profile, Chat with Nova, Send Match Request, 
+     Send DM, Join/Create Server, Add Friend, View Notifications 
+Moderator use cases: Manage Reports, Apply Sanctions, Review Appeals, View Dashboard 
+Administrator use cases: Manage Users, Manage Moderators, View Analytics, Configure System 
+Nova use cases: Respond to User, Initiate Proactive Message, Update Memory 
+Use include/extend arrows where appropriate (e.g., S'authentifier &lt;<include>&gt; Facial Auth)</div>
+<hr />
+<hh2 id="2-4-the-scrum-team">2.4  The SCRUM Team</hh2>
+<p>Table 2.4 â€“ SCRUM Team Composition</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Role</th>
+<th style="text-align: left;">Person</th>
+<th style="text-align: left;">Responsibilities</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Role</th>
+<th style="text-align: left;">Person</th>
+<th style="text-align: left;">Responsibilities</th>
+</tr><tr><td style="text-align: left;">Product Owner</td><td style="text-align: left;">[PS: Your supervisor's name] [PS: e.g., M. [Supervisor Name]]</td><td style="text-align: left;">Defines and prioritizes the Product Backlog. Validates sprint deliverables. Represents client interests.</td></tr><tr><td style="text-align: left;">Scrum Master</td><td style="text-align: left;">[PS: Your academic tutor's name]</td><td style="text-align: left;">Facilitates sprint ceremonies. Removes blockers. Ensures Scrum principles are respected throughout the project.</td></tr><tr><td style="text-align: left;">Development Team</td><td style="text-align: left;">[PS: Your full name(s)] [PS: e.g., Aziz Haddad]</td><td style="text-align: left;">Complete design, development, testing, and documentation of each sprint increment. Full-stack responsibility.</td></tr></tbody></table>
+<hr />
+<hh2 id="2-5-the-product-backlog">2.5  The Product Backlog</hh2>
+<p>The Product Backlog represents the complete, prioritized list of all features<br />
+to be developed in the SoulLink project. It is organized by sprint and by<br />
+functional area.</p>
+<p>Estimation column uses Story Points (Fibonacci: 1, 2, 3, 5, 8, 13).<br />
+Priority: Critical &gt; High &gt; Medium &gt; Low.</p>
+<p>Table 2.5 â€“ Product Backlog (Sprint 1: Foundation &amp; Onboarding)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">ID-F</th>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Est.</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">ID-F</th>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Est.</th>
+</tr><tr><td style="text-align: left;">F-01</td><td style="text-align: left;">User Registration</td><td style="text-align: left;">US-01</td><td style="text-align: left;">As a new user, I want to register with my email or phone number so that I can create my SoulLink account.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-02</td><td style="text-align: left;">OTP Verification</td><td style="text-align: left;">US-02</td><td style="text-align: left;">As a new user, I want to verify my email/phone via a 6-digit code so that my identity is confirmed.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-03</td><td style="text-align: left;">Facial Enrollment</td><td style="text-align: left;">US-03</td><td style="text-align: left;">As a new user, I want to enroll my face during signup so that my identity is verified biometrically.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-04</td><td style="text-align: left;">Standard Login</td><td style="text-align: left;">US-04</td><td style="text-align: left;">As a registered user, I want to log in with my email/phone and password to access my account.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-05</td><td style="text-align: left;">Facial Login</td><td style="text-align: left;">US-05</td><td style="text-align: left;">As a user, I want to log in using my face instead of a password for fast biometric authentication.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-06</td><td style="text-align: left;">Password Recovery</td><td style="text-align: left;">US-06</td><td style="text-align: left;">As a user who forgot my password, I want to reset it via a 6-digit OTP sent to my email or phone.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-07</td><td style="text-align: left;">Profile Management</td><td style="text-align: left;">US-07</td><td style="text-align: left;">As a user, I want to view and edit my profile (name, handle, bio, avatar, city, country).</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-08</td><td style="text-align: left;">Privacy Settings</td><td style="text-align: left;">US-08</td><td style="text-align: left;">As a user, I want to configure who sees my profile (Public / Matches Only / Friends Only / Private).</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">3</td></tr><tr><td style="text-align: left;">F-09</td><td style="text-align: left;">Soul Games Library</td><td style="text-align: left;">US-09</td><td style="text-align: left;">As a user, I want to see all available Soul Game episodes and track which ones I have completed.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-10</td><td style="text-align: left;">Play Soul Game Episode</td><td style="text-align: left;">US-10</td><td style="text-align: left;">As a user, I want to play an episode scene-by-scene by making choices so that my personality is profiled.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-11</td><td style="text-align: left;">Complete Episode &amp; Profile</td><td style="text-align: left;">US-11</td><td style="text-align: left;">As a user, I want to complete a Soul Game episode and receive my updated Big Five personality score (OCEAN: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism).</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-12</td><td style="text-align: left;">View Personality Profile</td><td style="text-align: left;">US-12</td><td style="text-align: left;">As a user, I want to consult my Big Five personality profile to better understand myself.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">3</td></tr></tbody></table>
+<p>Table 2.6 â€“ Product Backlog (Sprint 2: Social Layer)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">ID-F</th>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Est.</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">ID-F</th>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Est.</th>
+</tr><tr><td style="text-align: left;">F-13</td><td style="text-align: left;">Chat with Nova</td><td style="text-align: left;">US-13</td><td style="text-align: left;">As a user, I want to talk with Nova my AI companion so that she can support and guide me personally.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-14</td><td style="text-align: left;">Nova Proactive Messaging</td><td style="text-align: left;">US-14</td><td style="text-align: left;">As a user, I want Nova to initiate conversations proactively based on my patterns and check-ins.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-15</td><td style="text-align: left;">Nova Mood Adaptation</td><td style="text-align: left;">US-15</td><td style="text-align: left;">As a user, I want Nova to change her mood/tone based on what I say (happy, sad, curious, etc.).</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-16</td><td style="text-align: left;">Friend Requests</td><td style="text-align: left;">US-16</td><td style="text-align: left;">As a user, I want to send, accept, or reject friend requests so that I can build my friend network.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-17</td><td style="text-align: left;">Block/Unblock Users</td><td style="text-align: left;">US-17</td><td style="text-align: left;">As a user, I want to block users who make me uncomfortable so that I can protect my experience.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">3</td></tr><tr><td style="text-align: left;">F-18</td><td style="text-align: left;">Direct Messaging</td><td style="text-align: left;">US-18</td><td style="text-align: left;">As a user, I want to send direct messages to my friends and matches including text, GIFs, and files.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-19</td><td style="text-align: left;">Request a Match</td><td style="text-align: left;">US-19</td><td style="text-align: left;">As a user, I want the system to suggest compatible matches based on my Big Five personality profile.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">13</td></tr><tr><td style="text-align: left;">F-20</td><td style="text-align: left;">Anonymous Match Chat</td><td style="text-align: left;">US-20</td><td style="text-align: left;">As a matched user, I want to chat anonymously first before choosing to reveal my identity.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-21</td><td style="text-align: left;">Group Matching</td><td style="text-align: left;">US-21</td><td style="text-align: left;">As a user, I want to join group matches with 3-8 compatible users for 24-hour shared sessions.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-22</td><td style="text-align: left;">Match Justification</td><td style="text-align: left;">US-22</td><td style="text-align: left;">As a user, I want to understand why the AI suggested a specific match so that I can make an informed decision about accepting or declining it.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr></tbody></table>
+<p>Table 2.7 â€“ Product Backlog (Sprint 3: Community &amp; Administration)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">ID-F</th>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Est.</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">ID-F</th>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Est.</th>
+</tr><tr><td style="text-align: left;">F-23</td><td style="text-align: left;">Create Community Server</td><td style="text-align: left;">US-23</td><td style="text-align: left;">As a user, I want to create a public or private community server with channels and roles.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-24</td><td style="text-align: left;">Join &amp; Browse Servers</td><td style="text-align: left;">US-24</td><td style="text-align: left;">As a user, I want to discover and join public community servers that match my interests.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-25</td><td style="text-align: left;">Server Channels &amp; Messaging</td><td style="text-align: left;">US-25</td><td style="text-align: left;">As a server member, I want to send messages in channels with emoji, GIF, and file support.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-26</td><td style="text-align: left;">Server Role Management</td><td style="text-align: left;">US-26</td><td style="text-align: left;">As a server admin, I want to assign roles (admin, moderator, member) and manage permissions.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-27</td><td style="text-align: left;">Report a User</td><td style="text-align: left;">US-27</td><td style="text-align: left;">As a user, I want to report inappropriate behavior so that the platform remains safe.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-28</td><td style="text-align: left;">Moderator Dashboard</td><td style="text-align: left;">US-28</td><td style="text-align: left;">As a moderator, I want to view and act on reports (warn, suspend, ban) via a dedicated dashboard.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-29</td><td style="text-align: left;">Appeals System</td><td style="text-align: left;">US-29</td><td style="text-align: left;">As a sanctioned user, I want to appeal a moderation decision so that unjust penalties can be reviewed.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-30</td><td style="text-align: left;">Notifications System</td><td style="text-align: left;">US-30</td><td style="text-align: left;">As a user, I want to receive real-time notifications for friend requests, matches, and messages.</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">5</td></tr><tr><td style="text-align: left;">F-31</td><td style="text-align: left;">Analytics Dashboard (Admin)</td><td style="text-align: left;">US-31</td><td style="text-align: left;">As an administrator, I want to view platform-wide analytics (users, matches, retention, security).</td><td style="text-align: left;" class="prio-high">High</td><td style="text-align: left;">8</td></tr><tr><td style="text-align: left;">F-32</td><td style="text-align: left;">User &amp; Moderator Management</td><td style="text-align: left;">US-32</td><td style="text-align: left;">As an administrator, I want to create, suspend, ban, or promote users and moderators.</td><td style="text-align: left;" class="prio-critical">Critical</td><td style="text-align: left;">5</td></tr></tbody></table>
+<hr />
+<hh2 id="2-6-sprint-structure-and-planning">2.6  Sprint Structure and Planning</hh2>
+<hh3 id="2-6-1-sprint-overview">2.6.1  Sprint Overview</hh3>
+<p>The project is organized into three Scrum sprints. Each sprint delivers a<br />
+complete, tested, and demonstrable product increment. The sprint breakdown<br />
+follows the principle that each sprint covers a coherent group of features<br />
+that can be independently deployed and validated.</p>
+<p>Table 2.8 â€“ Sprint Planning Overview</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Sprint</th>
+<th style="text-align: left;">Duration</th>
+<th style="text-align: left;">Modules Covered</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Sprint</th>
+<th style="text-align: left;">Duration</th>
+<th style="text-align: left;">Modules Covered</th>
+</tr><tr><td style="text-align: left;">Sprint 1</td><td style="text-align: left;">4 weeks</td><td style="text-align: left;">Authentication, Profile Management, Soul Games (Functional IDs: F-01 to F-12) Users reach ACTIVE status. Personality profiling done.</td></tr><tr><td style="text-align: left;">Sprint 2</td><td style="text-align: left;">4 weeks</td><td style="text-align: left;">Nova AI Companion, Friends, Direct Messaging, Matching (Functional IDs: F-13 to F-22) Social interaction layer built on Sprint 1 foundation.</td></tr><tr><td style="text-align: left;">Sprint 3</td><td style="text-align: left;">4 weeks</td><td style="text-align: left;">Community Servers, Moderation, Notifications, Analytics (Functional IDs: F-23 to F-32) Advanced platform features. Admin tools completed.</td></tr></tbody></table>
+<hh3 id="2-6-2-project-timeline">2.6.2  Project Timeline</hh3>
+<p>Table 2.9 â€“ Project Development Timeline</p>
+<div class="ps-note"><strong>Note:</strong> INSERT GANTT CHART IMAGE HERE â€” draw in Excel, draw.io, or GanttProject 
+The chart should show the following phases on a 14-week timeline:</div>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Phase</th>
+<th style="text-align: left;">Duration</th>
+<th style="text-align: left;">Start</th>
+<th style="text-align: left;">End</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Phase</th>
+<th style="text-align: left;">Duration</th>
+<th style="text-align: left;">Start</th>
+<th style="text-align: left;">End</th>
+</tr><tr>
+<td style="text-align: left;">Requirements Analysis &amp; Architecture</td>
+<td style="text-align: left;">2 weeks</td>
+<td style="text-align: left;">Week 1</td>
+<td style="text-align: left;">Week 2</td>
+</tr><tr>
+<td style="text-align: left;">Sprint 1 (Auth + Profile + SoulGames)</td>
+<td style="text-align: left;">4 weeks</td>
+<td style="text-align: left;">Week 3</td>
+<td style="text-align: left;">Week 6</td>
+</tr><tr>
+<td style="text-align: left;">Sprint 2 (Nova + Friends + DM + Match)</td>
+<td style="text-align: left;">4 weeks</td>
+<td style="text-align: left;">Week 7</td>
+<td style="text-align: left;">Week 10</td>
+</tr><tr>
+<td style="text-align: left;">Sprint 3 (Community + Mod + Analytics)</td>
+<td style="text-align: left;">4 weeks</td>
+<td style="text-align: left;">Week 11</td>
+<td style="text-align: left;">Week 14</td>
+</tr><tr>
+<td style="text-align: left;">Testing, Documentation, Finalization</td>
+<td style="text-align: left;">Ongoing</td>
+<td style="text-align: left;">Week 1</td>
+<td style="text-align: left;">Week 14</td>
+</tr></tbody></table>
+<hr />
+<hh2 id="2-7-physical-architecture">2.7  Physical Architecture</hh2>
+<p>The SoulLink platform follows a client-server architecture with a decoupled<br />
+frontend and backend, connected via a RESTful API and a real-time WebSocket<br />
+layer. The following describes the deployment topology:</p>
+<div class="ps-note"><strong>Note:</strong> INSERT PHYSICAL ARCHITECTURE DIAGRAM HERE 
+The diagram should show: 
+Client Browser (Next.js Frontend) â†â†’ REST API + Socket.IO (Node.js Backend) â†â†’ PostgreSQL (Neon) 
+Also show: Backend â†â†’ Cloudinary (media), Backend â†â†’ Groq API (LLM), Backend â†â†’ Pinecone (vectors), Backend â†â†’ SMTP Server (email)</div>
+<p>Layer descriptions:</p>
+<p>CLIENT LAYER (Browser)</p>
+<hr />
+<p>â€¢ Next.js 16 + React 19 application served via Vercel or Node server.<br />
+  â€¢ Communicates with backend via Axios (REST) and Socket.IO-client (WebSocket).<br />
+  â€¢ Face-api.js runs entirely client-side â€” no biometric data sent raw to server.<br />
+    Only the 128-float descriptor vector is transmitted after local processing.</p>
+<p>APPLICATION LAYER (Backend API â€” Port 4000)</p>
+<hr />
+<p>â€¢ Node.js + Express + TypeScript.<br />
+  â€¢ 8 REST API route groups (auth, users, ai, soulgames, friends, communities,<br />
+    notifications, chat).<br />
+  â€¢ Socket.IO server for real-time presence and messaging.<br />
+  â€¢ Helmet, CORS, Rate Limiter, JWT middleware for security.</p>
+<p>DATA LAYER</p>
+<hr />
+<p>â€¢ PostgreSQL (Neon cloud): Primary database. All 30+ Prisma models.<br />
+  â€¢ Pinecone: Vector database for Nova's long-term semantic memory.<br />
+  â€¢ Cloudinary: Cloud media storage for avatars, server banners, file uploads.</p>
+<p>EXTERNAL SERVICES</p>
+<hr />
+<p>â€¢ Groq API (llama-3.3-70b-versatile): Powers Nova AI conversations.<br />
+  â€¢ Cohere API: Generates text embeddings for semantic memory search.<br />
+  â€¢ SMTP (Nodemailer): Sends OTP verification and password reset emails.<br />
+  â€¢ Giphy API: GIF search integration in message input.</p>
+<hr />
+<hh2 id="2-8-conclusion">2.8  Conclusion</hh2>
+<p>This chapter has established the complete planning and architectural foundation<br />
+for the SoulLink platform. We have formally identified all system actors, mapped<br />
+all 75 functional requirements from the Cahier des Charges to their<br />
+implementation context, and defined the non-functional quality constraints that<br />
+the system must meet.</p>
+<p>The Product Backlog (32 User Stories across 3 sprints) provides a clear,<br />
+prioritized roadmap for the entire project. The sprint structure ensures that<br />
+the most critical and foundational featuresâ€”authentication, identity<br />
+verification, and personality profilingâ€”are delivered first, creating a stable<br />
+base for the more complex social and community features in subsequent sprints.</p>
+<p>Chapter 3 will detail Sprint 1: the implementation of the Authentication<br />
+module, Profile Management, and Soul Games, accompanied by use case analyses,<br />
+sequence diagrams, and the technical implementation.</p>
+
+<p>â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”<br />
+PERSONAL NOTES â€” THINGS YOU MUST WRITE YOURSELF  [PS SUMMARY]<br />
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”</p>
+<p>The following items are marked [PS:] throughout the document. They require<br />
+your personal input and cannot be generated by me:</p>
+<p>CHAPTER 1:<br />
+  [PS-1] University name, department, academic year, submission date<br />
+         â†’ Goes on the title/cover page<br />
+  [PS-2] Your full name(s) as the development team<br />
+         â†’ Goes on the title/cover page and team table<br />
+  [PS-3] Your supervisor's name (encadreur)<br />
+         â†’ Goes on the title/cover page<br />
+  [PS-4] A brief personal statement about why you chose this project<br />
+         â†’ Could go in the Introduction (section 1.1) as 1-2 sentences</p>
+<p>CHAPTER 2:<br />
+  [PS-5] Product Owner name (usually your supervisor or client)<br />
+         â†’ Table 2.4 â€” SCRUM Team<br />
+  [PS-6] Scrum Master name (usually your academic tutor)<br />
+         â†’ Table 2.4 â€” SCRUM Team<br />
+  [PS-7] Development team names<br />
+         â†’ Table 2.4 â€” SCRUM Team<br />
+  [PS-8] USE CASE DIAGRAM (image to insert in section 2.3)<br />
+         â†’ Draw in StarUML / PlantUML / draw.io / Lucidchart<br />
+         â†’ Actors: SoulLinker, Moderator, Administrator, Nova (AI)<br />
+  [PS-9] GANTT CHART (image to insert in section 2.6.2)<br />
+         â†’ Excel/draw.io/GanttProject with 14-week timeline<br />
+  [PS-10] PHYSICAL ARCHITECTURE DIAGRAM (image to insert in section 2.7)<br />
+          â†’ Draw.io recommended. Show: Browser, API, DB, Cloudinary, Groq, Pinecone</p>
+<p>GENERAL:<br />
+  [PS-11] Page numbers, headers, and table of contents â†’ Word/LaTeX formatting<br />
+  [PS-12] References and bibliography section at end of rapport<br />
+          â†’ Cite: Scrum Guide, RGPD, Face-api.js docs, Next.js docs, Prisma docs<br />
+  [PS-13] Any personal anecdote, motivation, or acknowledgment<br />
+          â†’ Typically placed in the introduction or a "Remerciements" page</p>
+
+
+<p>â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”<br />
+MODULE 3A : SPRINT BACKLOG &amp; AUTHENTICATION USE CASES<br />
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”</p>
+<hh2 id="3-1-introduction">3.1  Introduction</hh2>
+<p>This chapter presents the detailed technical specifications for Sprint 1 of the<br />
+SoulLink project. Sprint 1 is the foundational sprint â€” it delivers the three<br />
+core modules that every other feature in the platform depends on:<br />
+Authentication, Profile Management, and Soul Games.</p>
+<p>A user cannot become fully active on SoulLink without completing this entire<br />
+pipeline: register â†’ verify identity â†’ enroll face â†’ complete Soul Game Episode 1<br />
+â†’ generate personality profile â†’ status: ACTIVE. This is enforced by the<br />
+AccountStatus state machine defined in schema.prisma:</p>
+<p>PENDING_VERIFICATION â†’ PENDING_FACE_VERIFY â†’ PENDING_SOUL_GAME â†’ ACTIVE</p>
+<p>This chapter (Module 3A) focuses on the Sprint Backlog, the Sprint Use Case<br />
+Diagram, and the full textual analysis of all four Authentication use cases.<br />
+Modules 3B and 3C cover Profile Management, Soul Games, conception, and<br />
+implementation.</p>
+<hr />
+<hh2 id="3-2-sprint-1-backlog">3.2  Sprint 1 Backlog</hh2>
+<p>The Sprint Backlog is the subset of the Product Backlog selected for Sprint 1.<br />
+It contains all tasks required to deliver the Authentication, Profile<br />
+Management, and Soul Games modules.</p>
+<p>Table 3.1 â€“ Sprint 1 Backlog</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Task ID</th>
+<th style="text-align: left;">Task</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">ID-Us</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Task ID</th>
+<th style="text-align: left;">Task</th>
+</tr><tr><td style="text-align: left;">US-01</td><td style="text-align: left;">Register</td><td style="text-align: left;">As a new user, I want to register with email or phone + password so I can create my SoulLink account.</td><td style="text-align: left;">T-01.1 T-01.2 T-01.3 T-01.4 T-01.5 T-01.6</td><td style="text-align: left;">Analyze and design the User data model (schema.prisma User, Verification, LoginHistory models). Implement multi-step signup UI (4 steps: Profile, Credentials, Face Enrollment, OTP Verification). Implement backend register() API with Zod validation (age 18+, handle format, password min 8 chars). Implement OTP generation and email/SMS sending. Draw Use Case + Sequence diagrams for Registration. Test the registration use case.</td></tr><tr><td style="text-align: left;">US-02</td><td style="text-align: left;">Verify Email / Phone</td><td style="text-align: left;">As a new user, I want to verify my contact via 6-digit OTP code so my identity is confirmed.</td><td style="text-align: left;">T-02.1 T-02.2 T-02.3</td><td style="text-align: left;">Implement verifyEmail() and verifyPhone() endpoints. Handle OTP expiry (15 minutes), resend logic. Update user status after successful verification.</td></tr><tr><td style="text-align: left;">US-03</td><td style="text-align: left;">Facial Enrollment</td><td style="text-align: left;">As a new user, I want to enroll my face during signup so my biometric identity is stored securely.</td><td style="text-align: left;">T-03.1 T-03.2 T-03.3 T-03.4</td><td style="text-align: left;">Integrate Face-api.js (TinyFaceDetector, Landmark68, FaceRecognitionNet) loaded from CDN. Implement camera capture and 128-float descriptor extraction in FaceRecognition.tsx. Store faceDescriptor (Json?) in User model (Prisma). Implement face duplication check at signup (0.45).</td></tr><tr><td style="text-align: left;">US-04</td><td style="text-align: left;">Standard Login</td><td style="text-align: left;">As a registered user, I want to log in with my credentials to access my account.</td><td style="text-align: left;">T-04.1 T-04.2 T-04.3 T-04.4</td><td style="text-align: left;">Implement login() with email/phone + password. Generate JWT access token + refresh token pair. Log login attempt to LoginHistory (IP, userAgent). Handle BANNED/SUSPENDED account status checks.</td></tr><tr><td style="text-align: left;">US-05</td><td style="text-align: left;">Facial Login</td><td style="text-align: left;">As a user, I want to log in using my face for fast biometric auth without typing a password.</td><td style="text-align: left;">T-05.1 T-05.2 T-05.3</td><td style="text-align: left;">Implement loginWithFace() endpoint. Euclidean distance comparison vs. all stored descriptors. Match threshold: 0.6. Set faceVerified=true and update lastLoginAt.</td></tr><tr><td style="text-align: left;">US-06</td><td style="text-align: left;">Password Recovery</td><td style="text-align: left;">As a user who forgot my password, I want to reset it via OTP so I can regain access to my account.</td><td style="text-align: left;">T-06.1 T-06.2 T-06.3</td><td style="text-align: left;">Implement forgotPassword() â€” sends 6-digit OTP. Implement resetPassword() â€” validates OTP, hashes new password, marks Verification as used. OTP stored as PASSWORD_RESET type, expires 15 min.</td></tr><tr><td style="text-align: left;">US-07</td><td style="text-align: left;">Profile Management</td><td style="text-align: left;">As a user, I want to view and edit my profile (name, bio, avatar, city, country, handle).</td><td style="text-align: left;">T-07.1 T-07.2 T-07.3</td><td style="text-align: left;">Implement GET/PUT /users/profile endpoints. Cloudinary integration for avatar/banner upload. Implement profile page UI (profile/page.tsx).</td></tr><tr><td style="text-align: left;">US-08</td><td style="text-align: left;">Privacy Settings</td><td style="text-align: left;">As a user, I want to set my profile visibility level (Public / Matches Only / Friends Only / Private).</td><td style="text-align: left;">T-08.1 T-08.2</td><td style="text-align: left;">Implement PATCH /users/privacy endpoint. Apply PrivacyLevel enum: PUBLIC, MATCHES_ONLY, FRIENDS_ONLY, PRIVATE.</td></tr><tr><td style="text-align: left;">US-09</td><td style="text-align: left;">Soul Games Library</td><td style="text-align: left;">As a user, I want to see all Soul Game episodes and track my progress.</td><td style="text-align: left;">T-09.1 T-09.2 T-09.3</td><td style="text-align: left;">Implement getAllGames() with progress and lock state. Implement games library page (games/page.tsx). Mandatory Episode 1 must be unlocked at onboarding.</td></tr><tr><td style="text-align: left;">US-10</td><td style="text-align: left;">Play a Soul Game Episode</td><td style="text-align: left;">As a user, I want to play an episode scene by scene by making choices.</td><td style="text-align: left;">T-10.1 T-10.2 T-10.3</td><td style="text-align: left;">Implement getGameById() with scenes and choices. Implement submitResponse() with upsert logic. Implement episode player UI (game/[id]/page.tsx).</td></tr><tr><td style="text-align: left;">US-11</td><td style="text-align: left;">Complete Episode &amp; Get OCEAN</td><td style="text-align: left;">As a user, I want to finish a Soul Game and receive my Big Five personality score (OCEAN).</td><td style="text-align: left;">T-11.1 T-11.2 T-11.3 T-11.4</td><td style="text-align: left;">Implement completeGame() â€” validates all scenes done. Calculate OCEAN scores from choice weights. Merge new scores with existing PersonalityProfile (50/50 weighted blend). Set user status â†’ ACTIVE if mandatory episode done.</td></tr><tr><td style="text-align: left;">US-12</td><td style="text-align: left;">View Personality Profile</td><td style="text-align: left;">As a user, I want to see my Big Five personality results and understand myself better.</td><td style="text-align: left;">T-12.1 T-12.2</td><td style="text-align: left;">Implement getPersonalityProfile() endpoint. Display OCEAN scores with radar chart on profile page (profile/page.tsx).</td></tr></tbody></table>
+<hr />
+<hh2 id="3-3-sprint-1-use-case-diagram">3.3  Sprint 1 Use Case Diagram</hh2>
+<p>The global use case diagram for Sprint 1 represents all interactions between<br />
+the system actors and the three modules delivered in this sprint.</p>
+<p>Actors involved in Sprint 1:<br />
+  â€¢ Standard User (SoulLinker) â€” primary actor for all use cases below<br />
+  â€¢ System (Nova / Backend) â€” secondary actor for OTP sending, face matching,<br />
+    score calculation, and status transitions</p>
+<div class="ps-note"><strong>Note:</strong> INSERT SPRINT 1 USE CASE DIAGRAM IMAGE HERE 
+The diagram should show the SoulLinker actor connected to: 
+Authentication: S'inscrire, S'authentifier, Authentification Faciale, 
+        Recuperation de mot de passe, Se deconnecter 
+Profile: Modifier son profil, Configurer la confidentialite 
+Soul Games: Consulter les episodes, Jouer un episode, 
+        Completer un episode, Consulter son profil de personnalite 
+Show include/extend relationships, e.g.: 
+S'inscrire &lt;<include>&gt; Enrolement Facial 
+S'inscrire &lt;<include>&gt; Verification OTP 
+Authentification Faciale &lt;<extend>&gt; S'authentifier 
+Completer un episode &lt;<include>&gt; Calculer profil OCEAN 
+Recommended tool: StarUML / PlantUML / draw.io</div>
+<hr />
+<hh2 id="3-4-authentication-module-textual-use-case-analyses">3.4  Authentication Module â€” Textual Use Case Analyses</hh2>
+<hh3 id="3-4-1-use-case-registration-s-inscrire">3.4.1  Use Case: Registration (S'inscrire)</hh3>
+<p>The registration process in SoulLink is a multi-step onboarding flow unique to<br />
+the platform. Unlike typical registrations, it combines standard credential<br />
+creation, biometric facial enrollment, and OTP contact verification into a<br />
+single, guided 4-step process (implemented in signup/page.tsx).</p>
+<p>Table 3.2 â€“ Textual Description: S'inscrire (Register)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-01</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">S'inscrire (Register)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">New User (unauthenticated)</td>
+</tr><tr>
+<td style="text-align: left;">Secondary Actor</td>
+<td style="text-align: left;">System (Backend API, Email/SMS service)</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The user does not have an existing SoulLink account. The user is at least 18 years old. The user has access to a webcam for facial enrollment.</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user navigates to the registration page (/signup). 2. Step 1 â€” PROFILE: user enters Display Name, unique Handle (@name), Date of Birth, City, and Country. System validates age (18+). 3. Step 2 â€” CREDENTIALS: user selects auth method (Email or Phone), enters the contact value, and creates a secure password (min 8 characters). 4. Step 3 â€” FACE ENROLLMENT: the FaceRecognition component activates the camera. The user positions their face. Face-api.js detects the face and generates a 128-float descriptor vector. 5. The system sends the registration request to POST /api/auth/register. 6. The backend checks for duplicate email/phone/handle and validates that no existing face descriptor has Euclidean distance &lt; 0.45 from the enrolled face. 7. The system creates the user record in PostgreSQL with status PENDING_VERIFICATION and stores the faceDescriptor (Json?). 8. The system generates a 6-digit OTP and sends it via email or SMS. 9. Step 4 â€” VERIFICATION: the user enters the 6-digit OTP received. 10. The system validates the OTP and updates the user status to PENDING_FACE_VERIFY (or ACTIVE if faceDescriptor already stored). 11. Nova cinematic animation plays and the user is redirected to /login.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">2a: User is under 18 â†’ system displays error "You must be at least 18" Nova says: "SoulLink is for souls 18 and older." Step 1 repeats. 6a: Email/phone already registered â†’ error "User already exists." User is invited to login instead. 6b: Face duplication detected â†’ error "This facial identity is already registered." Registration is blocked. User must contact support. 4a: No camera detected â†’ system shows "No camera found" error. User can use "Bypass for Dev" in development mode only. 9a: OTP expired (&gt;15 min) â†’ system shows "Code expired." User can request a new OTP via the Resend button. 9b: Wrong OTP code â†’ system shows "Invalid code." User may retry.</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">A new user account is created in PostgreSQL. Contact is verified. faceDescriptor is stored. Status: PENDING_FACE_VERIFY or ACTIVE. The user can proceed to Soul Games (mandatory Episode 1).</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">signup/page.tsx (steps 1-4), auth.service.ts register(), auth.schema.ts registerSchema, FaceRecognition.tsx, schema.prisma User</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT REGISTRATION SEQUENCE DIAGRAM HERE 
+Show: Browser â†’ POST /api/auth/register â†’ AuthService.register() 
+Include: Zod validation, face duplication check loop, prisma.$transaction, 
+OTP generation, sendVerificationEmail(), JWT token return 
+Then show separate step: POST /api/auth/verify-email with 6-digit code</div>
+<hr />
+<hh3 id="3-4-2-use-case-standard-authentication-s-authentifier">3.4.2  Use Case: Standard Authentication (S'authentifier)</hh3>
+<p>Standard login allows an existing user to authenticate using their email address<br />
+or phone number and their password. The system generates a JWT access token and<br />
+refresh token pair upon success and logs the login attempt.</p>
+<p>Table 3.3 â€“ Textual Description: S'authentifier (Standard Login)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-02</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">S'authentifier (Standard Login)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Registered User</td>
+</tr><tr>
+<td style="text-align: left;">Secondary Actor</td>
+<td style="text-align: left;">System (Backend API, JWT Service)</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The user holds a valid SoulLink account with ACTIVE status. The account is not BANNED or SUSPENDED.</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user navigates to the login page (/login). 2. The system displays a form requesting an identifier (email or phone) and a password. 3. The user enters their credentials and submits the form. 4. The frontend sends a POST request to /api/auth/login with the identifier and password fields. 5. The backend locates the user by email OR phone in the database. 6. The system compares the submitted password against the stored bcrypt hash using comparePasswords(). 7. The system checks that the account status is not BANNED/SUSPENDED. 8. The system generates a JWT access token and a refresh token. 9. The system logs the login to LoginHistory (IP address, user agent, success=true) and updates lastLoginAt. 10. The system returns the token pair and the user object. 11. The frontend stores the access token in localStorage and redirects the user to their personal dashboard.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">5a: Identifier (email/phone) not found in DB â†’ System returns 401 "Invalid email/phone or password." (Generic message to prevent user enumeration attacks.) 6a: Password does not match bcrypt hash â†’ Same 401 "Invalid email/phone or password" response. 7a: Account is BANNED â†’ 403 "Account is banned." 7b: Account is SUSPENDED â†’ 403 "Account is suspended." Rate limit exceeded (&gt;5 attempts) â†’ 429 Too Many Requests. User must wait before retrying (auth rate limiter â€” rateLimit.ts).</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">User is authenticated. JWT access token stored client-side. lastLoginAt updated in DB. Login event logged in LoginHistory. User is redirected to the main application.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">auth.service.ts login(), auth.routes.ts POST /login, auth.schema.ts loginSchema, middleware/rateLimit.ts</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT LOGIN SEQUENCE DIAGRAM HERE 
+Show: Browser â†’ POST /api/auth/login â†’ AuthService.login() 
+Include: prisma.user.findFirst(OR email/phone), comparePasswords(bcrypt), 
+status check, generateAccessToken(), generateRefreshToken(), 
+prisma.$transaction([LoginHistory.create, User.update lastLoginAt) 
+Return: { user, accessToken, refreshToken }</div>
+<hr />
+<hh3 id="3-4-3-use-case-facial-authentication-authentification-f">3.4.3  Use Case: Facial Authentication (Authentification Faciale)</hh3>
+<p>Facial authentication is SoulLink's biometric login method. It allows a user<br />
+who has enrolled their face during signup to log in without entering a password,<br />
+by simply looking at their camera. The system computes the Euclidean distance<br />
+between the captured descriptor and all stored descriptors in PostgreSQL to<br />
+find a match.</p>
+<p>Table 3.4 â€“ Textual Description: Authentification Faciale (Facial Login)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-03</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Authentification Faciale (Facial Login)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Registered User (with enrolled face)</td>
+</tr><tr>
+<td style="text-align: left;">Secondary Actor</td>
+<td style="text-align: left;">System (Face-api.js, Backend API, PostgreSQL)</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The user has a valid SoulLink account. The user enrolled their face descriptor during signup. The faceDescriptor (128-float Json) is stored in the User record. The user's device has a functioning camera with browser permissions.</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user navigates to the login page and selects "Face Login". 2. The system requests camera access permission from the browser. 3. The user grants camera permission. The live video stream activates. 4. Face-api.js loads three neural network models: TinyFaceDetector, FaceLandmark68Net, FaceRecognitionNet. 5. The user positions their face within the camera frame. 6. The system detects a face and extracts a 128-float descriptor vector using detectSingleFace().withFaceLandmarks().withFaceDescriptor(). 7. The descriptor is sent to POST /api/auth/login-face. 8. The backend retrieves ALL users who have a non-null faceDescriptor. 9. The system computes Euclidean distance between the input descriptor and each stored descriptor using: d = sqrt(sum((val - stored[i])^2)) 10. If the minimum distance found is below threshold 0.6, the user matching that descriptor is identified as the authenticated user. 11. The system sets faceVerified=true, updates lastLoginAt, and generates a JWT token pair. 12. The user is redirected to their personal dashboard.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">2a: Camera access denied by browser â†’ "Camera access denied. Please allow camera in your browser settings." User is offered to return to standard password login. 2b: No camera device found â†’ "No camera found. Please connect a webcam." 6a: No face detected in frame â†’ "No face detected. Please adjust your position and try again." The scan state resets to "ready". User retries step 5. 10a: No descriptor matched below 0.6 threshold â†’ Backend returns 401 "Face not recognized." User is prompted to retry or switch to standard login.</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">User is authenticated without a password. faceVerified=true and lastLoginAt updated in PostgreSQL. JWT access token issued and stored client-side.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">auth.service.ts loginWithFace(), FaceRecognition.tsx, auth.routes.ts POST /login-face, schema.prisma User.faceDescriptor</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT FACIAL LOGIN SEQUENCE DIAGRAM HERE 
+Show: Browser FaceRecognition.tsx â†’ loads models from CDN 
+â†’ camera stream â†’ detectSingleFace() â†’ descriptor â†’ 
+POST /api/auth/login-face â†’ AuthService.loginWithFace() 
+â†’ prisma.user.findMany(faceDescriptor != null) 
+â†’ Euclidean distance loop â†’ bestMatchUser found 
+â†’ generateAccessToken() â†’ return { user, accessToken, refreshToken }</div>
+<hr />
+<hh3 id="3-4-4-use-case-password-recovery-recuperation-de-mot-de">3.4.4  Use Case: Password Recovery (Recuperation de mot de passe)</hh3>
+<p>The password recovery flow allows a user who has forgotten their password to<br />
+reset it securely via a 6-digit OTP code sent to their registered email or<br />
+phone. Unlike a link-based reset, SoulLink uses a code-based approach for<br />
+both email and SMS delivery, providing a unified recovery experience.</p>
+<p>Table 3.5 â€“ Textual Description: Recuperation de mot de passe (Password Recovery)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-04</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Recuperation de mot de passe (Password Recovery)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">User (registered, lost password)</td>
+</tr><tr>
+<td style="text-align: left;">Secondary Actor</td>
+<td style="text-align: left;">System (Backend API, Email/SMS service via Nodemailer/SMTP)</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The user has a registered SoulLink account. The user knows the email address or phone number linked to the account. The user is on the login page and clicks "Forgot Password".</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user clicks "Forgot Password" on the login page. 2. The system displays a form requesting an identifier (email or phone). 3. The user enters their registered email or phone and submits. 4. The frontend sends POST /api/auth/forgot-password with the identifier. 5. The backend searches for a matching user by email OR phone. 6. The system generates a secure 6-digit OTP and creates a Verification record of type PASSWORD_RESET, expiring in 15 minutes. 7. If the identifier is an email: the system sends the OTP via sendPasswordResetEmail() using Nodemailer SMTP. If the identifier is a phone: the system sends an SMS via sendSMS(). 8. The system returns the message: "If an account exists, a reset code has been sent." (regardless of whether the user was found â€” to prevent user enumeration attacks). 9. The user receives the 6-digit OTP and enters it in the reset form. 10. The frontend sends POST /api/auth/reset-password with the identifier, the 6-digit code, and the new password. 11. The backend validates the OTP: finds the matching PASSWORD_RESET Verification record, checks it is not expired, and marks it as done. 12. The system hashes the new password with bcrypt and updates the user's passwordHash field in PostgreSQL. 13. The system confirms: "Password reset successfully." 14. The user is redirected to the login page to authenticate.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">5a: Identifier not found in database â†’ The system still returns the generic message (step 8) to prevent user enumeration. No email or SMS is sent. 11a: OTP code is incorrect â†’ Backend returns 400 "Invalid or expired reset code." User must request a new code. 11b: OTP code has expired (&gt; 15 minutes) â†’ Backend returns 400 "Reset code expired." User must restart the flow from step 1. 3a: Rate limit exceeded â†’ 429 Too Many Requests (authRateLimiter).</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">User's passwordHash is updated in PostgreSQL. The PASSWORD_RESET Verification record is marked verified=true. The user can log in with their new password.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">auth.service.ts forgotPassword(), resetPassword(), auth.routes.ts POST /forgot-password + /reset-password, schema.prisma Verification (type: PASSWORD_RESET)</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT PASSWORD RECOVERY SEQUENCE DIAGRAM HERE 
+Show TWO separate sequences: 
+SEQUENCE A â€” Forgot Password: 
+Browser â†’ POST /api/auth/forgot-password 
+â†’ AuthService.forgotPassword() â†’ prisma.user.findFirst(email OR phone) 
+â†’ generateOTP() â†’ prisma.verification.create(PASSWORD_RESET) 
+â†’ sendPasswordResetEmail() OR sendSMS() 
+â†’ response: generic success message 
+SEQUENCE B â€” Reset Password: 
+Browser â†’ POST /api/auth/reset-password 
+â†’ AuthService.resetPassword() â†’ find user + verification record 
+â†’ check expiry â†’ hashPassword(newPassword) 
+â†’ prisma.$transaction([User.update passwordHash, Verification.update verified=true) 
+â†’ response: "Password reset successfully"</div>
+<hr />
+<hh3 id="3-4-5-use-case-logout-se-deconnecter">3.4.5  Use Case: Logout (Se deconnecter)</hh3>
+<p>Although simpler than the other authentication use cases, logout is an important<br />
+security feature, particularly in a multi-device environment. SoulLink uses JWT<br />
+token blacklisting to invalidate sessions server-side.</p>
+<p>Table 3.6 â€“ Textual Description: Se deconnecter (Logout)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-05</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Se deconnecter (Logout)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User</td>
+</tr><tr>
+<td style="text-align: left;">Secondary Actor</td>
+<td style="text-align: left;">System (Backend API, TokenBlacklist table)</td>
+</tr><tr>
+<td style="text-align: left;">Precondition</td>
+<td style="text-align: left;">The user is currently authenticated with a valid JWT access token.</td>
+</tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user clicks the Logout button in the application. 2. The frontend sends POST /api/auth/logout with the access token. 3. The backend adds the token to the TokenBlacklist table with a 24h expiry TTL. 4. Future requests with this token will be rejected by the protect() middleware which checks the TokenBlacklist on every request. 5. The frontend clears localStorage (token, user) and redirects to the login page.</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">The JWT token is blacklisted server-side. The user session is invalid. User is redirected to /login.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">auth.service.ts logout(), middleware/auth.ts protect(), schema.prisma TokenBlacklist model</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT LOGOUT SEQUENCE DIAGRAM HERE â€” Simple: Browser â†’ POST /logout â†’ 
+TokenBlacklist.create() â†’ frontend clears localStorage â†’ redirect /login</div>
+
+
+<p>â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”<br />
+MODULE 3B : PROFILE MANAGEMENT &amp; SOUL GAMES USE CASES<br />
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”</p>
+<hh2 id="3-5-profile-management-module">3.5  Profile Management Module</hh2>
+<p>The Profile Management module allows authenticated users to maintain control<br />
+over their personal data, public identity, and privacy preferences. It is<br />
+directly connected to the Authentication module â€” a user must be authenticated<br />
+to access profile operations â€” and feeds data into the Matching and Soul Games<br />
+modules through the User model fields (bio, city, country, handle, avatarUrl).</p>
+<p>In SoulLink, a user's profile is not static. It evolves as the user interacts<br />
+with the platform: their personality profile updates with each Soul Game<br />
+completed, their online status is managed in real-time by Socket.IO (server.ts),<br />
+and their avatar can be updated via Cloudinary at any time.</p>
+<hr />
+<hh3 id="3-5-1-use-case-view-and-edit-personal-profile-consulter">3.5.1  Use Case: View and Edit Personal Profile (Consulter/Modifier son profil)</hh3>
+<p>Table 3.7 â€“ Textual Description: Consulter/Modifier son profil</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-06</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Consulter / Modifier son profil (View / Edit Profile)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User (SoulLinker)</td>
+</tr><tr>
+<td style="text-align: left;">Secondary Actor</td>
+<td style="text-align: left;">System (Backend API, Cloudinary for media)</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The user is authenticated with a valid JWT access token. The user's account status is ACTIVE.</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user navigates to their profile page (/profile). 2. The system sends GET /api/users/profile with the JWT token. 3. The backend retrieves the user record including: displayName, handle, bio, avatarUrl, bannerUrl, city, country, role, createdAt, personalityProfile (Big Five scores), and onlineStatus. 4. The system displays all profile information on the profile page. 5. The user clicks "Edit Profile". 6. The system displays an editable form pre-filled with current data. 7. The user modifies desired fields (displayName, bio, city, country, handle, avatar image, banner image). 8. If a new avatar/banner is selected, the system uploads the image to Cloudinary and returns the secure URL. 9. The user submits the form. The frontend sends PUT /api/users/profile with the updated fields. 10. The backend validates and saves the changes to the User model. 11. The system returns the updated user object. 12. The profile page refreshes to show the updated information.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">7a: Handle already taken by another user â†’ Backend returns 400 "Handle already in use." User must choose a different unique handle. 8a: Uploaded file exceeds size limit or is not an image â†’ Multer middleware rejects the upload. System shows "Invalid file type or size too large." 9a: JWT token expired during edit â†’ System returns 401 Unauthorized. User is redirected to login page.</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">User's profile data is updated in the PostgreSQL User model. If avatar/banner changed, new Cloudinary URLs are stored. The updated profile is immediately visible to other users (subject to the user's privacy settings).</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">users.controller.ts GET/PUT /profile, middleware/upload.ts (Multer + Cloudinary), schema.prisma User model fields</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT PROFILE EDIT SEQUENCE DIAGRAM HERE 
+Show: Browser â†’ GET /api/users/profile (protected) â†’ prisma.user.findUnique() 
+â†’ display data on UI â†’ PUT /api/users/profile â†’ upload to Cloudinary (if image) 
+â†’ prisma.user.update() â†’ return updated user</div>
+<hr />
+<hh3 id="3-5-2-use-case-configure-privacy-settings-configurer-la">3.5.2  Use Case: Configure Privacy Settings (Configurer la confidentialite)</hh3>
+<p>Table 3.8 â€“ Textual Description: Configurer la confidentialite</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-07</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Configurer la confidentialite (Configure Privacy Settings)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User</td>
+</tr><tr>
+<td style="text-align: left;">Precondition</td>
+<td style="text-align: left;">The user is authenticated and navigates to Settings (/settings).</td>
+</tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user accesses the Settings page. 2. The system displays the current privacy configuration. 3. The user selects their desired profile visibility: â€¢ PUBLIC â€” anyone can see their profile. â€¢ MATCHES_ONLY â€” only matched users can see the profile. â€¢ FRIENDS_ONLY â€” only accepted friends can see the profile. â€¢ PRIVATE â€” profile is hidden from all other users. 4. The user also configures notification preferences (notificationsOn: true/false). 5. The user saves the settings. Frontend sends PATCH /api/users/privacy. 6. The backend updates privacyProfile and notificationsOn in the DB. 7. System confirms the update.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">5a: Request body has no valid field to update â†’ Backend returns 400 with validation error.</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">User's privacyProfile and notificationsOn fields updated in PostgreSQL. Profile visibility now enforced across all API responses.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">users.controller.ts PATCH /privacy, schema.prisma User.privacyProfile (PrivacyLevel enum), schema.prisma User.notificationsOn (Boolean)</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT PRIVACY SETTINGS SEQUENCE DIAGRAM HERE â€” simple: 
+Browser â†’ PATCH /api/users/privacy â†’ prisma.user.update(privacyProfile) â†’ 200 OK</div>
+<hr />
+<hh3 id="3-5-3-use-case-view-login-history-consulter-l-historiqu">3.5.3  Use Case: View Login History (Consulter l'historique de connexion)</hh3>
+<p>Table 3.9 â€“ Textual Description: Consulter l'historique de connexion</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-08</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Consulter l'historique de connexion (View Login History)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User</td>
+</tr><tr>
+<td style="text-align: left;">Precondition</td>
+<td style="text-align: left;">The user is authenticated. At least one login attempt exists.</td>
+</tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user navigates to the Security section of Settings. 2. The system fetches all LoginHistory records for the user ordered by descending date. 3. The system displays each login event: IP address, user agent (browser/device), timestamp, and success status. 4. If the user notices an unfamiliar login, they can log out all sessions by invalidating their current tokens.</td></tr><tr>
+<td style="text-align: left;">Alternative Scenarios</td>
+<td style="text-align: left;">No login history found â†’ display "No login history yet."</td>
+</tr><tr>
+<td style="text-align: left;">Postcondition</td>
+<td style="text-align: left;">User reviews their login history. No data is modified.</td>
+</tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">users.controller.ts GET /login-history, schema.prisma LoginHistory (userId, ipAddress, userAgent, success)</td></tr></tbody></table>
+<hr />
+<hh2 id="3-6-soul-games-module">3.6  Soul Games Module</hh2>
+<p>The Soul Games module is the personality discovery engine of SoulLink. It is<br />
+the third and final gate in the onboarding pipeline and the most strategically<br />
+important feature of Sprint 1.</p>
+<p>Each Soul Game is an episodic narrative game composed of scenes. Each scene<br />
+presents the user with a choice. The user's choices are mapped to Big Five<br />
+OCEAN personality trait weights (openness, conscientiousness, extraversion,<br />
+agreeableness, neuroticism), and upon completing an episode, the system<br />
+calculates and stores the user's PersonalityProfile.</p>
+<p>Critically, completing Episode 1 of the Soul Games is mandatory during<br />
+onboarding. Only after completing it does the system upgrade the user's<br />
+AccountStatus from PENDING_SOUL_GAME to ACTIVE, giving them full access to<br />
+all platform features including matching.</p>
+<hr />
+<hh3 id="3-6-1-use-case-browse-soul-games-library-consulter-les-">3.6.1  Use Case: Browse Soul Games Library (Consulter les episodes disponibles)</hh3>
+<p>Table 3.10 â€“ Textual Description: Consulter les episodes disponibles</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-09</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Consulter les episodes disponibles (Browse Soul Games Library)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User</td>
+</tr><tr>
+<td style="text-align: left;">Precondition</td>
+<td style="text-align: left;">The user is authenticated. At least one Soul Game episode exists.</td>
+</tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user navigates to the Soul Games page (/games). 2. The frontend sends GET /api/soulgames with the user's JWT token. 3. The backend calls getAllGames() which returns all active episodes ordered by orderIndex, with: â€¢ totalScenes: total number of scenes in the episode. â€¢ answeredScenes: how many scenes the user has answered. â€¢ isCompleted: true if episode fully answered and marked done. â€¢ isLocked: true if the previous episode is not yet completed. â€¢ mandatory: true for Episode 1 (required for onboarding). 4. The system displays all episodes in order. Locked episodes show a visual lock indicator. Completed episodes show a checkmark. 5. A progress bar shows answered/total scenes for each episode.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">No episodes seeded in DB â†’ display empty state message. Episode 1 locked (should not happen for new users) â†’ system auto-heals: if user is ACTIVE and has a personalityProfile, Episode 1 is considered completed (auto-heal logic in getAllGames()).</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">User sees all available episodes with their completion and lock state. No data is modified.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">soulgames.service.ts getAllGames(), soulgames.routes.ts GET /, schema.prisma SoulGame, SoulGameProgress, GameResponse</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT BROWSE GAMES SEQUENCE DIAGRAM HERE 
+Browser â†’ GET /api/soulgames â†’ getAllGames(userId) 
+â†’ prisma.soulGame.findMany + prisma.soulGameProgress.findMany 
+â†’ prisma.gameResponse.groupBy(gameId) â†’ build results array 
+â†’ Pass 2: isLocked logic â†’ return enriched list</div>
+<hr />
+<hh3 id="3-6-2-use-case-play-a-soul-game-episode-jouer-un-episod">3.6.2  Use Case: Play a Soul Game Episode (Jouer un episode Soul Game)</hh3>
+<p>Table 3.11 â€“ Textual Description: Jouer un episode Soul Game</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-10</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Jouer un episode Soul Game (Play a Soul Game Episode)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The episode is not locked (the previous episode is completed). The user is authenticated. The episode exists in the database.</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user selects an unlocked episode from the library. 2. The frontend sends GET /api/soulgames/:id. 3. The backend returns the full game with all scenes ordered by sceneOrder, including each scene's choices ordered by orderIndex, and the user's already-answered choiceId per scene (if any). 4. The system displays the first scene: background image, narrative text (written by Nova with mood/comment), and choice buttons. 5. The user reads the scene and selects a choice. 6. The frontend sends POST /api/soulgames/:id/scenes/:sceneId/respond with: choiceId, responseTimeMs (tracked internally), emotionalNote. 7. The backend validates that the scene belongs to the game and the choice belongs to the scene. 8. The backend upserts the GameResponse (allows re-answering a scene). 9. The system also calls trackSceneView() to update SoulGameProgress with the current scene ID. 10. The user advances to the next scene. Steps 5-9 repeat. 11. When all scenes are answered, the system shows a "Complete Episode" button.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">5a: The user selects a choice they already answered (re-answering) â†’ The system updates the existing GameResponse via upsert logic. The old answer is replaced without creating a duplicate. 6a: Scene does not belong to the game â†’ Backend returns 400 "Scene does not belong to this game." 6b: Choice does not belong to the scene â†’ Backend returns 400 "Choice does not belong to this scene."</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">A GameResponse record is created/updated for each scene answered. SoulGameProgress.currentSceneId is updated to the latest scene. The user can resume from where they left off on next session.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">soulgames.service.ts getGameById(), submitResponse(), trackSceneView(), schema.prisma GameScene, GameChoice, GameResponse, SoulGameProgress</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT PLAY EPISODE SEQUENCE DIAGRAM HERE 
+Show: Browser â†’ GET /api/soulgames/:id â†’ getGameById(userId) 
+â†’ prisma.soulGame.findUnique(include scenes+choices) + prisma.gameResponse.findMany 
+â†’ return game with answeredChoiceId per scene 
+Then: User selects choice â†’ POST /api/soulgames/:id/scenes/:sceneId/respond 
+â†’ submitResponse() â†’ validate scene/choice â†’ GameResponse.upsert() 
+â†’ trackSceneView() â†’ SoulGameProgress.upsert()</div>
+<hr />
+<p>3.6.3  Use Case: Complete Episode &amp; Generate OCEAN Profile<br />
+   (Completer un episode et generer le profil de personnalite)</p>
+<hr />
+<p>This is the most critical use case in Sprint 1. Completing a Soul Game episode<br />
+triggers the OCEAN personality score calculation â€” a weighted average of the<br />
+Big Five trait values embedded in each choice the user made. For Episode 1<br />
+(mandatory), it also upgrades the user's account status to ACTIVE.</p>
+<p>Table 3.12 â€“ Textual Description: Completer un episode et generer le profil OCEAN</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-11</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Completer un episode et generer le profil OCEAN</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User</td>
+</tr><tr>
+<td style="text-align: left;">Secondary Actor</td>
+<td style="text-align: left;">System (Nova â€” triggers proactive message), Backend API</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The user has answered all scenes of the current episode. The "Complete Episode" button is visible on the game player UI.</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user clicks "Complete Episode" after answering all scenes. 2. The frontend sends POST /api/soulgames/:id/complete. 3. The backend retrieves all GameResponse records for this user/game, including the associated GameChoice with its trait weights. 4. The backend validates that all scenes have been answered. (responses.length must equal game._count.scenes) 5. The system creates/updates a SoulGameProgress record: isCompleted=true, completedAt=now(). 6. The backend runs calculateScores() on all responses: For each trait (O, C, E, A, N), it collects the weight values from all choices where that trait's weight !== 0, then averages and normalizes them to a 0.0â€“1.0 scale (divides by 5). 7. If a PersonalityProfile already exists for this user, the system applies a 50/50 weighted blend of old and new scores to calculate the updated profile values. If no profile exists, a new PersonalityProfile is created. 8. The PersonalityProfile is saved to PostgreSQL with the 5 OCEAN dimension scores and lastCalculatedAt=now(). 9. If the completed game has mandatory=true (Episode 1): The user's AccountStatus is updated from PENDING_SOUL_GAME â†’ ACTIVE. 10. Nova triggers a proactive message: "game_completed" event (aiService.generateProactiveMessage() runs asynchronously). 11. The system returns the updated PersonalityProfile. 12. The frontend displays the personality results to the user.</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">4a: Not all scenes are answered â†’ Backend returns 400 "Please answer all N scenes before completing." User must answer remaining scenes before submitting. 9a: Game is not mandatory â†’ user status remains unchanged. Only the personality profile is updated.</td></tr><tr><td style="text-align: left;">Postcondition</td><td style="text-align: left;">SoulGameProgress.isCompleted = true for this episode. PersonalityProfile updated/created with new OCEAN scores. If mandatory episode: User.status = ACTIVE (full platform access). Nova sends a proactive message congratulating the user.</td></tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">soulgames.service.ts completeGame(), calculateScores(), schema.prisma PersonalityProfile, SoulGame.mandatory, AccountStatus enum (PENDING_SOUL_GAME â†’ ACTIVE)</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT COMPLETE EPISODE SEQUENCE DIAGRAM HERE â€” most detailed in Sprint 1 
+Show: Browser â†’ POST /api/soulgames/:id/complete 
+â†’ completeGame(userId, gameId) 
+â†’ prisma.soulGame.findUnique (get mandatory flag + scene count) 
+â†’ prisma.gameResponse.findMany(include choice) â€” all answers 
+â†’ validate: responses.length === game._count.scenes 
+â†’ SoulGameProgress.upsert(isCompleted=true) 
+â†’ this.calculateScores(responses) â†’ scores: {O, C, E, A, N} 
+â†’ PersonalityProfile.findUnique() â†’ if exists: blend 50/50 
+â†’ PersonalityProfile.update() OR PersonalityProfile.create() 
+â†’ if mandatory: User.update(status: ACTIVE) 
+â†’ aiService.generateProactiveMessage('game_completed') [async, no await 
+â†’ return updated PersonalityProfile</div>
+<hr />
+<hh3 id="3-6-4-use-case-view-personality-profile-consulter-son-p">3.6.4  Use Case: View Personality Profile (Consulter son profil de personnalite)</hh3>
+<p>Table 3.13 â€“ Textual Description: Consulter son profil de personnalite</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Section</th>
+<th style="text-align: left;">Details</th>
+</tr><tr>
+<td style="text-align: left;">ID</td>
+<td style="text-align: left;">UC-12</td>
+</tr><tr>
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Consulter son profil de personnalite (View Personality Profile)</td>
+</tr><tr>
+<td style="text-align: left;">Primary Actor</td>
+<td style="text-align: left;">Authenticated User</td>
+</tr><tr><td style="text-align: left;">Precondition</td><td style="text-align: left;">The user has completed at least one Soul Game episode. A PersonalityProfile record exists for this user in the database.</td></tr><tr><td style="text-align: left;">Nominal Scenario</td><td style="text-align: left;">1. The user navigates to their profile page (/profile). 2. The profile page includes a "Personality" section. 3. The frontend sends GET /api/soulgames/personality with the JWT. 4. The backend returns the PersonalityProfile record: â€¢ openness (Float, 0.0â€“1.0) â€¢ conscientiousness (Float, 0.0â€“1.0) â€¢ extraversion (Float, 0.0â€“1.0) â€¢ agreeableness (Float, 0.0â€“1.0) â€¢ neuroticism (Float, 0.0â€“1.0) â€¢ lastCalculatedAt (DateTime) 5. The system displays the Big Five scores as a spider/radar chart. 6. The system also displays qualitative insight labels: e.g. "High Openness: You are imaginative and curious."</td></tr><tr><td style="text-align: left;">Alternative Scenarios</td><td style="text-align: left;">No personality profile found (user has not completed any episode) â†’ Backend returns 404 "No personality profile found. Complete a Soul Game first!" The UI shows a call-to-action card to start Episode 1.</td></tr><tr>
+<td style="text-align: left;">Postcondition</td>
+<td style="text-align: left;">User views their Big Five OCEAN scores. No data is modified.</td>
+</tr><tr><td style="text-align: left;">Source Reference</td><td style="text-align: left;">soulgames.service.ts getPersonalityProfile(), schema.prisma PersonalityProfile model</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> INSERT VIEW PROFILE SEQUENCE DIAGRAM HERE â€” simple: 
+Browser â†’ GET /api/soulgames/personality 
+â†’ getPersonalityProfile(userId) 
+â†’ prisma.personalityProfile.findUnique(userId) 
+â†’ if null: throw 404 | if found: return profile data 
+â†’ Frontend renders radar chart with 5 OCEAN values</div>
+
+
+<p>â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”<br />
+MODULE 3C : CONCEPTION, IMPLEMENTATION &amp; TESTING<br />
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”</p>
+<hh2 id="3-7-conception">3.7  Conception</hh2>
+<hh3 id="3-7-1-class-diagram-sprint-1-data-models">3.7.1  Class Diagram â€“ Sprint 1 Data Models</hh3>
+<p>The class diagram for Sprint 1 is derived directly from schema.prisma. It<br />
+represents the data models involved in Authentication, Profile Management,<br />
+and Soul Games.</p>
+<div class="ps-note"><strong>Note:</strong> INSERT CLASS DIAGRAM IMAGE HERE 
+Recommended tool: StarUML / draw.io / PlantUML 
+The diagram must include the following models and their key fields:</div>
+<div class="ps-note"><strong>Note:</strong> -- AUTHENTICATION CLUSTER -- 
+User { 
+  id: String (PK) 
+  displayName: String 
+  handle: String (unique) 
+  email: String? (unique) 
+  phone: String? (unique) 
+  passwordHash: String 
+  faceDescriptor: Json? 
+  faceVerified: Boolean 
+  avatarUrl: String? 
+  bannerUrl: String? 
+  bio: String? 
+  city: String? 
+  country: String? 
+  birthDate: DateTime 
+  role: Role (USER/MODERATOR/ADMIN) 
+  status: AccountStatus 
+  privacyProfile: PrivacyLevel 
+  notificationsOn: Boolean 
+  onlineStatus: OnlineStatus 
+  lastLoginAt: DateTime? 
+  createdAt: DateTime 
+}</div>
+<div class="ps-note"><strong>Note:</strong> Verification { 
+  id: String (PK) 
+  userId: String (FK â†’ User) 
+  type: VerificationType (EMAIL_OTP/PHONE_OTP/PASSWORD_RESET/FACE_PERIODIC) 
+  code: String 
+  expiresAt: DateTime 
+  verified: Boolean 
+}</div>
+<div class="ps-note"><strong>Note:</strong> LoginHistory { 
+  id: String (PK) 
+  userId: String (FK â†’ User) 
+  ipAddress: String? 
+  userAgent: String? 
+  success: Boolean 
+  createdAt: DateTime 
+}</div>
+<div class="ps-note"><strong>Note:</strong> TokenBlacklist { 
+  id: String (PK) 
+  token: String (unique) 
+  expiresAt: DateTime 
+}</div>
+<div class="ps-note"><strong>Note:</strong> -- SOUL GAMES CLUSTER -- 
+SoulGame { 
+  id: String (PK) 
+  title: String 
+  slug: String (unique) 
+  description: String 
+  episode: Int 
+  mandatory: Boolean 
+  orderIndex: Int 
+  isActive: Boolean 
+  scenes: GameScene[ 
+}</div>
+<div class="ps-note"><strong>Note:</strong> GameScene { 
+  id: String (PK) 
+  gameId: String (FK â†’ SoulGame) 
+  sceneOrder: Int 
+  title: String 
+  narrative: String 
+  imageUrl: String? 
+  choices: GameChoice[ 
+}</div>
+<div class="ps-note"><strong>Note:</strong> GameChoice { 
+  id: String (PK) 
+  sceneId: String (FK â†’ GameScene) 
+  text: String 
+  orderIndex: Int 
+  openness: Float 
+  conscientiousness: Float 
+  extraversion: Float 
+  agreeableness: Float 
+  neuroticism: Float 
+}</div>
+<div class="ps-note"><strong>Note:</strong> GameResponse { 
+  id: String (PK) 
+  userId: String (FK â†’ User) 
+  gameId: String (FK â†’ SoulGame) 
+  sceneId: String (FK â†’ GameScene) 
+  choiceId: String (FK â†’ GameChoice) 
+  responseTimeMs: Int? 
+  emotionalNote: String? 
+  createdAt: DateTime 
+}</div>
+<div class="ps-note"><strong>Note:</strong> PersonalityProfile { 
+  id: String (PK) 
+  userId: String (unique FK â†’ User) 
+  openness: Float 
+  conscientiousness: Float 
+  extraversion: Float 
+  agreeableness: Float 
+  neuroticism: Float 
+  lastCalculatedAt: DateTime 
+}</div>
+<div class="ps-note"><strong>Note:</strong> SoulGameProgress { 
+  id: String (PK) 
+  userId: String (FK â†’ User) 
+  gameId: String (FK â†’ SoulGame) 
+  currentSceneId: String? 
+  isCompleted: Boolean 
+  completedAt: DateTime? 
+  @@unique [userId, gameId 
+}</div>
+<div class="ps-note"><strong>Note:</strong> KEY RELATIONSHIPS TO SHOW: 
+User 1--<em> Verification (one user, many verification codes) 
+User 1--</em> LoginHistory 
+User 1--1 PersonalityProfile 
+User 1--<em> GameResponse 
+User 1--</em> SoulGameProgress 
+SoulGame 1--<em> GameScene 
+GameScene 1--</em> GameChoice 
+GameScene 1--<em> GameResponse 
+GameChoice 1--</em> GameResponse 
+SoulGame 1--* SoulGameProgress</div>
+<hr />
+<hh3 id="3-7-2-sequence-diagrams">3.7.2  Sequence Diagrams</hh3>
+<p>Below are instructions for all Sprint 1 sequence diagrams that must be drawn<br />
+by hand and inserted at the marked [PS:] positions in Modules 3A and 3B.</p>
+<p>Summary of all diagrams needed:<br />
+  - SD-01: S'inscrire (Registration + OTP Verification)<br />
+  - SD-02: S'authentifier (Standard Login)<br />
+  - SD-03: Authentification Faciale (Facial Login)<br />
+  - SD-04A: Mot de passe oublie (Forgot Password)<br />
+  - SD-04B: Reinitialisation (Reset Password)<br />
+  - SD-05: Se deconnecter (Logout)<br />
+  - SD-06: Modifier son profil (Edit Profile)<br />
+  - SD-07: Configurer la confidentialite (Privacy Settings)<br />
+  - SD-08: Consulter les episodes (Browse Soul Games)<br />
+  - SD-09: Jouer un episode (Play Episode)<br />
+  - SD-10: Completer un episode (Complete Episode + OCEAN)<br />
+  - SD-11: Consulter son profil OCEAN (View Personality Profile)</p>
+<div class="ps-note"><strong>Note:</strong> See individual  blocks inside Modules 3A and 3B above for the 
+detailed step-by-step instructions for each diagram. 
+Recommended tool: draw.io / PlantUML / StarUML / Lucidchart 
+Participants for all diagrams: Browser : User : AuthService : Prisma : EmailService</div>
+<hr />
+<hh2 id="3-8-implementation">3.8  Implementation</hh2>
+<hh3 id="3-8-1-technical-stack-used-in-sprint-1">3.8.1  Technical Stack Used in Sprint 1</hh3>
+<p>Table 3.14 â€“ Sprint 1 Technical Stack (Verified from package.json &amp; source code)</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Technology</th>
+<th style="text-align: left;">Role in Sprint 1</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Technology</th>
+<th style="text-align: left;">Role in Sprint 1</th>
+</tr><tr>
+<td style="text-align: left;">Runtime</td>
+<td style="text-align: left;">Node.js 20 (LTS)</td>
+<td style="text-align: left;">Server-side JavaScript runtime</td>
+</tr><tr>
+<td style="text-align: left;">Language</td>
+<td style="text-align: left;">TypeScript 5.x</td>
+<td style="text-align: left;">Static typing for backend and frontend</td>
+</tr><tr>
+<td style="text-align: left;">Backend Framework</td>
+<td style="text-align: left;">Express.js 4.x</td>
+<td style="text-align: left;">HTTP server, routing, middleware pipeline</td>
+</tr><tr>
+<td style="text-align: left;">Frontend</td>
+<td style="text-align: left;">Next.js 16 (App Router)</td>
+<td style="text-align: left;">React-based frontend with SSR support</td>
+</tr><tr>
+<td style="text-align: left;">UI Library</td>
+<td style="text-align: left;">React 19</td>
+<td style="text-align: left;">Component-based UI rendering</td>
+</tr><tr>
+<td style="text-align: left;">Animation</td>
+<td style="text-align: left;">Framer Motion</td>
+<td style="text-align: left;">Page transitions, Nova animations</td>
+</tr><tr>
+<td style="text-align: left;">ORM</td>
+<td style="text-align: left;">Prisma 5.22</td>
+<td style="text-align: left;">Type-safe database access layer</td>
+</tr><tr>
+<td style="text-align: left;">Database</td>
+<td style="text-align: left;">PostgreSQL (Neon Cloud)</td>
+<td style="text-align: left;">Primary data store (all 30+ models)</td>
+</tr><tr>
+<td style="text-align: left;">Validation</td>
+<td style="text-align: left;">Zod</td>
+<td style="text-align: left;">Schema validation for API requests</td>
+</tr><tr>
+<td style="text-align: left;">Auth</td>
+<td style="text-align: left;">JWT (jsonwebtoken)</td>
+<td style="text-align: left;">Access token + refresh token generation</td>
+</tr><tr>
+<td style="text-align: left;">Password Hash</td>
+<td style="text-align: left;">Bcryptjs</td>
+<td style="text-align: left;">Secure password hashing (salt rounds: 10)</td>
+</tr><tr>
+<td style="text-align: left;">Face Detection</td>
+<td style="text-align: left;">Face-api.js</td>
+<td style="text-align: left;">Client-side face detection + 128-vector</td>
+</tr><tr>
+<td style="text-align: left;">Media Upload</td>
+<td style="text-align: left;">Cloudinary + Multer</td>
+<td style="text-align: left;">Avatar / banner / file storage</td>
+</tr><tr>
+<td style="text-align: left;">Email</td>
+<td style="text-align: left;">Nodemailer (SMTP)</td>
+<td style="text-align: left;">OTP + password reset email delivery</td>
+</tr><tr>
+<td style="text-align: left;">Real-time</td>
+<td style="text-align: left;">Socket.IO</td>
+<td style="text-align: left;">Presence tracking (ONLINE/OFFLINE)</td>
+</tr><tr>
+<td style="text-align: left;">Logging</td>
+<td style="text-align: left;">Winston</td>
+<td style="text-align: left;">Structured server logging</td>
+</tr><tr>
+<td style="text-align: left;">Security</td>
+<td style="text-align: left;">Helmet, CORS, Rate Limit</td>
+<td style="text-align: left;">HTTP hardening + brute force protection</td>
+</tr></tbody></table>
+<hr />
+<hh3 id="3-8-2-key-code-extracts">3.8.2  Key Code Extracts</hh3>
+<p>The following extracts are taken directly from the SoulLink source code and<br />
+represent the most technically significant implementations in Sprint 1.</p>
+<p>--- Extract 1: Age Validation â€” auth.schema.ts ------------------------------</p>
+<p>The registration schema enforces an 18+ age requirement using Zod's refine()<br />
+method. This is a business rule from CDC EF-050.</p>
+<p>birthDate: z.coerce.date().refine(<br />
+    (date) =&gt; {<br />
+      const age = new Date().getFullYear() - date.getFullYear();<br />
+      return age &gt;= 18;<br />
+    },<br />
+    { message: "You must be at least 18 years old to join SoulLink" }<br />
+  )</p>
+<p>Source: soullink-backend/src/modules/auth/auth.schema.ts</p>
+<p>--- Extract 2: Face Duplication Check â€” auth.service.ts ---------------------</p>
+<p>During registration, the system rejects any face that is too similar to an<br />
+already-enrolled user (threshold: 0.45 Euclidean distance). This prevents the<br />
+same person from creating multiple accounts.</p>
+<p>const existingUsers = await prisma.user.findMany({<br />
+    where: { faceDescriptor: { not: null } },<br />
+    select: { faceDescriptor: true }<br />
+  });</p>
+<p>for (const user of existingUsers) {<br />
+    const stored = user.faceDescriptor as number[];<br />
+    const distance = Math.sqrt(<br />
+      stored.reduce((sum, val, i) =&gt; sum + Math.pow(val - descriptor[i], 2), 0)<br />
+    );<br />
+    if (distance &lt; 0.45) {<br />
+      throw new AppError(409, 'This facial identity is already registered.');<br />
+    }<br />
+  }</p>
+<p>Source: soullink-backend/src/modules/auth/auth.service.ts â€” register()</p>
+<p>--- Extract 3: Facial Login Matching â€” auth.service.ts ----------------------</p>
+<p>During face login, the system finds the closest match among all enrolled<br />
+descriptors using Euclidean distance. The threshold is 0.6 (more lenient than<br />
+the 0.45 duplication check to accommodate minor lighting/angle differences).</p>
+<p>let bestMatch = null;<br />
+  let bestDistance = Infinity;</p>
+<p>for (const user of usersWithFace) {<br />
+    const stored = user.faceDescriptor as number[];<br />
+    const distance = Math.sqrt(<br />
+      stored.reduce((sum, val, i) =&gt; sum + Math.pow(val - descriptor[i], 2), 0)<br />
+    );<br />
+    if (distance &lt; bestDistance) {<br />
+      bestDistance = distance;<br />
+      bestMatch = user;<br />
+    }<br />
+  }</p>
+<p>if (!bestMatch || bestDistance &gt; 0.6) {<br />
+    throw new AppError(401, 'Face not recognized. Please try again.');<br />
+  }</p>
+<p>Source: soullink-backend/src/modules/auth/auth.service.ts â€” loginWithFace()</p>
+<p>--- Extract 4: OCEAN Score Calculation â€” soulgames.service.ts ---------------</p>
+<p>The Big Five personality scores are calculated by averaging the choice weights<br />
+for each domain (O, C, E, A, N) and normalizing to a 0.0â€“1.0 scale. If the<br />
+weight is 0, the choice is neutral for that trait and excluded from the average.</p>
+<p>private calculateScores(responses: any[]) {<br />
+    const domains: Record<string, number[]> = {<br />
+      O: [], C: [], E: [], A: [], N: []<br />
+    };</p>
+<pre><code>for (const response of responses) {
+  const choice = response.choice;
+  if (choice.openness !== 0)          domains.O.push(choice.openness);
+  if (choice.conscientiousness !== 0) domains.C.push(choice.conscientiousness);
+  if (choice.extraversion !== 0)      domains.E.push(choice.extraversion);
+  if (choice.agreeableness !== 0)     domains.A.push(choice.agreeableness);
+  if (choice.neuroticism !== 0)       domains.N.push(choice.neuroticism);
+}
+
+const avg = (arr: number[]) =&gt;
+  arr.length &gt; 0
+    ? arr.reduce((a, b) =&gt; a + b, 0) / arr.length / 5
+    : 0.5;   // default to 0.5 if no data for a domain
+
+return {
+  openness:          avg(domains.O),
+  conscientiousness: avg(domains.C),
+  extraversion:      avg(domains.E),
+  agreeableness:     avg(domains.A),
+  neuroticism:       avg(domains.N),
+};
+</code></pre>
+<p>}</p>
+<p>Source: soullink-backend/src/modules/soulgames/soulgames.service.ts</p>
+<p>--- Extract 5: AccountStatus Transition â€” soulgames.service.ts --------------</p>
+<p>After completing a mandatory episode, the user's status transitions to ACTIVE,<br />
+giving them full access to the SoulLink platform features (matching, communities,<br />
+direct messaging, etc.).</p>
+<p>if (game.mandatory) {<br />
+    await prisma.user.update({<br />
+      where:  { id: userId },<br />
+      data:   { status: 'ACTIVE' },<br />
+    });<br />
+  }</p>
+<p>Source: soullink-backend/src/modules/soulgames/soulgames.service.ts â€” completeGame()</p>
+<hr />
+<hh3 id="3-8-3-interface-screenshots">3.8.3  Interface Screenshots</hh3>
+<div class="ps-note"><strong>Note:</strong> TAKE SCREENSHOTS OF YOUR RUNNING APPLICATION AND INSERT THEM HERE 
+The following screenshots are required for Sprint 1:</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 1 â€” Login Page (/login) 
+Show: email/phone input, password input, "Login with Face" button, 
+"Forgot Password" link, Nova orb on the side</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 2 â€” Signup Step 1: Profile Information 
+Show: Display Name, Handle, Date of Birth, City, Country fields 
+Step indicator showing Step 1/4</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 3 â€” Signup Step 2: Credentials 
+Show: Email/Phone toggle selector, contact input, password field 
+Step indicator showing Step 2/4</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 4 â€” Signup Step 3: Face Enrollment 
+Show: Live camera stream, face detection box, "Scanning..." state 
+Or show the success state after face is captured</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 5 â€” Signup Step 4: OTP Verification 
+Show: 6-digit OTP input boxes, "Verify" button, countdown timer</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 6 â€” Soul Games Library (/games) 
+Show: Episode cards with progress bars, lock icon for locked episodes, 
+checkmark for completed episodes, mandatory badge on Episode 1</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 7 â€” Soul Game Episode Player (/game/[id) 
+Show: Scene narrative text, choice buttons, progress indicator 
+(scene X of Y), back/forward navigation</div>
+<div class="ps-note"><strong>Note:</strong> Screenshot 8 â€” Personality Profile Section (/profile) 
+Show: Big Five radar/spider chart with 5 OCEAN dimensions labeled 
+and their numerical scores (e.g., Openness: 0.73)</div>
+<hr />
+<hh2 id="3-9-sprint-review-amp-testing">3.9  Sprint Review &amp; Testing</hh2>
+<hh3 id="3-9-1-functional-test-table">3.9.1  Functional Test Table</hh3>
+<p>The following tests were executed to validate the Sprint 1 deliverables.<br />
+Each test case maps to a use case and verifies the nominal or alternative flow.</p>
+<p>Table 3.15 â€“ Sprint 1 Functional Test Results</p>
+<hr />
+<table><thead>
+<tr>
+<th style="text-align: left;">Test #</th>
+<th style="text-align: left;">UC</th>
+<th style="text-align: left;">Test Scenario</th>
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Expected Result</th>
+<th style="text-align: left;">Status</th>
+</tr>
+</thead><tbody><tr>
+<th style="text-align: left;">Test #</th>
+<th style="text-align: left;">UC</th>
+<th style="text-align: left;">Test Scenario</th>
+<th style="text-align: left;">Input</th>
+<th style="text-align: left;">Expected Result</th>
+<th style="text-align: left;">Status</th>
+</tr><tr><td style="text-align: left;">T-01</td><td style="text-align: left;">UC-01</td><td style="text-align: left;">Register with valid data</td><td style="text-align: left;">Valid name, handle, email, password, DOB (22 years), face enrolled</td><td style="text-align: left;">Account created, OTP sent to email, status: PENDING_VERIFICATION</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr><td style="text-align: left;">T-02</td><td style="text-align: left;">UC-01</td><td style="text-align: left;">Register with age under 18</td><td style="text-align: left;">DOB = 2010-05-01 (14 years old)</td><td style="text-align: left;">Error: "You must be at least 18" Registration blocked at Step 1</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr>
+<td style="text-align: left;">T-03</td>
+<td style="text-align: left;">UC-01</td>
+<td style="text-align: left;">Register with already-registered email</td>
+<td style="text-align: left;">email = existing@user.com</td>
+<td style="text-align: left;">Error 409: "User already exists."</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr><td style="text-align: left;">T-04</td><td style="text-align: left;">UC-01</td><td style="text-align: left;">Register with duplicate facial identity</td><td style="text-align: left;">Face descriptor of already-enrolled user submitted</td><td style="text-align: left;">Error 409: "This facial identity is already registered."</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr>
+<td style="text-align: left;">T-05</td>
+<td style="text-align: left;">UC-02</td>
+<td style="text-align: left;">Verify email with correct OTP</td>
+<td style="text-align: left;">OTP: correct 6-digit code</td>
+<td style="text-align: left;">emailVerified=true, status updates</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-06</td>
+<td style="text-align: left;">UC-02</td>
+<td style="text-align: left;">Verify email with wrong OTP</td>
+<td style="text-align: left;">OTP: 000000 (wrong)</td>
+<td style="text-align: left;">Error 400: "Invalid code"</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-07</td>
+<td style="text-align: left;">UC-02</td>
+<td style="text-align: left;">Verify email with expired OTP</td>
+<td style="text-align: left;">OTP submitted after 15+ minutes</td>
+<td style="text-align: left;">Error 400: "Code expired"</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr><td style="text-align: left;">T-08</td><td style="text-align: left;">UC-02</td><td style="text-align: left;">Login with correct credentials (email)</td><td style="text-align: left;">email + correct password</td><td style="text-align: left;">JWT token pair returned, lastLoginAt updated, login logged to history</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr>
+<td style="text-align: left;">T-09</td>
+<td style="text-align: left;">UC-02</td>
+<td style="text-align: left;">Login with wrong password</td>
+<td style="text-align: left;">email + wrong password</td>
+<td style="text-align: left;">Error 401: "Invalid credentials"</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-10</td>
+<td style="text-align: left;">UC-02</td>
+<td style="text-align: left;">Login with banned account</td>
+<td style="text-align: left;">Banned user's email + password</td>
+<td style="text-align: left;">Error 403: "Account is banned"</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr><td style="text-align: left;">T-11</td><td style="text-align: left;">UC-03</td><td style="text-align: left;">Facial login with enrolled face</td><td style="text-align: left;">128-float descriptor of user</td><td style="text-align: left;">Match found (distance &lt; 0.6), JWT token returned</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr>
+<td style="text-align: left;">T-12</td>
+<td style="text-align: left;">UC-03</td>
+<td style="text-align: left;">Facial login with unknown face</td>
+<td style="text-align: left;">Descriptor of non-enrolled person</td>
+<td style="text-align: left;">Error 401: "Face not recognized"</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-13</td>
+<td style="text-align: left;">UC-04</td>
+<td style="text-align: left;">Request password reset (valid email)</td>
+<td style="text-align: left;">Registered email address</td>
+<td style="text-align: left;">OTP sent, generic success message</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-14</td>
+<td style="text-align: left;">UC-04</td>
+<td style="text-align: left;">Request password reset (non-existent email)</td>
+<td style="text-align: left;">unknown@email.com</td>
+<td style="text-align: left;">Same generic message (no enumeration)</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-15</td>
+<td style="text-align: left;">UC-04</td>
+<td style="text-align: left;">Reset password with valid OTP + new password</td>
+<td style="text-align: left;">correct OTP + new password (8+ chars)</td>
+<td style="text-align: left;">passwordHash updated, OTP invalidated</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr><td style="text-align: left;">T-16</td><td style="text-align: left;">UC-05</td><td style="text-align: left;">Logout (token blacklisting)</td><td style="text-align: left;">Valid JWT token</td><td style="text-align: left;">Token added to TokenBlacklist. Next request with same token â†’ 401</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr>
+<td style="text-align: left;">T-17</td>
+<td style="text-align: left;">UC-06</td>
+<td style="text-align: left;">Edit profile (valid data)</td>
+<td style="text-align: left;">New displayName + bio</td>
+<td style="text-align: left;">Profile updated in DB</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-18</td>
+<td style="text-align: left;">UC-06</td>
+<td style="text-align: left;">Edit profile with taken handle</td>
+<td style="text-align: left;">handle = @existing_user</td>
+<td style="text-align: left;">Error 400: "Handle already in use"</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-19</td>
+<td style="text-align: left;">UC-07</td>
+<td style="text-align: left;">Set privacy to PRIVATE</td>
+<td style="text-align: left;">privacyProfile: PRIVATE</td>
+<td style="text-align: left;">privacyProfile updated in DB</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr><td style="text-align: left;">T-20</td><td style="text-align: left;">UC-09</td><td style="text-align: left;">Browse Soul Games (new user)</td><td style="text-align: left;">userId with no history</td><td style="text-align: left;">Episode 1 shown as unlocked, all others locked</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr>
+<td style="text-align: left;">T-21</td>
+<td style="text-align: left;">UC-10</td>
+<td style="text-align: left;">Submit response to a scene (first answer)</td>
+<td style="text-align: left;">Valid gameId, sceneId, choiceId</td>
+<td style="text-align: left;">GameResponse created. Progress saved.</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr>
+<td style="text-align: left;">T-22</td>
+<td style="text-align: left;">UC-10</td>
+<td style="text-align: left;">Re-answer a scene (change choice)</td>
+<td style="text-align: left;">Same sceneId with different choiceId</td>
+<td style="text-align: left;">GameResponse updated via upsert.</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr><td style="text-align: left;">T-23</td><td style="text-align: left;">UC-11</td><td style="text-align: left;">Complete mandatory Episode 1</td><td style="text-align: left;">All scenes answered for Episode 1</td><td style="text-align: left;">OCEAN profile created. User.status â†’ ACTIVE. Nova proactive message triggered.</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr><td style="text-align: left;">T-24</td><td style="text-align: left;">UC-11</td><td style="text-align: left;">Complete episode before answering all scenes</td><td style="text-align: left;">Only 3 of 5 scenes answered</td><td style="text-align: left;">Error 400: "Please answer all 5 scenes before completing."</td><td style="text-align: left;">[PS: âœ…]</td></tr><tr>
+<td style="text-align: left;">T-25</td>
+<td style="text-align: left;">UC-12</td>
+<td style="text-align: left;">View personality profile after completing game</td>
+<td style="text-align: left;">User with PersonalityProfile</td>
+<td style="text-align: left;">5 OCEAN scores returned (0.0â€“1.0)</td>
+<td style="text-align: left;">[PS: âœ…]</td>
+</tr><tr><td style="text-align: left;">T-26</td><td style="text-align: left;">UC-12</td><td style="text-align: left;">View personality profile before any game</td><td style="text-align: left;">User with no PersonalityProfile</td><td style="text-align: left;">Error 404: "No personality profile found. Complete a Soul Game first!"</td><td style="text-align: left;">[PS: âœ…]</td></tr></tbody></table>
+<div class="ps-note"><strong>Note:</strong> Replace âœ… with your actual test result: âœ… Pass / âŒ Fail / âš ï¸ Partial 
+Add a "Notes" column if any test requires explanation of observed behavior</div>
+<hr />
+<hh3 id="3-9-2-sprint-1-review">3.9.2  Sprint 1 Review</hh3>
+<p>At the end of Sprint 1, the following deliverables were demonstrated to the<br />
+Product Owner and stakeholders:</p>
+<p>âœ… Working multi-step registration with biometric face enrollment<br />
+  âœ… OTP verification via email and SMS<br />
+  âœ… Standard login (email/phone + password)<br />
+  âœ… Facial login without password (Face-api.js + Euclidean distance)<br />
+  âœ… Password recovery via 6-digit OTP<br />
+  âœ… JWT token blacklisting for secure logout<br />
+  âœ… User profile CRUD with Cloudinary image upload<br />
+  âœ… Privacy settings configuration (4 levels)<br />
+  âœ… Soul Games library with episode locking logic<br />
+  âœ… Interactive episode player with scene-by-scene choices<br />
+  âœ… Big Five OCEAN score calculation from gameplay choices<br />
+  âœ… Automatic AccountStatus transition to ACTIVE after Episode 1</p>
+<div class="ps-note"><strong>Note:</strong> ADD SPRINT REVIEW NOTES HERE â€” any decisions made, features deferred, 
+or changes agreed during the sprint review meeting with your supervisor</div>
+<hr />
+<hh3 id="3-9-3-sprint-1-retrospective">3.9.3  Sprint 1 Retrospective</hh3>
+<div class="ps-note"><strong>Note:</strong> WRITE 3-5 SENTENCES PERSONALLY HERE. Answer these 3 questions: 
+1. What went well during Sprint 1? 
+(e.g., "The multi-step signup flow was implemented ahead of schedule.") 
+2. What was challenging? 
+(e.g., "Integrating Face-api.js and calibrating Euclidean distance 
+         thresholds required significant testing and iteration.") 
+3. What will be improved in Sprint 2? 
+(e.g., "Better error handling on the frontend for face detection failures.")</div>
+<hr />
+<hh2 id="3-10-conclusion">3.10  Conclusion</hh2>
+<p>Sprint 1 has successfully delivered the complete onboarding foundation of the<br />
+SoulLink platform. Three tightly coupled modules â€” Authentication, Profile<br />
+Management, and Soul Games â€” have been designed, implemented, and tested.</p>
+<p>The most technically innovative deliverable of this sprint is the biometric<br />
+authentication layer: a client-side face detection pipeline powered by<br />
+Face-api.js that generates 128-dimensional descriptor vectors, which are then<br />
+matched server-side using Euclidean distance comparisons with no reliance on<br />
+external facial recognition APIs or databases.</p>
+<p>Equally significant is the Big Five OCEAN personality scoring engine, which<br />
+transforms a user's in-game choices into a structured psychological profile<br />
+that will serve as the foundation for all matching and personalization features<br />
+in subsequent sprints.</p>
+<p>With the user onboarding pipeline complete and all ACTIVE users holding a<br />
+verified identity and a personality profile, Sprint 2 will build the social<br />
+layer on top of this foundation â€” delivering the Nova AI Companion, the Friend<br />
+System, Direct Messaging, and the Intelligent Matching engine.</p>
+
+<p>â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”<br />
+FULL [PS:] SUMMARY â€” THINGS YOU MUST WRITE OR INSERT YOURSELF<br />
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”</p>
+<p>DIAGRAMS TO DRAW (all Chapter 3):<br />
+  [D-01]  Sprint 1 Use Case Diagram        â†’ Section 3.3<br />
+  [D-02]  Class Diagram (Auth + SoulGames) â†’ Section 3.7.1<br />
+  [D-03]  SD-01: Registration Sequence     â†’ After Table 3.2<br />
+  [D-04]  SD-02: Standard Login Sequence   â†’ After Table 3.3<br />
+  [D-05]  SD-03: Facial Login Sequence     â†’ After Table 3.4<br />
+  [D-06]  SD-04A+B: Password Recovery      â†’ After Table 3.5<br />
+  [D-07]  SD-05: Logout Sequence           â†’ After Table 3.6<br />
+  [D-08]  SD-06: Edit Profile Sequence     â†’ After Table 3.7<br />
+  [D-09]  SD-07: Privacy Settings Sequence â†’ After Table 3.8<br />
+  [D-10]  SD-08: Browse Games Sequence     â†’ After Table 3.10<br />
+  [D-11]  SD-09: Play Episode Sequence     â†’ After Table 3.11<br />
+  [D-12]  SD-10: Complete Episode Sequence â†’ After Table 3.12<br />
+  [D-13]  SD-11: View OCEAN Profile        â†’ After Table 3.13</p>
+<p>SCREENSHOTS TO TAKE (app must be running):<br />
+  [S-01] Login page<br />
+  [S-02] Signup Step 1 (Profile info)<br />
+  [S-03] Signup Step 2 (Credentials)<br />
+  [S-04] Signup Step 3 (Face Enrollment â€” camera active)<br />
+  [S-05] Signup Step 4 (OTP input)<br />
+  [S-06] Soul Games library<br />
+  [S-07] Soul Game episode player (scene with choices)<br />
+  [S-08] Personality profile section (OCEAN radar chart)</p>
+<p>PERSONAL TEXT TO WRITE:<br />
+  [P-01] Sprint 1 Retrospective (3 questions â€” section 3.9.3)<br />
+  [P-02] Sprint Review Notes (section 3.9.2)<br />
+  [P-03] Actual test results (replace [PS: âœ…] in Table 3.15)</p>
+</div>
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr;</button>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+var links=document.querySelectorAll("#toc-sidebar nav a");
+var btn=document.getElementById("scroll-top");
+window.addEventListener("scroll",function(){
+  if(btn)btn.classList.toggle("visible",window.scrollY>400);
+  var y=window.scrollY+130,active=null;
+  document.querySelectorAll("[id]").forEach(function(el){if(el.offsetTop<=y)active=el;});
+  links.forEach(function(l){l.classList.remove("active");});
+  if(active){var a=document.querySelector("#toc-sidebar a[href='#"+active.id+"']");if(a)a.classList.add("active");}
+});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.modal {
+    width: 95%;
+    max-width: 800px;
+    max-height: 90vh;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(48px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 0 60px 120px rgba(0, 0, 0, 0.9);
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(129, 140, 248, 0.2) transparent;
+}
+
+.modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background: rgba(129, 140, 248, 0.15);
+    border-radius: 10px;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+    background: rgba(129, 140, 248, 0.3);
+}
+
+.banner {
+    height: 140px;
+    width: 100%;
+    background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
+    position: relative;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.closeBtn:hover {
+    background: rgba(239, 68, 68, 0.8);
+    transform: rotate(90deg);
+}
+
+.profileHeader {
+    padding: 0 24px;
+    position: relative;
+    margin-top: -50px;
+    margin-bottom: 24px;
+}
+
+.avatarWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 32px;
+    border: 5px solid #0a0a0f;
+    object-fit: cover;
+    background: #1a1a24;
+}
+
+.avatarFallback {
+    width: 100px;
+    height: 100px;
+    border-radius: 32px;
+    border: 5px solid #0a0a0f;
+    background: #6366f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+}
+
+.statusDot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #0f0f14;
+}
+
+.statusDot[data-status="ONLINE"] { background: #22c55e; }
+.statusDot[data-status="AWAY"] { background: #f59e0b; }
+.statusDot[data-status="DO_NOT_DISTURB"] { background: #ef4444; }
+.statusDot[data-status="OFFLINE"] { background: #64748b; }
+
+.mainInfo {
+    padding: 0 20px 20px;
+}
+
+.names {
+    margin-bottom: 16px;
+}
+
+.displayName {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.handle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+}
+
+.bioSection {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.bioTitle {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #818cf8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.bioText {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.statItem {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.statLabel {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.statValue {
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+.personalitySection {
+    margin-top: 16px;
+}
+
+.traitItem {
+    margin-bottom: 12px;
+}
+
+.traitHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+.traitLabel {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+}
+
+.traitValue {
+    color: #818cf8;
+    font-weight: 700;
+}
+
+.progressBar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+    border-radius: 4px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.actionBtn {
+    flex: 1;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.primaryBtn {
+    background: #4f46e5;
+    color: white;
+}
+
+.primaryBtn:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.3);
+}
+
+.secondaryBtn {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.secondaryBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.noMoreRoles {
+    text-align: center;
+    padding: 40px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modalAnimate {
+    animation: fadeIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Widescreen Layout Utils */
+.contentLayout {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    padding: 0 32px 32px;
+}
+
+.leftColumn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+}
+
+.rightColumn {
+    flex: 1.4;
+    min-width: 340px;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 40px;
+}
+
+@media (max-width: 768px) {
+    .contentLayout {
+        flex-direction: column;
+        gap: 24px;
+        padding: 0 20px 20px;
+    }
+    
+    .rightColumn {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-left: 0;
+        padding-top: 24px;
+    }
+}
+
+.editToggleBtn {
+    position: absolute;
+    top: 16px;
+    right: 56px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.editToggleBtn:hover {
+    background: rgba(79, 70, 229, 0.8);
+    transform: scale(1.1);
+}
+
+.editableAvatar {
+    cursor: pointer;
+}
+
+.avatarOverlay {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 100px;
+    height: 100px;
+    border-radius: 32px;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.editableAvatar:hover .avatarOverlay {
+    opacity: 1;
+}
+
+.displayNameInput {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    width: 100%;
+    margin-bottom: 6px;
+    outline: none;
+}
+
+.displayNameInput:focus {
+    border-color: #4f46e5;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.bioInput {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 12px;
+    width: 100%;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+}
+
+.bioInput:focus {
+    border-color: #4f46e5;
+    background: rgba(255, 255, 255, 0.06);
+}

@@ -1,0 +1,251 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{makecell}
+\geometry{margin=2cm}
+
+\definecolor{headerblue}{RGB}{30, 80, 160}
+
+% Custom column type for left-aligned paragraph
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  TABLE 1 — CAS D'UTILISATION : S'INSCRIRE
+% ═══════════════════════════════════════════════════════════════════════════════
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|L{4cm}|L{11.5cm}|}
+\hline
+\rowcolor{headerblue}
+\multicolumn{2}{|l|}{\color{white}\textbf{Table -- Description textuelle du cas d'utilisation \guillemotleft~S'inscrire~\guillemotright}} \\
+\hline
+\textbf{ID}               & UC-1 \\
+\hline
+\textbf{Nom}              & S'inscrire \\
+\hline
+\textbf{Acteurs primaires} & Utilisateur (non enregistré) \\
+\hline
+\textbf{Description}      & L'utilisateur souhaite créer un compte SoulLink afin d'accéder à la plateforme. Il fournit ses informations personnelles, choisit un identifiant unique (handle) et reçoit un code OTP pour vérifier son e-mail ou son numéro de téléphone. \\
+\hline
+\textbf{Préconditions}    &
+\begin{itemize}
+  \item L'utilisateur ne possède pas encore de compte sur la plateforme.
+  \item L'utilisateur doit avoir au moins 18 ans (validé automatiquement par le système).
+  \item L'utilisateur doit fournir au moins un e-mail \textbf{ou} un numéro de téléphone.
+\end{itemize} \\
+\hline
+\textbf{Scénario nominal} &
+\begin{enumerate}
+  \item L'utilisateur accède à la page d'inscription.
+  \item Le système affiche le formulaire d'inscription (nom affiché, handle, e-mail ou téléphone, mot de passe, date de naissance, ville, pays).
+  \item L'utilisateur remplit les champs obligatoires et valide le formulaire.
+  \item Le système vérifie que les données saisies respectent les contraintes de validation (mot de passe $\geq$ 8 caractères, handle alphanumérique, âge $\geq$ 18 ans).
+  \item Le système vérifie que l'e-mail, le téléphone et le handle ne sont pas déjà utilisés.
+  \item Le système crée le compte avec le statut \texttt{PENDING\_VERIFICATION}.
+  \item Le système génère un code OTP à 6 chiffres (valide 15 minutes) et l'envoie par e-mail ou par SMS.
+  \item Le système génère un \textit{access token} et un \textit{refresh token} et connecte automatiquement l'utilisateur.
+  \item Le système redirige l'utilisateur vers l'écran de vérification OTP.
+\end{enumerate} \\
+\hline
+\textbf{Scénarios alternatifs} &
+\textbf{4.1 : Données manquantes ou invalides} \\
+& \quad 4.1.1 Le système détecte qu'un champ obligatoire est absent ou invalide. \\
+& \quad 4.1.2 Le système affiche un message d'erreur précis (ex. : « Le mot de passe doit comporter au moins 8 caractères »). \\
+& \quad 4.1.3 Retour à l'étape 2 du scénario nominal. \\[4pt]
+& \textbf{4.2 : L'utilisateur n'a pas encore 18 ans} \\
+& \quad 4.2.1 Le système détecte que la date de naissance indique un âge inférieur à 18 ans. \\
+& \quad 4.2.2 Le système affiche le message : « Vous devez avoir au moins 18 ans pour rejoindre SoulLink ». \\
+& \quad 4.2.3 Retour à l'étape 2 du scénario nominal. \\[4pt]
+& \textbf{5.1 : E-mail, téléphone ou handle déjà utilisé} \\
+& \quad 5.1.1 Le système détecte qu'un compte existant utilise déjà cet e-mail, ce téléphone ou ce handle. \\
+& \quad 5.1.2 Le système affiche le message : « Un utilisateur avec cet e-mail, ce téléphone ou ce handle existe déjà ». \\
+& \quad 5.1.3 Retour à l'étape 2 du scénario nominal. \\[4pt]
+& \textbf{5.2 : Identité faciale déjà enregistrée (si descripteur facial fourni)} \\
+& \quad 5.2.1 Le système compare le descripteur facial soumis avec ceux déjà stockés en base. \\
+& \quad 5.2.2 Si la distance euclidienne est inférieure à 0,45, le système refuse l'inscription. \\
+& \quad 5.2.3 Le système affiche : « Cette identité faciale est déjà enregistrée sur un autre compte ». \\
+& \quad 5.2.4 Retour à l'étape 2 du scénario nominal. \\[4pt]
+& \textbf{7.1 : Échec d'envoi du code OTP} \\
+& \quad 7.1.1 Le service d'e-mail ou de SMS rencontre une erreur technique. \\
+& \quad 7.1.2 Le compte est néanmoins créé en base de données. \\
+& \quad 7.1.3 Le système invite l'utilisateur à redemander l'envoi du code depuis son profil. \\
+\hline
+\textbf{Postconditions} &
+\begin{itemize}
+  \item Le compte est créé avec le statut \texttt{PENDING\_VERIFICATION}.
+  \item Un code OTP est enregistré en base (valide 15 minutes) et envoyé à l'utilisateur.
+  \item L'utilisateur est connecté automatiquement (tokens générés) en attente de vérification.
+\end{itemize} \\
+\hline
+\end{longtable}
+\end{center}
+
+\vspace{1cm}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  TABLE 2 — CAS D'UTILISATION : SE CONNECTER
+% ═══════════════════════════════════════════════════════════════════════════════
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|L{4cm}|L{11.5cm}|}
+\hline
+\rowcolor{headerblue}
+\multicolumn{2}{|l|}{\color{white}\textbf{Table -- Description textuelle du cas d'utilisation \guillemotleft~Se connecter~\guillemotright}} \\
+\hline
+\textbf{ID}               & UC-2 \\
+\hline
+\textbf{Nom}              & Se connecter \\
+\hline
+\textbf{Acteurs primaires} & Utilisateur (Administrateur, Modérateur, Utilisateur standard) \\
+\hline
+\textbf{Description}      & L'utilisateur souhaite accéder à son espace personnel SoulLink. Il saisit son identifiant (e-mail ou téléphone) et son mot de passe, ou utilise la reconnaissance faciale. Le système valide les informations et délivre un jeton d'accès. \\
+\hline
+\textbf{Préconditions}    &
+\begin{itemize}
+  \item L'utilisateur possède un compte valide sur la plateforme.
+  \item Le compte n'est pas \texttt{BANNED} ni \texttt{SUSPENDED}.
+\end{itemize} \\
+\hline
+\textbf{Scénario nominal \newline (connexion par identifiant)} &
+\begin{enumerate}
+  \item L'utilisateur accède à la page de connexion.
+  \item Le système affiche le formulaire de connexion (identifiant e-mail/téléphone et mot de passe).
+  \item L'utilisateur saisit son identifiant et son mot de passe, puis valide.
+  \item Le système recherche le compte correspondant à l'identifiant fourni.
+  \item Le système compare le mot de passe saisi avec le hash stocké en base (bcrypt).
+  \item Le système génère un \textit{access token} (JWT) et un \textit{refresh token} (cookie HTTP-only, 7 jours).
+  \item Le système enregistre la connexion dans l'historique (\textit{IP}, \textit{User-Agent}, horodatage).
+  \item Le système met à jour la date de dernière connexion et le fuseau horaire de l'utilisateur.
+  \item Le système redirige l'utilisateur vers son tableau de bord personnel.
+\end{enumerate} \\
+\hline
+\textbf{Scénario nominal \newline (connexion faciale)} &
+\begin{enumerate}
+  \item L'utilisateur choisit l'option « Se connecter par reconnaissance faciale ».
+  \item Le système active la caméra et capture le descripteur facial (vecteur à 128 dimensions).
+  \item Le système compare le descripteur capturé avec l'ensemble des descripteurs stockés en base.
+  \item Le système calcule la distance euclidienne entre le vecteur capturé et chaque vecteur stocké.
+  \item Si la distance minimale est inférieure à 0,6, le système identifie l'utilisateur correspondant.
+  \item Le système génère les jetons d'accès, met à jour \texttt{faceVerified} et \texttt{lastLoginAt}.
+  \item Le système connecte l'utilisateur et le redirige vers son tableau de bord.
+\end{enumerate} \\
+\hline
+\textbf{Scénarios alternatifs} &
+\textbf{4.1 : Identifiant introuvable} \\
+& \quad 4.1.1 Le système ne trouve aucun compte correspondant à l'e-mail ou au téléphone saisi. \\
+& \quad 4.1.2 Le système affiche : « Identifiant ou mot de passe invalide ». \\
+& \quad 4.1.3 Retour à l'étape 2 du scénario nominal. \\[4pt]
+& \textbf{5.1 : Mot de passe incorrect} \\
+& \quad 5.1.1 La comparaison bcrypt échoue. \\
+& \quad 5.1.2 Le système affiche : « Identifiant ou mot de passe invalide ». \\
+& \quad 5.1.3 Retour à l'étape 2 du scénario nominal. \\[4pt]
+& \textbf{5.2 : Compte suspendu ou banni} \\
+& \quad 5.2.1 Le système détecte que le statut du compte est \texttt{SUSPENDED} ou \texttt{BANNED}. \\
+& \quad 5.2.2 Le système affiche : « Votre compte est suspendu / banni ». \\
+& \quad 5.2.3 La connexion est refusée. \\[4pt]
+& \textbf{5.3 : Tentatives excessives (rate limiting)} \\
+& \quad 5.3.1 Le \textit{rate limiter} détecte plus de requêtes autorisées depuis la même IP. \\
+& \quad 5.3.2 Le système bloque temporairement l'accès et affiche un message d'attente. \\
+& \quad 5.3.3 L'utilisateur peut réessayer après la fenêtre de blocage. \\[4pt]
+& \textbf{Facial — 5.4 : Visage non reconnu} \\
+& \quad 5.4.1 La distance euclidienne minimale calculée est supérieure ou égale à 0,6. \\
+& \quad 5.4.2 Le système affiche : « Visage non reconnu ». \\
+& \quad 5.4.3 Le système propose à l'utilisateur de se connecter par identifiant/mot de passe. \\[4pt]
+& \textbf{Facial — 5.5 : Aucune donnée faciale en base} \\
+& \quad 5.5.1 Aucun utilisateur n'a encore enregistré de descripteur facial. \\
+& \quad 5.5.2 Le système affiche : « Aucun utilisateur trouvé avec des données faciales ». \\
+\hline
+\textbf{Postconditions} &
+\begin{itemize}
+  \item L'utilisateur est authentifié et possède un \textit{access token} valide.
+  \item Un \textit{refresh token} est stocké dans un cookie sécurisé (\texttt{HttpOnly}, \texttt{SameSite=strict}).
+  \item La connexion est enregistrée dans l'historique (\texttt{LoginHistory}).
+  \item La date de dernière connexion (\texttt{lastLoginAt}) est mise à jour en base.
+\end{itemize} \\
+\hline
+\end{longtable}
+\end{center}
+
+\vspace{1cm}
+
+% ═══════════════════════════════════════════════════════════════════════════════
+%  TABLE 3 — CAS D'UTILISATION : RÉINITIALISER LE MOT DE PASSE
+% ═══════════════════════════════════════════════════════════════════════════════
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|L{4cm}|L{11.5cm}|}
+\hline
+\rowcolor{headerblue}
+\multicolumn{2}{|l|}{\color{white}\textbf{Table -- Description textuelle du cas d'utilisation \guillemotleft~Réinitialiser le mot de passe~\guillemotright}} \\
+\hline
+\textbf{ID}               & UC-3 \\
+\hline
+\textbf{Nom}              & Réinitialiser le mot de passe \\
+\hline
+\textbf{Acteurs primaires} & Utilisateur (Administrateur, Modérateur, Utilisateur standard) \\
+\hline
+\textbf{Description}      & L'utilisateur ayant oublié son mot de passe souhaite en définir un nouveau. Il fournit son identifiant (e-mail ou téléphone), reçoit un code OTP de réinitialisation valide 15 minutes, puis saisit et confirme un nouveau mot de passe. \\
+\hline
+\textbf{Préconditions}    &
+\begin{itemize}
+  \item L'utilisateur possède un compte actif enregistré avec un e-mail ou un numéro de téléphone valide.
+  \item L'utilisateur a accès à son e-mail ou à son téléphone pour recevoir le code OTP.
+\end{itemize} \\
+\hline
+\textbf{Scénario nominal} &
+\begin{enumerate}
+  \item L'utilisateur clique sur « Mot de passe oublié » sur la page de connexion.
+  \item Le système affiche un champ de saisie pour l'identifiant (e-mail ou numéro de téléphone).
+  \item L'utilisateur saisit son identifiant et soumet la demande.
+  \item Le système recherche le compte correspondant à l'identifiant fourni.
+  \item Le système génère un code OTP à 6 chiffres et crée une entrée de vérification de type \texttt{PASSWORD\_RESET} valide 15 minutes.
+  \item Le système envoie le code OTP par e-mail (si identifiant = e-mail) ou par SMS (si identifiant = téléphone).
+  \item Le système affiche le message : « Si un compte existe, un code de réinitialisation a été envoyé ».
+  \item L'utilisateur saisit le code OTP reçu, le nouvel mot de passe (minimum 8 caractères) et confirme.
+  \item Le système vérifie que le code OTP correspond et n'est pas expiré.
+  \item Le système hache le nouveau mot de passe (bcrypt) et met à jour le compte en base.
+  \item Le système marque le code OTP comme utilisé (\texttt{verified = true}).
+  \item Le système affiche le message de succès : « Mot de passe réinitialisé avec succès ».
+  \item Le système redirige l'utilisateur vers la page de connexion.
+\end{enumerate} \\
+\hline
+\textbf{Scénarios alternatifs} &
+\textbf{4.1 : Identifiant introuvable} \\
+& \quad 4.1.1 Le système ne trouve aucun compte associé à l'identifiant fourni. \\
+& \quad 4.1.2 Le système affiche tout de même : « Si un compte existe, un code a été envoyé » (pour des raisons de sécurité, aucune information sur l'existence du compte n'est divulguée). \\
+& \quad 4.1.3 Aucun code n'est généré ni envoyé. \\[4pt]
+& \textbf{4.2 : Rate limiting activé (tentatives excessives)} \\
+& \quad 4.2.1 Le \textit{rate limiter} détecte un nombre excessif de requêtes depuis la même IP. \\
+& \quad 4.2.2 Le système bloque temporairement les nouvelles demandes et affiche un message d'attente. \\[4pt]
+& \textbf{9.1 : Code OTP incorrect} \\
+& \quad 9.1.1 Le code saisi par l'utilisateur ne correspond à aucun enregistrement valide de type \texttt{PASSWORD\_RESET}. \\
+& \quad 9.1.2 Le système affiche : « Code de réinitialisation invalide ou expiré ». \\
+& \quad 9.1.3 Retour à l'étape 8 du scénario nominal. \\[4pt]
+& \textbf{9.2 : Code OTP expiré} \\
+& \quad 9.2.1 La date d'expiration du code enregistré (\texttt{expiresAt}) est antérieure à l'heure actuelle. \\
+& \quad 9.2.2 Le système affiche : « Le code de réinitialisation a expiré ». \\
+& \quad 9.2.3 Le système invite l'utilisateur à recommencer la procédure depuis l'étape 1. \\[4pt]
+& \textbf{9.3 : Nouveau mot de passe trop court} \\
+& \quad 9.3.1 Le système détecte que le nouveau mot de passe comporte moins de 8 caractères. \\
+& \quad 9.3.2 Le système affiche : « Le mot de passe doit comporter au moins 8 caractères ». \\
+& \quad 9.3.3 Retour à l'étape 8 du scénario nominal. \\
+\hline
+\textbf{Postconditions} &
+\begin{itemize}
+  \item Le mot de passe de l'utilisateur est mis à jour en base de données (hashé avec bcrypt).
+  \item Le code OTP de type \texttt{PASSWORD\_RESET} est marqué comme utilisé (\texttt{verified = true}).
+  \item L'utilisateur peut désormais se connecter avec son nouveau mot de passe.
+\end{itemize} \\
+\hline
+\end{longtable}
+\end{center}
+
+\end{document}

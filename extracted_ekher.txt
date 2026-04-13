@@ -1,0 +1,2047 @@
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Génie Logiciel  
+Conception et réalisation d’une solution 
+mobile pour la gestion des besoins 
+animaliers « Pet Care » 
+     JAZIRI Jihen Mr.BELGHUITH Mouheiddine 
+Mr.BETTAIEB Baha 
+ 
+TEAMDEV 
+
+ 
+ 
+  
+ 
+ 
+RÉSUMÉ 
+ 
+C'est un travail réalisé dans le cadre d'un projet de fin d'études pour l'obtention 
+du diplôme national d'ingénieur en Informatique. En fait, il désigne une plateforme 
+dédiée à la satisfaction des différents besoins spécifiques des animaux 
+domestiques. C'est ainsi une sorte de communication en ligne entre les 
+utilisateurs tout en suivant une approche attentive et respectueuse à la fois à 
+l'égard des besoins de la communauté des propriétaires d'anima ux et des 
+besoins des amis à quatre pattes. 
+ 
+ABSTRACT 
+ 
+This work is carried out as part of a final year project to obtain the national 
+engineering diploma in Computer Science. It refers to a platform dedicated to 
+fulfilling the various specific needs of domestic animals. It thus serves as an 
+online communication channel among users while following a considerate and 
+respectful approach towards the requirements of both the community of pet 
+owners and the needs of our four-legged friends.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+DÉDICACES 
+ 
+Je dédie ce travail ; 
+À ma chère mère Salwa Tekaya dont le soutien inconditionnel, les 
+encouragements constants et la confiance en mes capacités m'ont portée tout au 
+long de ce parcours. Sa patience, ses mots d'encouragement et sa présence ont 
+été ma source d'inspiration,  
+À mon cher père Bouraoui Jaziri, l'homme qui m'a offert son soutien et ses 
+conseils constants,  
+À ma sœur Nourhen Jaziri, ma source de courtoisie nourrissante qui me 
+protège et m'aime depuis l'enfance,  
+À mon frère Ahmed Jaziri mon âme sœur, mon joyau à qui j'éprouve tant 
+d'amour,  
+À mon fiancé Ramzi Touati dont le soutien et la compréhension ont été 
+inestimables. Ses encouragements, son écoute et sa croyance en moi m'ont 
+permis de surmonter les défis avec confiance. Sa présence à mes côtés a été un 
+réconfort constant, et je suis reconnaissante de l'avoir à mes côtés,  
+À ma meilleure amie Hiba Kalaï qui a été toujours mon roc tout au long de ce 
+voyage. Ses encouragements, ses conseils, son amitié sincère et sa présence dans 
+les moments de doute ont été d'une valeur inestimable,  
+À ma copine préférée Sirine Tarchouni et à mes précieux amis Bochra 
+Abaied, Rania Ben Hmida et Hamza Sghaier qui m’ont soutenue lors des 
+moments de doute et de difficulté. Le partage de nos idées et de nos expériences 
+a enrichi mon parcours et a contribué à l’évolution de ce projet,  
+
+À toute ma famille. Leurs encouragements inconditionnels, leur soutien moral et 
+leurs sacrifices ont été la source de ma motivation et de ma détermination tout 
+au long de ce parcours,  
+À tous ceux qui ont contribué de près ou de loin à la réalisation de ce projet. 
+Leur aide a été précieuse et a contribué à la réussite de ce travail. 
+Jihen …  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+REMERCIEMENTS 
+ 
+ 
+Mes plus respectueux remerciements s'adressent à la société TEAMDEV au sein 
+de laquelle j'ai eu la précieuse opportunité de travailler avec son équipe. Grâce à 
+monsieur Baha Bettaib  et madame Ghada El Hraiech, j'ai pu acquérir de 
+nouvelles compétences clés , de nouvelles connaissances et des automatismes 
+essentiels qui ont permis à une bonne démarche de travail dans les meilleures 
+conditions possibles.  
+Ce travail ne serait pas aussi riche et n'aurait pas pu avoir le jour sans l'aide 
+pratique et l'encouragem ent de monsieur Mouhedine Belguith, on le remercie 
+profondément pour la qualité de son encadrement exceptionnel, pour sa rigueur, 
+sa patience et sa disponibilité durant notre préparation de ce projet de fin d'études. 
+Tous nos remerciements à l'ensemble de nos professeurs pour leurs générosités et 
+le grand soutien dont ils ont su faire preuve malgré toutes leurs charges 
+académiques et professionnelles. 
+ 
+
+
+i 
+ 
+Table des matières 
+ 
+ 
+ 
+Table des matières 
+ 
+Introduction générale ............................................................................................................................ 1 
+Chapitre 1 : Etude préalable et spécification des besoins .................................................................. 3 
+1. Introduction : ............................................................................................................................... 4 
+2. Présentation de l’organisme d’accueil : ....................................................................................... 4 
+2.1. Cadre de stage : ...................................................................................................................... 4 
+2.2. Présentation de la société : ..................................................................................................... 4 
+3. Gestion du projet : ....................................................................................................................... 5 
+3.1. Présentation du projet : ......................................................................................................... 5 
+4. Etude de l’existant : ..................................................................................................................... 6 
+4.1. Analyse de l’existant : ............................................................................................................ 6 
+4.2. Critique de l’existant : ........................................................................................................... 7 
+4.3. Solution proposée et objectifs : .............................................................................................. 8 
+5. Analyse et spécification des besoins : ......................................................................................... 9 
+5.1. Identification des acteurs : ..................................................................................................... 9 
+5.2. Besoins fonctionnels ............................................................................................................... 9 
+5.3. Besoins non fonctionnels : .................................................................................................... 12 
+6. Méthodologie de travail : .......................................................................................................... 12 
+6.1. Langage de Modélisation Unifié : ....................................................................................... 12 
+6.2. Planification : ........................................................................................................................ 13 
+7. Conclusion ................................................................................................................................. 14 
+Chapitre 2 : Etude conceptuelle ......................................................................................................... 15 
+1. Introduction ............................................................................................................................... 16 
+2. Modélisation de l’architecture physique : ................................................................................. 16 
+2.1. Diagramme de déploiement : ............................................................................................... 16 
+3. Conception détaillée : ................................................................................................................ 17 
+3.1. Diagramme de cas d’utilisation :......................................................................................... 17 
+3.1.1. Diagramme de cas d’utilisation général : ...................................................................... 17 
+3.2. Cas d’utilisation détaillée ..................................................................................................... 20 
+3.2.1. Cas d’utilisation « Consulter les services» .................................................................... 20 
+3.2.2. Cas d’utilisation « Gérer les animaux» ......................................................................... 21 
+3.2.3. Cas d’utilisation «Gérer les publications» ..................................................................... 23 
+3.2.4. Cas d’utilisation «Gérer les réservations» ..................................................................... 25 
+
+ii 
+ 
+Table des matières 
+ 
+ 
+ 
+ 
+ 
+3.2.5. Cas d’utilisation «Gérer les articles » ............................................................................ 27 
+3.2.6. Cas d’utilisation « Consulter le tableau de bord» .......................................................... 30 
+3.3. Diagramme de classe ............................................................................................................ 31 
+3.4. Diagrammes des séquences .................................................................................................. 34 
+3.4.1. Diagramme de séquence du cas d’utilisation « S’authentifier ».................................... 34 
+3.4.2. Diagramme de séquence du cas d’utilisation « Ajouter un animal » ............................ 36 
+3.4.3. Diagramme de séquence du cas d’utilisation « Réserver un service» ........................... 38 
+3.4.4. Diagramme de séquence du cas d’utilisation « Ajouter un Article » ............................ 40 
+4. Conclusion ................................................................................................................................. 42 
+Chapitre 3 : Réalisation et Expérimentation ..................................................................................... 43 
+1. Introduction ............................................................................................................................... 44 
+2. Choix de l’architecture .............................................................................................................. 44 
+2.1. Spécification de l’architecture : .......................................................................................... 44 
+3. Environnement de développement ............................................................................................ 45 
+3.1. Environnement logiciel ........................................................................................................ 45 
+3.2. Technologies utilisées ........................................................................................................... 47 
+4. Pet Care ..................................................................................................................................... 49 
+4.1. Scénario expérimental .......................................................................................................... 49 
+5. Conclusion ................................................................................................................................. 67 
+Conclusion et perspectives .................................................................................................................. 68 
+Webographie ........................................................................................................................................ 69 
+ 
+ 
+ 
+ 
+ 
+
+iii 
+ 
+Liste des figures     
+ 
+ 
+ 
+Liste des figures 
+Figure 1: TeamDev .................................................................................................................................. 5 
+Figure 2: Rover ........................................................................................................................................ 6 
+Figure 3: PetBacker ................................................................................................................................. 7 
+Figure 4 : Schéma descriptif du modèle en V ....................................................................................... 13 
+Figure 5 : Diagramme de Gantt ............................................................................................................. 14 
+Figure 6 : Diagramme de déploiement .................................................................................................. 16 
+Figure 7 : Diagramme de cas d'utilisation général ................................................................................ 19 
+Figure 8 : Diagramme de cas d’utilisation « Consulter les services » ................................................... 20 
+Figure 9 : Diagramme de cas d’utilisation «Gérer les animaux» .......................................................... 22 
+Figure 10 : Diagramme de cas d’utilisation « Gérer les publications » ................................................ 24 
+Figure 11 : Diagramme de cas d’utilisation « Gérer les réservations » ................................................. 26 
+Figure 12 : Diagramme de cas d’utilisation « Gérer les articles » ........................................................ 27 
+Figure 13 : Diagramme de cas d’utilisation « Consulter le tableau de bord »....................................... 30 
+Figure 14 : Diagramme de classe .......................................................................................................... 33 
+Figure 15 : Diagramme de séquence « s’authentifier» .......................................................................... 35 
+Figure 16 : Diagramme de séquence du cas d’utilisation « Ajout d’un animal » .................................. 37 
+Figure 17 : Diagramme de séquence du cas d’utilisation «Réserver un service» ................................. 39 
+Figure 18 : Diagramme de séquence du cas d’utilisation «Ajouter un Article» .................................... 41 
+Figure 19 : Modèle MVVM .................................................................................................................. 45 
+Figure 20 : Visual Studio Code ............................................................................................................. 46 
+Figure 21 : Draw.io ............................................................................................................................... 46 
+Figure 22 : Postman ............................................................................................................................... 46 
+Figure 23 : Flutter .................................................................................................................................. 47 
+Figure 24 : NestJs .................................................................................................................................. 47 
+Figure 25 : mongoDB ............................................................................................................................ 48 
+Figure 26 : Firebase ............................................................................................................................... 48 
+Figure 27 : Angular ............................................................................................................................... 48 
+Figure 28: Pet Care ................................................................................................................................ 49 
+Figure 29 : Interfaces de démarrage ...................................................................................................... 50 
+Figure 30 : Interfaces authentification ................................................................................................... 51 
+Figure 31 : Interface d'accueil ............................................................................................................... 52 
+Figure 32 : Interface Liste des prestataires ............................................................................................ 53 
+Figure 33 : Interface Profil de prestataire .............................................................................................. 53 
+Figure 34 : Interfaces Procédure de la réservation ................................................................................ 54 
+
+iv 
+ 
+Liste des figures     
+ 
+ 
+ 
+Figure 35 : Interface ajouter un animal ................................................................................................. 55 
+Figure 36 : Interface ajouter publication ............................................................................................... 56 
+Figure 37 : Interface profil .................................................................................................................... 57 
+Figure 38 : Interface Authentification ................................................................................................... 58 
+Figure 39 : Interface Demandes ............................................................................................................ 59 
+Figure 40 : Interface Articles ................................................................................................................. 60 
+Figure 41 : Interface Ajouter un article ................................................................................................. 61 
+Figure 42 : Interface Authentification pour L'Admin............................................................................ 62 
+Figure 43 : Interface Liste des services ................................................................................................. 63 
+Figure 44 : Interface Ajouter un service ................................................................................................ 63 
+Figure 45 : Interface Supprimer un service ........................................................................................... 64 
+Figure 46 : Interface modifier un service .............................................................................................. 64 
+Figure 47 : Interface Liste des utilisateurs ............................................................................................ 65 
+Figure 48 : Interface Ajouter un utilisateur ........................................................................................... 66 
+Figure 49 : Interface Supprimer un utilisateur ...................................................................................... 66 
+Figure 50 : Interface Modifier un utilisateur ......................................................................................... 67 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+v 
+ 
+Liste des tableaux      
+ 
+ 
+ 
+Liste des tableaux 
+Tableau 1 : Tableau comparatif entre les existants ................................................................................. 8 
+Tableau 2 : Les tâches des acteurs ......................................................................................................... 18 
+Tableau 3: Description cas d'utilisation «Consulter les services» ......................................................... 20 
+Tableau 4: Description cas d'utilisation «Gérer les animaux» .............................................................. 22 
+Tableau 5 :Description cas d'utilisation «Gérer les publications» ......................................................... 24 
+Tableau 6 : Description cas d'utilisation « Gérer les réservations » ...................................................... 26 
+Tableau 7 : Description cas d'utilisation «Gérer les articles» ................................................................ 28 
+Tableau 8 : Description cas d'utilisation «Consulter le tableau de bord» .............................................. 30 
+ 
+ 
+ 
+ 
+ 
+
+vi 
+ 
+Liste des abréviations      
+ 
+ 
+ 
+Liste des abréviations 
+Android : Operating system for mobile phones and tablets. 
+API   : Application Programming Interface 
+MVVM  : Model View View-Model 
+REST   : Representational state transfer 
+ 
+
+1 
+ 
+Introduction générale 
+ 
+Introduction générale 
+La faune a toujours pris l'attention de l’homme ce qui était l’objet de plusieurs tentatives 
+d’organisation, de planification et de réglementation des volets de cette relation : la relation 
+homme- faune.  
+De nos jours, il existe un lien étroit entre l'homm e et l’animal suite au phénomène de la 
+domestication et l’élevage des animaux. Ainsi, la vie de la plupart des individus démontre un 
+besoin vital de bien gérer un animal domestique par son propriétaire qui est toujours le seul 
+responsable devant cette faible créature.  
+Ce quotidien vécu que ce soit à l’échelle internationale et même en Tunisie, révèle que la 
+plupart des gens accordent de plus en plus d’importance à comment perfectionner la gestion 
+des besoins de leurs animaux domestiques, de leur suivi et d e leur soin vu qu'ils sont devenus 
+des amis fidèles et une partie intégrante de leurs familles.  
+Les animaux de compagnie occupent une place spéciale dans la vie de chaque 
+propriétaire, et donc, de nouvelles opportunités sont ouvertes par l'avancement de la technologie 
+visant à simplifier la vie quotidienne des propriétaires d’animaux et à améliorer le bien-être de 
+leurs compagnons à quatre pattes.  
+L’application objet de notre travail, qui est la première de son genre en Tunisie, vise à 
+protéger les animaux domestiques contre toute sorte d’abandon par leurs propriétaires suite à 
+ne pas savoir comment gérer leurs besoins. En plus, notre projet est orienté vers l’intervention 
+des professionnels prestataires de services pour des animaux d’une manière rapide et efficace 
+selon un choix fait en ligne par les propriétaires.  
+D’ailleurs, cette application sera une excellente opportunité de gagner de l’argent par les 
+personnes compétentes dans le domaine des animaux, chose qui contribue à la créativi té des 
+richesses et du commerce.  
+Surmonter la menace de l’abandon d’un animal domestique ou bien ne pas connaître les 
+procédures essentielles pour lui garantir une vie saine, représente une question primordiale dont 
+la réponse nécessite un travail Bien dé taillé. Alors, cette solution va accroître le sens de la 
+productivité des compétences en ce domaine, le sens de l’innovation et le sens de la 
+communication, chose qui élabore la satisfaction de chaque utilisateur en s’appuyant sur la 
+
+2 
+ 
+Introduction générale 
+ 
+technologie moderne.  
+De ce fait, l'objectif ultime est d'embellir la qualité de vie d'un propriétaire d'animal et en 
+même temps accroître les méthodes de soin de son animal. La réalisation de cet objectif est 
+associée à notre plate -forme tout-en-un qui désigne une gamme divers ifiée de services et de 
+fonctionnalités dédiés à l'ensemble des animaux domestiques.  
+C'est dans ce contexte s'intègre mon projet de fin d'études qui est axé autour d'une 
+démarche minutieuse basée sur l’identification, l’analyse et la consécration d’une mé thode 
+spéciale aux besoins de chaque animal domestique.  
+Au niveau de ce travail, on va présenter soigneusement toute la démarche adoptée et ce, 
+à travers trois chapitres successifs.  
+Tout d’abord, le premier chapitre est consacré pour démontrer le cadre général du travail 
+dans lequel notre projet a été réalisé, l’étude préalable que nous avons exécutée, la spécification 
+des besoins et la méthodologie suivie.  
+Ensuite, le second chapitre désigne précisément la conception de notre application. En 
+plus, nous expliquons dans ce chapitre notre solution proposée par le biais de certains principes 
+en utilisant le langage UML.  
+En ce qui concerne le troisième chapitre, c’est celui qui aborde une description de 
+l’environnement du projet et la détermination du fonctionnement de la solution offerte avec ses 
+principaux aperçus graphiques.  
+En guise de conclusion, on tiendra à préciser tous les points forts de notre sujet d’un point 
+de vue récapitulatif et on suggérera des perspectives visant à optimiser ce qu’on a propo sé 
+comme solution. 
+ 
+ 
+ 
+ 
+
+3 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+ 
+ 
+ 
+ 
+ 
+Etude préalable et spécification des besoins 
+ 
+Chapitre 1  
+ 
+
+4 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+1. Introduction : 
+Cette étude préliminaire, c’est le fait de préciser au préalable le contexte général du projet, 
+étudier l’existant en l’analysant et le critiquant avant de proposer une solution visant à remédier 
+les problèmes liés à la possession d’un animal. 
+Ainsi, notre étude à ce niveau se b ase aussi sur la spécification d es besoins fonctionnels 
+ainsi que les besoins non fonctionnels et ce, en suivant une méthodologie adéquate. En effet, la 
+spécification des besoins pour la réalisation d'une application mobile est conçue pour surveiller, 
+suivre ou interagir avec des animaux domestiques.  
+Dans cette perspective, on va analyser les exigences particulières de l’entreprise et les 
+contraintes actuelles  sur le marché. Par la suite , nous examinerons les fonctionnalités 
+potentielles, les limitations techniques et les besoins spécifiques. Finalement, en exposant la 
+méthodologie de développement adoptée et en incluant l’utilisation d’un diagramme de Gantt, 
+cela guide par excellence à la planification et le suivi du projet. Cette démarche méthodologique 
+assurera la réponse aux besoins de l'entreprise et le succès de l’initiative de notre projet. 
+2. Présentation de l’organisme d’accueil : 
+2.1. Cadre de stage : 
+Le projet décrit dans le présent rappo rt s’intitule : « Mise en place d'une solution de  
+gestion des besoins animalie rs ». En effet, il  a été proposé comme s ujet d’un projet de fin 
+d’études au sein de la société TEAMDEV. 
+2.2. Présentation de la société : 
+La société TEAMDEV est créée en 2018 au cœur des nouvelles technologies. C'est une 
+plateforme positionnée sur plusieurs secteurs d’activités, qui offre plusieurs services 
+informatiques divers. Cette qualité de service lui permet d’apporter des résultats ef ficaces et 
+pertinents très appréciés par ses clients et partenaires. Ainsi, grâce à l'ensemble de ses experts 
+et à ses énormes efforts, TEAMDEV sert à améliorer le digital par les méthodes, les moyens et 
+les outils dont elle dispose. De ce fait, toute l'équipe de la société travaille dans le but d'accroître 
+la croissance de chaque bénéficiaire par des solutions uniques, personnalisées et performantes.  
+
+5 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+ 
+Figure 1: TeamDev 
+3. Gestion du projet : 
+3.1. Présentation du projet : 
+Dans le cadre de notre projet, n ous avons développé une solution qui est centrée sur la 
+création d’une application mobile novatrice destinée aux amoureux des animaux.  
+La solution Pet Care se compose de deux parties distinctes : une interface administrative 
+et une application mobile pour les propriétaires d’animaux et les prestataires des services. Du 
+côté de l'interface administrative, la plateforme permet aux administrateurs de gérer les 
+utilisateurs et d'organiser les demandes des services . Du côté des propriétaires, l'application 
+mobile leur permet de trouver aisément des prestataires soucieux et de confiance, en adéquation 
+avec leurs exigences spécifiques. En intégrant des fonctionnalités telles que la réservation, 
+consultation des services et gestion de ces animaux , notre application permet aux prestataires 
+de gérer leurs activités en toute simplicité  et interagir  avec les propriétaires d’animaux de 
+manière professionnelle. 
+La  solution Pet Care est consacrée à travers ses multiples fonctionnalités personnalisées 
+selon les besoins des propriétaires d'animaux domestiques et selon aussi les besoins des 
+prestataires de services animaliers. La gestion à distance consiste à un objet crucial pour notre 
+application, qui va répondre à un besoin assez croissant dans le domaine des soins des animaux 
+domestiques. L’aspect  primordial de notre application est de permettre une efficace 
+collaboration entre les propriétaires et les prestataires pour maintenir une très bonne gestion des 
+besoins animaliers. 
+Notre travail opte pour une optimisation considérable de la gestion du bien être animalier 
+
+
+6 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+en adoptant une démarche plus fluide, plus transparente et plus efficiente. 
+4. Etude de l’existant : 
+D'après ce chapitre, nous entamons une analyse approfondie des applications mobiles 
+existantes dédiées aux animaux domestiques. Une telle étude se base sur l'évaluation des 
+caractéristiques et des fonctionnalités des applications existantes et sur leur comparaison à les 
+nôtres afin de déterminer la teneur d'innovation pour les solutions offertes dans notre projet.  
+En étudiant ces applications mobiles similaires sur le marché, on examinera leurs 
+spécificités fonctionnelles, leur interface utilisateur et leur convivialité auprès des différents 
+utilisateurs.  
+Il importe de faire une comparaison entre l es points forts et les faiblesses de ces 
+applications existantes. Cette perspective comparative cernera les exploits de ces projets mais 
+aussi relèvera les lacunes qu'on peut combler d'après notre tentative digitale.  
+En outre, notre démarche analytique de l'existant sur le marché se base sur les avis 
+favorables ou bien non favorables des utilisateurs dans l'intention d'améliorer ce qui était 
+critiqué et dévalorisé.  
+Pour conclure, l'étude de l'existant sert à éclaircir la conception de notre application tout 
+en comprenant assez bien les applications existantes et leur impact sur les utilisateurs afin de se 
+consacrer à proposer de nouvelles solutions satisfaisantes.  
+4.1. Analyse de l’existant : 
+En fait, il y a quelques solutions actuelles à ce propos, parmi lesquelles les suivantes : 
+ 
+Figure 2: Rover 
+Rover : C’est une application et site web met en relation des propriétaires d’animaux avec 
+des pets setters et des promoteurs des chiens aimants tout en profitant des outils et de la sécurité 
+
+
+7 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+d’une application mondiale tels que la garde, toilettage et les visites à domicile. 
+ 
+Figure 3: PetBacker 
+PetBacker : C’est une application mobile permet au propriétaire de l’animal de réserver 
+des services tels que la garde, les promenades, les soins médicaux. Elle facilite l’interaction 
+entre les propriétaires et les prestataires de services, tout en offrant des fonctionnalit és telles 
+que suivi de l’animal.  
+4.2. Critique de l’existant : 
+Malgré les caractéristiques des applications qui s’intéressent aux besoins des animaux et 
+malgré les bénéfices qu’elles ont offerts, il existe des lacunes qu’elles n’ont pas pu les combler. 
+D’une part , en utilisant l’application Rover, les utilisateurs ont trouvé des problèmes de 
+communication avec les prestataires de services , dans certaines régions, de s services de cette 
+application sont indisponibles vu que cette application est disponible dans les Etats-Unis et dans 
+la France. 
+Il importe de noter qu'il y a eu des réclamations concernant la qualité des soins prodigués 
+aux ani maux par certains prestataires. , il y a des frais élevés et manque de transparence 
+concernant les tarifs ainsi que des difficultés pour certains utilisateurs à trouver des prestataires 
+de confiance. 
+Finalement, cette application révèle aussi des problèmes de remboursement ou de 
+résolution des conflits liés aux services. 
+D’autres part , au niveau de l’application Pet Backer ,  l'interface utilisateur est complexe 
+ou peu intuitive. Aussi, il y a des problèmes de stabilité et de bugs occasionnels. En plus, il 
+manque de la réactivité du service client. 
+
+
+8 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+Cette application malgré la possibilité  de son téléchargement dans n’importe quelle 
+région, elle ne sera fonctionnelle que dans la région sélectionnée. D’ailleurs , il n’existe pas des 
+mises à jour pour les rendez-vous et les réservations. 
+Tableau 1 : Tableau comparatif entre les existants 
+Caractéristiques Rover PetBacker 
+Mode en ligne     
+Garde et promenade d’animaux     
+Agenda et réservations      
+Transparence des prix     
+Communication      
+Ajout d’un service par le 
+prestataire 
+    
+Publications postées par le 
+propriétaire 
+    
+Articles informatif  postées par le 
+prestataire 
+    
+4.3. Solution proposée et objectifs : 
+D’après la vision adoptée dans le c adre de notre application « Pet Care », on a pour but 
+le sauvetage des animaux domestiques contre les  risques d’abandon de la part  de leurs 
+propriétaires. 
+Sur le plan de cette application, diriger les propriétaires vers les personnes spécialistes   
+pour prendre soin des animaux cités est l’o bjectif initial de toute fonctionnalité liée à notre 
+projet. Cela aide irréductiblement chaque utilisateur  à cibler la bonne personne pour une 
+certaine prestation dans les plus brefs délais et d’une manière efficace et bénéfique pour les 
+deux parties. 
+
+9 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+5. Analyse et spécification des besoins :  
+5.1.  Identification des acteurs : 
+Le système interagit avec quatre acteurs qui sont : 
+o Visiteur : C’est la personne qui peut consulter les services offrant par l’application. 
+o Utilisateur (propriétaire) : C’est un simple utilisateur qui a un compte, il peut 
+consulter et réserver des services proposés par le Prestataire. 
+o Le Prestataire : C’est celui qui est concerné par l’accompagnement de l’animal. En 
+fait, le Prestataire est la personne qui propose les services sur l’application, et il peut 
+créer, consulter modifier ou supprimer les services suggérés par lui.  
+o Administrateur de l’appl ication (Admin) : C’est un responsable, il a pour but d e 
+gérer les services et les comptes utilisateurs.  
+5.2. Besoins fonctionnels 
+Les fonctionnalités principales qui seront offertes aux : 
+➢ Le visiteur : 
+✓ Consulter les services : le visiteur a le droit de consulter les services. 
+✓ S’inscrire. 
+➢ Propriétaire :  
+✓ S’authentifier 
+✓ Se connecter à l’application 
+✓ Consultation des services :  
+▪ Après avoir être connecté à l’application, le propriétaire de l’animal aurait 
+accès à une liste complète de services disponibles, tels que la garde, la 
+promenade et d’autres prestations. Chaque service serait accompagné d’une 
+description détaillée, de tarifs, de disponibilités et de retours d’expériences 
+d’autres utilisateurs. 
+✓ Réservation de Services : 
+▪ Permet au propriétaire de réserver et de planifier des services spécifiques pour 
+leurs animaux, en choisissant des créneaux horaires et des prestataires. 
+✓ Création de profil d’animal : 
+
+10 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+▪ Le propriétaire peut créer un profile détaillé pour chaque animal, comprenant 
+des informations telles que le nom, la race, l’âge et les préférences. 
+✓ Passer des réservations : 
+▪ Il demande des réservations d’un service pour assurer le bien-être de l’animal. 
+✓ Evaluations et commentaires : 
+▪ Avoir la possibilité de  laisser des év aluations et des commentaires sur les 
+prestataires de services, contribuant ainsi à la confiance et à la qualité des 
+services. 
+✓ Réseau social Animalier : 
+▪ Le propriétaire peut partager des photos, publications avec d’autres 
+passionnés d’animaux. 
+✓ Messagerie Directe : 
+▪ Envoie des messages instantanés pour communiquer avec les prestataires de 
+services, poser des questions et échanger des informations. 
+➢ Le Prestataire :  
+✓ S’authentifier 
+✓ Se connecter à l’application 
+✓ Réception de demandes de réservations :  
+▪ Recevoir des demandes de services de la part des propriétaires d’animaux et 
+de gérer ces demandes de manière efficaces, en acceptant ou en refusant selon 
+la disponibilité. 
+✓ Gestion des réservations : 
+▪ Fournit des outils pour gérer les réserva tions confirmées, mettre à jour les 
+horaires et les services réservés, et les synchroniser. 
+✓ Evaluations et commentaires : 
+▪ Il peut recevoir des évaluations et des commentaires de la part de propriétaires 
+d’animaux, contribuant ainsi à la confiance et à la qualité des services. 
+✓ Consultation de son tableau de bord : 
+▪  Il peut accéder à son tableau de bord pour voir et gérer diverses informations 
+liées à ses activités et engagements. Il peut inclure les détails tels que les 
+
+11 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+Demandes, les services, etc… 
+✓ Gestion de ces services : 
+▪ Le prestataire a la capacité de gérer ses services, mettre à jour les informations 
+du service, y compris les tarifs et les détails, il peut aussi ajouter un service 
+d’après l’application. 
+✓ Communication avec les propriétaires :  
+▪ Il peut utiliser la messagerie intégrée pour discuter avec les propriétaires et 
+répondre à leurs questions. 
+✓ Publication des articles : 
+▪ Il a la possibilité de rédiger et publier des articles pertinents liés aux soins,  à 
+l’éducation et au bien -être des anima ux. Cela pourrait être des articles 
+informatifs, des conseils, des astuces ou des informations liées aux soins et à 
+la gestion des animaux de compagnie 
+➢ Administrateur de l’application (Admin) :  
+✓ S’authentifier 
+✓ Gestion des utilisateurs : 
+▪ Il a le droit d’ajouter, de supprimer ou de suspendre des comptes 
+d’utilisateurs. 
+✓ Gestion des services : 
+▪ Permet à l’administrateur de gérer la liste des services offerts, d’ajouter de 
+nouvelles catégories et de mettre à jour les informations. 
+✓ Sécurité et Confidentialité : 
+▪  Son rôle consiste à protéger les données des utilisateurs et garantir la 
+confidentialité des informations personnelles.  
+✓ Gestion des Problèmes : 
+▪ Permet aux administrateurs de traiter les problèmes signalés par les 
+utilisateurs, de répondre aux questions et de résoudre les litiges. 
+✓ Soutien et Assistance : 
+▪ Intègre un système de soutien aux utilisateurs et aux prestataires, avec la 
+possibilité de fournir des réponses et des solutions aux problèmes.  
+
+12 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+5.3. Besoins non fonctionnels : 
+Les besoins non fonctionnels englobent un ensemble de critères destinés à évaluer le  
+fonctionnement d'un système. Dans la suite de notre exposé, nous exposerons les exigences 
+auxquelles notre solution doit répondre. Parmi ces contraintes, nous pouvons identifier les 
+éléments suivants : 
+• Performance : La solution doit démontrer une performa nce optimale en répondant 
+efficacement aux fonctions de base, tout en minimisant les délais. 
+• Ergonomie de l'Interface Graphique : Les interfaces de l'application mobile et de 
+l'application web doivent être modernes, conviviales et soigneusement structurées. 
+L'application doit maintenir une cohérence ergonomique essentielle. 
+• Sécurité : Étant donné la nature confidentielle des données, l'application implémente 
+un système d'authentification sécurisé et offre un contrôle d'accès rigoureux pour les 
+différents utilisateurs. 
+• Responsive / Compatibilité : L'administrateur peut utiliser la solution web de manière 
+transparente à partir d'ordinateurs, de smartphones ou de tablettes. 
+ 
+6.  Méthodologie de travail : 
+6.1. Langage de Modélisation Unifié : 
+Le choix de la méthode de réalisation d’un projet est une étape essentielle qui va permettre 
+de faciliter et d’accélérer le développement de ses fonctionnalités et par conséquent augmenter 
+les chances de sa réussite. 
+C’est pour cette raison que nous avons opté pour la méthode en V, cette dernière est une 
+amélioration du modèle en cascade qui était auparavant le modèle le plus utilisé lors de la  
+réalisation des projets. Le cycle en V est composé de 9 étapes appartenant à trois grandes phases : 
+Conception, réalisation et validation comme le montre la figure suivante [1]. 
+
+13 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+ 
+ 
+Figure 4 : Schéma descriptif du modèle en V 
+6.2. Planification : 
+Ce travail a été réalisé durant une période de 6 mois et demi du 1er Mars 2023 jusqu’à    16 
+août. Pour passer d’une idée à l’exécution, il faut fixer des objectifs à atteindre dans une période 
+bien déterminée. Afin de visualiser la complexité de notre projet dans le temps, nous avons mis 
+chaque étape dans un calendrier. Nous serons en mesure de savoir si nous sommes en retard ou 
+en avance par rapport à notre planification. Pour la réussite de notre projet nous utilisons le 
+diagramme de GANTT pour élaborer les différentes étapes de réalisation de ce projet à savoir : 
+l’étude, le développement ainsi que l’élaboration du rapport. Cette planification a été formalisée 
+comme suit : 
+La première étape concerne l’analyse et la spécification des besoins de notre projet  afin 
+de rassembler toutes les informations et de connaître clairement la problématique. 
+Durant cette partie nous étions prêts à commencer la conception (diagrammes des cas 
+d’utilisations, diagramme de classe, diagrammes des séquences et diagramme de déploiement). 
+Lors de la deuxième partie, nous étions prêts à apprendre les technologies requises que nous 
+allions utiliser tout au long du cycle développement du projet. Alors nous avons commencé à 
+suivre des cours en ligne et autodidactes, en même temps que nous avons commencé à écrire le 
+code source de notre projet. 
+
+14 
+ 
+Chapitre 1 : Etude préalable et spécification des besoins 
+ 
+La dernière par tie consiste à rédiger le rapport. Ce dernier a été mise à jour durant la  
+période de projet. 
+Figure 5 : Diagramme de Gantt 
+7. Conclusion 
+Ce chapitre s’est articulé autour d’une étude préalable visant à préciser le contexte général 
+du projet, étudier l’existant en l’analysant et le critiquant avant de proposer une solution visant 
+à remédier les problèmes liés à la possession d’un animal. Ainsi, dans ce premier chapitre, on 
+a abordé une spécification des besoins fonctionnels ainsi que des besoins non fonctionnels et 
+ce, en suivant une certaine méthodologie qui est assez adéquate. 
+ 
+ 
+ 
+ 
+ 
+
+
+15 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Etude conceptuelle 
+ 
+Chapitre 2  
+ 
+
+16 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+1. Introduction 
+Dans ce qui précède, on a bien défini l'architecture des différents acteurs de la solution 
+proposée de notre part et de toutes les diverses fonctionnalités permettant de l'exploiter. A ce 
+stade, nous passons à une phase irréductiblement très importante concernant le développement 
+d'une application à savoir la phase de conception. En fait, le déclenchement sera d'après la 
+présentation du processus de notre solution. Puis, on détaillera chaque modèle d'un cas 
+d'utilisation en se basant sur les modèles UML. 
+2. Modélisation de l’architecture physique : 
+2.1.  Diagramme de déploiement : 
+Pour illustrer le déploiement de notre solution, nous avons utilisé le diagramme de  
+déploiement qui illustre la disposition physique des différents matériaux et la réparation des  
+composants au sein des nœuds 
+ 
+Figure 6 : Diagramme de déploiement 
+Notre diagramme de déploiement est constitué de quatre nœuds principaux : 
+• Un système de gestion de base de données MongoDB (serveur SGBD) : 
+Ce serveur SGBD est la masse de stockages de to utes les données  vitales de 
+l'application, notamment les profils des propriétaires et des prestataires, les détails des 
+animaux, les services offerts, les articles, etc. Il permet aux différents composants de 
+l'application d'accéder et de manipuler ces données de manière sécurisée. 
+
+17 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+• Des services web (serveur back-end) :  
+Les services web sont conçus selon l'architecture REST (Representational State 
+Transfer) pour faciliter la communication entre les différentes parties de notre 
+système. Ils pe rmettent aux utilisateurs ( prestataires et propriétaire de l’animal)  
+d'interagir avec la base de données et d'accéder aux fonctionnalités clés, telles que la 
+consultation des services, la gestion des publications et les articles , et bien plus 
+encore. Les services web assurent une connectivité fluide et une transmission de 
+données efficace entre les différents acteurs du système. 
+• Une application mobile (smartphone Android) :  
+Ce composant représente l'application mobile installée sur les smartphones et tablettes 
+des utilisateurs. Il permet aux propriétaires d'animaux et aux prestataires de services  
+d'interagir avec l'application, de visualiser les informations, de réserver des services, 
+Grâce à cette application, ils peuvent facilement consulter leurs profiles, enregistrer 
+les tâches réalisées  et accéder à des fonctionnalités spécifiques à leur domaine 
+d'activité. 
+• Une application Web du front-office (serveur front-end) :  
+Cette application offre une interface conviviale et intuitive aux administrateurs. Ils 
+peuvent ainsi accéder aux fonctionnalités de gestion, visualiser les données. 
+L'application Web du front -office est développée en utilisant des technologies 
+modernes telles qu’Angular, garantissant une expérience utilisateur fluide et réactive. 
+3. Conception détaillée : 
+3.1. Diagramme de cas d’utilisation : 
+Le diagramme de cas d’utilisation est l'un des diagrammes UML utilisé pour donner une 
+vision globale du comportement fonctionnel d’un système logiciel. Un cas d’utilisation 
+représente une unité discrète d’interaction entre un utilisateur (humain ou machine) et un 
+système. 
+3.1.1. Diagramme de cas d’utilisation général : 
+  Dans cette partie, on va présenter le diagramme de cas d’utilisation général qui  
+
+18 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+rassemble l’ensemble de ces cas  d’utilisation fondamentaux afin d’avoir une vue globale du 
+fonctionnement de notre système. 
+Tableau 2 : Les tâches des acteurs 
+Tâches Admin Propriétaire Prestataire Visiteur 
+S’inscrire ✓ ✓ ✓ ✓ 
+Gestion des utilisateurs ✓    
+Gestion des services ✓  ✓  
+Gestion des articles   ✓  
+Gestion des offres   ✓  
+Gestion des publications  ✓   
+Gestion de réservations    ✓  
+Gestion de profil ✓ ✓ ✓  
+Gestion de l’animal  ✓   
+Consulter le tableau de 
+bord 
+✓  ✓  
+Consultation des services ✓ ✓ ✓ ✓ 
+Demande de réservations  ✓   
+Consultation des articles  ✓   
+Consultation des offres  ✓   
+
+ 
+                                                                                                                   Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 7 : Diagramme de cas d'utilisation général 
+
+20 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+3.2. Cas d’utilisation détaillée 
+3.2.1. Cas d’utilisation « Consulter les services» 
+  Le diagramme de cas d'utilisation présent dans la figure ci -dessous spécifie le cas 
+"Consulter les services" pour l'acteur propriétaire de l’ animal. Une fois que le propriétaire a 
+ouvert l’application, une liste des différents types de services s’affiche sur l’écran d’accueil, le 
+propriétaire sélectionne le type de service qui l’intéresse en cliquant dessus, Cette fonctionnalité 
+lui permet d'accéder à la liste des prestataires qui offrent ce service et de consulter en détail les 
+informations spécifiques à chaque prestataire, il peut aussi réserver un service. 
+ 
+Figure 8 : Diagramme de cas d’utilisation « Consulter les services » 
+Le tableau ci-dessous décrit le cas d’utilisation « Consulter les services» en indiquant le 
+scénario possible et Scénario d’exception. 
+Tableau 3: Description cas d'utilisation «Consulter les services» 
+Intitulé o Consulter les services 
+Auteur Principal o Propriétaire de l’animal 
+Description o Ce cas d'utilisation permet au propriétaire d’animal de consulter 
+les services disponibles dans l’application pour répondre aux 
+besoins de son animal de compagnie. 
+Préconditions o Le propriétaire d’animal est connecté à l’application. 
+
+21 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+o Les services ont été préalablement enregistrés dans le système. 
+Post-conditions o le propriétaire consulte les services disponibles dans l’application 
+et il a la possibilité de réserver un service. 
+ 
+Scénario possible 
+ 
+o le propriétaire d’animal ouvre l’application sur son appareil 
+mobile. 
+o le système affiche la liste du service disponible. 
+o Le propriétaire explore les différents services (hébergement, 
+promenade, etc..) sur l’écran d’accueil de l'application. 
+o  Le propriétaire sélectionne le service choisi pour obtenir plus de 
+détails. 
+o Le système affiche la liste des prestataires offrant le service choisi, 
+avec leurs noms et informations pertinentes. 
+o En cliquant sur le prestataire spécifique, le propriétaire peut 
+accéder à des détails plus spécifiques sur le service proposé et les 
+prix. 
+o Le propriétaire a la possibilité de réserver un service en 
+remplissant le formulaire. 
+ 
+ 
+Scénario d’exception o Aucun service n’est disponible pour le type sélectionné, un 
+message d’indisponibilité s’affiche avec des suggestions 
+alternatives.  
+ 
+3.2.2. Cas d’utilisation « Gérer les animaux» 
+➢ Diagramme 
+Le diagramme de cas d’utilisation présent dans la figure ci-dessous spécifié le cas 
+«Gérer les animaux» pour l’acteur propriétaire de l’animal. Permettre au propriétaire de 
+gérer facilement les informations et les besoins liées à  ses animaux de compagnie via 
+l’application mobile. 
+
+22 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 9 : Diagramme de cas d’utilisation «Gérer les animaux» 
+Le tableau ci-dessous décrit le cas d’utilisation « Gérer les animaux » en indiquant le 
+scénario possible et Scénario d’exception. 
+Tableau 4: Description cas d'utilisation «Gérer les animaux» 
+ 
+Intitulé o Gérer les animaux 
+Auteur Principal o Propriétaire de l’animal 
+Description o Le cas d'utilisation "  Gérer les animaux " Permettre au propriétaire  
+d’ajouter un animal, modifier les détails de son animal ou de supprimer 
+un animal existant dans l’application.  
+Pré conditions o Le propriétaire est connecté à l’application. 
+o Le propriétaire a consulté le profil 
+o L’animal doit être enregistré dans le profil du propriétaire 
+Post-conditions o Les informations de l’animal sont mises à jour selon les actions 
+effectuées par le propriétaire. 
+ 
+Scénario possible 
+o Le propriétaire se connecte à son compte. 
+o Dans la barre de navigation, le propriétaire choisit l’option « profil ». 
+
+23 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+o La liste des animaux enregistrés dans le profil du propriétaire s’affiche. 
+o Le propriétaire choisit l’animal qu’il souhaite gérer en sélectionnant 
+au-dessus. 
+o Le système affiche les détails de l’animal tels que son nom, sa race, 
+son âge, etc... 
+o Le propriétaire peut mettre à jour les informations de l’animal en 
+modifiant les champs appropriés. 
+o Une fois les modifications terminées, le propriétaire enregistre les 
+mises à jour 
+o Il a la possibilité de supprimer l’animal. 
+o Le propriétaire peut également d’ajouter un animal en remplissant les 
+informations liées à son animal. 
+ 
+Scénario d’exception o Certains champs obligatoires ne sont pas remplis. Le système affiche 
+un message d’erreur. Le propriétaire remplit les champs manquants et 
+tente à nouveau d’enregistrer l’animal. 
+o L’application détecte que l’animal est déjà enregistré dans le profil, elle 
+affiche un message indiquant que l’animal existe déjà. 
+o Un problème de connexion à la base de données se produit, empêchant 
+l’enregistrement de l’animal. Application affiche un message d’erreur. 
+ 
+3.2.3. Cas d’utilisation «Gérer les publications» 
+➢ Diagramme 
+Le diagramme de cas d'utilisation présent dans la figure ci-dessous spécifie le cas "Gérer 
+les publications" pour l'acteur propriétaire. Après l'authentification, le propriétaire a le droit de 
+gérer ses publications, en les supprimant, les modifiant, les consultant et en les ajoutant. 
+
+24 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 10 : Diagramme de cas d’utilisation « Gérer les publications » 
+Le tableau ci -dessous décrit le cas d’utilisation «  Gérer les publications » en indiquant 
+Scénario possible et Scénario d’exception.  
+ 
+Tableau 5 :Description cas d'utilisation «Gérer les publications» 
+Intitulé o Gérer les publications 
+Auteur Principal o Propriétaire  
+Description o Ce cas d'utilisation représente le processus concernant la gestion des 
+publications postées par un propriétaire d’animaux au sein de 
+l’application mobile.  
+Pré conditions o Le propriétaire doit être authentifié dans le système. 
+Post-conditions o Le propriétaire redirige vers l’interface « publications » pour pouvoir 
+effectuer les différentes tâches assignées. 
+ 
+Scénario possible 
+o Le propriétaire ouvre l’application. 
+o Au niveau de la barre de navigation, le propriétaire sélectionne 
+l’option « Publications ». 
+o Une liste des publications existantes du propriétaire s’affiche, 
+
+25 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+montrant les informations telles que l’image et les commentaires. 
+o Le propriétaire choisit la publication qu'il souhaite gérer en 
+sélectionnant au-dessus.  
+o 5. L'application affiche les détails de la publication tels que la 
+description, l’image, etc.  
+o Le propriétaire peut mettre à jour les informations de la publication 
+en modifiant les champs appropriés. .   
+o Une fois les modifications terminées, le propriétaire enregistre les 
+mises à jour  
+o Les informations de la publication sont mises à jour. 
+o Le propriétaire peut ajouter ou supprimer des publications. 
+ 
+Scénario 
+d’exception 
+o Le propriétaire tente d'ajouter une nouvelle publication, mais tous les 
+champs obligatoires ne sont pas remplis 
+o L'application affiche un message d'erreur indiquant qu'il faut remplir 
+tous les champs obligatoires pour continuer 
+o Le propriétaire remplit les champs manquants et tente à nouveau 
+d'ajouter la publication 
+ 
+3.2.4. Cas d’utilisation «Gérer les réservations» 
+➢ Diagramme 
+Le diagramme de cas d'utilisation présent dans la figure ci -dessous spécifie le cas "  
+Consulter les réservations " pour l'acteur prestataire. Après l'authentification, le prestataire a le 
+droit de consulter tous les réservations de services tels que les engagées, à venir, en cours et 
+terminées. 
+
+26 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 11 : Diagramme de cas d’utilisation « Gérer les réservations » 
+Le tableau ci -dessous décrit le cas d’utilisation «  Gérer les réservations » en indiquant 
+Scénario possible et Scénario d’exception. 
+Tableau 6 : Description cas d'utilisation « Gérer les réservations » 
+Intitulé o Gérer les réservations 
+Auteur Principal o Prestataire 
+Description o Ce cas d'utilisation représente le processus de consultation des 
+réservations par un prestataire. Il englobe les étapes nécessaires pour 
+se connecter au système , consulter les réservations et effectuer les 
+actions nécessaires, telles que rejet ou l’acceptation de demande . 
+L'authentification est un pré condition pour pouvoir consulter les 
+réservations. 
+Pré conditions o Le prestataire doit être authentifié dans le système. 
+Post-conditions o Le prestataire redirige vers l’interface « Demandes » et peut effectuer 
+les différentes tâches assignées. 
+ 
+Scénario possible 
+o Le prestataire ouvre l’application. 
+o Le système demande l'authentification du prestataire 
+o Le prestataire saisit ses identifiants et se connecte au système. 
+
+27 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+o Le système vérifie les informations d'identification et autorise l'accès. 
+o Le prestataire  sélectionne l'option " Demande" dans la barre de 
+navigation pour consulter ses réservations. 
+o Le système affiche une interface contenant la liste des réservations 
+engagées, à venir, en cours et terminées. 
+o Le prestataire peut sélectionner sur le bouton «  Refuser » ou 
+« Accepter » selon leur disponibilité. 
+o Le système enregistre le choix de prestataire et notifie le propriétaire. 
+ 
+Scénario 
+d’exception 
+o Si le prestataire n’a aucune réservation affichée, le système affiche 
+un message indiquant qu’aucune réservation n’est prévue. 
+ 
+3.2.5. Cas d’utilisation «Gérer les articles » 
+➢ Diagramme 
+Le diagramme de cas d'utilisation présent dans la figure ci-dessous spécifie le cas "Gérer 
+les articles" pour l'acteur propriétaire. Après l'authentification, le prestataire a le droit de gérer 
+ses articles, en les supprimant, les modifiant, les consultant et en les ajoutant. 
+ 
+Figure 12 : Diagramme de cas d’utilisation « Gérer les articles » 
+Le tableau ci-dessous décrit le cas d’utilisation « Gérer les articles» en indiquant Scénario 
+
+28 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+possible et Scénario d’exception.  
+ 
+Tableau 7 : Description cas d'utilisation «Gérer les articles» 
+Intitulé o Gérer les articles 
+Auteur Principal o Prestataire 
+Description o Ce cas d'utilisation concerne la gestion des articles et des contenus 
+liés aux conseils, astuces et informations sur les animaux de 
+compagnie, destinés à être publiés par un prestataire au sein d'une 
+application mobile dédiée. 
+Pré conditions o Le prestataire doit être connecté à l'application avec un compte 
+valide. 
+o  Les articles qu'il souhaite publier doivent être enregistrés dans son 
+profil. 
+Post-conditions o Les articles sont mis à jour selon les actions effectuées par le 
+prestataire. 
+o Le propriétaire redirige vers l’interface « articles » pour pouvoir 
+effectuer les différentes tâches assignées. 
+ 
+Scénario possible 
+o Le prestataire ouvre l'application mobile et se connecte à son compte. 
+o Dans la barre de navigation , le prestataire sélectionne l'option "Mes 
+Articles". 
+o  Une liste des articles existants du prestataire s'affiche, montrant les 
+contenus qu'il souhaite publier. 
+o Le prestataire choisit l'article qu'il souhaite gérer en sélectionna nt le 
+contenu correspondant.  
+o L'application affiche les détails de l'article tels que le titre, le contenu, 
+etc. 
+o Le prestataire peut mettre à jour le contenu de l'ar ticle en modifiant 
+le titre, les détails et l’image associée à l'article pour le classer de 
+
+29 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+manière appropriée. 
+o Une fois les modifications terminées, le prest ataire enregistre les 
+mises à jour. 
+o Les informations de l'article sont mises à jour dans le profil du 
+prestataire. 
+o Le prestataire peut également ajouter ou supprimer un article. 
+ 
+Scénario 
+d’exception 
+o Le prestataire ouvre l'application, mais n'est pas  connecté à son 
+compte. 
+o L'application affiche un message demandant au prestataire de se 
+connecter ou de créer un compte. 
+o  Si le prestataire choisit de créer un compte, il doit fournir les 
+informations nécessaires et vérifier son adresse e-mail.  
+o Une fois le compte créé ou la connexion réussie, le prestataire peut 
+accéder à la gestion des articles.  
+o Le prestataire tente d'ajouter un nouvel article, mais tous les champs 
+obligatoires ne sont pas remplis. L'application affiche un message 
+d'erreur indiquant qu'il faut remplir tous les champs obligatoires pour 
+continuer.  
+o Le prestataire remplit les champs manquants et tente à nouve au 
+d'ajouter l'article.  
+o Le prestataire rencontre un problème de connexion à la base de 
+données lors de la mise à jour de l'article. L'application affiche un 
+message d'erreur indiquant que la mise à jou r n'a pas pu être 
+effectuée.  
+o Le prestataire peut essayer à nouveau après avoir vérifié sa connexion 
+Internet.  
+ 
+ 
+ 
+ 
+
+30 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+3.2.6. Cas d’utilisation « Consulter le tableau de bord» 
+  Le diagramme de cas d'utilisation présent dans la figure ci -dessous spécifie le cas 
+"Consulter le tableau de bord" pour l’acteur prestataire tels que les statistiques, les gains et les 
+demandes de réservations. 
+ 
+Figure 13 : Diagramme de cas d’utilisation « Consulter le tableau de bord » 
+Le tableau ci-dessous décrit le cas d’utilisation « Consulter le tableau de bord»  en 
+indiquant le scénario possible et Scénario d’exception. 
+ 
+Tableau 8 : Description cas d'utilisation «Consulter le tableau de bord» 
+Intitulé o Consulter le tableau de bord 
+Auteur Principal o Propriétaire de l’animal 
+Description o Ce cas d'utilisation concerne la consultation des informations et 
+des statistiques pertinentes sur le tableau de bord d'un prest ataire 
+d'animaux de compagnie. 
+Préconditions o Le prestataire doit être connecté à l'applic ation avec un compte 
+valide.  
+o Les données relatives à ses services et à son activité doivent être 
+
+
+31 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+enregistrées dans son profil. 
+Post-conditions o Le prestataire peut visualiser les informations et les statistiques 
+mises à jour sur son tableau de bord 
+ 
+Scénario possible 
+o Le prestataire ouvre l'application mobile et se connecte à son 
+compte. 
+o Le tableau de bord s'affiche, fournissant un aperçu des principales 
+informations et statistiques liées à l'activité du prestataire. 
+o Le tableau de bord peut afficher des données telles que le nombre 
+total de services effectués, les gains, les réservations, etc.  
+o Le prestataire peut voir les rendez-vous à venir et les annulations 
+récentes.  
+o Le prestataire peut revenir au tableau de bord à tout moment pour 
+consulter les mises à jour.  
+ 
+Scénario d’exception o Le tableau de bord ne parvient pas à charger en raison d'un 
+problème de connexion à la base de données ou à un autre 
+problème technique. L 'application affiche un message d'erreur 
+indiquant que le tableau de bord ne peut pas être affiché pour le 
+moment. 
+o Le prestataire peut essayer de rafraîchir la page ou de vérifier sa 
+connexion Internet. 
+ 
+3.3. Diagramme de classe 
+Considéré comme l'une des étapes les plus importantes dans la modélisation orientée 
+objet, le diagramme de classe offre une représentation statique des éléments constituant le 
+système, tels que les classes, leurs attributs, leurs méthodes et les relations entre elles. 
+Dans notre système, nous avons trois rôles distincts : l'Administrateur, le Propriétaire et 
+le Prestataire. Chacun de ces rôles est représenté comme une entité dans notre diagramme de 
+classe et hérite des attributs et des méthodes de base de la classe Utilisateur. 
+La Classe Utilisateur  représente les utilisateurs de l'application, y compris les 
+administrateurs, les prestataires et  les propriétaires d'animaux. Elle possède des attributs 
+
+32 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+communs tels que l'identifiant, le nom d'utilisateur, l'adresse e-mail et le mot de passe, ainsi que 
+les sous-classes (Administrateur, Prestataire, Propriétaire) héritent des attributs et méthodes de 
+la classe Utilisateur. 
+ La classe Propriétaire  définie les propriétaires d'animaux. Elle hérite des attributs et 
+méthodes de la class e Utilisateur. Elle possède une relation "possède" avec la classe Animal, 
+indiquant qu'un propriétaire peut avoir un ou plusieurs animaux. 
+Chaque propriétaire peut publier des publications, ce qui est indiqué par la relatio n avec 
+la classe Publication, il peut également effectuer des réservations pour leurs animaux, ce qui est 
+montré par la relation avec la classe Réservation.  
+La classe Animal représente les animaux de compagnie. Elle possède des attributs tels 
+que l'identifiant, le nom, l’image, la race, etc., elle est liée d’une coté à la classe Propriétaire via 
+la relation "possède", montrant quels animaux appar tiennent à quel propriétaire.  Les 
+réservations effectuées pour chaque animal sont liées à cette classe via la relation "passer". 
+La classe Publication est créée par les propriétaires.  En possédant des attributs tels que 
+l'identifiant, le titre, le contenu, la date de publication, etc., chaque instance de cette classe est 
+associée à un propriétaire particulier. 
+Concernant la classe Réservation qui démontre les réservations de services effectuées par 
+les pr opriétaires pour leurs animaux contenant des attributs tels que l'identifiant, la date de 
+début, la date de fin, etc. La Réservation est liée également à la classe Service pour indiquer le 
+service réservé.  
+Quant à la  classe Prestataire désignant les  prestataires de services pour animaux, qui 
+dispose des attributs tels que l'identifiant , le nom, la spécialité, etc. les Prestataires ont la 
+possibilité de poster des articles au sein de la classe Article, fournissant ainsi des informations 
+pertinentes concernant les animaux de compagnie. 
+La classe Propriétaire peut publier plusieurs publications sur son compte et écrire 
+plusieurs commentaires. Chaque Propriétaire peut également posséder plusieurs animaux. Ceci 
+établit une relation entre la classe P ropriétaire et la classe Animal, il peut aussi passer des 
+réservations pour son animal comme indiqué par la relation entre la classe Réservation et 
+animal. 
+L'Administrateur a le pouvoir de gérer à la fois les services et les utilisateurs, qui peuvent 
+
+33 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+être des Propriétaires ou des Prestataires. Son rôle est crucial pour maintenir le bon 
+fonctionnement du système. 
+ 
+Figure 14 : Diagramme de classe 
+ 
+
+34 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+3.4. Diagrammes des séquences 
+Le diagramme de séquence est un diagramme d’objet qui schématise les messages qui 
+s’envoient les uns aux autres présentés de façon chronologique et montrant comment les cas  
+d’utilisation sont réalisés. Il est de plus en plus utilisé car il permet de décrire la dynamique  
+d’un système et faire le lien entre les diagrammes de cas d’utilisation et le diagramme de classe. 
+Dans ce cas, en nous référant aux descriptions textuelles de la section précédente, nous  
+présentons les diagrammes des séquences système pour connaitre les étapes basiques de notre  
+projet. 
+3.4.1. Diagramme de séquence du cas d’utilisation « S’authentifier » 
+La figure ci-dessous montre le diagramme de séquence « S’authentifier  pour le 
+propriétaire » : 
+Le propriétaire de l’animal accède à l’interface d’authentification, il commence par la 
+saisie de son adresse e-mail, après la validation un contrôle se fait pour vérifier le champ saisi 
+tels que modélisés par les flèches 1,2 et 3.Si l’ adresse saisi est invalide le système affiche un 
+message d’erreur tel que modélisé par la flèche 14.D’où l’utilisation de l’étiquette « alt ». 
+Si l’adresse e-mail saisi est valide, le système vérifie l’existence d’adresse mail.S’il s’agit 
+d’un «  succès » le système affiche l’interface authentification mot de passe, le propriétaire 
+introduit son mot de passe, après la validation un contrôle se fait pour vérifier la validité du 
+champ saisi tels que modélisés par les flèches 4,5 et 6. 
+Si le mot de passe saisi est invalide le système affiche un message d’erreur tel que 
+modélisé par la flèche 13.D’où l’utilisation de l’étiquette « alt ». 
+Si le mot de passe saisi est valide, la fonction «  getPropriétaire » du ViewModel est 
+appelée pour récupérer le propriétaire qui est indiqué par l a flèche 8 .le système affiche 
+l’interface d’accueil tel que modélisé par la flèche 12. 
+ 
+ 
+ 
+ 
+ 
+
+35 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 15 : Diagramme de séquence « s’authentifier» 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+36 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+3.4.2. Diagramme de séquence du cas d’utilisation « Ajouter un animal » 
+La figure ci-dessous montre le diagramme de séquence «Ajouter un animal» : 
+Pour ajouter un animal par le propriétaire de l’animal, ce dernier se connecte en entrant 
+ses identifiants pour qu’il puisse ajouter un animal. 
+Une fois connecté, il accède à son profil, où il peut voir la liste des animaux, le système 
+doit passer par les étapes citées par les flèches 2,3,4 et 5,le propriétaire peut voir aussi l’option 
+ajouter un animal. 
+Le propriétaire sélectionne l’option «  ajouter animal» dans cette interface t els que 
+modélisé par la flèche 6. Le système lui affiche l’interface animal, c’est un formulaire vide pour 
+ajouter les détails de l’animal, le formulaire peut inclure des champs tels que le nom de l’animal, 
+la race, l’âge, etc… 
+Le propriétaire remplit les champs requis du formulaire avec les informations pertinentes 
+concernant l’animal qu’il souhaite ajouter comme représenté par la flèche 7. 
+Une fois que tous les détails ont  été saisis, l’utilisateur clique sur le bouton «  Ajouter », 
+le système vérifie les données saisies pour s’assurer qu’elles sont complètes et valide s tel 
+qu’indiqué par la flèche 8. 
+Si toutes les informations sont valides, le système vérifie si l’animal es t déjà existé, un 
+message d’erreur sera afficher  
+Si l’animal n’est pas enregistré dans la base de donnée, le système enregistre les détails 
+de l’animal dans la base de données associée à l’entité Animal tel que modélisé par la flèche 11 
+en appelant la méthode « Post Animal ». 
+L’application affiche un message de confirmation indiquant que l’animal a été ajouté avec 
+succès. 
+Le ViewModel récupère la réponse, s’il s’agit d’un « succès »  Le propriétaire peut voir 
+l’animal répertoire sur son profil. Indiquant Par la flèche 14. 
+Si les informations sont invalides, le système affiche un message d’erreur. 
+ 
+
+37 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 16 : Diagramme de séquence du cas d’utilisation « Ajout d’un animal » 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+38 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+3.4.3. Diagramme de séquence du cas d’utilisation « Réserver un service» 
+La figure ci-dessous montre le diagramme de séquence «Réserver un service» : 
+Le propriétaire de l’animal accède à la page d'accueil de l'application où il peut voir les 
+différents services comme représenté par le flèche,d’où l’interface envoie une demande au 
+contrôleur Service pour récupérer la liste des services, ce dernier appelle la 
+méthode  « GetAllServices » comme il est indiqué par le flèche 3,dans ce cas le modèle reçoit 
+l’appel de la méthode et envoie la liste au contrôleur qui passe le résultat a l’interface qui contint 
+la liste des services  
+Le propriétaire sélectionne un de ces services pour que le système lui afficher la listes des 
+prestataires offrant ce services en utilisant la méthode « GetPrestataire » tel que modélisés par 
+les flèche 8.  
+Le propriétaire sélectionne le bouton «  réserver » de prestataire  souhaité en cliquant 
+dessus. 11.  
+L'application affiche l’interface «  Réservations » où le propriétaire  peut choisir son 
+animal et les dates pour le service. Il sélectionne son animal et une date voulu. Après avoir 
+choisi la date et l’animal, l'utilisateur est invité à confirmer sa réservation tel que modélisé par 
+la flèche 12. 
+Une fois la réservation confirmée, le système vérifie les champs saisis. 
+Si les champs sont valides, L'application enregistre la réservation dans la base de données, 
+associant le service, le prestataire et l'animal comme représenté par la flèche 14 en utilisant la 
+méthode « AddRéeservation () ». 
+Si les champs sont invalides, le ViewModel retourne un message d’erreur tel que 
+modélisés par la flèche 17. 
+ 
+ 
+
+39 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 17 : Diagramme de séquence du cas d’utilisation «Réserver un service» 
+ 
+ 
+ 
+ 
+
+40 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+3.4.4. Diagramme de séquence du cas d’utilisation « Ajouter un Article » 
+La figure ci-dessous montre le diagramme de séquence «Ajouter un article» : 
+Pour ajouter un article par le prestataire, ce dernier se connecte en entrant ses identifiants 
+pour qu’il puisse ajouter un article. 
+Une fois connecté, il accède à l’interface des articles , où il peut voir la liste des articles 
+publiés et voir aussi l’option ajouter un article tel que modélisé par la flèche 1. 
+Le prestataire sélectionne l’option « ajouter article» dans cette interface tels que modélisé 
+par la flèche 6. Le système lui affiche l’interface « ajouter article », c’est un formulaire vide 
+pour ajouter les détails de l’article, le formulaire peut inclure des champs tels que le titre détails, 
+l’image, etc… 
+Le prestataire remplit les champs requis du formulaire avec les informations pertinentes 
+concernant l’article qu’il souhaite publier comme représenté par la flèche 7. 
+Une fois que tous les détails ont été saisis, l’utilisateur clique sur le bouton «  Ajouter », 
+le système v érifie les données saisies pour s’assurer qu’elles sont complètes et valides tel 
+qu’indiqué par la flèche 8. 
+Si toutes les informations sont valides, le système enregistre les détails de l’ article dans 
+la base de données associée à Article tel que modélisé par la flèche 10 en appelant la méthode « 
+PostArticle ». 
+L’application affiche un message de confirmation indiquant que l’article a été ajouté avec 
+succès. 
+Le ViewModel récupère la réponse, s’il s’agit d’un « succès » le prestataire peut voir 
+l’article sur l’interface des articles. Indiquant Par la flèche 12. 
+Si les informations sont invalides, le système affiche un message d’erreur. 
+ 
+
+41 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+ 
+Figure 18 : Diagramme de séquence du cas d’utilisation «Ajouter un Article» 
+ 
+
+42 
+ 
+Chapitre 2 : Etude conceptuelle 
+ 
+4. Conclusion 
+A travers ce chapitre, nous avons présenté la conception de notre projet. Dans ce cadre, 
+on a instauré un diagramme de déploiement illustrant la disposition physique des différents 
+matériaux et la réparation des composants au sein des nœuds. En outre, par les diagrammes de 
+cas d’utilisation précisés, on a bien expliqué notre besoin par rapport à ce projet. Ajoutons à 
+cela une conception globale par le biais d'un diagramme de classe décrivant l’architecture totale 
+du système. Enfin, nous avons abordé une conception détaillée du cas d’utilisation consacré par 
+notre solution via les diagrammes de séquences. Ainsi, on passera au chapitre suivant qui se 
+focalise sur la partie réalisation et expérimentation. 
+ 
+ 
+ 
+
+43 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Réalisation et Expérimentation 
+Chapitre 3  
+ 
+
+44 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+1. Introduction 
+Il est intéressant de préciser qu'après la partie conception, ce chapitre désigne une 
+présentation de la phase d réalisation de notre solution au but d'accomplir entièrement le travail. 
+Sur ce point, nous déterminons premièrement les outils matériels et logiciels utilisés pour le 
+développement de notre solution. De plus, à travers des captures d’écran, nous figurons les tests 
+de validation relatifs aux différentes fonctionnalités. 
+2. Choix de l’architecture 
+L’architecture de notre application mobile est une architecture 3-tiers partagée entre :  
+• Une base de données comporte une importante capacité de stockage, elle doit être 
+disponible afin qu’on puisse y accéder à tout moment, et doit avoir une puissante 
+capacité de traitement dans le cas où plusieurs clients y accèdent en même temps.  
+• Un client mobile est une personne qui a un smartphone ayant l’application Android.  
+• Un serveur web qui répond aux requêtes des clients mobiles. 
+2.1. Spécification de l’architecture : 
+Il est indispensable à la conception de tout système informatique de choisir le modèle 
+d'architecture qui lui sera adéquat pour assurer un bon fonctionnement et des meilleures 
+performances. 
+C'est pour cette raison que nous optons pour le modèle MVVM qui sera également très 
+pratique pour gérer l'interaction entre les différents composants de notre a pplication Android. 
+Nous décrivons cette architecture dans la section suivante.  
+• Architecture MVVM : 
+Le modèle-vue-vue modèle (en abrégé MVVM, de l'a nglais Model View ViewModel) 
+[2] est une architecture et une méthode de conception utilisée dans le génie logiciel. 
+Apparu en 2004, MVVM est originaire de Microsoft et adapté pour le développement des 
+applications basées sur les technologies Windows Presentation Foundation et Silverlight via 
+l'outil MVVM Light par exemple. Cette méthode permet, tel le mo dèle MVC (modèle -vue-
+contrôleur), de séparer la vue de la logique et de l'accès aux données en accentuant les principes 
+de binding et d’événement. 
+
+45 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+Figure 19 : Modèle MVVM 
+• Le modèle : le modèle contient les données. Généralement, ces données proviennent 
+d’une base de données ou d’un service externe comme un API. 
+• La vue : la vue correspond à ce qui est affiché (la page web dans notre cas). La  vue 
+contient les différents composants graphiques (boutons, liens, listes) ai nsi que le  
+texte. 
+• Le vue-modèle : ce composant fait le lien entre le modèle et la vue. Il s’occupe  de 
+gérer les liaisons de données et les éventuelles conversions. C’est ici qu’intervient le 
+binding. 
+3. Environnement de développement 
+Dans cette partie, nous décrivons les environnements logiciels et les technologies utilisées 
+pour la réalisation de notre solution 
+3.1. Environnement logiciel 
+Dans cette partie, nous allons présenter les différents logiciels utilisés lors de la réalisation 
+de notre solution : 
+• Visual Studio code  : Visual Studio Code est un éditeur de code open -source 
+développé par Microsoft supportant un très grand nombre de langages grâce à des 
+extensions. Il supporte l’autocomplétion, la coloration syntaxique, le débogage, et 
+les commandes git. [3]. 
+
+
+46 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 20 : Visual Studio Code 
+• Draw.io : Est un outil de création de diagrammes en ligne gratuit qui vous permet 
+de créer des organigrammes, des diagrammes, des cartes mentales, des 
+organigrammes et bien plus encore. Une application Web, Draw.io est entièrement 
+intégrée à Google Drive. Cela signifie que vous pouvez enregistrer automatiquement 
+les résultats de votre travail dans votre compte Google Workspace ou Gmail[4] 
+Figure 21 : Draw.io 
+• Postman : Est un outil permettant le test des requêtes http crée en 2014 par Abhinav 
+Asthana, Abhijit Kane, Ankit Sobti [5]. 
+ 
+Figure 22 : Postman 
+ 
+ 
+
+
+47 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+3.2. Technologies utilisées 
+Dans cette partie, nous allons présenter les différentes technologies utilisées pour la 
+réalisation de notre solution. 
+• Flutter : Est un kit de développement logiciel (SDK) d'interface utilisateur open -source 
+créé par Google. Il est utilisé pour développer des applications pour Android, iOS, Linux, 
+Mac, Windows, Google Fuchsia et le web à partir d'une seule base de code. [6] 
+ 
+ 
+Figure 23 : Flutter 
+ 
+• NestJs : Est un système de gestion de base de données relationnelle. est un framework 
+permettant de créer des applications Node.js hautement scalables, testables et facilement 
+maintenables. La principale problématique résolue par Nest est celle de l’architecture. Il est 
+en effet facile de se laisser tenter par la possibilité d’importer de nombreux.[7] 
+ 
+Figure 24 : NestJs 
+ 
+• MongoDB : Est une base de données NoSQL open source. Puisqu’il s’agit d’une base de 
+données non relationnelle, elle peut traiter des données structurées, semi-structurées et non 
+structurées. Elle utilise un modèle de donn ées non relationnel, orienté document, et un 
+langage de requête non structuré. [8] 
+
+
+48 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 25 : mongoDB 
+ 
+• Firebase : Firebase est un ensemble d'outils pour l'hébergement et le développement 
+d'applications mobiles et web, qui permet l'envoi de notifications et de publicités, la 
+remontée des erreurs et des clics effectués dans l'application. [9] 
+ 
+Figure 26 : Firebase 
+ 
+• Angular : Est un Framework open source écrit en JavaScript qui permet la création 
+d’applications Web. Il est développé par Google et fondé sur l’extension du langage HTML 
+par de nouvelles balises (tags) et attributs pour aboutir à une définition déclarative des pages 
+web. Aussi, le framework s’appuie sur Typescript, une surcouche au JavaSc ript développé 
+par Microsoft, qui est un langage typé qui permet de créer des classes, des variables et des 
+signatures de fonction [12]. Pour notre application nous avons utilisé la version 11 Il prend 
+en charge les  interfaces, les  mixins, les  classes abstraites , les  génériques réifiés et 
+l'inférence de type2. [10] 
+Figure 27 : Angular 
+ 
+
+
+49 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+4. Pet Care 
+Comme titre de projet, nous avons choisi «Pet Care». En fait, la figure suivante représente 
+le logo pour l'application qui reflète notre vision.  Une telle lettre est significative car elle 
+symbolise à la fois notre identité et notre engagement envers nos utilis ateurs. D’ailleurs, nous 
+avons choisi une couleur bleue, en accord avec l’harmonie qu’on songe garantir au niveau de 
+la relation entre l’homme et l’animal . Cette combinaison entre le mot "Pet " et le mot "Care "   
+permet de véhiculer notre message concernant l’encouragement au suivi animalier qui sera en 
+ligne. 
+ 
+Figure 28: Pet Care 
+4.1. Scénario expérimental  
+Notre projet vise à informatiser les différentes tâches effectuées pour l es acteurs 
+« Propriétaire de l’animal» et « Prestataire » à l’aide d’une application mobile. Pour cela, on va 
+présenter les principaux écrans et décrire leurs fonctionnements. 
+✓ Les interfaces qui sont relatives au propriétaire de l’animal sont : 
+➢ Les pages de démarrage "Onboarding pages"  
+ La figure ci -dessous Désigne les pages ou écrans d'introduction que les utilisateurs 
+rencontrent lorsqu'ils utilisent une nouvelle application. Ces pages sont conçues pour 
+familiariser les utilisateurs avec les fonctionnalités, l'inte rface et les principales actions de 
+l'application, afin de les guider à travers l'expérience utilisateur dès le début. Ces pages 
+contiennent des informations sur la navigation, les fonctionnalités clés qui aident les utilisateurs 
+à prendre en main l'application de manière efficace. 
+
+
+50 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 29 : Interfaces de démarrage 
+➢ Authentification 
+La figure ci-dessous présente l'écran d'authentification du propriétaire. Sur cet écran, le 
+propriétaire doit saisir son adresse mail. Une fois l’adresse mail est saisie, il clique sur le bouton 
+« Connecter », il devra entrer son mot de passe pour accéder à l’écran d’accueil   
+Ce processus d'authentification garantit la sécurité et l'accès approprié aux données de 
+chaque propriétaire. En fournissant son mail et son mot de passe, le  propriétaire peut réserver 
+un ou plusieurs services correspondant à ses besoins , lui permettant ai nsi d'accéder aux 
+informations nécessaires pour son animal de compagnie. 
+
+51 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+        
+  
+ 
+Figure 30 : Interfaces authentification 
+➢ Ecran d’accueil pour le propriétaire de l’animal 
+Il présente des éléments clés pour aider les propriétaires d'animaux à accéder rapidement 
+aux services et aux informations pertinentes. L'en-tête de l'écran contient le logo de l'application 
+Liste des Services Au centre de l'écran, une liste détaillée des services disponibles par le 
+biais de l'application est affichée. Chaque service est accompagné d'un titre  et d'une icône 
+représentative. Les propriétaires d'animaux peuvent parcourir cette liste pour voir les services 
+proposés, tels que la promenade des chiens, la garde d'animaux, etc.  
+Offres des Prestataires c’est u ne section distincte affiche les offres actuelles des 
+prestataires de services. Cela pourrait inclure des offres spéciales, des réductions ou des 
+promotions sur certains services. Articles Post és par les Prestataires c’est une autre partie de 
+l'écran met en avant les articles publiés par les prestataires de services. Ces articles contenant 
+des conseils, des astuces et des informations utiles sur les soins aux animaux de compagnie. Le 
+pied de Page contient des liens vers des pages profil, les publications, les réservations.  
+
+
+52 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 31 : Interface d'accueil 
+➢ Liste des prestataires offrant le service sélectionné 
+La figure ci-dessous présente la liste des prestataires qui proposent le service sélectionné. 
+Chaque prestataire est accompagné de deux boutons "Voir le profil" et "Réserver" ainsi que le 
+prix proposé et une image. Cette interface  est conçue pour permettre aux propriétaires 
+d'animaux de parcourir et de choisir facilement un prestataire pour le service souhaité. En haut 
+de l'écran, un titre indique clairement le service voulu, par exemple "Promenade  " ou 
+"hébergement". Juste en dessous liste des prestataires au centre de l'écran, une liste verticale de 
+prestataires est affichée.  
+Chaque élément de la liste représente un prestataire spécifique et affiche des informations 
+clés tels que l’i mage du Prestataire c’est u ne petite image ou une icône représentant le 
+prestataire est affichée à gauche, le nom du prestataire et le prix Proposé estimé pour le service 
+est indiqué, permettant aux utilisateurs de comparer les options. 
+ Un bouton distinct "Voir le profil" permet aux utilisateurs d'accéder aux informat ions 
+détaillées du prestataire et u n bouton "Réserve r" est inclus pour permettre aux propriétaires 
+d'animaux de réserver directement le service du prestataire. 
+
+
+53 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 32 : Interface Liste des prestataires 
+ 
+Figure 33 : Interface Profil de prestataire 
+ 
+
+54 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+➢ Procédure de la réservation  
+La figure ci -dessous présente la procédure de réservation .Cet écran contient une liste 
+déroulante ou une série de boutons radio permet aux propriétaires d'animaux de sélectionner 
+l'animal pour lequel ils réservent le service . Sous la sélection de l'animal, deux champs de 
+calendrier sont fournis pour que les utilisateurs choisissent la date de début et la date de fin de 
+la réservation. Les utilisateurs peuvent cliquer sur les champs pour ouvrir un calendrier pop-up 
+et choisir les dates souhaitées .On peut constater aussi un bouton distinct "Réserver" est placé 
+en bas de l'écran. Lorsque les utilisateurs ont sélectionné leur animal et les dates de réservation, 
+ils peuvent appuyer sur ce bouton pour confirmer la réservation. Après avoir appuyé sur le 
+bouton "Réserver", un petit message de confirmation peut apparaître pour confirmer que la 
+réservation a été effectuée avec succès. En somme, l'interface de l'écran de réservation simplifie 
+le processus de réservation en permettant aux propriétaires d'animaux de sélectionner leur 
+animal et de choisir les dates de réservation de manière fluide. Le bouton "Réserver" finalise la 
+démarche, et les propriétaires reçoivent une confirmation de leur réservation. 
+   
+     
+Figure 34 : Interfaces Procédure de la réservation 
+ 
+  
+
+
+55 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+➢ Ajouter un animal  
+La figure ci -dessous présente L'écran d'ajout d'un animal qui permet aux propriétaires 
+d'animaux d'ajouter facilement et rapidement les informations relatives à un nouvel animal de 
+compagnie. En haut de l'écran, un titre indique clairement l'objectif de la  page, "Ajouter un 
+votre Animal», au centre de l'écran, un formulaire est affiché, avec des champs pour saisir les 
+détails de l'animal tels que le nom de l'animal,  l’âge de l'animal, l’image qui lui correspond et 
+un bouton distinct "Ajouter un Animal" est placé en bas de l'écran. Lorsque les utilisateurs ont 
+saisi toutes les informations de l'animal, ils peuvent appuyer sur ce bouton pour l'ajouter à leur 
+profil. 
+ 
+ 
+Figure 35 : Interface ajouter un animal 
+➢ Ajouter une publication 
+La figure ci-dessous présente l’interface d'ajout d'une publication qui vise à permettre aux 
+propriétaires d'animaux de créer et de partager facilement des informations, des conseils ou des 
+expériences liés aux animaux.  
+En haut de l'écran, un titre indique clairement l'objectif de la page, tel que "Ajouter une 
+Publication", au centre de l'écran, un formulaire est affiché avec des champs pour saisir les 
+
+56 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+détails de la publication tels que le titre de la publication, description et une image avec un 
+bouton distinct "Ajouter Publication" est placé en bas de l'écran. Lorsque les utilisateurs ont 
+saisi toutes les informations de la publication, ils peuvent appuyer sur ce bouton pour la créer.. 
+   
+Figure 36 : Interface ajouter publication 
+➢ Profile 
+La figure ci-dessous présente une interface de profil offrant aux propriétaires d'animaux 
+un aperçu complet de leur compte et de leurs animaux de compagnie. En haut de l'écran, une 
+image de profil du propriétaire d'animaux est affichée. Cela peut être une photo téléchargée par 
+l'utilisateur ou une icône par défaut. Juste à côté de l'image de profil, le nom du propriétaire 
+d'animaux est indiqué. La majeure partie de l'écran est consacrée à la section "Mes Animaux". 
+Dans cette section on trouve une liste horizontale des animaux de compagnie associés au 
+propriétaire est affichée.  Chaque élément de la liste présente le nom de l'animal  et 
+éventuellement une image miniature.  
+
+57 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 37 : Interface profil 
+ 
+✓ Les interfaces qui sont relatives au prestataire sont : 
+➢ Authentification 
+La figure ci -dessous présente l'écran d'authentification du prestataire. Sur cet écran, le 
+propriétaire doit saisir son adresse mail et entrer son mot de passe pour accéder à l’écran 
+d’accueil. Une fois le mail et le mot de passe sont saisis, il clique sur le bouton 
+« Connexion ».Ce processus d'authentification est obligatoire pour garantit la sécurité et l'accès 
+approprié aux données de chaque prestataire.  
+
+58 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 38 : Interface Authentification 
+➢ Demandes  
+La fig ure ci -dessous présente la page demandes qui offre au prestataire une vue 
+d'ensemble des demandes de réservation, en fournissant une liste des informations sur les 
+réservations actuellement en cours et celles qui ont été finalisées  Chaque élément de la liste 
+peut présenter des informations telles que le nom du propriétaire, la date de réservation, le 
+service demandé et le statut de la réservation (en cours, terminé). À côté de chaque demande de 
+réservation, des options de gestion peuvent être incluses, telles que "Accepter", "Rejeter". 
+
+
+59 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 39 : Interface Demandes 
+➢ Articles 
+La figure ci-dessous présente Cette interface affichant des articles donne au prestataire 
+une vue pratique des articles qu'il a publiés, lui permettant de les consulter et de gérer son 
+contenu. Une liste est affichée, montrant les articles publiés par le prestataire, Chaque élément 
+de la liste présente des informations telles que le titre de l' article, l’heure de publication et 
+éventuellement un aperçu du contenu. 
+
+60 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 40 : Interface Articles 
+➢ Ajouter un Article 
+La figure ci-dessous présente une interface qui offre au prestataire une manière simple et 
+conviviale de cr éer et de publier de nouveaux articles via un formulaire. Le formulaire 
+comprend les champs pour le titre  c’est un champ texte permet au prestataire de saisir le titre 
+de l’article, les détails sous forme d’un champ de texte plus grand est fourni pour que le 
+prestataire écrive le contenu détaillé de l'article et une image pertinente à l'article. En résumé, 
+cette interface offre une expérience fluide pour le prestataire afin d'ajouter de nouveaux articles. 
+Le formulaire intuitif avec des champs pour le titre, les détails et l'image simplifie le processus 
+de création d'articles. Une fois le formulaire rempli, le bouton "Ajouter l'Article" permet au 
+prestataire de partager son contenu avec les utilisateurs de manière efficace. 
+
+61 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 41 : Interface Ajouter un article 
+ 
+✓ Les interfaces qui sont relatives à l’administrateur (Web) sont : 
+➢ Authentification 
+La figure ci-dessous présente L'interface d'authentification pour l'administration permet 
+aux utilisateurs ayant des privilèges d'administrateur d'accéder de manière sécurisée à la zone 
+d'administration de l'application. Voici comment se manifeste cette in terface : Les champs de 
+saisie typiques incluent le nom d'utilisateur ou l'adresse e -mail et le mot de passe associé au 
+compte d'administration, avec un bouton "Se Connecter" permettra à l'administrateur de 
+soumettre les informations d'identification et de  se connecter à l'interface d'administration. 
+Ainsi, les  administrateurs doivent entrer leurs identifiants de connexion pour accéder à 
+l'interface d'administration.  
+ 
+ 
+ 
+
+62 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+ 
+Figure 42 : Interface Authentification pour L'Admin 
+➢ Gestion des services 
+La figure ci -dessous présente une interface permettre aux administrateurs de gérer 
+efficacement les services proposés aux utilisateurs de l'application. Elle affiche une liste de tous 
+les services actuellement disponibles dans l'application m obile. Chaque service sera 
+accompagné d'options de modification et de suppression. 
+Un bouton "Ajouter un Service" autorise aux administrateurs de créer de nouveaux 
+services en remplissant un formulaire. Les champs incluent le nom du service, une description, 
+le prix, et l’image, À côté de chaque service répertorié, il y a, d’une part, un bouton «Modifier" 
+qui permet aux administrateurs de mettre à jour les détails d'un service existant, ce bouton dirige 
+vers u n formulaire pré -rempli avec les détails actuels du service sera présenté pour 
+modification. D’autre part, il y a un bouton "Supprimer" Lorsqu'un administrateur sélectionne 
+cette option, une confirmation sera demandée avant la suppression effective du service. 
+
+
+63 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 43 : Interface Liste des services 
+  
+ 
+Figure 44 : Interface Ajouter un service 
+ 
+ 
+
+
+64 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 45 : Interface Supprimer un service 
+ 
+ 
+Figure 46 : Interface modifier un service 
+➢ Gestion des utilisateurs 
+La figure ci -dessous présente L'interface qui affiche  une liste de tous les utilisateurs 
+enregistrés dans l'application, qu'ils soient des propriétaires d'animaux, des prestataires de 
+
+
+65 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+services. Cette interface contient aussi u n bouton "Ajouter un Utilisateur" permet  aux 
+administrateurs de créer de nouveaux c omptes utilisateurs en remplissant un formulaire. Les 
+champs peuvent inclure le nom, l'adresse e -mail, le rôle, etc. À côté de chaque utilisateur 
+répertorié, il y aura  premièrement un bouton "Modifier" qui permettra aux administrateurs de 
+mettre à jour les  détails d'un compte utilisateur existant. Un formulaire pré -rempli avec les 
+détails actuels de l'utilisateur sera présenté pour modification. Deuxièmement   il y aura un 
+bouton "Supprimer". Lorsqu'un administrateur sélectionne cette option, une confirmati on sera 
+demandée avant la suppression effective du compte utilisateur. 
+ 
+Figure 47 : Interface Liste des utilisateurs 
+
+
+66 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 48 : Interface Ajouter un utilisateur 
+ 
+ 
+Figure 49 : Interface Supprimer un utilisateur 
+
+
+67 
+ 
+Chapitre 3 : Réalisation et Expérimentation 
+ 
+ 
+Figure 50 : Interface Modifier un utilisateur 
+ 
+5. Conclusion 
+A travers ce chapitre, nous avons fait tout d’abord une analyse qui dénombre  
+l’architecture, les environnements techniques et les technologies utilisées. Ensuite, nous avons 
+exposé le travail réalisé en présentant les différentes Interfaces de notre application.  
+ 
+
+
+68 
+ 
+ Conclusion et perspectives 
+ 
+Conclusion et perspectives 
+Notre projet était toujours dans l'intention de doter tous les propriétaires d'animaux d'une 
+occasion parfaite pour effectuer leur choix de la personne qualifiée qui va fournir le soin 
+souhaité pour ces créatures fragiles. A ce propos, l'application " Pet Care" est destinée à défier 
+la méconnaissance des besoins animaliers surtout en cas d'urgence,  à préserver l'animal de ce 
+qui le menace et le sauver de n'importe quelle atrocité probable à l'avenir.  
+Tout au long de notre travail, on a adopté la méthodologie en V, une méthodologie qui a 
+servi impeccablement notre raisonnement et nous a permis d'aviser à l'évolution entière du sujet 
+y compris toutes les étapes. En analysant les applications existantes, on a pu extraire leur teneur 
+qui était entachée , par exemple , d'un manque de transparence aux niveaux des tarifs de s 
+prestations animalières ainsi que d’une difficulté apparente de trouver la bonne personne pour 
+rendre le service.  
+Pour cette raison, on  a proposé une solution qui sera plus efficace en surmontant ces 
+problèmes et qui sera plus adéquate aux besoins spécifiques des animaux de compagnie. Ladite 
+solution est dans le but d'assurer la gestion des opérations orientées vers l'animal domestique, 
+et la gestion de  tout ce qui concerne ses soins et son élevage selon des fonctionnalités et des 
+méthodes de suivi déterminées.  
+Le succès de cette application ouvre la porte à diverses perspectives futures pour son 
+amélioration et son expansion.  Ce sont des  pistes intéressantes à explorer à savoir  
+l'optimisation du chat et de messagerie, l’internationalisation qui rend l’application disponible 
+dans plusieurs langues , l'élargissement de la gamme de services de l'application afin d'inclure 
+d'autres offres de partenariat et de promotion avec des cliniques vétérinaires et des magasins 
+d'animaux. 
+En résumé, notre projet de fin d'études est une vision d'une meilleure vie pour les animaux 
+domestiques qui sera au futur susceptible d'autres améliorations par d'autres perspectives dans 
+ce vaste domaine.
+
+69 
+ 
+Webographie 
+ 
+Webographie 
+ 
+[1] https://www.manager-go.com/gestion-deprojet/cycle-en-v.htm [le 03-07-2023] 
+[2] https://www.arkance-systems.fr/blog/pattern-mvvm/# [le 01-01-2023] 
+[3] https://framalibre.org/content/visual-studio-code [le 04-04-2022] 
+[4] https://www.drawio.com/about [le 26-06-2023] 
+[5] https://www.postman.com/use-cases/application-development/ [le 04-02-2022] 
+[6] https://fr.wikipedia.org/wiki/Flutter_(logiciel) [le 13-05-2023] 
+[7] https://welovedevs.com/fr/articles/nestjs-tout-savoir-du-
+framework-nodejs/ 
+[le 06-07-2020] 
+[8] https://www.purestorage.com/fr/knowledge/what-is-
+mongodb.html# 
+[le 26-08-2022] 
+[9] https://www.boryl.fr/glossaire/firebase/ [le 25-11-2022] 
+[10] https://openclassrooms.com/fr/courses/7471261-debutez-avec-
+angular 
+[le 13-06-2022] 
+
+ 
+ 
+ 
+  
+

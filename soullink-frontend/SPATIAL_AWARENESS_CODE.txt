@@ -1,0 +1,106 @@
+// Complete Spatial Awareness System for Nova
+// Add this as a new useEffect in NovaAvatar.tsx (around line 305)
+
+useEffect(() => {
+    let hoverTimer: NodeJS.Timeout | null = null;
+    let currentElement: HTMLElement | null = null;
+
+    const getContextMessage = (element: HTMLElement): { type: string; message: string } => {
+        const tagName = element.tagName.toLowerCase();
+        const role = element.getAttribute('role');
+        
+        if (tagName === 'button' || role === 'button') {
+            return { type: 'button', message: 'This looks important... should we click it?' };
+        } else if (tagName === 'input' || tagName === 'textarea') {
+            return { type: 'input', message: "I'm ready to process whatever you type here!" };
+        } else if (tagName === 'a') {
+            return { type: 'link', message: 'I wonder where this leads us? My sensors suggest a new page.' };
+        } else {
+            return { type: 'generic', message: 'Hmm, interesting. Let me take a closer look at this.' };
+        }
+    };
+
+    const handleMouseEnter = (e: Event) => {
+        const target = e.currentTarget as HTMLElement;
+        currentElement = target;
+
+        hoverTimer = setTimeout(() => {
+            const rect = target.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // Calculate landing point (50px to the left or right)
+            const landingX = centerX > window.innerWidth / 2 
+                ? centerX - 50  // Element on right, Nova to the left
+                : centerX + 50; // Element on left, Nova to the right
+
+            // Wake up from bored state if needed
+            if (mood === 'bored' && setMood) {
+                setMood('curious');
+            }
+
+            // Set target and position
+            setCuriousTarget({ x: centerX, y: centerY });
+            setNovaPosition({ x: landingX, y: centerY });
+            
+            // Set context message
+            const context = getContextMessage(target);
+            setInvestigationContext(context);
+            
+            // Trigger curious mood
+            if (setMood) setMood('curious');
+        }, 1500);
+    };
+
+    const handleMouseLeave = () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        currentElement = null;
+        
+        if (mood === 'curious') {
+            resetToHome();
+        }
+    };
+
+    const handleClick = () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        if (mood === 'curious') {
+            resetToHome();
+        }
+    };
+
+    const resetToHome = () => {
+        setCuriousTarget(null);
+        setNovaPosition(null);
+        setInvestigationContext(null);
+        if (setMood) setMood('neutral');
+    };
+
+    // Attach listeners to interactive elements
+    const interactiveElements = document.querySelectorAll(
+        'button, a, [role="button"], .card, .interactive-card, input, textarea'
+    );
+    
+    interactiveElements.forEach((el) => {
+        el.addEventListener('mouseenter', handleMouseEnter);
+        el.addEventListener('mouseleave', handleMouseLeave);
+        el.addEventListener('click', handleClick);
+    });
+
+    // Reset when mouse enters chat container
+    const chatContainer = document.querySelector('[data-chat-container]');
+    if (chatContainer) {
+        chatContainer.addEventListener('mouseenter', resetToHome);
+    }
+
+    return () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        interactiveElements.forEach((el) => {
+            el.removeEventListener('mouseenter', handleMouseEnter);
+            el.removeEventListener('mouseleave', handleMouseLeave);
+            el.removeEventListener('click', handleClick);
+        });
+        if (chatContainer) {
+            chatContainer.removeEventListener('mouseenter', resetToHome);
+        }
+    };
+}, [mood, setMood, setCuriousTarget, setNovaPosition, setInvestigationContext]);

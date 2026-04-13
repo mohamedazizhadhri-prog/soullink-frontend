@@ -1,0 +1,236 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 480px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    z-index: 1001;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.closeBtn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.searchBox {
+    padding: var(--spacing-lg);
+    display: flex;
+    gap: 12px;
+    position: relative;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+}
+
+.searchBox input {
+    flex: 1;
+    background: var(--color-bg-app);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 10px 12px 10px 40px;
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.searchBox input:focus {
+    border-color: var(--color-primary-main);
+}
+
+.searchBox button {
+    background: var(--color-primary-main);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 0 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.searchBox button:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+}
+
+.searchBox button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.results {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+}
+
+.userRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    transition: background 0.2s;
+}
+
+.userRow:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-weight: 600;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.names {
+    display: flex;
+    flex-direction: column;
+}
+
+.displayName {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.handle {
+    font-size: 0.8rem;
+    color: var(--color-text-tertiary);
+}
+
+.addRequestBtn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--color-text-primary);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.addRequestBtn:hover {
+    background: var(--color-primary-main);
+    color: white;
+}
+
+.sentBadge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-status-online);
+}
+
+.friendsBadge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.pendingBadge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255, 215, 0, 0.1);
+    color: #FFD700;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.empty {
+    padding: 40px;
+    text-align: center;
+    color: var(--color-text-tertiary);
+}
+
+.spin {
+    animation: spinRotate 1s linear infinite;
+}
+
+@keyframes spinRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

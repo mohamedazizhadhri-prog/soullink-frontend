@@ -1,0 +1,689 @@
+﻿
+> soullink-frontend@0.1.0 lint
+> eslint
+
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\public\soul-game\soul-game-data.js
+  407:7  warning  'SOUL_GAME_DATA' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\(auth)\login\page.tsx
+    6:21  warning  'useSearchParams' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   50:5   warning  'novaMessage' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   52:5   warning  'isScanning' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   54:5   warning  'isError' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   56:5   warning  'isSuccess' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+   89:18  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   89:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-explicit-any
+  115:18  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  115:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-explicit-any
+  284:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\(auth)\login\page.tsx:284:13
+  282 |         const searchParams = new URLSearchParams(window.location.search);
+  283 |         if (searchParams.get('registered')) {
+> 284 |             setNovaMessage("Yay you're here! Let's get you logged in.");
+      |             ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  285 |         }
+  286 |     }, []);
+  287 |  react-hooks/set-state-in-effect
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\(auth)\signup\page.tsx
+    3:45  warning  'useCallback' is defined but never used                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+    3:58  warning  'useEffect' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+    4:25  warning  'Lock' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+    4:31  warning  'User' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+    4:69  warning  'Camera' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  144:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  149:73  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  182:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  340:69  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  525:49  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  553:41  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\(main)\games\[episode]\results\page.tsx
+  34:11  warning  'gameId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\(main)\server\[id]\[channelId]\page.tsx
+  14:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\(main)\server\[id]\page.tsx
+  13:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\(main)\server\page.tsx
+  1:10  warning  'redirect' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\app\layout.tsx
+  20:10  warning  'Shell' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\hooks\useNovaMoodParticles.ts
+   33:42  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\hooks\useNovaMoodParticles.ts:33:42
+  31 |     useEffect(() => {
+  32 |         if (mood !== 'angry') {
+> 33 |             if (ashParticles.length > 0) setAshParticles([]);
+     |                                          ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |             return;
+  35 |         }
+  36 |               react-hooks/set-state-in-effect
+  100:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\hooks\useNovaMoodParticles.ts:100:13
+   98 |             return () => clearInterval(interval);
+   99 |         } else {
+> 100 |             setPixels([]);
+      |             ^^^^^^^^^ Avoid calling setState() directly within an effect
+  101 |             setBubbles([]);
+  102 |             setLoveHearts([]);
+  103 |             setGlitchBlocks([]);  react-hooks/set-state-in-effect
+  137:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\hooks\useNovaMoodParticles.ts:137:13
+  135 |             };
+  136 |         } else {
+> 137 |             setMeltingIntensity(0);
+      |             ^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  138 |             setEmbers([]);
+  139 |         }
+  140 |     }, [isMelting]);                                                    react-hooks/set-state-in-effect
+  177:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\hooks\useNovaMoodParticles.ts:177:13
+  175 |             return () => clearInterval(interval);
+  176 |         } else {
+> 177 |             setMoneyParticles([]);
+      |             ^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  178 |         }
+  179 |     }, [mood]);
+  180 |                                                    react-hooks/set-state-in-effect
+  210:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\hooks\useNovaMoodParticles.ts:210:13
+  208 |     useEffect(() => {
+  209 |         if (!isSauronMode) {
+> 210 |             setSauronAsh([]);
+      |             ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  211 |             setSauronEmbers([]);
+  212 |             return;
+  213 |         }                                         react-hooks/set-state-in-effect
+  283:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\hooks\useNovaMoodParticles.ts:283:13
+  281 |             return () => clearInterval(interval);
+  282 |         } else {
+> 283 |             setBinaryBits([]);
+      |             ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  284 |         }
+  285 |     }, [isSmart, mood]);
+  286 |                                                   react-hooks/set-state-in-effect
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\index.tsx
+    37:9   warning  'consumedFriendIds' is assigned a value but never used                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+    39:9   warning  'curiousTarget' is assigned a value but never used                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+    42:35  warning  'temperature' is assigned a value but never used                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+    43:34  warning  'visionRadius' is assigned a value but never used                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+    43:62  warning  'followCursorMode' is assigned a value but never used                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+    50:63  warning  'setIsDancing' is assigned a value but never used                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+    51:9   warning  'setIsSauronMode' is assigned a value but never used                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+    51:26  warning  'setVisionRadius' is assigned a value but never used                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+    51:43  warning  'setAshIntensity' is assigned a value but never used                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+    51:60  warning  'setFollowCursorMode' is assigned a value but never used                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+    52:9   warning  'setIsNightMode' is assigned a value but never used                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   111:12  warning  'isVibrating' is assigned a value but never used                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   112:11  warning  'lastTypeRef' is assigned a value but never used                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   188:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   231:8   warning  React Hook useEffect has a missing dependency: 'setStormMode'. Either include it or remove the dependency array                                                                                                                                                                          react-hooks/exhaustive-deps
+   286:20  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   305:8   warning  React Hook useEffect has a missing dependency: 'isAscending'. Either include it or remove the dependency array                                                                                                                                                                           react-hooks/exhaustive-deps
+   311:25  error    'nextX' is never reassigned. Use 'const' instead                                                                                                                                                                                                                                         prefer-const
+   312:25  error    'nextY' is never reassigned. Use 'const' instead                                                                                                                                                                                                                                         prefer-const
+   496:30  warning  'e' is defined but never used                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   561:8   warning  React Hook useEffect has a missing dependency: 'setMood'. Either include it or remove the dependency array                                                                                                                                                                               react-hooks/exhaustive-deps
+   566:13  error    'hoverTimer' is never reassigned. Use 'const' instead                                                                                                                                                                                                                                    prefer-const
+   566:13  warning  'hoverTimer' is assigned a value but never used                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+   674:8   warning  React Hook useEffect has missing dependencies: 'disableCuriousMode' and 'isAscending'. Either include them or remove the dependency array                                                                                                                                                react-hooks/exhaustive-deps
+   730:11  warning  'isNearWater' is assigned a value but never used                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   753:8   warning  React Hook useEffect has a missing dependency: 'isAscending'. Either include it or remove the dependency array                                                                                                                                                                           react-hooks/exhaustive-deps
+  1252:23  warning  'setIsBurping' is assigned a value but never used                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  2369:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  2370:61  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaCinematicRenderer.tsx
+  40:42  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaCinematicRenderer.tsx:40:42
+  38 |                             className={i % 2 === 0 ? styles.confettiSquare : styles.confettiCircle}
+  39 |                             style={{
+> 40 |                                 left: `${Math.random() * 100}%`,
+     |                                          ^^^^^^^^^^^^^ Cannot call impure function
+  41 |                                 backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`,
+  42 |                             }}
+  43 |                             animate={{  react-hooks/purity
+  41:57  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaCinematicRenderer.tsx:41:57
+  39 |                             style={{
+  40 |                                 left: `${Math.random() * 100}%`,
+> 41 |                                 backgroundColor: `hsl(${Math.random() * 360}, 70%, 60%)`,
+     |                                                         ^^^^^^^^^^^^^ Cannot call impure function
+  42 |                             }}
+  43 |                             animate={{
+  44 |                                 y: [0, 400],                                          react-hooks/purity
+  49:47  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaCinematicRenderer.tsx:49:47
+  47 |                             }}
+  48 |                             transition={{
+> 49 |                                 duration: 2 + Math.random() * 2,
+     |                                               ^^^^^^^^^^^^^ Cannot call impure function
+  50 |                                 repeat: Infinity,
+  51 |                                 delay: Math.random() * 2,
+  52 |                                 ease: "linear"                                                                  react-hooks/purity
+  51:40  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaCinematicRenderer.tsx:51:40
+  49 |                                 duration: 2 + Math.random() * 2,
+  50 |                                 repeat: Infinity,
+> 51 |                                 delay: Math.random() * 2,
+     |                                        ^^^^^^^^^^^^^ Cannot call impure function
+  52 |                                 ease: "linear"
+  53 |                             }}
+  54 |                         />                                                                                        react-hooks/purity
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaMoodParticles.tsx
+   53:46  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaMoodParticles.tsx:53:46
+  51 |                             animate={{ y: 60, opacity: [0, 1, 1, 0] }}
+  52 |                             transition={{ duration: 1.2, ease: "linear", delay: p.delay }}
+> 53 |                             style={{ zIndex: Math.random() > 0.5 ? 5 : -1 }}
+     |                                              ^^^^^^^^^^^^^ Cannot call impure function
+  54 |                         />
+  55 |                     ))}
+  56 |                 </>  react-hooks/purity
+  221:43  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaMoodParticles.tsx:221:43
+  219 |                             animate={{
+  220 |                                 y: p.y + 150,
+> 221 |                                 x: p.x + (Math.random() - 0.5) * 20,
+      |                                           ^^^^^^^^^^^^^ Cannot call impure function
+  222 |                                 opacity: 0,
+  223 |                                 rotate: 360,
+  224 |                             }}                                 react-hooks/purity
+  400:43  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaSauronRenderer.tsx
+  34:51  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaSauronRenderer.tsx:34:51
+  32 |                                 }}
+  33 |                                 transition={{
+> 34 |                                     duration: 2 + Math.random() * 2,
+     |                                                   ^^^^^^^^^^^^^ Cannot call impure function
+  35 |                                     repeat: Infinity,
+  36 |                                     delay: i * 0.15,
+  37 |                                     ease: "easeInOut"  react-hooks/purity
+  56:53  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaAvatar\renderers\NovaSauronRenderer.tsx:56:53
+  54 |                                 }}
+  55 |                                 transition={{
+> 56 |                                     duration: 1.5 + Math.random(),
+     |                                                     ^^^^^^^^^^^^^ Cannot call impure function
+  57 |                                     repeat: Infinity,
+  58 |                                     delay: i * 0.1,
+  59 |                                     ease: "easeInOut"   react-hooks/purity
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaPanel.tsx
+   19:5   warning  'isSpitting' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   19:32  warning  'huntTarget' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   20:5   warning  'isSingularity' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   33:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaPanel.tsx:33:7
+  31 |   useEffect(() => {
+  32 |     if (isCinematicMode) {
+> 33 |       setIsOpen(true);
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |     }
+  35 |   }, [isCinematicMode]);
+  36 |  react-hooks/set-state-in-effect
+   38:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-explicit-any
+  491:53  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaSearchAndDestroy.tsx
+   4:18  warning  'AnimatePresence' is defined but never used             @typescript-eslint/no-unused-vars
+  10:32  warning  'novaPosition' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  13:12  warning  'showEliminated' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  13:28  warning  'setShowEliminated' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  51:23  warning  'parts' is assigned a value but never used              @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\ai\NovaSingularityOverlay.tsx
+    4:18  warning  'AnimatePresence' is defined but never used                                                                           @typescript-eslint/no-unused-vars
+   20:12  warning  'centerPos' is assigned a value but never used                                                                        @typescript-eslint/no-unused-vars
+   22:11  warning  'overlayRef' is assigned a value but never used                                                                       @typescript-eslint/no-unused-vars
+   45:8   warning  React Hook useEffect has a missing dependency: 'captureAndConsume'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  150:39  error    Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\auth\AuthNovaBubble.tsx
+    3:17  warning  'useState' is defined but never used      @typescript-eslint/no-unused-vars
+    3:27  warning  'useEffect' is defined but never used     @typescript-eslint/no-unused-vars
+    4:35  warning  'useAnimation' is defined but never used  @typescript-eslint/no-unused-vars
+  155:42  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:46  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\auth\FaceRecognition.tsx
+  15:35  warning  'mode' is defined but never used                @typescript-eslint/no-unused-vars
+  17:11  warning  'canvasRef' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  66:23  error    Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\auth\NovaLoginTransition.tsx
+  36:35  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\auth\NovaLoginTransition.tsx:36:35
+  34 |         Array.from({ length: 32 }, (_, i) => {
+  35 |             const angle = (i / 32) * Math.PI * 2;
+> 36 |             const velocity = 15 + Math.random() * 25;
+     |                                   ^^^^^^^^^^^^^ Cannot call impure function
+  37 |             return {
+  38 |                 id: i,
+  39 |                 angle,  react-hooks/purity
+  41:27  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\auth\NovaLoginTransition.tsx:41:27
+  39 |                 angle,
+  40 |                 velocity,
+> 41 |                 size: 2 + Math.random() * 4,
+     |                           ^^^^^^^^^^^^^ Cannot call impure function
+  42 |                 color: i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#9d50bb' : '#ffffff',
+  43 |             };
+  44 |         }), []                  react-hooks/purity
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\community\MemberListPanel.tsx
+   82:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   92:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  124:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\games\SoulGameCard.tsx
+  5:17  warning  'CheckCircle' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\games\SoulGameSession.tsx
+    5:23  warning  'Sparkles' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+   60:8   warning  React Hook useEffect has a missing dependency: 'fetchGame'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  175:19  warning  'profile' is assigned a value but never used                                                                  @typescript-eslint/no-unused-vars
+  178:23  error    Unexpected any. Specify a different type                                                                      @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\games\SoulGamesHub.tsx
+   5:40  warning  'Play' is defined but never used             @typescript-eslint/no-unused-vars
+  27:11  warning  'router' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\EatSpitOverlay.tsx
+  17:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\EatSpitOverlay.tsx:17:13
+  15 |             return () => clearTimeout(timer);
+  16 |         } else {
+> 17 |             setShowVortex(false);
+     |             ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  18 |         }
+  19 |     }, [isHunting]);
+  20 |  react-hooks/set-state-in-effect
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\FriendsBar.tsx
+    2:30  warning  'stagger' is defined but never used                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+    2:39  warning  'AnimatePresence' is defined but never used                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+    5:10  warning  'Plus' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+    7:10  warning  'NovaAvatar' is defined but never used                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  144:8   warning  React Hook useEffect has a missing dependency: 'scope'. Either include it or remove the dependency array                                                                                                                                                                                 react-hooks/exhaustive-deps
+  175:34  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  223:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\HomeSidebar.tsx
+   19:9   warning  'setCinematicMode' is assigned a value but never used                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   26:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  171:25  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  342:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  367:34  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\NotificationPopover.tsx
+   12:56  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   14:13  warning  'setMood' is assigned a value but never used                     @typescript-eslint/no-unused-vars
+   34:54  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   76:71  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   88:25  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  151:35  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\RainEffect.tsx
+  27:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\RainEffect.tsx:27:13
+  25 |                 duration: 0.5 + Math.random() * 0.5,
+  26 |             }));
+> 27 |             setDrops(newDrops);
+     |             ^^^^^^^^ Avoid calling setState() directly within an effect
+  28 |         } else {
+  29 |             setDrops([]);
+  30 |         }  react-hooks/set-state-in-effect
+  52:44  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\ServerSidebar.tsx
+    4:22  warning  'Hash' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   20:12  warning  'isLoading' is assigned a value but never used                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   62:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  108:34  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\Shell.tsx
+  10:10  warning  'NovaProvider' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\TopNavigation.tsx
+   5:35  warning  'Search' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  86:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\layout\WaterOverlay.tsx
+  9:13  warning  'isStormMode' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\modals\AddFriendModal.tsx
+   43:64  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   44:70  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   45:69  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   57:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  108:53  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\modals\CommunitySettingsModal.tsx
+  13:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  14:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  62:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\modals\CreateChannelModal.tsx
+  13:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  34:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\modals\CreateCommunityModal.tsx
+    5:58  warning  'ImageIcon' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   64:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  110:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\modals\InviteFriendsModal.tsx
+    5:35  warning  'Search' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  120:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\modals\JoinCommunityModal.tsx
+   5:13  warning  'Hash' is defined but never used                                 @typescript-eslint/no-unused-vars
+  36:23  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  96:40  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\Dashboard.tsx
+   3:17   warning  'useState' is defined but never used                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+   3:27   warning  'useEffect' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   7:8    warning  'api' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+   8:10   warning  'socketService' is defined but never used                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+  39:45   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  93:49   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  93:103  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\DirectMessageView.tsx
+    5:10  warning  'Phone' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+    5:17  warning  'Video' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+    5:68  warning  'ImageIcon' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+   22:56  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-explicit-any
+   33:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\DirectMessageView.tsx:33:13
+  31 |     useEffect(() => {
+  32 |         if (!searchQuery.trim()) {
+> 33 |             setSearchResults([]);
+     |             ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |             return;
+  35 |         }
+  36 |         const delayDebounce = setTimeout(async () => {  react-hooks/set-state-in-effect
+   54:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   64:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   74:40  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-explicit-any
+   80:25  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @next/next/no-img-element
+  107:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @next/next/no-img-element
+  115:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @next/next/no-img-element
+  177:40  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\DiscoverCommunitiesView.tsx
+   54:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  111:65  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  131:53  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\FriendsView.tsx
+   3:27  warning  'useEffect' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   5:10  warning  'UserPlus' is defined but never used                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+   5:31  warning  'Clock' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   5:38  warning  'Send' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   5:88  warning  'Trash2' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   6:8   warning  'api' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  17:86  warning  'refresh' is assigned a value but never used                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  23:21  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  38:57  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  52:68  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  64:68  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  76:68  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  91:53  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\GameView.tsx
+  11:117  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  11:133  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  19:35   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  24:86   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  37:33   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  37:97   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\GroupView.tsx
+  37:29  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\LandingPage.tsx
+  5:19  warning  'Download' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\MatchView.tsx
+  5:26  warning  'MessageCircle' is defined but never used  @typescript-eslint/no-unused-vars
+  5:41  warning  'Sparkles' is defined but never used       @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\NotificationView.tsx
+   9:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:54  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  61:71  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  68:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\ProfileView.tsx
+    4:42  warning  'Heart' is defined but never used                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+    8:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  119:29  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  119:29  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                jsx-a11y/alt-text
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\ServerView.tsx
+    5:70  warning  'Pencil' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   26:76  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   39:99  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   44:54  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   53:45  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   91:8   warning  React Hook useEffect has a missing dependency: 'activeChannel'. Either include it or remove the dependency array                                                                                                                                                                         react-hooks/exhaustive-deps
+  119:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  120:26  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  129:30  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  131:52  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  133:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  139:42  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  185:50  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  185:91  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  246:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\components\views\SettingsView.tsx
+   10:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   54:25  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   74:25  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  133:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  133:37  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                jsx-a11y/alt-text
+  169:80  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\context\slices\NovaActionContext.tsx
+    6:10  warning  'useNovaEnvironmentState' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+    6:35  warning  'useNovaEnvironmentDispatch' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+   53:8   warning  React Hook useCallback has a missing dependency: 'interactState.isAscending'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   63:8   warning  React Hook useCallback has a missing dependency: 'interactState.isAscending'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   73:8   warning  React Hook useCallback has a missing dependency: 'interactState.isAscending'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   82:8   warning  React Hook useCallback has a missing dependency: 'interactState.isAscending'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  101:8   warning  React Hook useCallback has a missing dependency: 'interactState.isAscending'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  151:43  warning  'type' is defined but never used                                                                                                @typescript-eslint/no-unused-vars
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\context\slices\NovaInteractionContext.tsx
+  57:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\hooks\useChat.ts
+   8:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  11:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  21:65  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  49:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\hooks\useDashboard.ts
+  24:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  24:68  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\hooks\useFriendsList.ts
+   5:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   6:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   7:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  35:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  61:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\hooks\useWindowSize.ts
+  15:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\hooks\useWindowSize.ts:15:9
+  13 |     useEffect(() => {
+  14 |         // Set initial size
+> 15 |         setWindowSize({
+     |         ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  16 |             width: window.innerWidth,
+  17 |             height: window.innerHeight,
+  18 |         });  react-hooks/set-state-in-effect
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\lib\socket.ts
+  46:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  50:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\services\apiService.ts
+  13:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  28:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\services\chatService.ts
+  22:51  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\services\friendService.ts
+  19:86  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  23:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  24:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  27:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  31:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  32:36  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  35:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-frontend\src\types\api.types.ts
+   1:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  10:15  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Ô£û 269 problems (139 errors, 130 warnings)
+  3 errors and 0 warnings potentially fixable with the `--fix` option.
+

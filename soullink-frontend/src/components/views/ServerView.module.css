@@ -1,0 +1,585 @@
+.container {
+    height: 100%;
+    display: flex;
+    background-color: var(--color-bg-app);
+}
+
+.channelList {
+    width: 240px;
+    background-color: rgba(15, 15, 26, 0.3);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.serverHeader {
+    height: 48px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.serverHeader:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.channelGroup {
+    padding: var(--spacing-md) var(--spacing-sm);
+}
+
+
+
+
+.channelItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    margin-bottom: 2px;
+    transition: all var(--transition-fast);
+}
+
+.channelItem:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-primary);
+}
+
+.activeChannel {
+    background-color: rgba(123, 104, 238, 0.1);
+    color: var(--color-text-primary);
+}
+
+.chatArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-app);
+}
+
+.chatHeader {
+    height: 48px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-lg);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    gap: var(--spacing-sm);
+}
+
+.hashtag {
+    color: var(--color-text-secondary);
+}
+
+.messagesScroll {
+    flex: 1;
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.serverMessage {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.userAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.userAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.messageContentWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+}
+
+.timestamp {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-left: var(--spacing-sm);
+}
+
+.messageText {
+    color: var(--color-text-secondary);
+    /* Discord messages are slightly off-white unless high contrast */
+    color: rgba(240, 240, 245, 0.9);
+    line-height: 1.4;
+}
+
+.welcomeBanner {
+    background: linear-gradient(135deg, rgba(75, 0, 130, 0.2), rgba(123, 104, 238, 0.1));
+    padding: var(--spacing-lg);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid rgba(123, 104, 238, 0.2);
+}
+
+/* ─── Server Dropdown Menu ────────────────────────────────────── */
+
+.serverMenu {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 220px;
+    background: rgba(15, 15, 22, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 6px;
+    z-index: 100;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+
+.menuItem:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+.systemMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(108, 99, 255, 0.03);
+    border-radius: 8px;
+    font-style: italic;
+    border: 1px dashed rgba(108, 99, 255, 0.1);
+    gap: 8px;
+}
+
+/* ─── Channel Label + Add Button ────────────────────────────── */
+
+.channelLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    padding-left: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addChannelBtn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    display: flex;
+    transition: all 0.15s;
+}
+
+.addChannelBtn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Header Action Buttons ─────────────────────────────────── */
+
+.headerBtn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    display: flex;
+    transition: all 0.15s;
+}
+
+.headerBtn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.headerBtnActive {
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* ─── Channel Context Menu ──────────────────────────────────── */
+
+.channelContextMenu {
+    position: fixed;
+    background: rgba(15, 15, 22, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 6px;
+    min-width: 170px;
+    z-index: 9999;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.contextOption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+
+.contextOption:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.danger {
+    color: #f87171;
+}
+
+.danger:hover {
+    background: rgba(248, 113, 113, 0.1);
+}
+
+/* ─── Reply and Pin Features ────────────────────────────────── */
+
+.pinnedMessage {
+    background: rgba(255, 215, 0, 0.03);
+    border-left: 2px solid #ffd700;
+}
+
+.messageActions {
+    position: absolute;
+    right: 16px;
+    top: -12px;
+    display: flex;
+    gap: 4px;
+    background: #1e1e2d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.serverMessage {
+    position: relative;
+}
+
+.serverMessage:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.serverMessage:hover .messageActions {
+    opacity: 1;
+}
+
+.messageActions button {
+    background: none;
+    border: none;
+    display: flex;
+    padding: 4px;
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.messageActions button:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.pinIndicator {
+    color: #ffd700;
+    margin-left: 6px;
+    opacity: 0.8;
+}
+
+/* Reply Context */
+.replyContext {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    padding-left: 8px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.replyIcon {
+    opacity: 0.5;
+}
+
+.replyUser {
+    font-weight: 600;
+    color: #818cf8;
+}
+
+.replyText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+}
+
+/* Input Area with Reply Preview */
+.inputContainer {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    background: var(--color-bg-app);
+}
+
+.replyPreview {
+    background: rgba(0, 0, 0, 0.2);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: none;
+}
+
+.replyPreviewInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cancelReply {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    display: flex;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all 0.15s;
+}
+
+.cancelReply:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Pinned Messages Overlay */
+.pinnedOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pinnedPanel {
+    width: 500px;
+    max-height: 80vh;
+    background: #1e1e2d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+.pinnedHeader {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pinnedHeader h3 {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+}
+
+.headerBtn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.headerBtnActive {
+    color: #6366f1 !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+}
+
+.unpinBtn {
+    font-size: 0.8rem;
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.1);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.unpinBtn:hover {
+    background: #f87171;
+    color: white;
+}
+
+/* ─── Image Upload & Previews ──────────────────────────────── */
+
+.formContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.attachmentBtn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.attachmentBtn:hover {
+    background: rgba(108, 99, 255, 0.2);
+    color: #818cf8;
+    transform: scale(1.1);
+}
+
+.hiddenFile {
+    display: none;
+}
+
+.attachmentPreview {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.attachmentPreview img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    display: block;
+}
+
+.attachmentPreview button {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #f87171;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.messageMedia {
+    margin-top: 8px;
+    max-width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s;
+}
+
+.messageMedia:hover {
+    transform: scale(1.02);
+}
+
+.chatImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}

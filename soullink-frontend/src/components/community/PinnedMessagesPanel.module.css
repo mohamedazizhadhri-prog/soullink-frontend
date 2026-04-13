@@ -1,0 +1,112 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pinItem {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px;
+    transition: all 0.2s;
+}
+
+.pinItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-2px);
+}
+
+.itemHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.authorInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.miniAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatarFallback {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(99, 102, 241, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #a5b4fc;
+}
+
+.meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.authorName {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.date {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.unpinBtn {
+    color: rgba(255, 255, 255, 0.3);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.unpinBtn:hover {
+    color: #ef4444;
+    transform: scale(1.1);
+}
+
+.itemBody {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+    word-break: break-word;
+    margin-bottom: 12px;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.jumpBtn {
+    font-size: 0.75rem;
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.1);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.jumpBtn:hover {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+}

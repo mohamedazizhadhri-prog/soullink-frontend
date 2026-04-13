@@ -1,0 +1,305 @@
+.tabBar {
+    display: flex;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 8px;
+}
+
+.tabItem {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tabItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.tabItem.active {
+    background: rgba(99, 102, 241, 0.1);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.toggleCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggleCard:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.toggleInfo {
+    flex: 1;
+}
+
+.toggleLabel {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.toggleDesc {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.switch {
+    width: 36px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.switch::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.switch.on {
+    background: #6366f1;
+}
+
+.switch.on::before {
+    left: 19px;
+}
+
+.channelList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.channelItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.channelItem:hover {
+    background: rgba(99, 102, 241, 0.05);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.channelMain {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.channelDetail {
+    display: flex;
+    flex-direction: column;
+}
+
+.backLink {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: #6366f1;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.auditLog {
+    display: flex;
+    flex-direction: column;
+}
+
+.logList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.logItem {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.15);
+    border-left: 2px solid #6366f1;
+    border-radius: 4px 8px 8px 4px;
+}
+
+.logTime {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 4px;
+}
+
+.logText {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+.logDetails {
+    font-size: 0.75rem;
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 6px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.error {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.success {
+    color: #10b981;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.mediaGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.bannerUpload {
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bannerUpload:hover {
+    border-color: #6366f1;
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.bannerImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.iconUpload {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: #1e1e2d;
+    border: 3px solid #0f0f14;
+    position: absolute;
+    bottom: -15px;
+    left: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s;
+    z-index: 5;
+}
+
+.iconUpload:hover {
+    transform: scale(1.05);
+    border-color: #6366f1;
+}
+
+.iconImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.iconPlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #4f46e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+}
+
+.mediaOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.bannerUpload:hover .mediaOverlay,
+.iconUpload:hover .mediaOverlay {
+    opacity: 1;
+}
+
+.dangerDesc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}

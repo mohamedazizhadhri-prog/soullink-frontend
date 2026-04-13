@@ -1,0 +1,1229 @@
+Table des Matières
+
+CAHIER DES CHARGES
+
+SoulLink - Plateforme de Connexions Humaines Authentiques
+
+Table des Matières
+
+1. Introduction et Contexte
+
+1.1 Description du Projet
+
+1.2 Vision
+
+1.3 Problématique
+
+2. Objectifs du Projet
+
+2.1 Objectifs Métier
+
+2.2 Objectifs Utilisateur
+
+3. Périmètre du Système
+
+3.1 Inclus dans le Projet
+
+3.2 Exclu du Projet
+
+4. Parties Prenantes et Utilisateurs
+
+4.1 Utilisateurs Finaux
+
+4.1.1 Utilisateurs Standards
+
+4.1.2 Utilisateurs Premium (futur)
+
+4.2 Modérateurs
+
+4.3 Administrateurs Système
+
+4.4 Maître d'Ouvrage / Client
+
+5. Exigences Fonctionnelles
+
+5.1 Gestion des Utilisateurs et Authentification
+
+5.2 Découverte de Personnalité et Jeux Soul
+
+5.3 Compagnon IA Personnel
+
+5.4 Matching et Correspondances
+
+5.5 Communication et Communauté
+
+5.6 Sécurité et Modération
+
+5.7 Analytics et Reporting
+
+5.8 Gestion Administrative
+
+6. Exigences Non-Fonctionnelles
+
+6.1 Performance
+
+6.2 Sécurité
+
+6.3 Fiabilité
+
+6.4 Disponibilité
+
+6.5 Facilité d'Utilisation
+
+6.6 Portabilité et Interopérabilité
+
+6.7 Contraintes Liées au Processus
+
+7. Contraintes Générales
+
+7.1 Contraintes Techniques
+
+7.2 Contraintes Légales et Réglementaires
+
+7.3 Contraintes d'Interopérabilité
+
+7.4 Contraintes Organisationnelles
+
+8. Critères d'Acceptation et de Réception
+
+8.1 Critères d'Acceptation Généraux
+
+8.2 Scénarios de Test de Recette
+
+Scénario 1 : Inscription et Découverte de Personnalité
+
+Scénario 2 : Correspondance et Communication
+
+Scénario 3 : Modération et Sécurité
+
+Scénario 4 : Analytics et Reporting
+
+8.3 Procédure de Réception
+
+9. Glossaire
+
+Annexes
+
+Annexe A : Références
+
+Annexe B : Historique des Versions
+
+CAHIER DES CHARGES
+
+SoulLink - Plateforme de Connexions Humaines
+
+Authentiques
+
+Document Type : Cahier des Charges (Spécification des Besoins)
+
+Point de Vue : Client / Maître d'Ouvrage
+
+Date : [Date de rédaction]
+
+Version : 1.0
+
+Auteur : [Nom du rédacteur]
+
+Table des Matières
+
+1.
+
+Introduction et Contexte
+
+2. Objectifs du Projet
+
+3. Périmètre du Système
+
+4. Parties Prenantes et Utilisateurs
+
+5. Exigences Fonctionnelles
+
+6. Exigences Non-Fonctionnelles
+
+7. Contraintes Générales
+
+8. Critères d'Acceptation et de Réception
+
+9. Glossaire
+
+1. Introduction et Contexte
+
+1.1 Description du Projet
+
+SoulLink  est  une  plateforme  révolutionnaire  conçue  pour  faciliter  des  connexions  humaines 
+
+authentiques  qui  transcendent  les  profils  superficiels,  les  titres  professionnels  ou  les  intérêts
+
+communs.  La  plateforme  vise  à  combattre  la  solitude  moderne  et  l'isolement  numérique  en
+
+utilisant  l'intelligence  artificielle  pour  comprendre  profondément  les  utilisateurs  d'un  point  de  vue
+
+psychologique,  permettant  ainsi  des  correspondances  significatives  qui  mènent  à  de  véritables
+
+relations.
+
+Contrairement aux réseaux sociaux traditionnels qui privilégient les interactions virtuelles, l'objectif
+
+principal de SoulLink est de favoriser les rencontres et amitiés dans le monde réel. La plateforme
+
+utilise  des  jeux  interactifs  pour  découvrir  la  personnalité  des  utilisateurs,  un  système  de
+
+correspondance anonyme basé sur la compatibilité psychologique, et une sécurité avancée avec
+
+vérification par reconnaissance faciale.
+
+1.2 Vision
+
+La vision de SoulLink est de créer un monde où la technologie facilite des connexions humaines
+
+authentiques,  où 
+
+les  personnes 
+
+rencontrent  d'autres  personnes  qui 
+
+les  comprennent
+
+véritablement,  et  où  les  interactions  numériques  évoluent  naturellement  vers  des  relations
+
+significatives dans la vie réelle.
+
+1.3 Problématique
+
+Les plateformes sociales actuelles présentent plusieurs limitations critiques :
+
+Connexions superficielles : Les connexions sont basées principalement sur des profils et
+
+des photos, sans compréhension réelle de la personnalité des utilisateurs.
+
+Algorithmes orientés engagement : Les algorithmes privilégient l'engagement et le temps
+
+passé sur la plateforme plutôt que des interactions significatives.
+
+Absence de relations réelles : Les interactions numériques conduisent rarement à des
+
+relations authentiques dans le monde réel.
+
+Incompréhension de la personnalité : Les plateformes existantes sont incapables de
+
+comprendre les personnalités authentiques et les valeurs des utilisateurs.
+
+Fraude d'identité : Incidence élevée de catfishing et de fraude d'identité, compromettant la
+
+confiance des utilisateurs.
+
+2. Objectifs du Projet
+
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+2.1 Objectifs Métier
+
+Réduire l'isolement social : Faciliter la création de connexions authentiques et durables
+
+entre les utilisateurs.
+
+Améliorer la qualité des correspondances : Utiliser l'intelligence artificielle et la psychologie
+
+pour créer des correspondances basées sur la compatibilité réelle plutôt que sur des critères
+
+superficiels.
+
+Garantir la sécurité et la confiance : Mettre en place des mécanismes de vérification et de
+
+modération robustes pour prévenir la fraude et les comportements toxiques.
+
+Favoriser les rencontres réelles : Créer un environnement qui encourage l'évolution des
+
+interactions numériques vers des relations dans le monde physique.
+
+2.2 Objectifs Utilisateur
+
+Découvrir sa personnalité : Permettre aux utilisateurs de mieux se connaître à travers des
+
+jeux interactifs et des évaluations psychologiques.
+
+Rencontrer des personnes compatibles : Faciliter la rencontre de personnes avec qui il
+
+existe une réelle compatibilité psychologique et émotionnelle.
+
+Évoluer à son rythme : Offrir un système de connexion progressif (anonyme initialement) qui
+
+permet aux utilisateurs de révéler leur identité quand ils se sentent prêts.
+
+Bénéficier d'un accompagnement personnalisé : Fournir un compagnon IA qui guide et
+
+soutient l'utilisateur dans son parcours social.
+
+3. Périmètre du Système
+
+3.1 Inclus dans le Projet
+
+Le système SoulLink inclut les fonctionnalités suivantes :
+
+Gestion des utilisateurs : Création de comptes, authentification, gestion de profils
+
+dynamiques, contrôles de confidentialité.
+
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+Découverte de personnalité : Jeux interactifs épisodiques, évaluations psychologiques,
+
+analyse comportementale.
+
+Compagnon IA personnel : Conversations contextuelles, engagement proactif, intelligence
+
+émotionnelle, suivi de croissance personnelle.
+
+Système de correspondance : Algorithme de matching basé sur la psychologie,
+
+correspondance de groupe, justification des correspondances.
+
+Communication : Chat texte enrichi, appels audio/vidéo, partage d'écran, salles d'activités
+
+collaboratives.
+
+Communauté : Serveurs publics/privés, gestion de rôles, recommandations de serveurs.
+
+Sécurité et modération : Vérification faciale, système de signalement, modération assistée
+
+par IA, outils de modération humaine.
+
+Analytics et reporting : Tableaux de bord interactifs, métriques utilisateurs et plateforme,
+
+visualisations, analyses prédictives.
+
+Gestion administrative : Administration système, gestion des comptes, configuration, logs
+
+d'audit.
+
+3.2 Exclu du Projet
+
+Les éléments suivants sont explicitement exclus du périmètre initial :
+
+Application mobile native : Le projet se concentre sur une plateforme web. Les applications
+
+mobiles natives (iOS/Android) sont hors périmètre pour la version initiale.
+
+Intégration avec réseaux sociaux externes : Pas d'authentification via Facebook, Google,
+
+etc. dans la version initiale.
+
+Système de paiement intégré : Les fonctionnalités premium et leurs paiements sont hors
+
+périmètre pour la version initiale (mentionnées dans les métriques mais non développées).
+
+Plateforme de rencontre romantique exclusive : SoulLink se concentre sur les connexions
+
+authentiques en général (amitiés, relations), pas uniquement sur les rencontres amoureuses.
+
+Services de conseil psychologique professionnel : Le compagnon IA fournit un guidage et
+
+un soutien, mais ne remplace pas un professionnel de la santé mentale.
+
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+4. Parties Prenantes et Utilisateurs
+
+4.1 Utilisateurs Finaux
+
+4.1.1 Utilisateurs Standards
+
+Description : Personnes cherchant à créer des connexions authentiques et à découvrir leur
+
+personnalité.
+
+Besoins : Découvrir leur personnalité, rencontrer des personnes compatibles, communiquer
+
+de manière sécurisée, bénéficier d'un accompagnement personnalisé.
+
+Intérêts : Confidentialité, sécurité, qualité des correspondances, facilité d'utilisation.
+
+4.1.2 Utilisateurs Premium (futur)
+
+Description : Utilisateurs ayant souscrit à un abonnement premium.
+
+Besoins : Accès à des fonctionnalités avancées, priorité dans les correspondances,
+
+statistiques détaillées.
+
+Intérêts : Valeur ajoutée, retour sur investissement.
+
+4.2 Modérateurs
+
+Description : Personnel humain chargé de la modération du contenu et de la résolution des
+
+litiges.
+
+Besoins : Outils de modération efficaces, accès aux signalements, tableau de bord de
+
+modération, processus d'appel.
+
+Intérêts : Efficacité, clarté des cas, réduction du temps de traitement.
+
+4.3 Administrateurs Système
+
+Description : Personnel technique chargé de la gestion et de la configuration du système.
+
+Besoins : Accès complet à la configuration système, gestion des utilisateurs et modérateurs,
+
+logs d'audit, gestion des versions IA.
+
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+Intérêts : Contrôle, traçabilité, maintenance efficace.
+
+4.4 Maître d'Ouvrage / Client
+
+Description : L'organisation qui commande et finance le projet.
+
+Besoins : Plateforme fonctionnelle répondant aux objectifs métier, métriques de performance,
+
+retour sur investissement.
+
+Intérêts : Succès du projet, satisfaction utilisateurs, viabilité économique.
+
+5. Exigences Fonctionnelles
+
+Les exigences fonctionnelles décrivent les services que le système doit fournir, formulées du point
+
+de vue du client et sans référence aux solutions techniques.
+
+5.1 Gestion des Utilisateurs et Authentification
+
+EF-001  :  Le  système  DOIT  permettre  à  un  nouvel  utilisateur  de  créer  un  compte  en  fournissant
+
+une adresse email et un numéro de téléphone, afin de garantir une identification de base.
+
+EF-002 : Le système DOIT exiger une vérification de l'adresse email et du numéro de téléphone
+
+avant l'activation complète du compte, afin d'assurer la validité des informations de contact.
+
+EF-003  :  Le  système  DOIT  exiger  une  vérification  faciale  obligatoire  lors  de  l'inscription,  afin  de
+
+prévenir la fraude d'identité et de garantir l'authenticité des utilisateurs.
+
+EF-004  :  Le  système  DOIT  permettre  la  re-vérification  faciale  périodique  pour  les  comptes
+
+suspects, afin de maintenir l'intégrité de la plateforme.
+
+EF-005  :  Le  système  DOIT  permettre  à  un  utilisateur  de  créer,  consulter,  modifier  et  supprimer
+
+son profil, afin de lui donner le contrôle sur ses informations personnelles.
+
+EF-006  :  Le  système  DOIT  maintenir  un  profil  dynamique  qui  évolue  avec  les  interactions  de
+
+l'utilisateur, afin de refléter fidèlement sa personnalité et ses préférences actuelles.
+
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+EF-007 : Le système DOIT permettre à l'utilisateur de configurer des contrôles de confidentialité
+
+pour  différentes  couches  d'information 
+
+(profil  public, 
+
+informations  partagées  avec
+
+correspondances, informations privées), afin de respecter ses préférences de partage.
+
+EF-008  :  Le  système  DOIT  conserver  un  historique  des  connexions  de  l'utilisateur,  afin  de
+
+permettre la traçabilité et la sécurité du compte.
+
+EF-009 : Le système DOIT permettre à un utilisateur de récupérer son compte en cas d'oubli de
+
+mot de passe, afin d'assurer la continuité d'accès.
+
+5.2 Découverte de Personnalité et Jeux Soul
+
+EF-010 : Le système DOIT proposer une série de jeux interactifs épisodiques, afin de découvrir la
+
+personnalité des utilisateurs de manière engageante.
+
+EF-011 : Le système DOIT rendre l'Épisode 1 des Jeux Soul obligatoire lors de l'inscription, afin
+
+d'établir un profil de personnalité de base pour chaque utilisateur.
+
+EF-012 : Le système DOIT intégrer des évaluations psychologiques (telles que le modèle Big Five
+
+et  des  insights  de  type  MBTI)  dans  les  jeux,  afin  de  fournir  une  analyse  structurée  de  la
+
+personnalité.
+
+EF-013  :  Le  système  DOIT  analyser  les  patterns  comportementaux  des  utilisateurs  via  le
+
+gameplay, afin d'identifier leurs traits de personnalité et leurs préférences.
+
+EF-014  :  Le  système  DOIT  découvrir  le  système  de  valeurs  de  l'utilisateur  (éthique,  priorités,
+
+objectifs de vie) à travers les jeux, afin de faciliter des correspondances basées sur les valeurs.
+
+EF-015 : Le système DOIT proposer des narratives à embranchements basées sur les choix de
+
+l'utilisateur, afin de créer une expérience personnalisée et engageante.
+
+EF-016  :  Le  système  DOIT  présenter  des  scénarios  de  prise  de  décision  à  l'utilisateur,  afin
+
+d'évaluer ses préférences et ses valeurs.
+
+EF-017 : Le système DOIT suivre les réponses émotionnelles de l'utilisateur pendant les jeux, afin
+
+d'enrichir le profil psychologique.
+
+EF-018 : Le système DOIT permettre à l'utilisateur de suivre sa progression à travers les épisodes
+
+de jeux, afin de maintenir son engagement.
+
+EF-019  :  Le  système  DOIT  générer  des  insights  personnalisés  à  partir  des  données  de  jeu
+
+collectées, afin de fournir à l'utilisateur une compréhension de sa personnalité.
+
+5.3 Compagnon IA Personnel
+
+EF-020  :  Le  système  DOIT  assigner  un  compagnon  IA  personnel  à  chaque  utilisateur  lors  de
+
+l'inscription, afin de fournir un accompagnement personnalisé.
+
+EF-021  :  Le  système  DOIT  permettre  au  compagnon  IA  d'engager  des  conversations
+
+contextuelles qui référencent les interactions passées, les habitudes et les horaires de l'utilisateur,
+
+afin de créer une expérience personnalisée et cohérente.
+
+EF-022 : Le système DOIT permettre au compagnon IA d'initier proactivement des conversations
+
+basées  sur  les  patterns  de  l'utilisateur,  afin  de  maintenir  l'engagement  et  de  fournir  un  soutien
+
+opportun.
+
+EF-023 : Le système DOIT permettre au compagnon IA de reconnaître et de répondre aux états
+
+émotionnels de l'utilisateur, afin de fournir un soutien adapté.
+
+EF-024  :  Le  système  DOIT  permettre  au  compagnon  IA  de  suivre  la  croissance  personnelle  de
+
+l'utilisateur, afin de fournir des insights sur son évolution.
+
+EF-025 : Le système DOIT permettre au compagnon IA d'effectuer des check-ins quotidiens avec
+
+l'utilisateur, afin de maintenir une relation régulière.
+
+EF-026  :  Le  système  DOIT  permettre  au  compagnon  IA  de  reconnaître  les  habitudes  de
+
+l'utilisateur, afin de personnaliser les interactions et les recommandations.
+
+EF-027  :  Le  système  DOIT  permettre  au  compagnon  IA  de  fournir  un  guidage  philosophique  à
+
+l'utilisateur, afin de l'aider dans sa réflexion personnelle.
+
+EF-028  :  Le  système  DOIT  permettre  au  compagnon  IA  d'assister  l'utilisateur  dans  son
+
+auto-découverte, afin de l'aider à mieux se comprendre.
+
+EF-029  :  Le  système  DOIT  permettre  au  compagnon  IA  de  recommander  des  serveurs
+
+communautaires pertinents à l'utilisateur, afin de faciliter sa découverte de communautés.
+
+5.4 Matching et Correspondances
+
+EF-030  :  Le  système  DOIT  utiliser  un  algorithme  de  correspondance  basé  sur  la  psychologie
+
+(compatibilité de personnalité), afin de créer des correspondances significatives.
+
+EF-031 : Le système DOIT effectuer des correspondances basées sur les intérêts communs (jeux,
+
+activités, sujets de conversation), afin d'augmenter la probabilité de connexions réussies.
+
+EF-032  :  Le  système  DOIT  effectuer  des  correspondances  basées  sur  la  disponibilité  en  temps
+
+réel des utilisateurs, afin de faciliter les interactions immédiates.
+
+EF-033 : Le système DOIT permettre des correspondances de groupe pour 3 à 8 utilisateurs pour
+
+des sessions de 24 heures, afin de créer des opportunités de connexions multiples.
+
+EF-034  :  Le  système  DOIT  fournir  une  justification  des  correspondances  en  expliquant  pourquoi
+
+l'IA a suggéré cette correspondance, afin de renforcer la confiance et la transparence.
+
+EF-035  :  Le  système  DOIT  permettre  aux  utilisateurs  correspondants  de  communiquer
+
+initialement  de  manière  anonyme  via  chat  texte,  afin  de  permettre  une  découverte  progressive
+
+avant la révélation d'identité.
+
+EF-036  :  Le  système  DOIT  permettre  aux  utilisateurs  correspondants  de  passer  à  des  appels
+
+audio, afin de faciliter une connexion plus personnelle.
+
+EF-037  :  Le  système  DOIT  permettre  aux  utilisateurs  correspondants  de  passer  à  des  appels
+
+vidéo, afin de permettre une interaction visuelle.
+
+EF-038 : Le système DOIT permettre aux utilisateurs correspondants de révéler progressivement
+
+leur identité quand ils se sentent prêts, afin de respecter leur rythme de confort.
+
+EF-039  :  Le  système  DOIT  permettre  aux  utilisateurs  correspondants  d'effectuer  des  activités
+
+partagées (regarder YouTube, jouer ensemble), afin d'enrichir leurs interactions.
+
+EF-040  :  Le  système  DOIT  permettre  à  un  utilisateur  d'ajouter  un  autre  utilisateur  comme  ami
+
+avec approbation mutuelle requise, afin de créer des connexions durables.
+
+EF-041 : Le système DOIT permettre à un utilisateur de découvrir des amis via un ID utilisateur,
+
+afin de faciliter les connexions avec des personnes connues.
+
+5.5 Communication et Communauté
+
+EF-042 : Le système DOIT fournir un chat texte enrichi supportant les emojis, GIFs et le partage
+
+de fichiers, afin de permettre une communication expressive et riche.
+
+EF-043  :  Le  système  DOIT  intégrer  des  appels  audio/vidéo  entre  utilisateurs,  afin  de  permettre
+
+une communication vocale et visuelle.
+
+EF-044 : Le système DOIT permettre le partage d'écran pour des activités collaboratives, afin de
+
+faciliter les interactions partagées.
+
+EF-045 : Le système DOIT fournir des salles d'activités permettant le visionnage YouTube partagé
+
+et des sessions de jeu, afin de créer des expériences collaboratives.
+
+EF-046  :  Le  système  DOIT  permettre  la  création  et  la  gestion  de  serveurs  publics  (groupes
+
+communautaires ouverts), afin de faciliter la découverte de communautés.
+
+EF-047  :  Le  système  DOIT  permettre  la  création  et  la  gestion  de  serveurs  privés  (groupes
+
+communautaires restreints), afin de permettre des espaces plus intimes.
+
+EF-048  :  Le  système  DOIT  permettre  la  gestion  des  rôles  dans  les  serveurs  (administrateur,
+
+modérateur, membre), afin d'organiser la communauté.
+
+EF-049 : Le système DOIT fournir des outils de modération de contenu pour les serveurs, afin de
+
+maintenir un environnement sain.
+
+5.6 Sécurité et Modération
+
+EF-050  :  Le  système  DOIT  vérifier  l'âge  des  utilisateurs  lors  de  l'inscription,  afin  de  garantir  la
+
+conformité avec les réglementations de protection des mineurs.
+
+EF-051  :  Le  système  DOIT  fournir  un  système  de  signalement  multi-niveaux  permettant  aux
+
+utilisateurs  de  signaler  des  comportements  inappropriés,  du  contenu  problématique  ou  des
+
+utilisateurs suspects, afin de maintenir un environnement sûr.
+
+EF-052  :  Le  système  DOIT  maintenir  un  "mur  de  la  honte"  pour  la  responsabilité  publique  des
+
+utilisateurs  signalés  (sous  réserve  de  validation  par  modérateurs),  afin  de  dissuader  les
+
+comportements toxiques.
+
+EF-053 : Le système DOIT utiliser une modération assistée par IA pour détecter automatiquement
+
+les comportements toxiques, afin d'améliorer l'efficacité de la modération.
+
+EF-054  :  Le  système  DOIT  fournir  un  tableau  de  bord  aux  modérateurs  humains  pour  gérer  les
+
+signalements et les cas de modération, afin de faciliter leur travail.
+
+EF-055  :  Le  système  DOIT  permettre  à  un  utilisateur  signalé  de  faire  appel  de  la  décision  de
+
+modération, afin d'assurer un processus équitable.
+
+EF-056 : Le système DOIT permettre aux modérateurs de gérer les appels et les litiges, afin de
+
+résoudre les conflits de manière équitable.
+
+EF-057 : Le système DOIT conserver des logs d'audit de sécurité pour toutes les actions critiques,
+
+afin d'assurer la traçabilité et la sécurité.
+
+5.7 Analytics et Reporting
+
+EF-058  :  Le  système  DOIT  fournir  un  tableau  de  bord  interactif  représentant  les  statistiques  de
+
+tous les modules, afin de donner une vue d'ensemble de la plateforme.
+
+EF-059  :  Le  système  DOIT  calculer  et  afficher  des  métriques  utilisateurs  (taux  de  rétention,
+
+engagement, etc.), afin de comprendre le comportement des utilisateurs.
+
+EF-060 : Le système DOIT calculer et afficher des métriques de plateforme (taux de succès des
+
+matchs, précision de l'IA, etc.), afin d'évaluer la performance du système.
+
+EF-061 : Le système DOIT calculer et afficher des métriques de performance (temps de réponse,
+
+disponibilité), afin de surveiller la santé technique du système.
+
+EF-062 
+
+:  Le  système  DOIT  calculer  et  afficher  des  métriques  de  sécurité  (incidents,
+
+signalements), afin de surveiller la sécurité de la plateforme.
+
+EF-063  :  Le  système  DOIT  calculer  et  afficher  des  métriques  business  (coût  d'acquisition
+
+utilisateur, conversion premium), afin d'évaluer la viabilité économique.
+
+EF-064  :  Le  système  DOIT  fournir  des  visualisations  interactives  des  métriques,  afin  de  faciliter
+
+l'analyse des données.
+
+EF-065  :  Le  système  DOIT  fournir  une  analyse  des  tendances,  afin  d'identifier  les  évolutions  à
+
+long terme.
+
+EF-066  :  Le  système  DOIT  fournir  des  insights  prédictifs  basés  sur  les  données  collectées,  afin
+
+d'anticiper les besoins et les tendances.
+
+5.8 Gestion Administrative
+
+EF-067  :  Le  système  DOIT  permettre  aux  administrateurs  d'effectuer  des  opérations  CRUD
+
+(Créer, Lire, Modifier, Supprimer) sur les utilisateurs et modérateurs, afin de gérer les comptes.
+
+EF-068  :  Le  système  DOIT  permettre  aux  administrateurs  de  gérer  les  comptes  suspendus  et
+
+bannis, afin de maintenir la sécurité de la plateforme.
+
+EF-069 : Le système DOIT permettre aux administrateurs de configurer les paramètres système,
+
+afin d'adapter la plateforme aux besoins.
+
+EF-070  :  Le  système  DOIT  permettre  aux  administrateurs  de  gérer  les  paramètres  de
+
+confidentialité globaux, afin de protéger les utilisateurs.
+
+EF-071 : Le système DOIT fournir des outils de modération de contenu aux administrateurs, afin
+
+de maintenir la qualité de la plateforme.
+
+EF-072  :  Le  système  DOIT  permettre  aux  administrateurs  de  gérer  les  appels  et  litiges,  afin  de
+
+résoudre les conflits.
+
+EF-073  :  Le  système  DOIT  fournir  des  logs  d'audit  de  sécurité  accessibles  aux  administrateurs,
+
+afin d'assurer la traçabilité.
+
+EF-074  :  Le  système  DOIT  permettre  aux  administrateurs  de  gérer  les  versions  de  l'IA
+
+(déploiement, rollback), afin de contrôler l'évolution du système.
+
+EF-075  :  Le  système  DOIT  permettre  aux  administrateurs  de  gérer  les  mises  à  jour  de  la
+
+plateforme, afin d'assurer la maintenance et l'évolution.
+
+6. Exigences Non-Fonctionnelles
+
+Les  exigences  non-fonctionnelles  décrivent  les  contraintes  et  propriétés  que  le  système  doit
+
+satisfaire dans son intégralité.
+
+6.1 Performance
+
+ENF-Perf-001  :  Le  temps  de  réponse  moyen  de  l'interface  de  chat  doit  être  inférieur  à  200  ms
+
+pour 95% des requêtes, afin d'assurer une expérience utilisateur fluide.
+
+ENF-Perf-002 : Le temps de chargement initial de la plateforme doit être inférieur à 3 secondes
+
+sur une connexion haut débit standard, afin de réduire l'abandon lors du premier accès.
+
+ENF-Perf-003 : Le système de correspondance doit générer des suggestions de correspondances
+
+en moins de 5 secondes après la demande de l'utilisateur, afin de maintenir l'engagement.
+
+ENF-Perf-004  :  Les  appels  audio/vidéo  doivent  maintenir  une  latence  inférieure  à  150  ms,  afin
+
+d'assurer une communication naturelle.
+
+ENF-Perf-005  :  Le  système  doit  supporter  au  moins  10  000  utilisateurs  simultanés  sans
+
+dégradation significative des performances, afin de garantir la scalabilité.
+
+ENF-Perf-006  :  Les  requêtes  de  base  de  données  critiques  doivent  s'exécuter  en  moins  de  500
+
+ms pour 99% des cas, afin d'assurer la réactivité du système.
+
+6.2 Sécurité
+
+ENF-Sec-001 : Toutes les communications (chat, audio, vidéo) doivent être chiffrées de bout en
+
+bout (E2EE), afin de protéger la confidentialité des échanges.
+
+ENF-Sec-002  :  Les  données  personnelles  des  utilisateurs  doivent  être  stockées  de  manière
+
+chiffrée, afin de prévenir les accès non autorisés.
+
+ENF-Sec-003 
+
+:  Le  système  doit 
+
+implémenter  une  authentification 
+
+forte 
+
+(multi-facteurs
+
+recommandée), afin de sécuriser les comptes utilisateurs.
+
+ENF-Sec-004 : Le système doit être protégé contre les attaques courantes (injection SQL, XSS,
+
+CSRF, etc.), afin de garantir l'intégrité du système.
+
+ENF-Sec-005  :  Les  mots  de  passe  doivent  être  stockés  avec  un  hachage  sécurisé  (bcrypt  ou
+
+équivalent)  et 
+
+respecter  une  politique  de  complexité  minimale,  afin  de  prévenir 
+
+les
+
+compromissions.
+
+ENF-Sec-006  :  Le  système  doit  effectuer  des  sauvegardes  quotidiennes  des  données  critiques,
+
+afin d'assurer la récupération en cas d'incident.
+
+ENF-Sec-007 : Le système doit conserver un journal d'audit de toutes les actions administratives
+
+et des accès aux données sensibles, afin d'assurer la traçabilité.
+
+ENF-Sec-008  :  Les  données  biométriques  (reconnaissance  faciale)  doivent  être  traitées
+
+conformément au RGPD et ne doivent pas être stockées de manière réversible, afin de protéger la
+
+vie privée.
+
+6.3 Fiabilité
+
+ENF-Fiab-001 : Le système doit avoir un taux de disponibilité de 99,5% (temps d'arrêt maximum
+
+de 3,65 jours par an), afin de garantir un service fiable.
+
+ENF-Fiab-002 : Le système doit être capable de récupérer automatiquement après une panne en
+
+moins de 15 minutes, afin de minimiser l'impact sur les utilisateurs.
+
+ENF-Fiab-003  :  Le  système  doit  prévenir  la  perte  de  données  en  cas  de  défaillance,  afin  de
+
+protéger les informations des utilisateurs.
+
+ENF-Fiab-004  :  Les  transactions  critiques  (création  de  compte,  correspondances)  doivent  être
+
+atomiques et garantir la cohérence des données, afin d'éviter les états incohérents.
+
+6.4 Disponibilité
+
+ENF-Disp-001  :  Le  système  doit  être  accessible  24/7,  sauf  pour  les  fenêtres  de  maintenance
+
+planifiée, afin de permettre l'accès à tout moment.
+
+ENF-Disp-002  :  Les  fenêtres  de  maintenance  doivent  être  annoncées  au  moins  48  heures  à
+
+l'avance et ne doivent pas dépasser 4 heures par mois, afin de minimiser l'impact.
+
+ENF-Disp-003 : Le système doit être accessible depuis les navigateurs web modernes (Chrome,
+
+Firefox, Safari, Edge) sur desktop et mobile, afin d'assurer une large compatibilité.
+
+6.5 Facilité d'Utilisation
+
+ENF-Usab-001  :  L'interface  utilisateur  doit  être  intuitive  et  permettre  à  un  nouvel  utilisateur  de
+
+créer un compte et de commencer à utiliser les fonctionnalités de base en moins de 10 minutes,
+
+afin de réduire la courbe d'apprentissage.
+
+ENF-Usab-002 : Le système doit fournir des messages d'erreur clairs et actionnables, afin d'aider
+
+les utilisateurs à résoudre les problèmes.
+
+ENF-Usab-003  :  L'interface  doit  être  responsive  et  s'adapter  aux  différentes  tailles  d'écran
+
+(desktop, tablette, mobile), afin d'assurer une expérience optimale sur tous les appareils.
+
+ENF-Usab-004 : Le système doit être accessible aux personnes handicapées (conformité WCAG
+
+2.1 niveau AA minimum), afin d'assurer l'inclusion.
+
+ENF-Usab-005  :  Le  système  doit  fournir  une  aide  contextuelle  et  des  tutoriels  pour  guider  les
+
+nouveaux utilisateurs, afin de faciliter l'onboarding.
+
+6.6 Portabilité et Interopérabilité
+
+ENF-Port-001 : Le système doit être déployable sur des environnements cloud standards (AWS,
+
+Azure, GCP), afin d'assurer la flexibilité de déploiement.
+
+ENF-Port-002 : Le système doit utiliser des standards ouverts pour les communications (WebRTC
+
+pour audio/vidéo), afin de garantir l'interopérabilité.
+
+ENF-Port-003 : Les données doivent être exportables dans des formats standards (JSON, CSV)
+
+pour les besoins d'analyse, afin de permettre l'intégration avec d'autres outils.
+
+6.7 Contraintes Liées au Processus
+
+ENF-Proc-001  :  Le  système  doit  être  développé  en  respectant  les  bonnes  pratiques  de
+
+développement logiciel (code review, tests, documentation), afin d'assurer la qualité.
+
+ENF-Proc-002 : Le système doit être livré avec une documentation technique complète pour les
+
+développeurs, afin de faciliter la maintenance.
+
+ENF-Proc-003 : Le système doit être livré avec une documentation utilisateur (guides, FAQ), afin
+
+d'aider les utilisateurs finaux.
+
+ENF-Proc-004 : Le système doit être testé pour garantir qu'au moins 80% du code est couvert par
+
+des tests automatisés, afin d'assurer la fiabilité.
+
+ENF-Proc-005  :  Le  système  doit  respecter  les  réglementations  en  vigueur  concernant  la
+
+protection des données personnelles (RGPD pour l'UE, équivalents pour autres juridictions), afin
+
+d'assurer la conformité légale.
+
+7. Contraintes Générales
+
+7.1 Contraintes Techniques
+
+Architecture : Le système doit être conçu pour être scalable horizontalement afin de
+
+supporter la croissance du nombre d'utilisateurs.
+
+Technologies : Les technologies utilisées doivent être maintenues et supportées à long
+
+terme.
+
+Intégration IA : Le système doit intégrer des modèles d'IA pour la personnalité, le matching et
+
+la modération, avec possibilité de mise à jour des modèles sans interruption de service.
+
+7.2 Contraintes Légales et Réglementaires
+
+Protection des données : Conformité avec le RGPD (Règlement Général sur la Protection
+
+des Données) pour les utilisateurs européens, et avec les lois équivalentes pour les autres
+
+juridictions.
+
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+Protection des mineurs : Conformité avec les réglementations de protection des mineurs
+
+(vérification d'âge, restrictions d'accès).
+
+Consentement : Obtention du consentement explicite des utilisateurs pour le traitement des
+
+données personnelles et biométriques.
+
+Droit à l'oubli : Possibilité pour les utilisateurs de supprimer leurs données personnelles
+
+conformément aux réglementations.
+
+7.3 Contraintes d'Interopérabilité
+
+Standards web : Utilisation des standards web (HTML5, CSS3, JavaScript ES6+) pour
+
+garantir la compatibilité.
+
+APIs : Le système doit exposer des APIs RESTful pour permettre d'éventuelles intégrations
+
+futures.
+
+Formats de données : Utilisation de formats standards (JSON) pour les échanges de
+
+données.
+
+7.4 Contraintes Organisationnelles
+
+Équipe : L'équipe de développement doit inclure des compétences en IA, sécurité, et
+
+développement web.
+
+Formation : Les modérateurs et administrateurs doivent recevoir une formation appropriée
+
+avant la mise en production.
+
+8. Critères d'Acceptation et de Réception
+
+8.1 Critères d'Acceptation Généraux
+
+Le système sera considéré comme accepté si :
+
+1. Fonctionnalités de base : Toutes les exigences fonctionnelles EF-001 à EF-075 sont
+
+implémentées et testées avec succès.
+
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+(cid:127)
+2. Performance : Toutes les exigences non-fonctionnelles de performance (ENF-Perf-001 à
+
+ENF-Perf-006) sont respectées lors des tests de charge.
+
+3. Sécurité : Un audit de sécurité indépendant confirme que les exigences de sécurité
+
+(ENF-Sec-001 à ENF-Sec-008) sont respectées.
+
+4. Disponibilité : Le système atteint le taux de disponibilité requis (ENF-Fiab-001) pendant une
+
+période d'essai de 30 jours.
+
+5. Documentation : Toute la documentation requise (technique, utilisateur, API) est fournie et
+
+validée.
+
+8.2 Scénarios de Test de Recette
+
+Scénario 1 : Inscription et Découverte de Personnalité
+
+1. Un nouvel utilisateur accède à la plateforme.
+
+2. L'utilisateur crée un compte avec email et téléphone.
+
+3. L'utilisateur vérifie son email et téléphone.
+
+4. L'utilisateur effectue la vérification faciale.
+
+5. L'utilisateur complète l'Épisode 1 des Jeux Soul.
+
+6. Le système génère un profil de personnalité de base.
+
+7. Un compagnon IA est assigné à l'utilisateur.
+
+8. Critère de succès : Le compte est créé, le profil est généré, et le compagnon IA est
+
+disponible.
+
+Scénario 2 : Correspondance et Communication
+
+1. Un utilisateur demande des correspondances.
+
+2. Le système génère des suggestions basées sur la compatibilité psychologique.
+
+3. L'utilisateur accepte une correspondance.
+
+4. Les deux utilisateurs communiquent initialement de manière anonyme via chat.
+
+5. Les utilisateurs passent progressivement à l'audio, puis à la vidéo.
+
+6. Les utilisateurs révèlent leur identité quand ils se sentent prêts.
+
+7. Critère de succès : La correspondance est créée, la communication fonctionne, et la
+
+progression est fluide.
+
+Scénario 3 : Modération et Sécurité
+
+1. Un utilisateur signale un comportement inapproprié.
+
+2. Le système enregistre le signalement.
+
+3. La modération IA détecte automatiquement le comportement toxique.
+
+4. Un modérateur humain examine le cas via le tableau de bord.
+
+5. Une action de modération est prise (avertissement, suspension, bannissement).
+
+6. L'utilisateur signalé peut faire appel.
+
+7. Critère de succès : Le signalement est traité, l'action est appropriée, et le processus d'appel
+
+fonctionne.
+
+Scénario 4 : Analytics et Reporting
+
+1. Un administrateur accède au tableau de bord analytics.
+
+2. L'administrateur consulte les métriques utilisateurs, plateforme, performance, sécurité et
+
+business.
+
+3. L'administrateur utilise les visualisations interactives.
+
+4. L'administrateur génère un rapport d'analyse des tendances.
+
+5. Critère de succès : Les métriques sont calculées correctement, les visualisations sont
+
+claires, et les insights sont pertinents.
+
+8.3 Procédure de Réception
+
+1. Tests fonctionnels : L'équipe de développement effectue des tests fonctionnels complets et
+
+fournit un rapport de tests.
+
+2. Tests de recette : Le maître d'ouvrage effectue les scénarios de test de recette définis
+
+ci-dessus.
+
+3. Audit de sécurité : Un audit de sécurité indépendant est effectué.
+
+4. Tests de charge : Des tests de charge sont effectués pour valider les exigences de
+
+performance.
+
+5. Période d'essai : Une période d'essai de 30 jours en production avec un nombre limité
+
+d'utilisateurs est effectuée.
+
+6. Validation finale : Le maître d'ouvrage valide que tous les critères d'acceptation sont remplis
+
+et signe la réception.
+
+9. Glossaire
+
+Compagnon  IA  :  Assistant  virtuel  personnel  assigné  à  chaque  utilisateur,  capable  de
+
+conversations contextuelles, d'intelligence émotionnelle et de guidage personnalisé.
+
+Correspondance (Match) : Suggestion de connexion entre utilisateurs basée sur la compatibilité
+
+psychologique, les intérêts communs et la disponibilité.
+
+Correspondance  Anonyme 
+
+:  Phase 
+
+initiale  d'une  correspondance  où 
+
+les  utilisateurs
+
+communiquent sans révéler leur identité complète.
+
+E2EE  (End-to-End  Encryption)  :  Chiffrement  de  bout  en  bout  garantissant  que  seuls  les
+
+expéditeurs et destinataires peuvent lire les messages.
+
+Jeux  Soul  :  Série  de  jeux  interactifs  épisodiques  conçus  pour  découvrir  la  personnalité,  les
+
+valeurs et les préférences des utilisateurs.
+
+Match de Groupe : Correspondance impliquant 3 à 8 utilisateurs pour une session de 24 heures.
+
+Modération  Assistée  par 
+
+IA 
+
+:  Système  utilisant 
+
+l'intelligence  artificielle  pour  détecter
+
+automatiquement les comportements toxiques et le contenu problématique.
+
+Mur  de  la  Honte  :  Mécanisme  de  responsabilité  publique  affichant  les  utilisateurs  ayant  été
+
+signalés et sanctionnés (sous réserve de validation par modérateurs).
+
+Profil Dynamique : Profil utilisateur qui évolue automatiquement en fonction des interactions, des
+
+jeux et des préférences exprimées.
+
+Reconnaissance  Faciale  :  Processus  de  vérification  d'identité  utilisant  l'analyse  faciale  pour
+
+prévenir la fraude d'identité.
+
+Serveur  :  Espace  communautaire  (public  ou  privé)  permettant  aux  utilisateurs  de  se  regrouper
+
+autour d'intérêts communs.
+
+Système de Correspondance : Algorithme utilisant la psychologie, les intérêts et la disponibilité
+
+pour suggérer des connexions entre utilisateurs.
+
+Vérification Faciale : Processus obligatoire lors de l'inscription utilisant la reconnaissance faciale
+
+pour valider l'identité de l'utilisateur.
+
+Annexes
+
+Annexe A : Références
+
+Chapitre 2 : Ingénierie des Exigences - Université de Manouba
+
+RGPD : Règlement (UE) 2016/679 du Parlement européen et du Conseil
+
+(cid:127) WCAG 2.1 : Web Content Accessibility Guidelines
+
+Annexe B : Historique des Versions
+
+Version
+
+Date
+
+Auteur
+
+Modifications
+
+1.0
+
+[Date]
+
+[Auteur]
+
+Version initiale
+
+Fin du Document
+
+(cid:127)
+(cid:127)
+
