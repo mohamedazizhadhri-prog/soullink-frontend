@@ -1,0 +1,116 @@
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: #10101E;
+    border-right: 1px solid rgba(123, 104, 238, 0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid rgba(123, 104, 238, 0.12);
+    margin-bottom: 8px;
+}
+
+.brandIcon {
+    font-size: 22px;
+    line-height: 1;
+    filter: drop-shadow(0 0 8px rgba(123, 104, 238, 0.8));
+}
+
+.brandText {
+    font-size: 15px;
+    color: #A0A0B5;
+    letter-spacing: 0.02em;
+}
+
+.brandText strong {
+    color: #F0F0F5;
+    font-weight: 700;
+}
+
+.navList {
+    list-style: none;
+    padding: 4px 12px;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: #A0A0B5;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.navItem:hover {
+    background: rgba(123, 104, 238, 0.1);
+    color: #F0F0F5;
+}
+
+.navItem.active {
+    background: linear-gradient(135deg, rgba(123, 104, 238, 0.2) 0%, rgba(0, 191, 255, 0.08) 100%);
+    color: #E8E8FF;
+    font-weight: 600;
+}
+
+.navIcon {
+    font-size: 17px;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 22px;
+    text-align: center;
+}
+
+.navLabel {
+    flex: 1;
+}
+
+.activeBar {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: linear-gradient(180deg, #7B68EE, #00BFFF);
+    border-radius: 3px 0 0 3px;
+}
+
+.footer {
+    padding: 16px 20px 24px;
+    border-top: 1px solid rgba(123, 104, 238, 0.12);
+}
+
+.exitLink {
+    display: block;
+    font-size: 13px;
+    color: #A0A0B5;
+    text-decoration: none;
+    transition: color 0.18s;
+}
+
+.exitLink:hover {
+    color: #7B68EE;
+}

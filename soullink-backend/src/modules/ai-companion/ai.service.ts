@@ -1,12 +1,13 @@
 import { prisma } from '../../config/database.js';
 import { logger } from '../../shared/utils/logger.js';
-import { BASE_SYSTEM_PROMPT, SUMMARY_PROMPT, GAME_COMMENT_PROMPT } from './nova.prompt.js';
+import { getBasePrompt, getSummaryPrompt, getGameCommentPrompt, getEventPrompt } from './nova.prompt.js';
 import { embeddingService } from './embedding.service.js';
 import { vectorService } from './vector.service.js';
-import { memoryService } from './memory.service.js';
+import { memoryService, TrustEvent } from './memory.service.js';
 import { llmService } from './llm.service.js';
 import { contextService } from './context.service.js';
 import { AI_CONFIG, MODELS } from './ai.constants.js';
+import { configService } from '../admin/config.service.js';
 
 interface AIMessage {
     id: string;
@@ -39,14 +40,15 @@ export class AIService {
                 });
             }
 
-            // 2. Build Context (Personality, Gaming, Memory)
+            // 2. Build Context + config in parallel
+            const contextWindowSize = await configService.getNumber('ai_context_window', AI_CONFIG.CONTEXT_WINDOW_SIZE);
             const [userContext, vector, messageCount] = await Promise.all([
                 contextService.getUserContext(userId, userMessage, timezone),
                 embeddingService.embedQuery(userMessage),
                 prisma.aIMessage.count({ where: { conversationId: conversation.id } })
             ]);
 
-            // 3. RAG: Search similar past memories
+            // 3. RAG
             let pastMemories = "";
             if (vector && vectorService.isEnabled()) {
                 const results = await vectorService.searchMemories(userId, vector);
@@ -61,18 +63,22 @@ export class AIService {
                 content: m.content
             }));
 
+            const basePrompt   = await getBasePrompt();
+            const temperature  = await configService.getNumber('ai_temperature', 0.7);
+            const maxTokens    = await configService.getNumber('ai_max_tokens', AI_CONFIG.CONTEXT_WINDOW_SIZE * 40);
+
             const finalSystemPrompt = `
-${BASE_SYSTEM_PROMPT}
+${basePrompt}
 
 ${userContext}
 ${pastMemories}
 
-CONVERSATION HISTORY (Last ${AI_CONFIG.CONTEXT_WINDOW_SIZE} messages):
+CONVERSATION HISTORY (Last ${contextWindowSize} messages):
 ${history.map((m: any) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join('\n')}
 `;
 
             // 5. Call LLM
-            const responseText = await llmService.call(finalSystemPrompt, userMessage, MODELS.MAIN, 0.7, 800, { type: 'json_object' });
+            const responseText = await llmService.call(finalSystemPrompt, userMessage, MODELS.MAIN, temperature, maxTokens, { type: 'json_object' });
             if (!responseText) throw new Error('AI returned no response');
 
             let parsed;
@@ -112,13 +118,16 @@ ${history.map((m: any) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.cont
             await memoryService.recordTrustEvent(userId, 'emotional_moment');
         }
 
-        // Periodic Summary & Memory
-        if (count > 0 && count % AI_CONFIG.FACT_EXTRACTION_INTERVAL === 0) {
+        // Periodic Summary & Memory — use config values at runtime
+        const factInterval    = await configService.getNumber('ai_fact_extraction_interval', AI_CONFIG.FACT_EXTRACTION_INTERVAL);
+        const summaryInterval = AI_CONFIG.SUMMARY_TRIGGER_COUNT;
+
+        if (count > 0 && count % factInterval === 0) {
             const recent = [...history, { role: 'user', content: userMessage }, { role: 'assistant', content: parsed.response }];
             memoryService.extractFactsAndUpdateMemory(userId, recent);
         }
 
-        if (count > 0 && count % AI_CONFIG.SUMMARY_TRIGGER_COUNT === 0) {
+        if (count > 0 && count % summaryInterval === 0) {
             this.updateConversationSummary(conversationId, [...history, { role: 'user', content: userMessage }]);
         }
     }
@@ -139,7 +148,8 @@ ${history.map((m: any) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.cont
 
     private async updateConversationSummary(conversationId: string, history: any[]) {
         const historyText = history.map((m: any) => `${m.role}: ${m.content}`).join('\n');
-        const summary = await llmService.call(SUMMARY_PROMPT, `Summarize:\n${historyText}`, MODELS.LIGHT, 0.3, 300);
+        const summaryPrompt = await getSummaryPrompt();
+        const summary = await llmService.call(summaryPrompt, `Summarize:\n${historyText}`, MODELS.LIGHT, 0.3, 300);
         if (summary) {
             await prisma.aIConversation.update({ where: { id: conversationId }, data: { summary } });
             logger.info('[AI] Updated conversation summary');
@@ -152,8 +162,9 @@ ${history.map((m: any) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.cont
             prisma.gameChoice.findUnique({ where: { id: choiceId } })
         ]);
 
+        const gameCommentPrompt = await getGameCommentPrompt();
         const userPrompt = `Choice: "${choice?.text}". Time: ${responseTimeMs}ms.`;
-        const resultText = await llmService.call(GAME_COMMENT_PROMPT, `${context}\n\n${userPrompt}`, MODELS.MAIN, 0.8, 400, { type: 'json_object' });
+        const resultText = await llmService.call(gameCommentPrompt, `${context}\n\n${userPrompt}`, MODELS.MAIN, 0.8, 400, { type: 'json_object' });
 
         if (!resultText) return { comment: null, mood: 'neutral', skip: true };
 
@@ -187,6 +198,76 @@ ${history.map((m: any) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.cont
             }
         } catch (e) {
             logger.warn('[AI] Proactive parse failed');
+        }
+    }
+
+    /**
+     * Event-driven proactive response.
+     * Called from POST /api/ai/event when the user performs a trackable action.
+     */
+    async generateEventResponse(userId: string, trigger: string, payload: Record<string, any>) {
+        const promptTemplate = getEventPrompt(trigger);
+        if (!promptTemplate) {
+            logger.warn(`[AI] Unknown event trigger: ${trigger}`);
+            return null;
+        }
+
+        try {
+            // Build context (invalidate first for fresh social data)
+            contextService.invalidateCache(userId);
+            const [context, basePrompt] = await Promise.all([
+                contextService.getUserContext(userId),
+                getBasePrompt(),
+            ]);
+
+            // Interpolate payload variables into prompt template
+            let prompt = promptTemplate;
+            for (const [key, value] of Object.entries(payload)) {
+                prompt = prompt.replaceAll(`{{${key}}}`, String(value));
+            }
+
+            const systemPrompt = `${basePrompt}\n\n${context}\n\nEVENT CONTEXT:\n${prompt}`;
+            const responseText = await llmService.call(
+                systemPrompt,
+                'React to this event naturally. Keep it under 2 sentences.',
+                MODELS.LIGHT,
+                0.8,
+                200,
+                { type: 'json_object' }
+            );
+
+            if (!responseText) return null;
+
+            const parsed = JSON.parse(responseText);
+
+            // Save as proactive message
+            let conversation = await prisma.aIConversation.findFirst({
+                where: { userId }, orderBy: { createdAt: 'desc' },
+            });
+            if (!conversation) {
+                conversation = await prisma.aIConversation.create({
+                    data: { userId }, include: { messages: true },
+                });
+            }
+            await this.saveMessage(conversation.id, 'assistant', parsed.response, parsed.mood || 'neutral', true, userId);
+
+            // Trust event (fire-and-forget)
+            const trustMap: Record<string, TrustEvent> = {
+                intent_selected: 'interest_action',
+                friend_accepted: 'social_connection',
+                friend_request_sent: 'social_connection',
+                match_found: 'social_connection',
+                watching_youtube: 'social_connection',
+            };
+            const trustEvent = trustMap[trigger];
+            if (trustEvent) {
+                memoryService.recordTrustEvent(userId, trustEvent).catch(() => {});
+            }
+
+            return { response: parsed.response, mood: parsed.mood || 'neutral' };
+        } catch (error) {
+            logger.error(`[AI] Event response failed for trigger '${trigger}':`, error);
+            return null;
         }
     }
 

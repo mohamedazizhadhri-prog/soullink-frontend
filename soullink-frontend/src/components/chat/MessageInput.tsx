@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Plus, Smile, Image as ImageIcon, Send, X, Gift } from 'lucide-react';
+import { Plus, Smile, Image as ImageIcon, Send, X, Gift, Tv } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { socketService } from '@/lib/socket';
 import EmojiPicker, { Theme } from 'emoji-picker-react';
 import { Grid } from '@giphy/react-components';
 import { GiphyFetch } from '@giphy/js-fetch-api';
@@ -18,6 +20,10 @@ interface MessageInputProps {
   replyingTo?: any;
   onCancelReply?: () => void;
   disabled?: boolean;
+  context?: 'dm' | 'community' | 'match';
+  contextId?: string;
+  /** Called when a watch party session is created or the user joins one */
+  onWatchSession?: (sessionId: string | null) => void;
 }
 
 export function MessageInput({
@@ -25,15 +31,18 @@ export function MessageInput({
   onSend,
   replyingTo,
   onCancelReply,
-  disabled = false
+  disabled = false,
+  context,
+  contextId,
+  onWatchSession,
 }: MessageInputProps) {
+  const router = useRouter();
   const [content, setContent] = useState('');
   const [attachment, setAttachment] = useState<File | null>(null);
   const [attachmentPreview, setAttachmentPreview] = useState<string | null>(null);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [showGifPicker, setShowGifPicker] = useState(false);
   const [gifSearch, setGifSearch] = useState('');
-
   const emojiRef = useRef<HTMLDivElement>(null);
   const gifRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -212,6 +221,25 @@ export function MessageInput({
               </div>
             )}
           </div>
+
+          {context && (
+            <button
+              type="button"
+              className={styles.actionBtn}
+              title="Watch YouTube Together"
+              onClick={() => {
+                if (!context || !contextId) return;
+                const handleCreated = ({ sessionId }: { sessionId: string }) => {
+                  socketService.off('watch:session-created', handleCreated);
+                  if (onWatchSession) onWatchSession(sessionId);
+                };
+                socketService.on('watch:session-created', handleCreated);
+                socketService.emit('watch:create', { context, contextId });
+              }}
+            >
+              <Tv size={20} />
+            </button>
+          )}
 
           <textarea
             className={styles.inputField}

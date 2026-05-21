@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./MatchView.module.css";
 import { useMatching } from "@/hooks/useMatching";
 import { 
@@ -22,6 +22,11 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MatchChat } from "./MatchChat";
+import { ConstellationInterests } from "./ConstellationInterests";
+import { useOnboardingOptional } from "@/context/OnboardingContext";
+import { getDemoSoulMatches, isDemoEntityId } from "@/lib/onboardingDemo";
+import { DemoMatchPreview } from "@/components/onboarding/DemoMatchPreview";
+import { useNovaProactive } from "@/hooks/useNovaProactive";
 
 const INTENT_OPTIONS = [
     { id: 'FRIEND', title: 'Find Friends', icon: <Users />, desc: 'Meaningful connections and casual hangouts' },
@@ -51,7 +56,43 @@ export function MatchView() {
         me
     } = useMatching();
 
+    const { fireEvent } = useNovaProactive();
     const [selectedMatchId, setSelectedMatchId] = React.useState<string | null>(null);
+    const idleTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+    const hasNudgedRef = React.useRef(false);
+
+    // Nova nudges if user is idle on intent picker for 5 minutes
+    React.useEffect(() => {
+        if (step !== 'intent' || hasNudgedRef.current || selectedMatchId) return;
+        idleTimerRef.current = setTimeout(() => {
+            hasNudgedRef.current = true;
+            fireEvent('idle_on_match', {});
+        }, 5 * 60 * 1000);
+        return () => {
+            if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+        };
+    }, [step, selectedMatchId]);
+
+    // Reset nudge flag when user takes action
+    React.useEffect(() => {
+        if (step !== 'intent') hasNudgedRef.current = false;
+    }, [step]);
+
+
+    const onboarding = useOnboardingOptional();
+
+    React.useEffect(() => {
+        if (onboarding?.isDemoWorldVisible) return;
+        if (selectedMatchId && isDemoEntityId(selectedMatchId)) {
+            setSelectedMatchId(null);
+        }
+    }, [onboarding?.isDemoWorldVisible, selectedMatchId]);
+    const sidebarMatches = useMemo(() => {
+        const tour = onboarding?.isTourActive && onboarding?.isDemoWorldVisible;
+        if (!tour) return activeMatches;
+        const demos = getDemoSoulMatches(me?.id);
+        return [...demos, ...activeMatches];
+    }, [onboarding?.isTourActive, onboarding?.isDemoWorldVisible, activeMatches, me?.id]);
 
     // ─── RENDERING PHASES ───────────────────────────────────────────────────
 
@@ -61,15 +102,16 @@ export function MatchView() {
                 <h3>Soul Links</h3>
             </div>
             <div className={styles.matchList}>
-                {activeMatches.length === 0 ? (
+                {sidebarMatches.length === 0 ? (
                     <div className={styles.emptySidebar}>
                         <MessageCircle size={32} opacity={0.2} />
                         <p>No active connections yet. <br/> Start a search!</p>
                     </div>
                 ) : (
-                    activeMatches.map((match) => {
+                    sidebarMatches.map((match) => {
                         const otherUser = match.receiver.id === me?.id ? match.sender : match.receiver;
                         const isSelected = selectedMatchId === match.id;
+                        const isDemo = isDemoEntityId(match.id);
                         return (
                             <div 
                                 key={match.id} 
@@ -84,13 +126,15 @@ export function MatchView() {
                                         {match.isAnonymous ? (match.anonymousName || 'Anonymous Soul') : otherUser.displayName}
                                     </span>
                                     <span className={styles.matchPreview}>
-                                        {match.isQuickMatch ? '⏱️ Quick Match' : (match.isAnonymous ? '✨ Anonymous Chat' : '👤 Identity Revealed')}
+                                        {isDemo ? '🎬 Tour preview' : (match.isQuickMatch ? '⏱️ Quick Match' : (match.isAnonymous ? '✨ Anonymous Chat' : '👤 Identity Revealed'))}
                                     </span>
                                 </div>
                                 <div className={styles.matchActions}>
-                                    <button className={styles.miniBtn} title="Leave Match" onClick={(e) => { e.stopPropagation(); leaveMatch(match.id); }}>
-                                        <UserMinus size={14} />
-                                    </button>
+                                    {!isDemo && (
+                                        <button className={styles.miniBtn} title="Leave Match" onClick={(e) => { e.stopPropagation(); leaveMatch(match.id); }}>
+                                            <UserMinus size={14} />
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         );
@@ -110,7 +154,10 @@ export function MatchView() {
                 <div 
                     key={opt.id} 
                     className={`${styles.intentCard} ${intent === opt.id ? styles.intentCardActive : ''}`}
-                    onClick={() => setIntent(opt.id)}
+                    onClick={() => {
+                        setIntent(opt.id);
+                        fireEvent('intent_selected', { intent: opt.title });
+                    }}
                 >
                     <div className={styles.intentIcon}>{opt.icon}</div>
                     <h3>{opt.title}</h3>
@@ -126,28 +173,11 @@ export function MatchView() {
     );
 
     const renderInterestPicker = () => (
-        <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className={styles.interestContainer}
-        >
-            {Object.entries(categories).map(([category, tags]) => (
-                <section key={category} className={styles.categorySection}>
-                    <h4 className={styles.categoryTitle}>{category}</h4>
-                    <div className={styles.pillsGrid}>
-                        {tags.map(tag => (
-                            <button
-                                key={tag}
-                                className={`${styles.interestPill} ${selectedInterests.includes(tag) ? styles.interestPillActive : ''}`}
-                                onClick={() => toggleInterest(tag)}
-                            >
-                                {tag}
-                            </button>
-                        ))}
-                    </div>
-                </section>
-            ))}
-        </motion.div>
+        <ConstellationInterests
+            categories={categories}
+            selectedInterests={selectedInterests}
+            toggleInterest={toggleInterest}
+        />
     );
 
     const renderSearching = () => (
@@ -179,6 +209,16 @@ export function MatchView() {
 
     const renderContent = () => {
         if (selectedMatchId) {
+            if (isDemoEntityId(selectedMatchId)) {
+                const demo = sidebarMatches.find((m) => m.id === selectedMatchId);
+                const label = demo?.anonymousName || 'Velvet Comet';
+                return (
+                    <DemoMatchPreview
+                        partnerLabel={label}
+                        onClose={() => setSelectedMatchId(null)}
+                    />
+                );
+            }
             const selectedMatch = activeMatches.find(m => m.id === selectedMatchId);
             if (!selectedMatch) {
                 setSelectedMatchId(null);
@@ -206,7 +246,7 @@ export function MatchView() {
     // ─── MAIN LAYOUT ────────────────────────────────────────────────────────
 
     return (
-        <div className={styles.dashboard}>
+        <div className={styles.dashboard} data-onboarding-anchor="match-dashboard">
             {renderSidebar()}
 
             <div className={styles.contentArea}>
@@ -259,23 +299,23 @@ export function MatchView() {
 
                 <AnimatePresence>
                     {(step !== 'searching' && !selectedMatchId) && (
-                        <motion.footer 
+                        <motion.footer
                             initial={{ y: 100 }}
                             animate={{ y: 0 }}
                             exit={{ y: 100 }}
                             className={styles.stickyFooter}
                         >
-                            <div className={styles.progressText}>
-                                {step === 'intent' ? 'Step 1 of 2' : `${selectedInterests.length} / 5 interests required`}
-                            </div>
-                            <button 
-                                className={styles.continueBtn}
+                            <button
+                                className={`${styles.continueBtn} ${
+                                    step === 'intent' || selectedInterests.length >= 5 ? styles.continueBtnReady : ''
+                                } ${step === 'interests' && selectedInterests.length >= 1 && selectedInterests.length < 5 ? styles[`continueBtnProgress${selectedInterests.length}`] : ''}
+                                ${step === 'interests' && selectedInterests.length === 5 ? styles.continueBtnShake : ''}`}
                                 disabled={step === 'interests' && selectedInterests.length < 5}
                                 onClick={() => step === 'intent' ? setStep('interests') : startMatching(false)}
                             >
                                 {isLoading ? <Loader2 className="animate-spin" size={18} /> : (
                                     <>
-                                        {step === 'intent' ? 'Next' : 'Find Match'} 
+                                        {step === 'intent' ? 'Next' : 'Find Match'}
                                         <ChevronRight size={18} />
                                     </>
                                 )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNovaMoodParticles } from '../hooks/useNovaMoodParticles';
 import { NovaMood } from '@/types/nova.types';
@@ -40,12 +40,12 @@ export function NovaMoodParticles({
         <AnimatePresence>
             {/* Sad Mood Effects */}
             {mood === 'sad' && (
-                <>
+                <Fragment key="nova-mood-sad">
                     <div className={styles.lightning} />
                     <div className={styles.thunderFlash} />
                     {pixels.map((p) => (
                         <motion.div
-                            key={p.id}
+                            key={`sad-pixel-${p.id}`}
                             className={styles.pixel}
                             initial={{ y: -60, x: p.x, opacity: 0 }}
                             animate={{ y: 60, opacity: [0, 1, 1, 0] }}
@@ -53,15 +53,15 @@ export function NovaMoodParticles({
                             style={{ zIndex: Math.random() > 0.5 ? 5 : -1 }}
                         />
                     ))}
-                </>
+                </Fragment>
             )}
 
             {/* Disgusted Mood Effects */}
             {mood === 'disgusted' && (
-                <>
+                <Fragment key="nova-mood-disgusted">
                     {bubbles.map((b) => (
                         <motion.div
-                            key={b.id}
+                            key={`disgusted-bubble-${b.id}`}
                             className={styles.disgustedBubble}
                             initial={{ y: 20, x: b.x, opacity: 1, scale: 0.5 }}
                             animate={{
@@ -72,15 +72,15 @@ export function NovaMoodParticles({
                             transition={{ duration: 2, ease: "easeOut", delay: b.delay }}
                         />
                     ))}
-                </>
+                </Fragment>
             )}
 
             {/* Love Hearts Effects */}
             {mood === 'love' && (
-                <>
+                <Fragment key="nova-mood-love">
                     {loveHearts.map((h) => (
                         <motion.div
-                            key={h.id}
+                            key={`love-heart-${h.id}`}
                             style={{
                                 position: 'absolute',
                                 left: '50%',
@@ -110,15 +110,15 @@ export function NovaMoodParticles({
                             </svg>
                         </motion.div>
                     ))}
-                </>
+                </Fragment>
             )}
 
             {/* Melting Effects */}
             {isMelting && (
-                <>
+                <Fragment key="nova-melting">
                     {embers.map((e) => (
                         <motion.div
-                            key={e.id}
+                            key={`ember-${e.id}`}
                             style={{
                                 position: 'absolute',
                                 left: '50%',
@@ -135,15 +135,15 @@ export function NovaMoodParticles({
                             }}
                         />
                     ))}
-                </>
+                </Fragment>
             )}
 
             {/* Money Particles (Rich Mode) */}
             {mood === 'rich' && (
-                <>
+                <Fragment key="nova-mood-rich">
                     {moneyParticles.map((p) => (
                         <motion.div
-                            key={p.id}
+                            key={`money-${p.id}`}
                             style={{
                                 position: 'absolute',
                                 left: '50%',
@@ -173,6 +173,7 @@ export function NovaMoodParticles({
 
                     {/* Ticker Tape Ring */}
                     <motion.div
+                        key="rich-ticker-ring"
                         animate={{ rotate: 360 }}
                         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                         style={{
@@ -205,15 +206,15 @@ export function NovaMoodParticles({
                             </div>
                         ))}
                     </motion.div>
-                </>
+                </Fragment>
             )}
 
             {/* Ash Particles (Angry Mode) */}
             {mood === 'angry' && (
-                <>
+                <Fragment key="nova-mood-angry">
                     {ashParticles.map((p) => (
                         <motion.div
-                            key={p.id}
+                            key={`ash-${p.id}`}
                             className={styles.ashParticle}
                             initial={{ x: p.x, y: p.y, opacity: 0.8, scale: 1 }}
                             animate={{
@@ -225,15 +226,15 @@ export function NovaMoodParticles({
                             transition={{ duration: 2, ease: 'linear' }}
                         />
                     ))}
-                </>
+                </Fragment>
             )}
 
             {/* Sauron Ash & Ember Particles */}
             {isSauronMode && (
-                <>
+                <Fragment key="nova-sauron-particles">
                     {sauronAsh.map((p) => (
                         <div
-                            key={p.id}
+                            key={`sauron-ash-${p.id}`}
                             className={styles.sauronAshflake}
                             style={{
                                 left: '50%',
@@ -244,7 +245,7 @@ export function NovaMoodParticles({
                     ))}
                     {sauronEmbers.map((e) => (
                         <div
-                            key={e.id}
+                            key={`sauron-ember-${e.id}`}
                             className={styles.sauronEmber}
                             style={{
                                 left: '50%',
@@ -253,12 +254,16 @@ export function NovaMoodParticles({
                             }}
                         />
                     ))}
-                </>
+                </Fragment>
             )}
 
             {/* Sauron Gaze Beam */}
             {isSauronMode && containerRef?.current && gazeTarget && (
-                <svg className={styles.gazeBeam} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 105 }}>
+                <svg
+                    key="nova-sauron-gaze"
+                    className={styles.gazeBeam}
+                    style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 105 }}
+                >
                     <defs>
                         <linearGradient id="gazeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stopColor="#ff4500" stopOpacity="0.3" />
@@ -292,9 +297,10 @@ export function NovaMoodParticles({
 
             {/* Smart Mode Effects */}
             {(isSmart || mood === 'smart') && (
-                <>
+                <Fragment key="nova-smart-fx">
                     {/* Rotating Tech Ring */}
                     <motion.div
+                        key="smart-tech-ring"
                         animate={{ rotate: 360 }}
                         transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                         style={{
@@ -312,7 +318,7 @@ export function NovaMoodParticles({
                     {/* Binary Particles (Code Rain) */}
                     {binaryBits.map((bit) => (
                         <motion.div
-                            key={bit.id}
+                            key={`binary-${bit.id}`}
                             initial={{ y: bit.y, x: bit.x, opacity: 1 }}
                             animate={{ y: 60, opacity: [1, 1, 0] }}
                             transition={{ duration: 1.5, ease: "linear", delay: bit.delay }}
@@ -334,6 +340,7 @@ export function NovaMoodParticles({
 
                     {/* Synapse Flash Pulse */}
                     <motion.div
+                        key="smart-synapse-pulse"
                         animate={{
                             scale: [1, 1.8, 1],
                             opacity: [0.6, 0, 0.6],
@@ -356,6 +363,7 @@ export function NovaMoodParticles({
 
                     {/* Neural Lines */}
                     <svg
+                        key="smart-neural-lines"
                         style={{
                             position: 'absolute',
                             width: '150%',
@@ -391,15 +399,15 @@ export function NovaMoodParticles({
                             transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
                         />
                     </svg>
-                </>
+                </Fragment>
             )}
 
             {/* Glitched Mood Effects */}
             {mood === 'glitched' && (
-                <>
+                <Fragment key="nova-mood-glitched">
                     {glitchBlocks.map((b: any) => (
                         <motion.div
-                            key={b.id}
+                            key={`glitch-${b.id}`}
                             style={{
                                 position: 'absolute' as const,
                                 left: '50%',
@@ -419,6 +427,7 @@ export function NovaMoodParticles({
                     ))}
                     {/* Scanline Jitter */}
                     <motion.div
+                        key="glitch-scanline"
                         style={{
                             position: 'absolute' as const,
                             left: '50%',
@@ -441,7 +450,7 @@ export function NovaMoodParticles({
                             ease: "linear",
                         }}
                     />
-                </>
+                </Fragment>
             )}
         </AnimatePresence>
     );

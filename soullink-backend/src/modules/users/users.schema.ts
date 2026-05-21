@@ -8,6 +8,7 @@ export const updateProfileSchema = z.object({
         bannerUrl: z.string().url().optional(),
         theme: z.enum(['light', 'dark']).optional(),
         notificationsOn: z.boolean().optional(),
+        onboardingCompleted: z.boolean().optional(),
     }),
 });
 

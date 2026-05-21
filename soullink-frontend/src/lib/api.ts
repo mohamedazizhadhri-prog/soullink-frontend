@@ -11,7 +11,7 @@ const api = axios.create({
 // Add a request interceptor to attach the token
 api.interceptors.request.use(
     (config) => {
-        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        const token = typeof window !== 'undefined' ? localStorage.getItem('sl_token') : null;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -27,8 +27,8 @@ api.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             console.warn("Unauthorized! Redirecting to login...");
             if (typeof window !== 'undefined') {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
+                localStorage.removeItem('sl_token');
+                localStorage.removeItem('sl_user');
                 // Avoid infinite redirect loop if already on login page
                 if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/signup')) {
                     window.location.href = '/login';

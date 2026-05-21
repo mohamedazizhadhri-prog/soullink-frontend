@@ -1,11 +1,28 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Award, Zap, Users as UsersIcon, Heart, Edit3, Save, X, Camera, Loader2, Image as ImageIcon, Search } from "lucide-react";
+import { Award, Zap, Users as UsersIcon, Edit3, Save, X, Camera, Loader2, Image as ImageIcon, Search } from "lucide-react";
+import { motion } from "framer-motion";
 import api from "@/lib/api";
 import { GifPicker } from "../profile/GifPicker";
 
 import styles from "./ProfileView.module.css";
+
+const TRAIT_LABELS: Record<string, string> = {
+    openness: "Openness",
+    conscientiousness: "Focus",
+    extraversion: "Energy",
+    agreeableness: "Empathy",
+    neuroticism: "Stability",
+};
+
+const TRAIT_COLORS: Record<string, string> = {
+    openness: "#8b5cf6",
+    conscientiousness: "#3b82f6",
+    extraversion: "#f59e0b",
+    agreeableness: "#10b981",
+    neuroticism: "#ef4444",
+};
 
 export function ProfileView() {
     const [user, setUser] = useState<any>(null);
@@ -144,8 +161,7 @@ export function ProfileView() {
                 <div 
                     className={styles.banner}
                     style={{
-                        backgroundImage: user.bannerUrl ? `url(${user.bannerUrl})` : 'none',
-                        background: !user.bannerUrl ? 'linear-gradient(45deg, #2A1B3D, #44318D)' : undefined
+                        background: user.bannerUrl ? `url(${user.bannerUrl})` : undefined
                     }}
                 >
                     <div className={styles.bannerOverlay} />
@@ -259,6 +275,47 @@ export function ProfileView() {
                             <div className={styles.statLabel}>Games</div>
                         </div>
                     </div>
+
+                    {user.personalityProfile && (
+                        <div className={styles.personalitySection}>
+                            <h2 className={styles.personalityTitle}>Soul Profile</h2>
+                            <div className={user.personalityProfile.insights?.length ? styles.personalityLayout : ""}>
+                                <div className={styles.traitsContainer}>
+                                    {Object.entries(user.personalityProfile)
+                                        .filter(([key]) => TRAIT_LABELS[key])
+                                        .map(([key, value]: [string, any]) => (
+                                            <div key={key} className={styles.traitItem}>
+                                                <div className={styles.traitHeader}>
+                                                    <span className={styles.traitLabel}>{TRAIT_LABELS[key]}</span>
+                                                    <span className={styles.traitValue}>{Math.round(value * 100)}%</span>
+                                                </div>
+                                                <div className={styles.progressBar}>
+                                                    <motion.div 
+                                                        className={styles.progressFill}
+                                                        initial={{ width: 0 }}
+                                                        animate={{ width: `${value * 100}%` }}
+                                                        transition={{ duration: 1, delay: 0.2 }}
+                                                        style={{ background: TRAIT_COLORS[key] || "#4f46e5" }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+
+                                {user.personalityProfile.insights && user.personalityProfile.insights.length > 0 && (
+                                    <div className={styles.insightsContainer}>
+                                        <h3 className={styles.insightsTitle}>Personality Insights</h3>
+                                        {user.personalityProfile.insights.map((insight: string, idx: number) => (
+                                            <div key={idx} className={styles.insightCard}>
+                                                <p className={styles.insightText}>{insight}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 

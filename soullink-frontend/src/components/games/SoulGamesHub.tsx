@@ -6,6 +6,7 @@ import { Sparkles, Lock, CheckCircle2, Play, ChevronRight, Loader2 } from 'lucid
 import styles from './SoulGamesHub.module.css';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
+import { ONBOARDING_ANCHOR_ATTR } from '@/lib/onboardingDemo';
 
 interface GameSummary {
     id: string;
@@ -55,7 +56,7 @@ export function SoulGamesHub() {
     }
 
     return (
-        <div className={styles.hubContainer}>
+        <div className={styles.hubContainer} data-onboarding-anchor={ONBOARDING_ANCHOR_ATTR.soulGames}>
             <header className={styles.hubHeader}>
                 <motion.h1
                     className={styles.title}

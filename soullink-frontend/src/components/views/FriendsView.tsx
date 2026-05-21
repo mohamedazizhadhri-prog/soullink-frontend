@@ -9,6 +9,7 @@ import Link from "next/link";
 type Tab = "all" | "pending" | "sent" | "add";
 
 import { useFriendsList } from "@/hooks/useFriendsList";
+import { useNovaProactive } from "@/hooks/useNovaProactive";
 
 export function FriendsView() {
     const [activeTab, setActiveTab] = useState<Tab>("all");
@@ -17,9 +18,20 @@ export function FriendsView() {
         handleRespond: baseRespond, handleRemove: handleRemoveBase, handleAddFriend, refresh
     } = useFriendsList();
 
+    const { fireEvent } = useNovaProactive();
+
     const handleRespond = async (id: string, action: 'accept' | 'decline') => {
+        // Capture request data BEFORE the API call clears it from state
+        const request = pending.find(r => r.id === id);
         try {
             await baseRespond(id, action);
+            // Nova reacts to accepted friend requests
+            if (action === 'accept' && request?.sender) {
+                fireEvent('friend_accepted', {
+                    friendName: request.sender.displayName || 'someone',
+                    friendHandle: request.sender.handle || '',
+                });
+            }
         } catch (e: any) {
             alert(e.response?.data?.message || "Failed to process request");
         }
@@ -87,6 +99,10 @@ export function FriendsView() {
                                     onClick={async () => {
                                         try {
                                             await handleAddFriend(searchQuery);
+                                            // Nova asks if you know this person
+                                            fireEvent('friend_request_sent', {
+                                                targetHandle: searchQuery,
+                                            });
                                             setActiveTab('sent');
                                         } catch (e: any) {
                                             alert(e.message || "Operation failed");

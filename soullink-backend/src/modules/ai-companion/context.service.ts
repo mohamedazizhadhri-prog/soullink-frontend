@@ -18,7 +18,7 @@ export class ContextService {
         }
 
         // 2. Fetch Optimized Context (Parallel Queries)
-        const [user, activeProgress, recentResponses, friendshipsCount] = await Promise.all([
+        const [user, activeProgress, recentResponses, friendshipsCount, recentFriendship, activeMatch] = await Promise.all([
             prisma.user.findUnique({
                 where: { id: userId },
                 include: {
@@ -45,7 +45,22 @@ export class ContextService {
                     OR: [{ senderId: userId }, { receiverId: userId }],
                     status: 'ACCEPTED'
                 }
-            })
+            }),
+            // Recent friendship (for social context)
+            prisma.friendship.findFirst({
+                where: { OR: [{ senderId: userId }, { receiverId: userId }], status: 'ACCEPTED' },
+                orderBy: { updatedAt: 'desc' },
+                include: {
+                    sender: { select: { displayName: true } },
+                    receiver: { select: { displayName: true } },
+                },
+            }),
+            // Active anonymous match (for social context)
+            (prisma as any).match.findFirst({
+                where: { OR: [{ senderId: userId }, { receiverId: userId }], status: 'ACCEPTED', leftById: null },
+                orderBy: { updatedAt: 'desc' },
+                select: { anonymousName: true, isAnonymous: true, compatibilityScore: true, updatedAt: true },
+            }).catch(() => null),
         ]);
 
         if (!user) return "User profile not found.";
@@ -107,6 +122,18 @@ export class ContextService {
 
         lines.push(`\nSOCIAL: ${friendshipsCount} friends.`);
 
+        // Recent social activity
+        if (recentFriendship) {
+            const friendName = recentFriendship.senderId === userId
+                ? (recentFriendship as any).receiver?.displayName
+                : (recentFriendship as any).sender?.displayName;
+            const hoursAgo = Math.round((Date.now() - new Date(recentFriendship.updatedAt).getTime()) / 3600000);
+            if (friendName) lines.push(`- Last friend added: ${friendName} (${hoursAgo}h ago)`);
+        }
+        if (activeMatch) {
+            lines.push(`- Active match: Talking to "${activeMatch.anonymousName}" (Score: ${Math.round((activeMatch.compatibilityScore || 0) * 100)}%)`);
+        }
+
         const contextText = lines.join('\n');
 
         // 3. Update Cache
@@ -116,6 +143,13 @@ export class ContextService {
         });
 
         return contextText;
+    }
+
+    /**
+     * Invalidates the context cache for a user (call after social events).
+     */
+    invalidateCache(userId: string) {
+        this.cache.delete(userId);
     }
 }
 

@@ -1,0 +1,56 @@
+.shell { display: flex; min-height: 100vh; width: 100%; background: #0A0A12; }
+.main  { flex: 1; padding: 32px 36px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+.header { display: flex; align-items: center; gap: 16px; justify-content: space-between; flex-wrap: wrap; }
+.title  { font-size: 24px; font-weight: 700; color: #F0F0F5; margin: 0; }
+
+.periodSelector { display: flex; gap: 4px; }
+.periodBtn { padding: 7px 14px; border-radius: 8px; background: #13131F; border: 1px solid rgba(255,255,255,0.06); color: #A0A0B5; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+.periodBtn:hover  { border-color: rgba(123,104,238,0.4); color: #F0F0F5; }
+.activePeriod { background: rgba(123,104,238,0.2) !important; border-color: rgba(123,104,238,0.5) !important; color: #C4B8FF !important; }
+
+.errorBanner { background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.3); border-radius: 10px; padding: 14px 20px; color: #FF8888; font-size: 14px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; background: #13131F; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 4px; flex-wrap: wrap; }
+.tab { flex: 1; min-width: 100px; padding: 8px 12px; border-radius: 9px; background: none; border: none; color: #A0A0B5; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap; }
+.tab:hover { color: #F0F0F5; background: rgba(123,104,238,0.1); }
+.activeTab { background: linear-gradient(135deg, rgba(123,104,238,0.25), rgba(0,191,255,0.1)) !important; color: #E8E8FF !important; }
+
+/* Skeleton */
+.skeletonGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.skeletonCard { height: 100px; border-radius: 12px; background: linear-gradient(90deg, #13131F 25%, #1A1A2E 50%, #13131F 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Panel */
+.panelWrap { display: flex; flex-direction: column; gap: 20px; }
+.twoCol    { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+
+/* Stat Cards */
+.statGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.statCard { background: #13131F; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 4px; }
+.statValue { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.statLabel { font-size: 11px; color: #A0A0B5; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; }
+.statSub   { font-size: 12px; color: #A0A0B5; }
+
+/* Bar List */
+.barListCard { background: #13131F; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.barListTitle { font-size: 12px; font-weight: 700; color: #A0A0B5; text-transform: uppercase; letter-spacing: 0.07em; margin: 0 0 4px; }
+.barRow  { display: flex; align-items: center; gap: 10px; }
+.barLabel { font-size: 12px; color: #D0D0E0; min-width: 120px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barTrack { flex: 1; height: 6px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+.barFill  { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+.barValue { font-size: 12px; color: #A0A0B5; min-width: 50px; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Games Table */
+.gamesTable { background: #13131F; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; }
+.table { width: 100%; border-collapse: collapse; }
+.table th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; color: #A0A0B5; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); }
+.table td { padding: 12px 16px; font-size: 13px; color: #D0D0E0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.table tr:last-child td { border-bottom: none; }
+
+/* Credit Row (Nova tab) */
+.creditRow { display: flex; gap: 12px; flex-wrap: wrap; }
+.creditChip { background: #13131F; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 14px 18px; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 110px; }
+.creditVal   { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.creditLabel { font-size: 11px; color: #A0A0B5; text-align: center; }

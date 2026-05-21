@@ -1,0 +1,106 @@
+/* Admin communities — card grid (aligned with other admin pages) */
+
+.shell { display: flex; min-height: 100vh; width: 100%; background: #0A0A12; }
+.main  { flex: 1; padding: 32px 36px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+.header { display: flex; align-items: center; gap: 16px; }
+.title  { font-size: 24px; font-weight: 700; color: #F0F0F5; margin: 0; }
+.count  { font-size: 13px; color: #A0A0B5; background: rgba(255,255,255,0.06); border-radius: 999px; padding: 3px 10px; }
+
+.errorBanner { background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.3); border-radius: 10px; padding: 14px 20px; color: #FF8888; font-size: 14px; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.skeleton {
+    min-height: 168px;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #13131F 25%, #1A1A2E 50%, #13131F 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s infinite;
+}
+@keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.empty { text-align: center; padding: 40px; color: #A0A0B5; font-size: 14px; }
+
+.modCard {
+    background: #13131F;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+.modCard:hover {
+    border-color: rgba(123,104,238,0.35);
+    box-shadow: 0 0 0 1px rgba(123,104,238,0.12);
+}
+
+.modHeader { display: flex; align-items: center; gap: 12px; min-width: 0; }
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #292940;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.modName   { font-size: 15px; font-weight: 600; color: #F0F0F5; line-height: 1.25; word-break: break-word; }
+.modHandle { font-size: 12px; color: #A0A0B5; margin-top: 2px; }
+
+.statRow { display: flex; gap: 16px; padding-top: 2px; }
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.statVal   { font-size: 18px; font-weight: 700; color: #E8E8F0; font-variant-numeric: tabular-nums; }
+.statLabel { font-size: 11px; font-weight: 600; color: #6868A0; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.cardActions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+
+.viewBtn, .demoteBtn {
+    flex: 1;
+    min-width: 0;
+    padding: 9px 12px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.viewBtn {
+    background: rgba(123,104,238,0.15);
+    border: 1px solid rgba(123,104,238,0.35);
+    color: #C4B8FF;
+}
+.viewBtn:hover {
+    background: rgba(123,104,238,0.28);
+    border-color: #7B68EE;
+    color: #F0EFFF;
+}
+
+.demoteBtn {
+    background: rgba(255,68,68,0.08);
+    border: 1px solid rgba(255,68,68,0.25);
+    color: #FF9999;
+}
+.demoteBtn:hover {
+    background: rgba(255,68,68,0.18);
+    border-color: rgba(255,68,68,0.45);
+    color: #FFCCCC;
+}
+
+.pagination { display: flex; align-items: center; gap: 12px; justify-content: center; }
+.pageBtn { background: #13131F; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #F0F0F5; padding: 8px 16px; cursor: pointer; font-size: 14px; transition: all 0.15s; }
+.pageBtn:hover:not(:disabled) { border-color: #7B68EE; color: #C4B8FF; }
+.pageBtn:disabled { opacity: 0.3; cursor: not-allowed; }
+.pageInfo { font-size: 13px; color: #A0A0B5; }

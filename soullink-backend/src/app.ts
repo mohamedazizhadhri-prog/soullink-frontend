@@ -16,6 +16,15 @@ import notificationsRoutes from './modules/notifications/notifications.routes.js
 import chatRoutes from './modules/chat/chat.routes.js';
 import matchingRoutes from './modules/matching/matching.routes.js';
 import personalityRoutes from './modules/personality/personality.routes.js';
+// Step 2: SoulLink — Admin, Moderator & Analytics Walkthrough Plan §3
+import adminRoutes from './modules/admin/admin.routes.js';
+// Step 3: SoulLink — Admin, Moderator & Analytics Walkthrough Plan §4
+import moderationRoutes from './modules/moderation/moderation.routes.js';
+// Step 4: SoulLink — Admin, Moderator & Analytics Walkthrough Plan §5
+import analyticsRoutes from './modules/analytics/analytics.routes.js';
+// User-facing report submission
+import reportsRoutes from './modules/reports/reports.routes.js';
+import feedbackRoutes from './modules/feedback/feedback.routes.js';
 
 import { server, io } from './server.js';
 
@@ -52,6 +61,15 @@ app.use('/api/notifications', notificationsRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/matching', matchingRoutes);
 app.use('/api/personality', personalityRoutes);
+// Admin god-mode routes — ADMIN role only (§3 of walkthrough plan)
+app.use('/api/admin', adminRoutes);
+// Moderation scoped routes — ADMIN + MODERATOR (§4 of walkthrough plan)
+app.use('/api/moderation', moderationRoutes);
+// Analytics dashboard routes — ADMIN role only (§5 of walkthrough plan)
+app.use('/api/analytics', analyticsRoutes);
+// User-facing report submission — any authenticated user
+app.use('/api/reports', reportsRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 // Health check
 app.get('/health', (req, res) => {

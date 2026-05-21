@@ -6,6 +6,33 @@ class TtsService {
     private currentAudio: HTMLAudioElement | null = null;
 
     /**
+     * Call once from a **click** handler before the first remote TTS in a session.
+     * Browsers block `audio.play()` until the document has a user gesture; priming
+     * in the same tick as "Start with voice" keeps later streamed playback allowed.
+     */
+    primeFromUserGesture(): void {
+        try {
+            const AC = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+            if (AC) {
+                const ctx = new AC();
+                void ctx.resume();
+                ctx.close().catch(() => {});
+            }
+        } catch {
+            /* ignore */
+        }
+        try {
+            const silent = new Audio(
+                'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='
+            );
+            silent.volume = 0.001;
+            void silent.play();
+        } catch {
+            /* ignore */
+        }
+    }
+
+    /**
      * Streams Nova's voice from the SoulLink backend.
      * The backend calls ElevenLabs using its secure server-side API key.
      * Uses MediaSource API once available for true streaming (plays before fully downloaded).
@@ -17,7 +44,7 @@ class TtsService {
         // Stop any currently playing audio immediately
         this.stop();
 
-        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        const token = typeof window !== 'undefined' ? localStorage.getItem('sl_token') : null;
         if (!token) return;
 
         try {
@@ -45,6 +72,7 @@ class TtsService {
 
         } catch (error) {
             console.error('[TTS] Stream failed:', error);
+            // Still resolve callers waiting on "speech finished" (e.g. onboarding pacing).
         }
     }
 
@@ -90,8 +118,8 @@ class TtsService {
                     sourceBuffer.addEventListener('updateend', appendChunk, { once: true });
                 };
 
-                // Start audio and begin feeding chunks
-                audio.play().catch(reject);
+                // Start audio and begin feeding chunks (must follow a user gesture for first play)
+                void audio.play().catch(reject);
                 await appendChunk();
             });
         });
@@ -106,8 +134,18 @@ class TtsService {
         const url = URL.createObjectURL(blob);
         const audio = new Audio(url);
         this.currentAudio = audio;
-        await audio.play();
-        audio.onended = () => URL.revokeObjectURL(url);
+        await new Promise<void>((resolve, reject) => {
+            const done = () => {
+                URL.revokeObjectURL(url);
+                resolve();
+            };
+            audio.onended = done;
+            audio.onerror = () => {
+                URL.revokeObjectURL(url);
+                reject(new Error('Audio playback error'));
+            };
+            void audio.play().catch(reject);
+        });
     }
 
     /** Stop any in-progress TTS playback. */

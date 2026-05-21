@@ -3,6 +3,7 @@ import { env } from './config/env.js';
 import { logger } from './shared/utils/logger.js';
 import { prisma } from './config/database.js';
 import { startAICronJobs } from './modules/ai-companion/ai.cron.js';
+import { startCronJobs } from './cron/index.js';
 
 const startServer = async () => {
     try {
@@ -16,6 +17,7 @@ const startServer = async () => {
 
             // Start background tasks
             startAICronJobs();
+            startCronJobs();
         });
     } catch (error) {
         logger.error('Failed to start server:', error);

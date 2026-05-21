@@ -212,6 +212,7 @@ export function HomeSidebarComponent() {
 
     return (
         <div
+            data-onboarding-anchor="home-sidebar"
             className={`${styles.sidebar} ${mood === 'crazy' ? styles.sidebarShake : ''}`}
             style={{
                 position: 'relative',
@@ -244,10 +245,7 @@ export function HomeSidebarComponent() {
                         <span>Find Connections</span>
                     </Link>
 
-                    <Link href="/group" className={`${styles.navItem} ${pathname === '/group' ? styles.active : ''}`}>
-                        <MessageCircle size={20} />
-                        <span>24h Groups</span>
-                    </Link>
+
 
                     <Link href="/games" className={`${styles.navItem} ${pathname === '/games' ? styles.active : ''}`}>
                         <Gamepad2 size={20} />
@@ -269,18 +267,42 @@ export function HomeSidebarComponent() {
                             <motion.div
                                 key={msg.id}
                                 data-msg-sender={msg.sender}
-                                className={`${styles.message} ${isCinematicMode ? styles.messageGlow : ''} ${mood === 'crazy' ? styles.glitchText : ''} ${mood === 'cursed' ? styles.cursedText : ''}`}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
+                                className={`${styles.message} ${isCinematicMode ? styles.messageGlow : ''} ${mood === 'crazy' ? styles.glitchText : ''} ${mood === 'cursed' ? styles.cursedText : ''} ${msg.isProactive ? styles.proactiveMessage : ''}`}
+                                initial={{ opacity: 0, y: 10, scale: msg.isProactive ? 0.92 : 1 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                                 style={{
                                     alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-                                    background: msg.sender === 'user' ? 'rgba(255,255,255,0.1)' : undefined,
+                                    background: msg.isProactive
+                                        ? 'linear-gradient(135deg, rgba(123,104,238,0.18) 0%, rgba(0,191,255,0.12) 100%)'
+                                        : (msg.sender === 'user' ? 'rgba(255,255,255,0.1)' : undefined),
                                     borderRadius: msg.sender === 'user' ? '12px 12px 0 12px' : '12px 12px 12px 0',
                                     marginLeft: msg.sender === 'user' ? '20%' : 0,
                                     marginRight: msg.sender === 'nova' ? '20%' : 0,
+                                    border: msg.isProactive ? '1px solid rgba(123,104,238,0.45)' : undefined,
+                                    boxShadow: msg.isProactive ? '0 0 10px rgba(123,104,238,0.2), inset 0 0 8px rgba(0,191,255,0.06)' : undefined,
+                                    position: 'relative',
+                                    paddingTop: msg.isProactive ? '18px' : undefined,
                                 }}
                             >
+                                {msg.isProactive && (
+                                    <span style={{
+                                        position: 'absolute',
+                                        top: '4px',
+                                        left: '8px',
+                                        fontSize: '0.58rem',
+                                        fontWeight: 700,
+                                        letterSpacing: '0.05em',
+                                        textTransform: 'uppercase',
+                                        color: 'rgba(123,104,238,0.9)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '3px',
+                                        lineHeight: 1,
+                                    }}>
+                                        ⚡ Nova
+                                    </span>
+                                )}
                                 {msg.sender === 'nova' ? zalgoify(msg.text) : msg.text}
                             </motion.div>
                         ))}

@@ -686,3 +686,198 @@
         filter: blur(0.5px);
     }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SUPER SAIYAN MODE
+   ═══════════════════════════════════════════════════════════ */
+
+/* --- SSJ Core (golden glow) --- */
+.ssjCore {
+    background: radial-gradient(circle at 40% 40%, #FFF7AE 0%, #FFD700 40%, #FFA500 100%) !important;
+    border: 2px solid rgba(255, 215, 0, 0.8) !important;
+    box-shadow:
+        0 0 20px #FFD700,
+        0 0 40px rgba(255, 165, 0, 0.6),
+        inset 0 0 15px rgba(255, 255, 255, 0.4) !important;
+}
+
+/* --- SSJ Aura (layered golden flames) --- */
+.ssjAura {
+    position: absolute;
+    inset: -35%;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    pointer-events: none;
+    z-index: 0;
+    animation: ssjAuraPulse 1.5s infinite ease-in-out alternate;
+}
+
+.ssjAuraSSJ1 {
+    composes: ssjAura;
+    background: radial-gradient(ellipse at center bottom,
+            rgba(255, 215, 0, 0.6) 0%,
+            rgba(255, 165, 0, 0.3) 40%,
+            transparent 70%);
+    filter: blur(6px);
+}
+
+.ssjAuraSSJ2 {
+    composes: ssjAura;
+    background: radial-gradient(ellipse at center bottom,
+            rgba(255, 215, 0, 0.8) 0%,
+            rgba(255, 140, 0, 0.4) 40%,
+            transparent 70%);
+    filter: blur(4px);
+    inset: -45%;
+}
+
+.ssjAuraSSJ3 {
+    composes: ssjAura;
+    background: radial-gradient(ellipse at center bottom,
+            rgba(255, 255, 200, 0.9) 0%,
+            rgba(255, 215, 0, 0.5) 40%,
+            rgba(255, 140, 0, 0.2) 70%,
+            transparent 90%);
+    filter: blur(3px);
+    inset: -55%;
+}
+
+@keyframes ssjAuraPulse {
+    0% {
+        transform: scaleY(1) scaleX(0.95);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scaleY(1.15) scaleX(1.05);
+        opacity: 1;
+    }
+}
+
+/* --- SSJ Hair Container --- */
+.ssjHair {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));
+}
+
+/* --- SSJ Ki Spark (electric bolts around orb) --- */
+.ssjSpark {
+    position: absolute;
+    width: 2px;
+    height: 12px;
+    background: linear-gradient(to bottom, #FFFFFF, #FFD700, transparent);
+    pointer-events: none;
+    z-index: 8;
+    border-radius: 2px;
+    filter: blur(0.5px);
+    box-shadow: 0 0 4px #FFD700;
+}
+
+/* --- SSJ Lightning Bolt --- */
+.ssjLightning {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9;
+    opacity: 0;
+    animation: ssjLightningFlash 2s infinite;
+}
+
+@keyframes ssjLightningFlash {
+
+    0%,
+    45%,
+    55%,
+    100% {
+        opacity: 0;
+    }
+
+    48%,
+    52% {
+        opacity: 1;
+    }
+}
+
+/* --- SSJ Ground Shatter --- */
+.ssjGroundCrack {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- SSJ Power-Up Shake --- */
+.ssjShake {
+    animation: ssjPowerShake 0.08s infinite alternate;
+}
+
+@keyframes ssjPowerShake {
+    0% {
+        transform: translate(-1.5px, 0.5px);
+    }
+
+    100% {
+        transform: translate(1.5px, -0.5px);
+    }
+}
+
+/* --- SSJ Eye (intense teal/white pupil) --- */
+.ssjEye {
+    background: radial-gradient(circle, #FFFFFF 0%, #40E0D0 50%, #00CED1 100%) !important;
+    box-shadow: 0 0 10px #40E0D0, 0 0 20px rgba(64, 224, 208, 0.5) !important;
+}
+
+/* --- SSJ2 Electric Sparks --- */
+.ssjElectricArc {
+    position: absolute;
+    pointer-events: none;
+    z-index: 7;
+    animation: ssjArcFlicker 0.3s infinite alternate;
+}
+
+@keyframes ssjArcFlicker {
+    0% {
+        opacity: 0.4;
+        filter: blur(0px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0.5px);
+    }
+}
+
+/* --- SSJ3 Extended Hair Trail --- */
+.ssjHairTrail {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 1));
+}
+
+/* --- SSJ Charge Burst (on activation) --- */
+.ssjChargeBurst {
+    position: absolute;
+    inset: -100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 215, 0, 0.4) 30%, transparent 60%);
+    pointer-events: none;
+    z-index: 100;
+    animation: ssjBurstExpand 0.8s ease-out forwards;
+}
+
+@keyframes ssjBurstExpand {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}

@@ -148,8 +148,8 @@ function SignupContent() {
             const response = await api.post("/auth/register", signupData);
             if (response.data.status === "success") {
                 if (response.data.data.accessToken) {
-                    localStorage.setItem('token', response.data.data.accessToken);
-                    localStorage.setItem('user', JSON.stringify(response.data.data.user));
+                    localStorage.setItem('sl_token', response.data.data.accessToken);
+                    localStorage.setItem('sl_user', JSON.stringify(response.data.data.user));
                 }
                 setIsScanning(false);
                 setNovaMessage("Perfect! Now let's verify it's really you.");

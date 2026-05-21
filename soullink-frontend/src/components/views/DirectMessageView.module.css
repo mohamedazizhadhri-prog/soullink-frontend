@@ -5,6 +5,7 @@
     background: radial-gradient(circle at top right, #1a1a2e, #0f0f1a);
     color: #e0e0e0;
     font-family: 'Inter', sans-serif;
+    position: relative;
 }
 
 .header {

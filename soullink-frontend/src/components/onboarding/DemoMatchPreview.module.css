@@ -1,0 +1,240 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    min-height: 280px;
+    position: relative;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.chatInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(157, 78, 221, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.h2 {
+    margin: 0 0 6px;
+    font-size: 1.25rem;
+    color: #f4f2ff;
+}
+
+.sub {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #a8a0c8;
+    line-height: 1.45;
+}
+
+.close {
+    flex-shrink: 0;
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.06);
+    color: #c8c4e2;
+}
+
+.close:hover {
+    background: rgba(255, 68, 68, 0.15);
+    color: #ffb4b4;
+}
+
+.log {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4px 2px 12px;
+}
+
+.bubbleThem,
+.bubbleYou {
+    max-width: 88%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.bubbleThem {
+    align-self: flex-start;
+    background: rgba(125, 108, 255, 0.18);
+    border: 1px solid rgba(125, 108, 255, 0.28);
+    color: #ece8ff;
+}
+
+.bubbleYou {
+    align-self: flex-end;
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.28);
+    color: #d1fae5;
+}
+
+/* ── Watch Party Overlay ─────────────────────────────────────────── */
+.watchPartyOverlay {
+    position: absolute;
+    top: 60px;
+    left: 12px;
+    right: 12px;
+    bottom: 68px;
+    background: rgba(10, 10, 18, 0.97);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(123, 104, 238, 0.3);
+    border-radius: 14px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.watchPartyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(123, 104, 238, 0.15);
+    border-bottom: 1px solid rgba(123, 104, 238, 0.2);
+}
+
+.watchPartyTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #E0E0F5;
+    font-weight: 600;
+}
+
+.watchPartyClose {
+    background: none;
+    border: none;
+    color: #A0A0B5;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.watchPartyClose:hover {
+    background: rgba(255, 68, 68, 0.15);
+    color: #ffb4b4;
+}
+
+.playerWrapper {
+    flex: 1;
+    min-height: 0;
+    background: #000;
+}
+
+.playerWrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.watchPartyHint {
+    padding: 10px 14px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Input Bar ────────────────────────────────────────────────────── */
+.inputBar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0 0 12px 12px;
+}
+
+.inputFake {
+    flex: 1;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+    cursor: default;
+    user-select: none;
+}
+
+.tvBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(123, 104, 238, 0.15);
+    border: 1px solid rgba(123, 104, 238, 0.3);
+    color: #7B68EE;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tvBtn:hover {
+    background: rgba(123, 104, 238, 0.3);
+    transform: scale(1.05);
+}
+
+.tvBtnActive {
+    background: rgba(123, 104, 238, 0.4);
+    border-color: #7B68EE;
+    color: #fff;
+    animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(123, 104, 238, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(123, 104, 238, 0); }
+}
+
+.sendBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
+    cursor: default;
+}

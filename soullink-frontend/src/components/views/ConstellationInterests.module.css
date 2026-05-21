@@ -1,0 +1,475 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Constellation Interests — Bento Box Constellation Tag Selector
+   
+   Core Aesthetic: Clean, high-tech, minimal dark-mode.
+   High-blur frosted glass, neon edge-lighting, dynamic constellation effects.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Deep Space Background ──────────────────────────────────────────────── */
+.constellationContainer {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  padding: 40px 20px 100px;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+    rgba(10, 10, 18, 0.98) 0%,
+    rgba(15, 15, 26, 0.99) 50%,
+    rgba(8, 8, 14, 1) 100%);
+  border-radius: 24px;
+}
+
+/* Star field background */
+.starField {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: starTwinkle 4s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* Nebula gas clouds */
+.nebulaCloud1,
+.nebulaCloud2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.nebulaCloud1 {
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(ellipse at 30% 50%,
+    rgba(176, 38, 255, 0.35) 0%,
+    rgba(255, 20, 147, 0.2) 40%,
+    transparent 70%);
+  top: 5%;
+  right: -150px;
+  opacity: 0.25;
+  animation: nebulaDrift 20s ease-in-out infinite alternate;
+}
+
+.nebulaCloud2 {
+  width: 450px;
+  height: 350px;
+  background: radial-gradient(ellipse at 70% 50%,
+    rgba(0, 210, 255, 0.3) 0%,
+    rgba(0, 255, 127, 0.2) 50%,
+    transparent 70%);
+  bottom: 15%;
+  left: -120px;
+  opacity: 0.2;
+  animation: nebulaDrift 25s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes nebulaDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -20px) scale(1.1); }
+}
+
+/* ─── Bento Grid Layout ────────────────────────────────────────────────── */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Bento Box — Frosted Glass Container ────────────────────────────── */
+.bentoBox {
+  position: relative;
+  background: linear-gradient(135deg,
+    var(--category-bg, rgba(25, 25, 40, 0.5)) 0%,
+    rgba(20, 20, 32, 0.4) 50%,
+    rgba(15, 15, 26, 0.6) 100%);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 28px 24px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Asymmetric geometric feel */
+  clip-path: polygon(
+    0 2%, 2% 0, 98% 0, 100% 2%,
+    100% 98%, 98% 100%, 2% 100%, 0 98%
+  );
+}
+
+.bentoBox::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: 24px;
+  background: linear-gradient(135deg,
+    var(--category-glow, rgba(200, 200, 220, 0.4)) 0%,
+    transparent 30%,
+    transparent 70%,
+    var(--category-glow, rgba(200, 200, 220, 0.35)) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.8;
+  animation: borderPulse 3s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+.bentoBox:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px var(--category-glow, rgba(200, 200, 220, 0.25)),
+    0 0 80px var(--category-glow, rgba(200, 200, 220, 0.1));
+  border-color: var(--category-border, rgba(255, 255, 255, 0.2));
+}
+
+/* ─── Category Header ──────────────────────────────────────────────────── */
+.categoryHeader {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.categoryTitle {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--category-text, #d0d0e0);
+  margin: 0;
+  text-shadow:
+    0 0 10px var(--category-glow, rgba(255, 255, 255, 0.2)),
+    0 0 20px var(--category-glow, rgba(255, 255, 255, 0.1));
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  0% { text-shadow: 0 0 10px var(--category-glow, rgba(255, 255, 255, 0.15)); }
+  100% { text-shadow: 0 0 20px var(--category-glow, rgba(255, 255, 255, 0.3)), 0 0 30px var(--category-glow, rgba(255, 255, 255, 0.1)); }
+}
+
+.headerGlow {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    var(--category-glow, rgba(255, 255, 255, 0.3)) 0%,
+    transparent 100%);
+  animation: headerGlowSweep 4s ease-in-out infinite;
+}
+
+@keyframes headerGlowSweep {
+  0%, 100% { opacity: 0.3; transform: translateX(-100%); }
+  50% { opacity: 0.8; transform: translateX(50%); }
+}
+
+/* ─── Constellation Grid — Tags Layout ──────────────────────────────────── */
+.constellationGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: relative;
+  padding: 8px 4px;
+}
+
+/* ─── Tag Node — The "Point of Light" Anchor ────────────────────────────── */
+.tagNode {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible;
+  /* Zero-gravity float animation */
+  animation: tagFloat 6s ease-in-out infinite;
+  animation-delay: calc(var(--tag-index, 0) * 0.5s);
+}
+
+.tagNode:nth-child(odd) {
+  animation-duration: 7s;
+}
+
+.tagNode:nth-child(3n) {
+  animation-duration: 5s;
+  animation-delay: 1s;
+}
+
+@keyframes tagFloat {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-2px) translateX(1px); }
+  50% { transform: translateY(0) translateX(-1px); }
+  75% { transform: translateY(2px) translateX(0); }
+}
+
+.tagNode:hover {
+  border-color: var(--category-border, rgba(255, 255, 255, 0.15));
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* Point of Light — the glowing dot anchor */
+.pointOfLight {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.3),
+    0 0 8px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  animation: pointPulse 2s ease-in-out infinite;
+}
+
+@keyframes pointPulse {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.3);
+  }
+}
+
+.pointActive {
+  background: white;
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 1),
+    0 0 24px var(--category-glow, rgba(255, 255, 255, 0.6)),
+    0 0 48px var(--category-glow, rgba(255, 255, 255, 0.4)),
+    0 0 80px var(--category-glow, rgba(255, 255, 255, 0.2));
+  animation: pointActivePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pointActivePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 1),
+      0 0 24px var(--category-glow, rgba(255, 255, 255, 0.5)),
+      0 0 48px var(--category-glow, rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    transform: scale(1.5);
+    box-shadow:
+      0 0 16px rgba(255, 255, 255, 1),
+      0 0 32px var(--category-glow, rgba(255, 255, 255, 0.8)),
+      0 0 64px var(--category-glow, rgba(255, 255, 255, 0.5)),
+      0 0 100px var(--category-glow, rgba(255, 255, 255, 0.3));
+  }
+}
+
+/* Tag text */
+.tagText {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.tagNode:hover .tagText {
+  color: var(--category-text, rgba(255, 255, 255, 0.95));
+  text-shadow: 0 0 10px var(--category-glow, rgba(255, 255, 255, 0.3));
+}
+
+.tagSelected .tagText {
+  color: white;
+  font-weight: 600;
+}
+
+/* Selected state */
+.tagSelected {
+  border-color: var(--category-border, rgba(255, 255, 255, 0.4));
+  background: linear-gradient(135deg,
+    var(--category-bg, rgba(255, 255, 255, 0.12)) 0%,
+    rgba(255, 255, 255, 0.04) 100%);
+  box-shadow:
+    0 0 20px var(--category-glow, rgba(255, 255, 255, 0.2)),
+    inset 0 0 12px var(--category-glow, rgba(255, 255, 255, 0.05));
+}
+
+/* ─── Hover Energy Orb ───────────────────────────────────────────────────── */
+.energyOrb {
+  position: absolute;
+  inset: -4px;
+  border-radius: 24px;
+  background: radial-gradient(ellipse at center,
+    var(--category-glow, rgba(255, 255, 255, 0.25)) 0%,
+    var(--category-bg, rgba(255, 255, 255, 0.08)) 50%,
+    transparent 80%);
+  border: 1px solid var(--category-border, rgba(255, 255, 255, 0.3));
+  box-shadow:
+    0 0 30px var(--category-glow, rgba(255, 255, 255, 0.3)),
+    0 0 60px var(--category-glow, rgba(255, 255, 255, 0.15)),
+    inset 0 0 30px var(--category-glow, rgba(255, 255, 255, 0.08));
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── Selected Core Nucleus ──────────────────────────────────────────────── */
+.coreNucleus {
+  position: absolute;
+  inset: -3px;
+  border-radius: 24px;
+  background: radial-gradient(ellipse at center,
+    var(--category-glow, rgba(255, 255, 255, 0.35)) 0%,
+    var(--category-bg, rgba(255, 255, 255, 0.1)) 40%,
+    transparent 70%);
+  border: 2px solid var(--category-border, rgba(255, 255, 255, 0.3));
+  box-shadow:
+    0 0 40px var(--category-glow, rgba(255, 255, 255, 0.4)),
+    0 0 80px var(--category-glow, rgba(255, 255, 255, 0.2)),
+    0 0 120px var(--category-glow, rgba(255, 255, 255, 0.1)),
+    inset 0 0 30px var(--category-glow, rgba(255, 255, 255, 0.1));
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── Constellation Lines SVG ─────────────────────────────────────────────── */
+.constellationSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Selection Counter ──────────────────────────────────────────────────── */
+.selectionCounter {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg,
+    rgba(25, 25, 40, 0.8) 0%,
+    rgba(15, 15, 26, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(157, 78, 221, 0.1);
+  z-index: 100;
+}
+
+.counterGlow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 30px;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(157, 78, 221, 0.4) 0%,
+    transparent 50%,
+    rgba(0, 191, 255, 0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: counterGlowPulse 2s ease-in-out infinite;
+}
+
+@keyframes counterGlowPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.counterText {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: white;
+  min-width: 24px;
+  text-align: center;
+}
+
+.counterLabel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ─── Responsive Adjustments ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bentoBox {
+    padding: 20px 16px;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .constellationGrid {
+    gap: 8px;
+  }
+
+  .tagNode {
+    padding: 6px 10px 6px 8px;
+  }
+
+  .tagText {
+    font-size: 0.8rem;
+  }
+
+  .selectionCounter {
+    bottom: 20px;
+    padding: 10px 18px;
+  }
+}
+
+/* ─── Reduced Motion ────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  .nebulaCloud1,
+  .nebulaCloud2,
+  .tagNode,
+  .pointOfLight,
+  .pointActive,
+  .bentoBox::before,
+  .headerGlow,
+  .counterGlow {
+    animation: none;
+  }
+
+  .tagNode {
+    transform: none;
+  }
+}

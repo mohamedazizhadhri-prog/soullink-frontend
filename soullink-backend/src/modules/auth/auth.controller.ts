@@ -27,7 +27,13 @@ export class AuthController {
                         displayName: user.displayName,
                         handle: user.handle,
                         role: user.role,
-                        status: user.status
+                        status: user.status,
+                        avatarUrl: user.avatarUrl,
+                        bannerUrl: user.bannerUrl,
+                        bio: user.bio,
+                        onboardingCompleted: user.onboardingCompleted,
+                        privacyProfile: user.privacyProfile,
+                        notificationsOn: user.notificationsOn
                     },
                     accessToken
                 },
@@ -55,7 +61,21 @@ export class AuthController {
             res.status(200).json({
                 status: 'success',
                 data: {
-                    user: { id: user.id, email: user.email, phone: user.phone, handle: user.handle, role: user.role },
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        phone: user.phone,
+                        displayName: user.displayName,
+                        handle: user.handle,
+                        role: user.role,
+                        status: user.status,
+                        avatarUrl: user.avatarUrl,
+                        bannerUrl: user.bannerUrl,
+                        bio: user.bio,
+                        onboardingCompleted: user.onboardingCompleted,
+                        privacyProfile: user.privacyProfile,
+                        notificationsOn: user.notificationsOn
+                    },
                     accessToken,
                 },
             });
@@ -124,7 +144,21 @@ export class AuthController {
             res.status(200).json({
                 status: 'success',
                 data: {
-                    user: { id: user.id, email: user.email, phone: user.phone, handle: user.handle, role: user.role },
+                    user: {
+                        id: user.id,
+                        email: user.email,
+                        phone: user.phone,
+                        displayName: user.displayName,
+                        handle: user.handle,
+                        role: user.role,
+                        status: user.status,
+                        avatarUrl: user.avatarUrl,
+                        bannerUrl: user.bannerUrl,
+                        bio: user.bio,
+                        onboardingCompleted: user.onboardingCompleted,
+                        privacyProfile: user.privacyProfile,
+                        notificationsOn: user.notificationsOn
+                    },
                     accessToken,
                 },
             });

@@ -27,6 +27,7 @@ model User {
   lastLoginAt         DateTime?
   createdAt           DateTime            @default(now())
   updatedAt           DateTime            @updatedAt
+  onboardingCompleted Boolean             @default(false)
   privacyProfile      PrivacyLevel        @default(PUBLIC)
   notificationsOn     Boolean             @default(true)
   faceDescriptor      Json?
@@ -37,6 +38,7 @@ model User {
   aiConversations          AIConversation[]
   appeals                  Appeal[]
   auditLogs                AuditLog[]          @relation("UserAuditLogs")
+  systemLogs               SystemLog[]         @relation("SystemLogActor")
   receivedDMs              DirectMessage[]     @relation("ReceivedDMs")
   sentDMs                  DirectMessage[]     @relation("SentDMs")
   receivedFriendships      Friendship[]        @relation("ReceivedFriendships")
@@ -65,6 +67,7 @@ model User {
   ownedMatchSuggestions    MatchSuggestion[]   @relation("SuggestionOwner")
   candidateSuggestions     MatchSuggestion[]   @relation("SuggestionCandidate")
   matchRequests            MatchRequest[]
+  feedbacks                Feedback[]
 
 
   @@index([email])
@@ -508,24 +511,41 @@ model Message {
 }
 
 model Report {
-  id            String         @id @default(uuid())
+  id            String          @id @default(uuid())
   reporterId    String
   reportedId    String
   category      ReportCategory
   description   String
-  evidence      Json           @default("[]")
-  status        ReportStatus   @default(PENDING)
+  evidence      Json            @default("[]")
+  status        ReportStatus    @default(PENDING)
   assignedModId String?
   resolvedAt    DateTime?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  // Context: where the incident happened
+  contextType   ReportContext?
+  contextId     String?         // messageId, matchId, serverId, dmId, etc.
   appeal        Appeal?
+  evidences     ReportEvidence[]
   modActions    ModAction[]
-  reported      User           @relation("Reported", fields: [reportedId], references: [id])
-  reporter      User           @relation("Reporter", fields: [reporterId], references: [id])
+  reported      User            @relation("Reported", fields: [reportedId], references: [id])
+  reporter      User            @relation("Reporter", fields: [reporterId], references: [id])
 
   @@index([status])
   @@index([reportedId])
+  @@index([reporterId])
+}
+
+model ReportEvidence {
+  id        String   @id @default(uuid())
+  reportId  String
+  type      String   // 'SCREENSHOT' | 'MESSAGE_SNAPSHOT' | 'URL'
+  url       String   // Cloudinary URL
+  caption   String?
+  createdAt DateTime @default(now())
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([reportId])
 }
 
 model ModAction {
@@ -560,14 +580,6 @@ model Appeal {
   @@index([status])
 }
 
-model ShameWall {
-  id        String    @id @default(uuid())
-  userId    String
-  reason    String
-  addedAt   DateTime  @default(now())
-  expiresAt DateTime?
-}
-
 model Notification {
   id        String   @id @default(uuid())
   userId    String
@@ -596,6 +608,37 @@ model AuditLog {
   @@index([serverId])
   @@index([actorId])
   @@index([createdAt])
+}
+
+/// Global platform-wide audit trail — not scoped to a server.
+/// Category: 'ADMIN' | 'MODERATION' | 'SECURITY' | 'SYSTEM'
+model SystemLog {
+  id        String   @id @default(uuid())
+  category  String
+  action    String
+  actorId   String?
+  targetId  String?
+  metadata  Json     @default("{}")
+  createdAt DateTime @default(now())
+  actor     User?    @relation("SystemLogActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([category])
+  @@index([actorId])
+  @@index([targetId])
+  @@index([createdAt])
+}
+
+/// Live platform configuration — every hard-coded constant migrated here.
+model SystemConfig {
+  key       String   @id       // e.g. "match_ocean_weight"
+  value     String             // always a string, parsed by consumer
+  group     String             // "platform" | "ai" | "matching" | "moderation"
+  label     String             // human-readable label for the admin UI
+  type      String             // "boolean" | "number" | "string" | "textarea"
+  updatedAt DateTime @updatedAt
+  updatedBy String?            // userId of last admin to change it
+
+  @@index([group])
 }
 
 model AnalyticsSnapshot {
@@ -628,6 +671,28 @@ model AIModelVersion {
   isActive   Boolean   @default(false)
   deployedAt DateTime?
   createdAt  DateTime  @default(now())
+}
+
+// ─── Step 1 Addition: External Service Credit Tracker ───────────────────────
+// Reference: SoulLink — Admin, Moderator & Analytics Walkthrough Plan (§5.7 & §6 Phase 2)
+// Purpose: Log daily quota snapshots for all free-tier external APIs so the
+//          admin dashboard can display a credit burn gauge per service.
+model ServiceUsageLog {
+  id         String   @id @default(uuid())
+  /// Service identifier: 'groq' | 'cloudinary' | 'elevenlabs' | 'cohere' | 'pinecone' | 'sendmator' | 'smtp'
+  service    String
+  /// Metric key: 'requests' | 'tokens_in' | 'tokens_out' | 'storage_bytes' | 'bandwidth_bytes' | 'characters' | 'emails' | 'vectors'
+  metric     String
+  /// Actual measured value
+  value      Float
+  /// Known free-tier hard limit for this metric (null = unlimited / unknown)
+  limit      Float?
+  /// Percentage used: (value / limit) * 100 — null when limit is null
+  percentage Float?
+  recordedAt DateTime @default(now())
+
+  @@index([service, recordedAt])
+  @@index([recordedAt])
 }
 
 model TokenBlacklist {
@@ -743,6 +808,7 @@ enum MessageType {
   GIF
   SYSTEM
   VIDEO
+  CALL
 }
 
 enum ChannelType {
@@ -777,6 +843,13 @@ enum ReportCategory {
   OTHER
 }
 
+enum ReportContext {
+  DM
+  MATCH
+  COMMUNITY
+  PROFILE
+}
+
 enum AppealStatus {
   PENDING
   ACCEPTED
@@ -785,9 +858,41 @@ enum AppealStatus {
 
 enum ModActionType {
   WARNING
-  MUTE
   SUSPENSION
   BAN
   UNBAN
   CONTENT_REMOVAL
+  MUTE
+}
+
+enum FeedbackCategory {
+  BUG
+  IDEA
+  IMPROVEMENT
+  OTHER
+}
+
+enum FeedbackStatus {
+  PENDING
+  REPLIED
+  CLOSED
+}
+
+model Feedback {
+  id          String           @id @default(uuid())
+  userId      String
+  title       String
+  content     String
+  category    FeedbackCategory @default(OTHER)
+  status      FeedbackStatus   @default(PENDING)
+  reply       String?
+  repliedAt   DateTime?
+  repliedById String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
 }

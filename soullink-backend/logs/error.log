@@ -3784,3 +3784,1825 @@
 2026-04-13 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
 2026-04-13 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
 2026-04-13 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-14 01:52:10:5210 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 01:52:12:5212 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 01:54:13:5413 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:308:59[39m
+
+[31m  305 const today      = new Date();[39m
+[31m  306 const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());[39m
+[31m  307 const todayEnd   = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000);[39m
+[31m→ 308 const logs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async <anonymous> (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:308:30)[39m
+[31m    at async Promise.all (index 7)[39m
+[31m    at async AnalyticsService.getNovaAnalytics (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:271:13)[39m
+[31m    at async getNovaAnalytics (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:51:22)[39m
+2026-04-14 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-14 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-14 11:42:22:4222 [31merror[39m: [31mSocket Auth: JWT verification failed for socket mDmkiYSfxuQTKnikAAAE. Error: jwt expired[39m
+2026-04-14 11:42:22:4222 [31merror[39m: [31mSocket Auth: JWT verification failed for socket qrpIQ8SHv92DB9FFAAAF. Error: jwt expired[39m
+2026-04-14 11:42:22:4222 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 7yrjMH3l7YXFmBrUAAAG. Error: jwt expired[39m
+2026-04-14 11:42:22:4222 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 9d_8VyEqrA5KFptbAAAH. Error: jwt expired[39m
+2026-04-14 11:42:33:4233 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 1MCX236gGGsaO9bXAAAK. Error: jwt expired[39m
+2026-04-14 11:42:33:4233 [31merror[39m: [31mSocket Auth: JWT verification failed for socket pNgyhHtT4Is8FuMhAAAL. Error: jwt expired[39m
+2026-04-14 11:49:40:4940 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 11:49:44:4944 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 11:52:33:5233 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 11:52:33:5233 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 11:52:44:5244 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 11:52:44:5244 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: PrismaClientKnownRequestError: [39m
+[31mInvalid `prisma.serviceUsageLog.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:56[39m
+
+[31m  582 };[39m
+[31m  583 [39m
+[31m  584 // Get the latest record per service from today[39m
+[31m→ 585 const usageLogs = await prisma.serviceUsageLog.findMany([39m
+[31mThe table `public.ServiceUsageLog` does not exist in the current database.[39m
+[31m    at $n.handleRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:7315)[39m
+[31m    at $n.handleAndLogRequestError (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6623)[39m
+[31m    at $n.request (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:121:6307)[39m
+[31m    at async l (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\@prisma\client\runtime\library.js:130:9633)[39m
+[31m    at async AnalyticsService.getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.service.ts:585:27)[39m
+[31m    at async getCreditUsage (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\analytics\analytics.controller.ts:75:22)[39m
+2026-04-14 12:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-14 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-14 14:00:01:01 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-14 14:00:01:01 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 16:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 17:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 17:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 23:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 23:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-15 23:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 00:00:06:06 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 01:00:10:010 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 13:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 13:00:05:05 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 13:00:05:05 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 13:31:43:3143 [31merror[39m: [31mFailed to start server: Can't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-16 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 14:00:08:08 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 14:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 14:52:50:5250 [31merror[39m: [31mSocket Auth: JWT verification failed for socket N6hfQz2p9DG3ABFzAAAM. Error: jwt expired[39m
+2026-04-16 14:52:50:5250 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 8qU3p1Poe4jXhiz1AAAN. Error: jwt expired[39m
+2026-04-16 14:52:50:5250 [31merror[39m: [31mSocket Auth: JWT verification failed for socket qngySvnu4Sf8r5TkAAAO. Error: jwt expired[39m
+2026-04-16 14:52:50:5250 [31merror[39m: [31mSocket Auth: JWT verification failed for socket tmaRg2RFD1g1gJw3AAAP. Error: jwt expired[39m
+2026-04-16 15:00:06:06 [31merror[39m: [31mSocket Auth: JWT verification failed for socket AtvBQbxxJa7D_nnxAAAD. Error: jwt expired[39m
+2026-04-16 15:00:06:06 [31merror[39m: [31mSocket Auth: JWT verification failed for socket cQ3tEb0Yu6C_W-4vAAAE. Error: jwt expired[39m
+2026-04-16 15:00:06:06 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 5AHjQ8SJG4QoNlClAAAF. Error: jwt expired[39m
+2026-04-16 15:00:07:07 [31merror[39m: [31mSocket Auth: JWT verification failed for socket fX_XVf7DwsSaQUjLAAAH. Error: jwt expired[39m
+2026-04-16 15:37:10:3710 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket 7oRtV6-1ypdK1ER5AAAM. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-16 15:37:10:3710 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket XZzz1FBdWxZxo2eRAAAN. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-16 15:37:10:3710 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket 1S0FQRT0SB-E587iAAAO. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-16 15:37:10:3710 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket rdWPJ-fuRM2rZDJTAAAP. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-16 15:37:12:3712 [31merror[39m: [31mPresence Offline Error for 00747bed-0627-4d2a-a6c7-e702b31eb5a0: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:131:39[39m
+
+[31m  128 userSockets.delete(user.id);[39m
+[31m  129 // Last connection closed: set offline[39m
+[31m  130 try {[39m
+[31m→ 131     await prisma.user.update([39m
+[31mServer has closed the connection.[39m
+2026-04-16 16:00:08:08 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 16:00:08:08 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 16:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 18:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 18:00:10:010 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 23:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 23:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-16 23:00:05:05 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 00:00:06:06 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 01:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 01:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 01:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 03:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 13:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 14:51:03:513 [31merror[39m: [31mSocket Auth: JWT verification failed for socket gDY3KF0H_E1LaIEmAAAM. Error: jwt expired[39m
+2026-04-17 14:51:03:513 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 5UODTexuxVZcoMXnAAAN. Error: jwt expired[39m
+2026-04-17 14:51:03:513 [31merror[39m: [31mSocket Auth: JWT verification failed for socket L9plUe8Flely_xllAAAO. Error: jwt expired[39m
+2026-04-17 14:51:03:513 [31merror[39m: [31mSocket Auth: JWT verification failed for socket zxIJCFSjVnmhnD7YAAAP. Error: jwt expired[39m
+2026-04-17 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-17 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-18 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-18 00:00:03:03 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-18 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-18 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-18 01:00:08:08 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-18 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-20 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-20 14:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-20 14:00:11:011 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-20 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-20 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-20 15:00:06:06 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 00:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 00:00:11:011 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 00:00:13:013 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 01:00:10:010 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 01:10:44:1044 [31merror[39m: [31mPresence Offline Error for d04f2a5a-8cde-4cf2-89bf-62efa43bcbf6: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:131:39[39m
+
+[31m  128 userSockets.delete(user.id);[39m
+[31m  129 // Last connection closed: set offline[39m
+[31m  130 try {[39m
+[31m→ 131     await prisma.user.update([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 01:10:46:1046 [31merror[39m: [31mPresence Online Error for d04f2a5a-8cde-4cf2-89bf-62efa43bcbf6: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:108:31[39m
+
+[31m  105 userSockets.set(user.id, new Set());[39m
+[31m  106 // First connection: set online[39m
+[31m  107 try {[39m
+[31m→ 108     await prisma.user.update([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 01:10:46:1046 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket 13wFt40OlIMtZd65AAAs. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 01:10:46:1046 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket UwJCtHrLmRvxzpuUAAAr. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 01:10:46:1046 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket kqMS-xr2HMIENxnTAAAu. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 01:10:46:1046 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket LaDhhqAnIl7s-aQIAAAv. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 01:10:46:1046 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket aGnasEcorDGQgChKAAAt. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:68:44[39m
+
+[31m  65 }[39m
+[31m  66 [39m
+[31m  67 try {[39m
+[31m→ 68     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 02:00:10:010 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 02:00:12:012 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 07:41:44:4144 [31merror[39m: [31mPresence Offline Error for 00747bed-0627-4d2a-a6c7-e702b31eb5a0: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:131:39[39m
+
+[31m  128 userSockets.delete(user.id);[39m
+[31m  129 // Last connection closed: set offline[39m
+[31m  130 try {[39m
+[31m→ 131     await prisma.user.update([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 4GDEgZlq01txJ32aAAAi. Error: jwt expired[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket LXrxkCZ7gHWXcM3IAAAj. Error: jwt expired[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket wn3SZ-D-NJOrVX0SAAAn. Error: jwt expired[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket L4SZ6z-hQx8bDOCKAAAp. Error: jwt expired[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket N9Aeg5hzvEfbV3APAAAq. Error: jwt expired[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket d9PSuwxF3w75bxPQAAAr. Error: jwt expired[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket k6jvpOIAWF9W8gFcAAAs. Error: jwt expired[39m
+2026-04-21 07:41:48:4148 [31merror[39m: [31mSocket Auth: JWT verification failed for socket CShq7Vad6WGNHM3cAAAt. Error: jwt expired[39m
+2026-04-21 07:41:49:4149 [31merror[39m: [31mPresence Offline Error for d04f2a5a-8cde-4cf2-89bf-62efa43bcbf6: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:131:39[39m
+
+[31m  128 userSockets.delete(user.id);[39m
+[31m  129 // Last connection closed: set offline[39m
+[31m  130 try {[39m
+[31m→ 131     await prisma.user.update([39m
+[31mServer has closed the connection.[39m
+2026-04-21 07:56:29:5629 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 9Du91luhCWN3yWpnAAAy. Error: jwt expired[39m
+2026-04-21 07:56:29:5629 [31merror[39m: [31mSocket Auth: JWT verification failed for socket FW6IIMCWziMNDu65AAAz. Error: jwt expired[39m
+2026-04-21 07:56:29:5629 [31merror[39m: [31mSocket Auth: JWT verification failed for socket PtNNvarKJ95wcb7KAAA0. Error: jwt expired[39m
+2026-04-21 07:56:29:5629 [31merror[39m: [31mSocket Auth: JWT verification failed for socket PASu8PMdFj6O0wfFAAA1. Error: jwt expired[39m
+2026-04-21 07:57:23:5723 [31merror[39m: [31mSocket Auth: JWT verification failed for socket RBiTo0H4PUIz8b54AAA8. Error: jwt expired[39m
+2026-04-21 07:57:23:5723 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 1C60pIoDp2KCmGh4AAA9. Error: jwt expired[39m
+2026-04-21 07:57:23:5723 [31merror[39m: [31mSocket Auth: JWT verification failed for socket Fn4OhZ7oTZlTURWsAAA-. Error: jwt expired[39m
+2026-04-21 07:57:23:5723 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 6MzbTW32nBNEd9DBAAA_. Error: jwt expired[39m
+2026-04-21 07:57:23:5723 [31merror[39m: [31mSocket Auth: JWT verification failed for socket eWeR_hYAN7Ddoe1lAABA. Error: jwt expired[39m
+2026-04-21 07:57:23:5723 [31merror[39m: [31mSocket Auth: JWT verification failed for socket Cvw-HEWOhhuuIUfXAABB. Error: jwt expired[39m
+2026-04-21 08:00:04:04 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 08:00:05:05 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 08:00:07:07 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 12:00:47:047 [31merror[39m: [31mFailed to start server: Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-21 12:16:31:1631 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 13:56:34:5634 [31merror[39m: [31mPresence Offline Error for 84ef831b-709b-4780-a0a3-d7ba999c801a: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:131:39[39m
+
+[31m  128 userSockets.delete(user.id);[39m
+[31m  129 // Last connection closed: set offline[39m
+[31m  130 try {[39m
+[31m→ 131     await prisma.user.update([39m
+[31mServer has closed the connection.[39m
+2026-04-21 13:56:39:5639 [31merror[39m: [31mSocket Auth: JWT verification failed for socket tHKItWTnl6CB6D4eAABK. Error: jwt expired[39m
+2026-04-21 13:56:39:5639 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 3Jao_urSAdrpUhcLAABL. Error: jwt expired[39m
+2026-04-21 13:56:39:5639 [31merror[39m: [31mSocket Auth: JWT verification failed for socket XfFVTOFMFJhoGJgaAABM. Error: jwt expired[39m
+2026-04-21 13:56:39:5639 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 6MICMFD_Cf6KuR75AABN. Error: jwt expired[39m
+2026-04-21 13:56:39:5639 [31merror[39m: [31mSocket Auth: JWT verification failed for socket Dji4hzXGCcL9jOhpAABO. Error: jwt expired[39m
+2026-04-21 13:56:39:5639 [31merror[39m: [31mSocket Auth: JWT verification failed for socket sq0TREaiP0CpGC6-AABP. Error: jwt expired[39m
+2026-04-21 14:00:32:032 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 14:00:38:038 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-21 14:00:48:048 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-22 02:01:09:19 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-22 02:01:49:149 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-22 02:02:18:218 [31merror[39m: [31m[LLM] API Error (400):[39m
+2026-04-22 02:52:47:5247 [31merror[39m: [31mFailed to start server: Can't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-22 03:00:36:036 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 03:00:47:047 [31merror[39m: [31m[AI-CRON] Error in proactive check: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\ai-companion\context.service.ts:22:25[39m
+
+[31m  19 [39m
+[31m  20 // 2. Fetch Optimized Context (Parallel Queries)[39m
+[31m  21 const [user, activeProgress, recentResponses, friendshipsCount] = await Promise.all([[39m
+[31m→ 22     prisma.user.findUnique([39m
+[31mServer has closed the connection.[39m
+2026-04-22 03:00:47:047 [31merror[39m: [31m[UsageTracker] Failed to upsert CLOUDINARY_TRANSFORMS.transforms: [39m
+[31mInvalid `prisma.serviceUsageLog.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\cron\usageTracker.ts:56:42[39m
+
+[31m  53 });[39m
+[31m  54 [39m
+[31m  55 if (existing) {[39m
+[31m→ 56     await prisma.serviceUsageLog.update([39m
+[31mServer has closed the connection.[39m
+2026-04-22 03:00:47:047 [31merror[39m: [31m[UsageTracker] Failed to upsert CLOUDINARY_CREDITS.credits: [39m
+[31mInvalid `prisma.serviceUsageLog.findFirst()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\cron\usageTracker.ts:47:55[39m
+
+[31m  44 const percentage = limit > 0 ? (value / limit) * 100 : 0;[39m
+[31m  45 [39m
+[31m  46 try {[39m
+[31m→ 47     const existing = await prisma.serviceUsageLog.findFirst([39m
+[31mServer has closed the connection.[39m
+2026-04-22 12:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 12:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 12:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 13:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 17:00:21:021 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 17:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 17:00:23:023 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 18:00:25:025 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 18:00:32:032 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 18:00:45:045 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 19:01:06:16 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 19:01:16:116 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-22 19:01:22:122 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 01:48:13:4813 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 2pQ_VfXmXRi45H5jAAAU. Error: jwt expired[39m
+2026-04-23 01:48:13:4813 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 9ZuAC6Lw649ud4dVAAAV. Error: jwt expired[39m
+2026-04-23 01:48:14:4814 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 0o7mWMZ4McYT34zoAAAX. Error: jwt expired[39m
+2026-04-23 02:00:19:019 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 02:00:20:020 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 02:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 02:36:00:360 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket Uxi_iWKj4cgR_2bdAAAd. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:100:44[39m
+
+[31m   97 }[39m
+[31m   98 [39m
+[31m   99 try {[39m
+[31m→ 100     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-23 02:36:00:360 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket SSTG8M3SmX00xoAzAAAc. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:100:44[39m
+
+[31m   97 }[39m
+[31m   98 [39m
+[31m   99 try {[39m
+[31m→ 100     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-23 02:36:00:360 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket bI8MGyBo4zMbVAc8AAAe. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:100:44[39m
+
+[31m   97 }[39m
+[31m   98 [39m
+[31m   99 try {[39m
+[31m→ 100     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-23 02:36:00:360 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket ftvNjH3C-k3d6pJ5AAAf. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:100:44[39m
+
+[31m   97 }[39m
+[31m   98 [39m
+[31m   99 try {[39m
+[31m→ 100     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-23 03:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 03:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 03:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 04:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 04:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 04:00:32:032 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 14:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 14:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 15:40:15:4015 [31merror[39m: [31mSocket Auth: JWT verification failed for socket zdtHYPAr37vzBkZ9AAAB. Error: jwt expired[39m
+2026-04-23 15:40:16:4016 [31merror[39m: [31mSocket Auth: JWT verification failed for socket rew9ua-qb0geP1ktAAAD. Error: jwt expired[39m
+2026-04-23 15:40:16:4016 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 6RmVNRgtzC3S8jsZAAAF. Error: jwt expired[39m
+2026-04-23 15:40:32:4032 [31merror[39m: [31mSocket Auth: JWT verification failed for socket ullQlHu2U1wOWPh5AAAS. Error: jwt expired[39m
+2026-04-23 15:40:32:4032 [31merror[39m: [31mSocket Auth: JWT verification failed for socket vXX_NgAh6UjQJ1WFAAAT. Error: jwt expired[39m
+2026-04-23 15:40:32:4032 [31merror[39m: [31mSocket Auth: JWT verification failed for socket mzNCnga0agWywFduAAAU. Error: jwt expired[39m
+2026-04-23 15:40:32:4032 [31merror[39m: [31mSocket Auth: JWT verification failed for socket ISFBDIFYiPpM8lpCAAAV. Error: jwt expired[39m
+2026-04-23 16:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 16:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket twgu2-lyk6hsbbWwAAAk. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket uheACP7WGIhfjyGMAAAl. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket umqYemakByGaso23AAAm. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket 2MqjBd7xThDEs59ZAAAn. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket CN3n4Hpu1tQShe-4AAAo. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket wU43oweKBtI0DkLkAAAp. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket DajbLXcOWHV5UqaiAAAq. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 16:28:03:283 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket 56WsPlv6DYN5OptCAAAr. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-23 19:00:40:040 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 19:00:58:058 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 19:01:18:118 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 20:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 20:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 20:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 23:00:33:033 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 23:00:34:034 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 23:00:35:035 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-23 23:05:56:556 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket C8zuKHwICOKaJEzZAAAW. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-23 23:05:56:556 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket 9ClkkuKsk5WkT1Y8AAAV. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-23 23:05:56:556 [31merror[39m: [31mSocket Auth: Database error during user lookup. Socket 7NtgqLrWWXjD99AzAAAX. Error: [39m
+[31mInvalid `prisma.user.findUnique()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:104:44[39m
+
+[31m  101 }[39m
+[31m  102 [39m
+[31m  103 try {[39m
+[31m→ 104     const user = await prisma.user.findUnique([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-24 00:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket mvMlKdQ9-u4TM1ERAACB. Error: jwt expired[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket hR29M7M2oKck2rIVAACD. Error: jwt expired[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket LrZnGxCGpLciihQOAACE. Error: jwt expired[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket j6FghJLOHwtBf6KcAACF. Error: jwt expired[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket WmdRPbLHvT3Zf5BNAACI. Error: jwt expired[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 6I9YoUBSoZ9gTP8IAACJ. Error: jwt expired[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 12fuGMuF3u1EVvf3AACK. Error: jwt expired[39m
+2026-04-24 00:49:50:4950 [31merror[39m: [31mSocket Auth: JWT verification failed for socket CYN1FfqBZqvGq6_kAACL. Error: jwt expired[39m
+2026-04-24 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 03:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 03:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 12:14:03:143 [31merror[39m: [31mPresence Offline Error for d317e763-7fc0-4404-a730-ab0685d7f5a6: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:167:39[39m
+
+[31m  164 userSockets.delete(user.id);[39m
+[31m  165 // Last connection closed: set offline[39m
+[31m  166 try {[39m
+[31m→ 167     await prisma.user.update([39m
+[31mServer has closed the connection.[39m
+2026-04-24 12:14:04:144 [31merror[39m: [31mPresence Offline Error for 00747bed-0627-4d2a-a6c7-e702b31eb5a0: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:167:39[39m
+
+[31m  164 userSockets.delete(user.id);[39m
+[31m  165 // Last connection closed: set offline[39m
+[31m  166 try {[39m
+[31m→ 167     await prisma.user.update([39m
+[31mServer has closed the connection.[39m
+2026-04-24 12:14:05:145 [31merror[39m: [31mSocket Auth: JWT verification failed for socket mqxoayfsOnMndswkAABu. Error: jwt expired[39m
+2026-04-24 12:14:05:145 [31merror[39m: [31mSocket Auth: JWT verification failed for socket _4Jz10uJU4BUwidWAABv. Error: jwt expired[39m
+2026-04-24 12:14:05:145 [31merror[39m: [31mSocket Auth: JWT verification failed for socket S0U7lMZbfEbstt7CAABw. Error: jwt expired[39m
+2026-04-24 12:14:05:145 [31merror[39m: [31mSocket Auth: JWT verification failed for socket GtOkuEoF8k9gWgBeAABx. Error: jwt expired[39m
+2026-04-24 12:14:16:1416 [31merror[39m: [31mSocket Auth: JWT verification failed for socket tsIdaAF1UDufTurQAAB1. Error: jwt expired[39m
+2026-04-24 12:14:16:1416 [31merror[39m: [31mSocket Auth: JWT verification failed for socket WfGim2rFiSSKwZL3AAB2. Error: jwt expired[39m
+2026-04-24 12:14:16:1416 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 9mQVYBwysftycZWGAAB3. Error: jwt expired[39m
+2026-04-24 12:15:57:1557 [31merror[39m: [31mSocket Auth: JWT verification failed for socket VPRImqZ7kaxewXiwAAB7. Error: jwt expired[39m
+2026-04-24 12:15:57:1557 [31merror[39m: [31mSocket Auth: JWT verification failed for socket zL1F8gS7bE-Ldh5vAAB8. Error: jwt expired[39m
+2026-04-24 12:15:57:1557 [31merror[39m: [31mSocket Auth: JWT verification failed for socket RIFPElhoOkdaKTwZAAB9. Error: jwt expired[39m
+2026-04-24 14:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket kqJ53Z3byzIVUai-AABK. Error: jwt expired[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket K3X1UPSUZMnpZ492AABL. Error: jwt expired[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket xR5lcVroqKFGtn8IAABM. Error: jwt expired[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket lOCToobnqZ-z64wHAABN. Error: jwt expired[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket IEtsZlUvK5XaeC76AABO. Error: jwt expired[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 6_AuVoYOMqQiQdP4AABP. Error: jwt expired[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket Ckye6pqhwCfaFE5LAABQ. Error: jwt expired[39m
+2026-04-24 14:04:53:453 [31merror[39m: [31mSocket Auth: JWT verification failed for socket aCAofXRrjYOdEUrOAABR. Error: jwt expired[39m
+2026-04-24 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 16:15:15:1515 [31merror[39m: [31mPresence Offline Error for d04f2a5a-8cde-4cf2-89bf-62efa43bcbf6: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:167:39[39m
+
+[31m  164 userSockets.delete(user.id);[39m
+[31m  165 // Last connection closed: set offline[39m
+[31m  166 try {[39m
+[31m→ 167     await prisma.user.update([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-04-24 16:15:18:1518 [31merror[39m: [31mSocket Auth: JWT verification failed for socket MGMgiSauvfkU8_IWAADl. Error: jwt expired[39m
+2026-04-24 16:15:18:1518 [31merror[39m: [31mSocket Auth: JWT verification failed for socket zh55IINkQ-yPeNS6AADm. Error: jwt expired[39m
+2026-04-24 16:15:18:1518 [31merror[39m: [31mSocket Auth: JWT verification failed for socket HLzFcKxGmH214kttAADn. Error: jwt expired[39m
+2026-04-24 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 18:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 18:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 18:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-24 18:01:30:130 [31merror[39m: [31mSocket Auth: JWT verification failed for socket NhBiU3ds1i2o8unvAADr. Error: jwt expired[39m
+2026-04-24 18:01:30:130 [31merror[39m: [31mSocket Auth: JWT verification failed for socket Xc7ONRM1ryNKniotAADs. Error: jwt expired[39m
+2026-04-24 18:01:30:130 [31merror[39m: [31mSocket Auth: JWT verification failed for socket EQ8XTg2Ax7ZiQH8KAADt. Error: jwt expired[39m
+2026-04-25 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 02:13:31:1331 [31merror[39m: [31mSocket Auth: JWT verification failed for socket idfxRaVXuj610dE3AACd. Error: jwt expired[39m
+2026-04-25 02:13:31:1331 [31merror[39m: [31mSocket Auth: JWT verification failed for socket HFtkethwJgXTM4ntAACe. Error: jwt expired[39m
+2026-04-25 02:13:31:1331 [31merror[39m: [31mSocket Auth: JWT verification failed for socket TGUtiIOSfPzOJC_dAACf. Error: jwt expired[39m
+2026-04-25 03:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 03:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 11:23:25:2325 [31merror[39m: [31mSocket Auth: JWT verification failed for socket M0_PYwsB2OJbVTtGAADZ. Error: jwt expired[39m
+2026-04-25 11:23:25:2325 [31merror[39m: [31mSocket Auth: JWT verification failed for socket iWflZxazRoRwZTO7AADa. Error: jwt expired[39m
+2026-04-25 11:23:25:2325 [31merror[39m: [31mSocket Auth: JWT verification failed for socket qO0NT-rRozlJYEFNAADb. Error: jwt expired[39m
+2026-04-25 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 13:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 13:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 13:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-25 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 01:00:25:025 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 01:00:39:039 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 01:00:54:054 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 01:01:05:15 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 02:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 02:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 11:24:53:2453 [31merror[39m: [31mPresence Offline Error for 00747bed-0627-4d2a-a6c7-e702b31eb5a0: [39m
+[31mInvalid `prisma.user.update()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\server.ts:167:39[39m
+
+[31m  164 userSockets.delete(user.id);[39m
+[31m  165 // Last connection closed: set offline[39m
+[31m  166 try {[39m
+[31m→ 167     await prisma.user.update([39m
+[31mServer has closed the connection.[39m
+2026-04-26 12:00:26:026 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 12:00:33:033 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 12:00:43:043 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 12:00:59:059 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 12:03:22:322 [31merror[39m: [31mSocket Auth: JWT verification failed for socket YuA-bu5elQZSq4R8AABX. Error: jwt expired[39m
+2026-04-26 12:03:22:322 [31merror[39m: [31mSocket Auth: JWT verification failed for socket N6goMnZgxgijRFCnAABY. Error: jwt expired[39m
+2026-04-26 12:03:22:322 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 3spJOmMmKgRzGkvWAABZ. Error: jwt expired[39m
+2026-04-26 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 13:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 13:00:16:016 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 14:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 17:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 17:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 18:00:59:059 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 18:01:24:124 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 18:01:55:155 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-26 18:02:18:218 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 00:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 00:00:19:019 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 00:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 00:00:23:023 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 01:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 01:00:18:018 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 01:00:20:020 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 01:00:26:026 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 02:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 03:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 03:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 03:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 03:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 03:00:19:019 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 03:15:11:1511 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-27 03:15:11:1511 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-27 03:30:10:3010 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-27 03:30:10:3010 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-27 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 16:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-27 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 00:44:12:4412 [31merror[39m: [31m[LLM] API Error (429) with model "llama-3.1-8b-instant":[39m
+2026-04-28 00:45:56:4556 [31merror[39m: [31m[LLM] API Error (429) with model "llama-3.1-8b-instant":[39m
+2026-04-28 00:47:07:477 [31merror[39m: [31m[LLM] API Error (429) with model "llama-3.1-8b-instant":[39m
+2026-04-28 00:47:08:478 [31merror[39m: [31m[LLM] API Error (429) with model "llama-3.1-8b-instant":[39m
+2026-04-28 00:47:10:4710 [31merror[39m: [31m[LLM] API Error (429) with model "llama-3.1-8b-instant":[39m
+2026-04-28 01:00:49:049 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 01:01:06:16 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 01:01:08:18 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 01:01:27:127 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 01:01:43:143 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 02:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 02:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 11:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 11:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 11:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 11:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 11:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 12:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 13:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 13:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 13:08:46:846 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 4hZ9lvjwtLaxL9rXAAAB. Error: jwt expired[39m
+2026-04-28 13:08:49:849 [31merror[39m: [31mSocket Auth: JWT verification failed for socket MHfpnTivvwp8I6O9AAAD. Error: jwt expired[39m
+2026-04-28 13:12:06:126 [31merror[39m: [31mSocket Auth: JWT verification failed for socket BsvgMRWxEKCap6N6AAAB. Error: jwt expired[39m
+2026-04-28 13:16:35:1635 [31merror[39m: [31mSocket Auth: JWT verification failed for socket wNvDSQQA9mcA_D8LAAAD. Error: jwt expired[39m
+2026-04-28 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 14:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 14:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 14:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 14:40:10:4010 [31merror[39m: [31m[TTS] ElevenLabs error (401):[39m
+2026-04-28 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 15:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 15:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 15:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 15:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 16:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 16:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:16:016 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:21:021 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:25:025 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:26:026 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:30:030 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:32:032 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-28 18:00:37:037 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:00:40:040 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:00:42:042 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:00:53:053 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:03:13 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:10:110 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:20:120 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:21:121 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:22:122 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:37:137 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:41:141 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:01:49:149 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:02:08:28 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:02:24:224 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:02:30:230 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:02:49:249 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:03:06:36 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 00:03:24:324 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 01:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 02:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 14:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 14:00:19:019 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 14:00:21:021 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 14:00:23:023 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 14:00:26:026 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 14:00:29:029 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 23:00:45:045 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 23:01:04:14 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 23:01:26:126 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 23:01:36:136 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 23:01:57:157 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-29 23:02:11:211 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:21:021 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:24:024 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:25:025 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 00:00:27:027 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 01:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 01:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 01:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 02:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 02:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 02:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 02:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 02:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:16:016 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:19:019 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:20:020 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 12:00:24:024 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 18:00:00:00 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 18:00:00:00 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 18:00:00:00 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 18:00:00:00 [31merror[39m: [31m[AI-CRON] Absence check error: [39m
+[31mInvalid `prisma.aIConversation.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\ai-companion\ai.cron.ts:37:68[39m
+
+[31m  34 logger.info('[AI-CRON] Running absence check...');[39m
+[31m  35 try {[39m
+[31m  36     const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);[39m
+[31m→ 37     const staleConversations = await prisma.aIConversation.findMany([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-30 18:00:00:00 [31merror[39m: [31m[AI-CRON] Random proactive error: [39m
+[31mInvalid `prisma.user.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\ai-companion\ai.cron.ts:89:50[39m
+
+[31m  86 logger.info('[AI-CRON] Running random proactive...');[39m
+[31m  87 try {[39m
+[31m  88     const threeHoursAgo = new Date(Date.now() - 3 * 60 * 60 * 1000);[39m
+[31m→ 89     const candidates = await prisma.user.findMany([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-30 18:15:00:150 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 18:15:00:150 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 18:15:00:150 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 18:30:00:300 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 18:30:00:300 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 18:30:00:300 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 18:45:00:450 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 18:45:00:450 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 18:45:00:450 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 19:00:00:00 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 19:00:00:00 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 19:00:00:00 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 19:00:00:00 [31merror[39m: [31m[AI-CRON] Absence check error: [39m
+[31mInvalid `prisma.aIConversation.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\ai-companion\ai.cron.ts:37:68[39m
+
+[31m  34 logger.info('[AI-CRON] Running absence check...');[39m
+[31m  35 try {[39m
+[31m  36     const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);[39m
+[31m→ 37     const staleConversations = await prisma.aIConversation.findMany([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-30 19:15:00:150 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 19:15:00:150 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 19:15:00:150 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 19:30:00:300 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 19:30:00:300 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 19:30:00:300 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 19:45:00:450 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 19:45:00:450 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 19:45:00:450 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 20:00:00:00 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 20:00:00:00 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 20:00:00:00 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 20:00:00:00 [31merror[39m: [31m[AI-CRON] Absence check error: [39m
+[31mInvalid `prisma.aIConversation.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\ai-companion\ai.cron.ts:37:68[39m
+
+[31m  34 logger.info('[AI-CRON] Running absence check...');[39m
+[31m  35 try {[39m
+[31m  36     const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);[39m
+[31m→ 37     const staleConversations = await prisma.aIConversation.findMany([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-30 20:15:00:150 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 20:15:00:150 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 20:15:00:150 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 20:30:00:300 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 20:30:00:300 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 20:30:00:300 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 20:45:00:450 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 20:45:00:450 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 20:45:00:450 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 21:00:00:00 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 21:00:00:00 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 21:00:00:00 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 21:00:00:00 [31merror[39m: [31m[AI-CRON] Absence check error: [39m
+[31mInvalid `prisma.aIConversation.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\ai-companion\ai.cron.ts:37:68[39m
+
+[31m  34 logger.info('[AI-CRON] Running absence check...');[39m
+[31m  35 try {[39m
+[31m  36     const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);[39m
+[31m→ 37     const staleConversations = await prisma.aIConversation.findMany([39m
+[31mCan't reach database server at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`[39m
+
+[31mPlease make sure your database server is running at `ep-withered-salad-agxzvgfm-pooler.c-2.eu-central-1.aws.neon.tech:5432`.[39m
+2026-04-30 21:15:00:150 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 21:15:00:150 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 21:15:00:150 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 21:30:00:300 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 21:30:00:300 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 21:30:00:300 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 21:45:00:450 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-04-30 21:45:00:450 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-04-30 21:45:00:450 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-04-30 22:00:26:026 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 22:00:35:035 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 22:00:45:045 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 22:00:51:051 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 22:00:59:059 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 22:01:04:14 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 23:00:33:033 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 23:01:07:17 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 23:01:26:126 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 23:01:37:137 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 23:01:48:148 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-04-30 23:01:52:152 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:36:036 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:38:038 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:00:41:041 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:02:12 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:03:13 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:04:14 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:07:17 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:09:19 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:10:110 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:11:111 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:11:111 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 00:01:12:112 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 01:00:44:044 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 01:01:03:13 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 01:01:08:18 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 01:01:17:117 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 01:01:35:135 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 01:01:52:152 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 01:02:05:25 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 02:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 02:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 02:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 02:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-01 02:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 16:03:25:325 [31merror[39m: [31mSocket Auth: JWT verification failed for socket vuVk0_5hxOA-fVefAAAB. Error: jwt expired[39m
+2026-05-04 17:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 17:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 17:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 17:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 17:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 17:19:05:195 [31merror[39m: [31mSocket Auth: JWT verification failed for socket Pw10n2mMb5OC0eCGAAAU. Error: jwt expired[39m
+2026-05-04 17:19:05:195 [31merror[39m: [31mSocket Auth: JWT verification failed for socket XMhnDEse4dGZFCqJAAAV. Error: jwt expired[39m
+2026-05-04 17:19:05:195 [31merror[39m: [31mSocket Auth: JWT verification failed for socket kHdd_Pc_bu9Y9D4lAAAW. Error: jwt expired[39m
+2026-05-04 17:19:05:195 [31merror[39m: [31mSocket Auth: JWT verification failed for socket _i1bSgF1LXluE2rAAAAX. Error: jwt expired[39m
+2026-05-04 17:19:05:195 [31merror[39m: [31mSocket Auth: JWT verification failed for socket O1GSh_8K8kUhh5F6AAAY. Error: jwt expired[39m
+2026-05-04 17:19:05:195 [31merror[39m: [31mSocket Auth: JWT verification failed for socket P-NxCINB1H8d817hAAAZ. Error: jwt expired[39m
+2026-05-04 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 18:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 19:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 19:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 19:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 19:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 19:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 19:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 19:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 20:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 20:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 20:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 20:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 20:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 20:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 20:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 21:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 21:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 21:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 21:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 21:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 21:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-04 21:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 11:30:00:300 [31merror[39m: [31m[UsageTracker] ElevenLabs poll failed: fetch failed[39m
+2026-05-05 11:30:00:300 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-05-05 11:30:00:300 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-05-05 12:25:30:2530 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-05-05 12:25:30:2530 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-05-05 12:30:20:3020 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-05-05 12:30:30:3030 [31merror[39m: [31m[UsageTracker] Failed to upsert ELEVENLABS.characters: [39m
+[31mInvalid `prisma.serviceUsageLog.findFirst()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\cron\usageTracker.ts:47:55[39m
+
+[31m  44 const percentage = limit > 0 ? (value / limit) * 100 : 0;[39m
+[31m  45 [39m
+[31m  46 try {[39m
+[31m→ 47     const existing = await prisma.serviceUsageLog.findFirst([39m
+[31mTimed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 30, connection limit: 17)[39m
+2026-05-05 12:45:11:4511 [31merror[39m: [31m[UsageTracker] Pinecone poll failed: Request failed to reach Pinecone. This can occur for reasons such as network problems that prevent the request from being completed, or a Pinecone API outage. Check your network connection, and visit https://status.pinecone.io/ to see whether any outages are ongoing.[39m
+2026-05-05 12:45:11:4511 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-05-05 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 13:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 13:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 13:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 13:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 13:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 13:00:17:017 [31merror[39m: [31m[AI-CRON] Absence check error: [39m
+[31mInvalid `prisma.gameResponse.findMany()` invocation in[39m
+[31mC:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\ai-companion\context.service.ts:37:33[39m
+
+[31m  34         currentScene: { include: { choices: true } }[39m
+[31m  35     }[39m
+[31m  36 }),[39m
+[31m→ 37 prisma.gameResponse.findMany([39m
+[31mServer has closed the connection.[39m
+2026-05-05 14:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 14:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 14:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 15:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 15:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 17:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 17:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 17:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 17:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-05 17:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 01:20:25:2025 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: Error: Malformed part header[39m
+[31m    at SBMH.ssCb [as _cb] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\busboy\lib\types\multipart.js:398:32)[39m
+[31m    at feed (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\streamsearch\lib\sbmh.js:248:10)[39m
+[31m    at SBMH.push (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\streamsearch\lib\sbmh.js:104:16)[39m
+[31m    at Multipart._write (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\busboy\lib\types\multipart.js:567:19)[39m
+[31m    at writeOrBuffer (node:internal/streams/writable:570:12)[39m
+[31m    at _write (node:internal/streams/writable:499:10)[39m
+[31m    at Writable.write (node:internal/streams/writable:508:10)[39m
+[31m    at IncomingMessage.ondata (node:internal/streams/readable:1008:24)[39m
+[31m    at IncomingMessage.emit (node:events:508:28)[39m
+[31m    at Readable.read (node:internal/streams/readable:780:10)[39m
+2026-05-06 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 02:41:31:4131 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: SyntaxError: Unexpected token 'w', ..."content": wink ya 8a"... is not valid JSON[39m
+[31m    at JSON.parse (<anonymous>)[39m
+[31m    at parse (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\body-parser\lib\types\json.js:92:19)[39m
+[31m    at C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\body-parser\lib\read.js:128:18[39m
+[31m    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)[39m
+[31m    at invokeCallback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\raw-body\index.js:238:16)[39m
+[31m    at done (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\raw-body\index.js:227:7)[39m
+[31m    at IncomingMessage.onEnd (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\raw-body\index.js:287:7)[39m
+[31m    at IncomingMessage.emit (node:events:508:28)[39m
+[31m    at endReadableNT (node:internal/streams/readable:1701:12)[39m
+[31m    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)[39m
+2026-05-06 03:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 03:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 03:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 03:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 03:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 10:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 10:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 10:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 10:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 10:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 10:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 10:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 11:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 11:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 11:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 11:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 11:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 11:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 11:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 14:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 14:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 14:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 14:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 16:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 16:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 16:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 16:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 16:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 16:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 16:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 17:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 17:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 17:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 17:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 17:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 17:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-06 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 00:30:11:3011 [31merror[39m: [31m[UsageTracker] Cloudinary poll failed: fetch failed[39m
+2026-05-07 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 01:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 01:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 01:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 02:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 02:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 02:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 02:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 03:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 03:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 03:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 03:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 03:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 11:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 11:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 11:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 11:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 11:00:20:020 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 11:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 11:00:24:024 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 12:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 13:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 13:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 14:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 14:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 14:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 14:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 16:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 16:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 17:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 17:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 17:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 17:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 17:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 17:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:19:019 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:20:020 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:23:023 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 18:00:28:028 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 19:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 19:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 19:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 19:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 19:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 19:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 19:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 20:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 20:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 20:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 20:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 20:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 20:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 20:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 21:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 21:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 21:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 21:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 21:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 21:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-07 21:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-08 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-08 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-08 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-08 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-08 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-08 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-08 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-09 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-09 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-09 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-09 16:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-09 16:00:15:015 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-09 16:00:16:016 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-09 16:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 13:29:04:294 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 1aq8xlZVMGCxl3fuAAAB. Error: jwt expired[39m
+2026-05-16 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 14:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 14:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 15:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 16:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 17:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:18:018 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:20:020 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:21:021 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-16 19:00:22:022 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:13:013 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:14:014 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:16:016 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:17:017 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 00:00:19:019 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 01:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:11:011 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 02:00:12:012 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 03:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-17 04:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 03:02:33:233 [31merror[39m: [31mSocket Auth: JWT verification failed for socket S9hNiOap5YMyyFWMAAAB. Error: jwt expired[39m
+2026-05-20 04:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 04:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 04:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 04:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 04:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 04:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 04:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 04:00:10:010 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 10:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 11:03:16:316 [31merror[39m: [31mSocket Auth: JWT verification failed for socket iS6WwomrHu54h9f5AAAx. Error: jwt expired[39m
+2026-05-20 11:03:16:316 [31merror[39m: [31mSocket Auth: JWT verification failed for socket l0Zk6CRVzUlvWwpyAAAz. Error: jwt expired[39m
+2026-05-20 11:39:49:3949 [31merror[39m: [31mSocket Auth: JWT verification failed for socket bMbGwuMjB5H0wq4iAAA9. Error: jwt expired[39m
+2026-05-20 12:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 12:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 13:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 14:06:35:635 [31merror[39m: [31mSocket Auth: JWT verification failed for socket H0E8rXshPLjSdk_nAAA_. Error: jwt expired[39m
+2026-05-20 15:10:40:1040 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 27QQ8k-_s9stOUckAAAB. Error: jwt expired[39m
+2026-05-20 18:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 18:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:00:09:09 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-20 23:04:13:413 [31merror[39m: [31mSocket Auth: JWT verification failed for socket p7E-nvbhnj7frxkhAAA1. Error: jwt expired[39m
+2026-05-20 23:04:13:413 [31merror[39m: [31mSocket Auth: JWT verification failed for socket F8NgCnUA_7rOsQTXAAA2. Error: jwt expired[39m
+2026-05-20 23:04:13:413 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 91Ai1PhXAF5Be7jvAAA3. Error: jwt expired[39m
+2026-05-21 00:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 00:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 01:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 02:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 11:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 13:00:08:08 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 14:00:07:07 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:03:03 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 15:32:03:323 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: TypeError: Cannot read properties of undefined (reading 'count')[39m
+[31m    at FeedbackService.createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.service.ts:28:51)[39m
+[31m    at createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.controller.ts:21:36)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at Route.dispatch (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:119:3)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:284:15[39m
+[31m    at router.process_params (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:346:12)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:280:10)[39m
+[31m    at protect (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\middleware\auth.ts:82:20)[39m
+2026-05-21 15:32:05:325 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: TypeError: Cannot read properties of undefined (reading 'count')[39m
+[31m    at FeedbackService.createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.service.ts:28:51)[39m
+[31m    at createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.controller.ts:21:36)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at Route.dispatch (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:119:3)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:284:15[39m
+[31m    at router.process_params (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:346:12)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:280:10)[39m
+[31m    at protect (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\middleware\auth.ts:82:20)[39m
+2026-05-21 15:37:10:3710 [31merror[39m: [31mSocket Auth: JWT verification failed for socket LxGVCAj3D9HzbHPGAAAN. Error: jwt expired[39m
+2026-05-21 15:53:21:5321 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: TypeError: Cannot read properties of undefined (reading 'count')[39m
+[31m    at FeedbackService.createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.service.ts:28:51)[39m
+[31m    at createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.controller.ts:21:36)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at Route.dispatch (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:119:3)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:284:15[39m
+[31m    at router.process_params (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:346:12)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:280:10)[39m
+[31m    at protect (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\middleware\auth.ts:82:20)[39m
+2026-05-21 15:55:45:5545 [31merror[39m: [31m[Unhandled Error] Status: 500 - Detail: TypeError: Cannot read properties of undefined (reading 'count')[39m
+[31m    at FeedbackService.createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.service.ts:28:51)[39m
+[31m    at createFeedback (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\modules\feedback\feedback.controller.ts:21:36)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:149:13)[39m
+[31m    at Route.dispatch (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\route.js:119:3)[39m
+[31m    at Layer.handle [as handle_request] (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\layer.js:95:5)[39m
+[31m    at C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:284:15[39m
+[31m    at router.process_params (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:346:12)[39m
+[31m    at next (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\node_modules\express\lib\router\index.js:280:10)[39m
+[31m    at protect (C:\Users\azizh\Downloads\soullink-frontend-soullink-1.4\soullink-frontend-soullink-1.4\soullink-backend\src\middleware\auth.ts:82:20)[39m
+2026-05-21 15:58:24:5824 [31merror[39m: [31mSocket Auth: JWT verification failed for socket 6Pbgv5j2AcEvXaN8AAAH. Error: jwt expired[39m
+2026-05-21 16:00:01:01 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 16:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 16:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 16:00:02:02 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 16:00:04:04 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 16:00:05:05 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m
+2026-05-21 16:00:06:06 [31merror[39m: [31m[LLM] API Error (400) with model "llama-3.1-8b-instant":[39m

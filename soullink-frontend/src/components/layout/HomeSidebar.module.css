@@ -321,3 +321,24 @@
         filter: blur(0.5px);
     }
 }
+
+/* Cursed Text Style */
+.cursedText {
+    color: #ff4444 !important;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 1px 0 #880000;
+}
+
+/* ── Proactive Message (Nova-initiated) ─────────────────────── */
+.proactiveMessage {
+    animation: proactiveGlow 3s ease-in-out infinite;
+}
+
+@keyframes proactiveGlow {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(123, 104, 238, 0.2), inset 0 0 6px rgba(0, 191, 255, 0.04);
+    }
+    50% {
+        box-shadow: 0 0 18px rgba(123, 104, 238, 0.5), inset 0 0 12px rgba(0, 191, 255, 0.15);
+    }
+}

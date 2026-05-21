@@ -14,13 +14,23 @@ import { EatSpitOverlay } from "./EatSpitOverlay";
 import { NovaAvatar } from "@/components/ai/NovaAvatar";
 import { NovaSearchAndDestroy } from "@/components/ai/NovaSearchAndDestroy";
 import { NovaSingularityOverlay } from "@/components/ai/NovaSingularityOverlay";
+import { WebRTCProvider, useWebRTCContext } from "@/context/WebRTCContext";
+import { WatchPartyProvider } from "@/context/WatchPartyContext";
+import { CallOverlay } from "@/components/chat/CallOverlay";
+import { WatchPartyInviteToast } from "@/components/watch-party/WatchPartyInviteToast";
 
 interface ShellProps {
     children: React.ReactNode;
 }
 
 export function Shell({ children }: { children: React.ReactNode }) {
-    return <ShellContent>{children}</ShellContent>;
+    return (
+        <WebRTCProvider>
+            <WatchPartyProvider>
+                <ShellContent>{children}</ShellContent>
+            </WatchPartyProvider>
+        </WebRTCProvider>
+    );
 }
 
 const MemoizedTopNavigation = React.memo(TopNavigation);
@@ -33,8 +43,10 @@ function ShellContent({ children }: ShellProps) {
     const pathname = usePathname();
     const { isCinematicMode, mood, isSauronMode, isNightMode } = useNovaState();
     const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/signup');
-    // Show HomeSidebar for non-server routes
     const showHomeSidebar = !pathname.startsWith('/server') && !isAuthPage;
+
+    // Access the single global WebRTC instance
+    const { oneToOne } = useWebRTCContext();
 
     // Memoize children to prevent page re-renders on layout pulses
     const memoizedChildren = React.useMemo(() => children, [children]);
@@ -93,6 +105,60 @@ function ShellContent({ children }: ShellProps) {
 
             {/* Singularity Overlay */}
             {!isAuthPage && <NovaSingularityOverlay />}
+
+            {/* Watch Party Global Invite */}
+            {!isAuthPage && <WatchPartyInviteToast />}
+
+            {/* Global Incoming Call Notification — driven by single WebRTCContext */}
+            {!isAuthPage && oneToOne.incomingCall && (
+                <div style={{
+                    position: 'fixed', top: 24, right: 24, zIndex: 10000,
+                    animation: 'slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                }}>
+                    <CallOverlay
+                        status="ringing"
+                        callType={oneToOne.incomingCall.callType}
+                        duration={0}
+                        localStream={null}
+                        remoteStream={null}
+                        participants={[]}
+                        isMuted={false}
+                        isVideoOff={false}
+                        isScreenSharing={false}
+                        callerName={oneToOne.incomingCall.caller.displayName}
+                        callerAvatar={oneToOne.incomingCall.caller.avatarUrl}
+                        mode="1:1"
+                        onAccept={() => oneToOne.acceptCall()}
+                        onReject={() => oneToOne.rejectCall()}
+                        onEnd={() => oneToOne.rejectCall()}
+                        onToggleMute={() => {}}
+                        onToggleVideo={() => {}}
+                        onToggleScreenShare={() => {}}
+                    />
+                </div>
+            )}
+
+            {/* Active 1:1 call overlay (when accepted from global notification) */}
+            {!isAuthPage && oneToOne.callStatus !== 'idle' && !oneToOne.incomingCall && (
+                <CallOverlay
+                    status={oneToOne.callStatus}
+                    callType={oneToOne.callType}
+                    duration={oneToOne.callDuration}
+                    localStream={oneToOne.localStream}
+                    remoteStream={oneToOne.remoteStream}
+                    participants={[]}
+                    isMuted={oneToOne.isMuted}
+                    isVideoOff={oneToOne.isVideoOff}
+                    isScreenSharing={oneToOne.isScreenSharing}
+                    callerName={oneToOne.incomingCall ? (oneToOne.incomingCall as any)?.caller?.displayName : undefined}
+                    callerAvatar={null}
+                    mode="1:1"
+                    onEnd={oneToOne.endCall}
+                    onToggleMute={oneToOne.toggleMute}
+                    onToggleVideo={oneToOne.toggleVideo}
+                    onToggleScreenShare={oneToOne.toggleScreenShare}
+                />
+            )}
 
             {/* Sauron Mordor Vignette — dark volcanic gradient, center stays visible */}
             <AnimatePresence>

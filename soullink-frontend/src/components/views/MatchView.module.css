@@ -568,36 +568,96 @@
     right: 40px;
     background: rgba(15, 10, 25, 0.8);
     backdrop-filter: blur(20px);
-    padding: 14px 24px;
+    padding: 12px 16px;
     border-radius: 16px;
     display: flex;
     align-items: center;
-    gap: 32px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     z-index: 100;
 }
 
-.progressText {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
-}
-
 .continueBtn {
-    background: #9d4edd;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 24px;
+    border-radius: 12px;
     font-weight: 700;
+    font-size: 0.9rem;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-.continueBtn:disabled {
-    opacity: 0.3;
+/* Ready state — purple glow when 5+ interests selected */
+.continueBtnReady {
+    background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
+    color: #fff;
+    border-color: rgba(157, 78, 221, 0.5);
+    box-shadow:
+        0 0 20px rgba(157, 78, 221, 0.4),
+        0 0 40px rgba(157, 78, 221, 0.2),
+        0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.continueBtnReady:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 30px rgba(157, 78, 221, 0.5),
+        0 0 60px rgba(157, 78, 221, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Progressive color states as user picks interests 1-4 */
+.continueBtnProgress1 {
+    background: linear-gradient(135deg, rgba(157, 78, 221, 0.2) 0%, rgba(123, 44, 191, 0.15) 100%);
+    border-color: rgba(157, 78, 221, 0.25);
+    color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.15);
+}
+
+.continueBtnProgress2 {
+    background: linear-gradient(135deg, rgba(157, 78, 221, 0.35) 0%, rgba(123, 44, 191, 0.25) 100%);
+    border-color: rgba(157, 78, 221, 0.35);
+    color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.25);
+}
+
+.continueBtnProgress3 {
+    background: linear-gradient(135deg, rgba(157, 78, 221, 0.5) 0%, rgba(123, 44, 191, 0.4) 100%);
+    border-color: rgba(157, 78, 221, 0.45);
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 25px rgba(157, 78, 221, 0.35);
+}
+
+.continueBtnProgress4 {
+    background: linear-gradient(135deg, rgba(157, 78, 221, 0.7) 0%, rgba(123, 44, 191, 0.6) 100%);
+    border-color: rgba(157, 78, 221, 0.55);
+    color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 35px rgba(157, 78, 221, 0.45);
+}
+
+/* Shake animation when exactly 5 interests selected */
+.continueBtnShake {
+    animation: btnShake 0.6s cubic-bezier(0.36, 0, 0.66, -0.56) both;
+}
+
+@keyframes btnShake {
+    0%, 100% { transform: translateX(0) scale(1); }
+    10% { transform: translateX(-4px) scale(1.02); }
+    20% { transform: translateX(4px) scale(1.02); }
+    30% { transform: translateX(-4px) scale(1.02); }
+    40% { transform: translateX(4px) scale(1.02); }
+    50% { transform: translateX(-3px) scale(1.01); }
+    60% { transform: translateX(3px) scale(1.01); }
+    70% { transform: translateX(-2px) scale(1); }
+    80% { transform: translateX(2px) scale(1); }
+    90% { transform: translateX(-1px) scale(1); }
 }
 
 .matchOverlay {

@@ -1,0 +1,208 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Settings Page — Premium Dark CSS Module
+   EF-069 | SoulLink Admin
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.shell { display: flex; min-height: 100vh; width: 100%; background: #0A0A12; }
+.main  { flex: 1; padding: 32px 36px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.title { font-size: 24px; font-weight: 700; color: #F0F0F5; margin: 0; }
+.subtitle { font-size: 13px; color: #707090; }
+
+/* ── Accordion Section ──────────────────────────────────────────────────── */
+.section {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+.section:focus-within { box-shadow: 0 0 0 1px rgba(123,104,238,0.25); }
+
+.sectionHeader {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 24px; cursor: pointer; user-select: none;
+    background: transparent; border: none; width: 100%; text-align: left;
+    transition: background 0.15s;
+}
+.sectionHeader:hover { background: rgba(255,255,255,0.02); }
+
+.sectionHeaderLeft { display: flex; align-items: center; gap: 14px; }
+.sectionIcon { font-size: 20px; }
+.sectionTitle { font-size: 15px; font-weight: 700; color: #F0F0F5; margin: 0; }
+.sectionDesc { font-size: 12px; color: #707090; margin-top: 2px; }
+
+.chevron {
+    font-size: 12px; color: #606080;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+.chevron.open { transform: rotate(90deg); }
+
+.sectionBody {
+    padding: 0 24px 24px;
+    display: flex; flex-direction: column; gap: 18px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    animation: slideDown 0.2s ease-out;
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Config Row ─────────────────────────────────────────────────────────── */
+.configRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 20px;
+    align-items: start;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.configRow:last-child { border-bottom: none; }
+
+.configLabel { font-size: 13px; font-weight: 600; color: #D0D0E8; }
+.configHint  { font-size: 11px; color: #606080; margin-top: 3px; }
+
+.configControl { display: flex; align-items: center; gap: 10px; }
+
+/* ── Toggle Switch ──────────────────────────────────────────────────────── */
+.toggle {
+    position: relative; width: 44px; height: 24px; flex-shrink: 0;
+    cursor: pointer;
+}
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggleSlider {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.1); border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.2s;
+}
+.toggleSlider::before {
+    content: ''; position: absolute;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #808098; left: 2px; top: 2px;
+    transition: all 0.2s;
+}
+.toggle input:checked + .toggleSlider { background: rgba(123,104,238,0.4); border-color: rgba(123,104,238,0.6); }
+.toggle input:checked + .toggleSlider::before { transform: translateX(20px); background: #B4A8FF; }
+.toggle.danger input:checked + .toggleSlider { background: rgba(255,68,68,0.35); border-color: rgba(255,68,68,0.5); }
+.toggle.danger input:checked + .toggleSlider::before { background: #FF8888; }
+
+/* ── Number / Text Input ────────────────────────────────────────────────── */
+.input {
+    background: #0E0E1A; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 9px; padding: 9px 13px; color: #F0F0F5; font-size: 13px;
+    outline: none; transition: border-color 0.2s; min-width: 200px;
+    font-family: inherit;
+}
+.input:focus { border-color: #7B68EE; }
+.input.narrow { min-width: 90px; max-width: 120px; text-align: right; }
+
+/* ── Textarea ───────────────────────────────────────────────────────────── */
+.textarea {
+    background: #0A0A12; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 12px 14px; color: #D0D0E0; font-size: 12px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace; line-height: 1.7;
+    outline: none; width: 100%; resize: vertical; min-height: 140px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+.textarea:focus { border-color: #7B68EE; }
+
+/* ── Slider ─────────────────────────────────────────────────────────────── */
+.sliderRow { display: flex; align-items: center; gap: 12px; }
+.slider {
+    -webkit-appearance: none; appearance: none;
+    width: 180px; height: 4px; border-radius: 2px;
+    background: linear-gradient(to right, #7B68EE var(--pct, 60%), rgba(255,255,255,0.1) var(--pct, 60%));
+    outline: none; cursor: pointer;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #C4B8FF; border: 2px solid #7B68EE; cursor: pointer;
+    box-shadow: 0 0 0 4px rgba(123,104,238,0.15);
+    transition: box-shadow 0.15s;
+}
+.slider::-webkit-slider-thumb:hover { box-shadow: 0 0 0 6px rgba(123,104,238,0.25); }
+.sliderValue {
+    font-size: 13px; font-weight: 700; color: #C4B8FF;
+    background: rgba(123,104,238,0.12); border: 1px solid rgba(123,104,238,0.25);
+    border-radius: 6px; padding: 3px 9px; min-width: 50px; text-align: center;
+}
+.sliderSum { font-size: 11px; color: #606080; margin-left: 4px; }
+.sliderSumOk   { color: #50CD80; }
+.sliderSumBad  { color: #FF7070; }
+
+/* ── Save Button ────────────────────────────────────────────────────────── */
+.saveBtn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 18px; border-radius: 9px; font-size: 13px; font-weight: 600;
+    background: rgba(123,104,238,0.15); border: 1px solid rgba(123,104,238,0.35);
+    color: #C4B8FF; cursor: pointer; transition: all 0.18s; white-space: nowrap;
+}
+.saveBtn:hover:not(:disabled) { background: rgba(123,104,238,0.28); border-color: #7B68EE; }
+.saveBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.saveBtn.saved { background: rgba(50,205,80,0.15); border-color: rgba(50,205,80,0.4); color: #80FF90; }
+
+/* ── Warn Badge ─────────────────────────────────────────────────────────── */
+.warnBadge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    background: rgba(255,165,0,0.1); border: 1px solid rgba(255,165,0,0.3);
+    color: #FFA500; border-radius: 5px; padding: 2px 8px;
+}
+
+/* ── Error/Banner ───────────────────────────────────────────────────────── */
+.errorBanner { background: rgba(255,68,68,0.08); border: 1px solid rgba(255,68,68,0.25); border-radius: 12px; padding: 14px 20px; color: #FF8888; font-size: 14px; }
+.loadingText { padding: 20px 0; color: #606080; font-size: 14px; }
+.empty { padding: 16px 0; color: #606080; font-size: 13px; }
+
+/* ── Game list (kept from existing settings) ──────────────────────────────*/
+.gameList { display: flex; flex-direction: column; gap: 8px; }
+.gameRow {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px; padding: 12px 16px; transition: background 0.15s;
+}
+.gameRow:hover { background: rgba(255,255,255,0.04); }
+.gameIcon { font-size: 20px; }
+.gameMeta { flex: 1; }
+.gameTitle { font-size: 14px; font-weight: 600; color: #F0F0F5; display: block; }
+.gameEpisode { font-size: 12px; color: #707090; }
+.gameActions { display: flex; gap: 8px; }
+.activeToggle {
+    padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; border: 1px solid;
+    background: rgba(50,205,80,0.1); border-color: rgba(50,205,80,0.35); color: #70DD88; transition: all 0.15s;
+}
+.inactiveToggle {
+    padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; border: 1px solid;
+    background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); color: #707090; transition: all 0.15s;
+}
+.activeToggle:hover, .inactiveToggle:hover { border-color: #7B68EE; color: #C4B8FF; }
+
+/* ── Shame Wall ─────────────────────────────────────────────────────────── */
+.shameList { display: flex; flex-direction: column; gap: 8px; }
+.shameRow {
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,68,68,0.04); border: 1px solid rgba(255,68,68,0.1);
+    border-radius: 10px; padding: 12px 16px;
+}
+.shameInfo { display: flex; flex-direction: column; gap: 3px; }
+.shameUser { font-size: 14px; font-weight: 600; color: #D0D0E8; }
+.shameReason { font-size: 12px; color: #A0A0B5; }
+.shameExpiry { font-size: 11px; color: #707090; }
+.removeBtn { padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid rgba(255,68,68,0.3); background: rgba(255,68,68,0.08); color: #FF8888; transition: all 0.15s; }
+.removeBtn:hover { background: rgba(255,68,68,0.2); border-color: #FF4444; }
+
+.spin {
+    animation: spin 1.2s linear infinite;
+    display: inline-block;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

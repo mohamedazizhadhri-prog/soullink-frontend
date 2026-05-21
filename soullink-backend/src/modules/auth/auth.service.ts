@@ -128,9 +128,9 @@ export class AuthService {
             throw new AppError(401, 'Invalid email/phone or password');
         }
 
-        if (user.status === 'BANNED' || user.status === 'SUSPENDED') {
-            throw new AppError(403, `Account is ${user.status.toLowerCase()}`);
-        }
+        // We no longer throw an error here if banned/suspended.
+        // They need a token to access the /suspended details page and submit an appeal.
+        // The `protect` middleware will block them from all other routes.
 
         const accessToken = generateAccessToken(user.id);
         const refreshToken = generateRefreshToken(user.id);
@@ -261,14 +261,24 @@ export class AuthService {
         const accessToken = generateAccessToken(user.id);
         const refreshToken = generateRefreshToken(user.id);
 
-        // Update face record and login time
-        await prisma.user.update({
-            where: { id: user.id },
-            data: {
-                faceVerified: true,
-                lastLoginAt: new Date()
-            }
-        });
+        // Update face record, login time, and log login history
+        await prisma.$transaction([
+            prisma.user.update({
+                where: { id: user.id },
+                data: {
+                    faceVerified: true,
+                    lastLoginAt: new Date()
+                }
+            }),
+            prisma.loginHistory.create({
+                data: {
+                    userId: user.id,
+                    ipAddress: 'face-auth',
+                    userAgent: 'face-api.js',
+                    success: true,
+                }
+            })
+        ]);
 
         return { user, accessToken, refreshToken };
     }

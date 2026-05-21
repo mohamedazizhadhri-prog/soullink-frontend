@@ -2,19 +2,23 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ServerView.module.css";
-import { Hash, ChevronDown, Users, Settings, UserPlus, Plus, Trash2, Pencil, Pin, Reply, X, Clock } from "lucide-react";
+import callStyles from "../chat/CallOverlay.module.css";
+import { Hash, ChevronDown, Users, Settings, UserPlus, Plus, Trash2, Pencil, Pin, Reply, X, Clock, Flag, Volume2 } from "lucide-react";
 import Link from "next/link";
 import groupStyles from "./GroupView.module.css";
 import api from "@/lib/api";
 import { socketService } from "@/lib/socket";
+import { useWebRTCContext } from "@/context/WebRTCContext";
 import { MemberListPanel } from "../community/MemberListPanel";
 import { PinnedMessagesPanel } from "../community/PinnedMessagesPanel";
 import { InviteFriendsPanel } from "../community/InviteFriendsPanel";
 import { CommunitySettingsPanel } from "../community/CommunitySettingsPanel";
 import { MessageInput } from "../chat/MessageInput";
+import { CallOverlay } from "../chat/CallOverlay";
 import { CreateChannelModal } from "../modals/CreateChannelModal";
 import { EditChannelModal } from "../modals/EditChannelModal";
 import { UserProfileModal } from "../modals/UserProfileModal";
+import { ReportUserModal } from "../modals/ReportUserModal";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Message {
@@ -53,9 +57,42 @@ export function ServerView({ server: initialServer, channelId }: { server: any, 
     const [pinnedMessages, setPinnedMessages] = useState<Message[]>([]);
     const [muteStatus, setMuteStatus] = useState<any>(null); // { expiresAt: Date, reason: string }
     const [isBanned, setIsBanned] = useState(false);
+    const [reportingMessage, setReportingMessage] = useState<Message | null>(null);
+    const [voiceChannelUsers, setVoiceChannelUsers] = useState<Record<string, { userId: string; displayName?: string }[]>>({});
+    const [activeVoiceChannelId, setActiveVoiceChannelId] = useState<string | null>(null);
 
     // Current user role
     const [currentUserRole, setCurrentUserRole] = useState<string>("MEMBER");
+
+    // WebRTC for voice channels — use the shared context's voice state
+    const { voice: webrtc } = useWebRTCContext();
+
+    // Handle voice presence updates
+    useEffect(() => {
+        const handlePresenceUpdate = (data: { channelId: string; userId: string; displayName?: string; action: 'join' | 'leave' }) => {
+            setVoiceChannelUsers(prev => {
+                const current = prev[data.channelId] || [];
+                if (data.action === 'join') {
+                    // Avoid duplicates
+                    if (current.find(u => u.userId === data.userId)) return prev;
+                    return {
+                        ...prev,
+                        [data.channelId]: [...current, { userId: data.userId, displayName: data.displayName }]
+                    };
+                } else {
+                    return {
+                        ...prev,
+                        [data.channelId]: current.filter(u => u.userId !== data.userId)
+                    };
+                }
+            });
+        };
+
+        socketService.on('voice:presence-update', handlePresenceUpdate);
+        return () => {
+            socketService.off('voice:presence-update', handlePresenceUpdate);
+        };
+    }, []);
 
     // Sync internal server state when the prop changes (e.g. after navigation)
     useEffect(() => {
@@ -72,7 +109,7 @@ export function ServerView({ server: initialServer, channelId }: { server: any, 
             try {
                 const res = await api.get(`/communities/${server.id}/members`);
                 const members = res.data.data.members;
-                const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user") || "{}") : {};
+                const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("sl_user") || "{}") : {};
                 const me = members.find((m: any) => m.user?.id === storedUser?.id);
                 if (me) setCurrentUserRole(me.role?.toUpperCase() || "MEMBER");
             } catch { }
@@ -255,6 +292,63 @@ export function ServerView({ server: initialServer, channelId }: { server: any, 
                         </Link>
                     ))}
                 </div>
+
+                {/* Voice Channels */}
+                {server?.channels?.filter((c: any) => c.type === 'VOICE').length > 0 && (
+                    <div className={styles.channelGroup}>
+                        <div className={styles.channelLabel}>
+                            VOICE CHANNELS
+                            {isAdmin && (
+                                <button
+                                    className={styles.addChannelBtn}
+                                    onClick={() => setShowCreateChannel(true)}
+                                    title="Create Channel"
+                                >
+                                    <Plus size={14} />
+                                </button>
+                            )}
+                        </div>
+                        {server?.channels?.filter((c: any) => c.type === 'VOICE').map((channel: any) => {
+                            const usersInChannel = voiceChannelUsers[channel.id] || [];
+                            const isActiveVoice = activeVoiceChannelId === channel.id;
+                            return (
+                                <div key={channel.id}>
+                                    <div
+                                        className={`${callStyles.voiceChannelItem} ${isActiveVoice ? callStyles.voiceChannelActive : ''}`}
+                                        onClick={() => {
+                                            if (isActiveVoice) {
+                                                webrtc.leaveVoiceChannel(server?.id);
+                                                setActiveVoiceChannelId(null);
+                                            } else {
+                                                if (activeVoiceChannelId) {
+                                                    webrtc.leaveVoiceChannel(server?.id);
+                                                }
+                                                webrtc.joinVoiceChannel(channel.id, server?.id);
+                                                setActiveVoiceChannelId(channel.id);
+                                            }
+                                        }}
+                                    >
+                                        <Volume2 size={18} /> {channel.name}
+                                        {usersInChannel.length > 0 && (
+                                            <span className={callStyles.voiceUserCount}>{usersInChannel.length}</span>
+                                        )}
+                                    </div>
+                                    {/* Show participants in voice channel */}
+                                    {isActiveVoice && webrtc.participants.length > 0 && (
+                                        <div className={callStyles.voiceParticipants}>
+                                            {webrtc.participants.map((p) => (
+                                                <div key={p.socketId} className={callStyles.voiceParticipant}>
+                                                    <span className="speakingIndicator" style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
+                                                    {p.displayName || p.userId.slice(0, 8)}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
 
             {/* Main Chat Area */}
@@ -367,6 +461,9 @@ export function ServerView({ server: initialServer, channelId }: { server: any, 
                                     <button onClick={() => setReplyingTo(msg)} title="Reply">
                                         <Reply size={16} />
                                     </button>
+                                    <button onClick={() => setReportingMessage(msg)} title="Report Message" style={{ color: '#ff4757' }}>
+                                        <Flag size={16} />
+                                    </button>
                                     <button onClick={() => handleTogglePin(msg.id)} title={msg.isPinned ? "Unpin" : "Pin"}>
                                         <Pin size={16} />
                                     </button>
@@ -386,6 +483,8 @@ export function ServerView({ server: initialServer, channelId }: { server: any, 
                             replyingTo={replyingTo}
                             onCancelReply={() => setReplyingTo(null)}
                             disabled={!!(muteStatus && new Date(muteStatus.expiresAt) > new Date())}
+                            context="community"
+                            contextId={activeChannel.id}
                         />
                     )}
                     {muteStatus && new Date(muteStatus.expiresAt) > new Date() && (
@@ -477,6 +576,16 @@ export function ServerView({ server: initialServer, channelId }: { server: any, 
                 onClose={() => setSelectedProfileHandle(null)} 
             />
 
+            {reportingMessage && (
+                <ReportUserModal
+                    targetUserId={reportingMessage.author.id}
+                    targetDisplayName={reportingMessage.author.displayName}
+                    contextType="COMMUNITY"
+                    contextId={activeChannel.id}
+                    onClose={() => setReportingMessage(null)}
+                />
+            )}
+
             <CreateChannelModal
                 isOpen={showCreateChannel}
                 onClose={() => setShowCreateChannel(false)}
@@ -522,6 +631,28 @@ export function ServerView({ server: initialServer, channelId }: { server: any, 
                         <Trash2 size={14} /> Delete Channel
                     </button>
                 </div>
+            )}
+
+            {/* Voice Call Overlay */}
+            {webrtc.callStatus === 'active' && activeVoiceChannelId && (
+                <CallOverlay
+                    status={webrtc.callStatus}
+                    callType={webrtc.callType}
+                    duration={webrtc.callDuration}
+                    localStream={webrtc.localStream}
+                    remoteStream={null}
+                    participants={webrtc.participants}
+                    isMuted={webrtc.isMuted}
+                    isVideoOff={webrtc.isVideoOff}
+                    isScreenSharing={false}
+                    callerName={`Voice Channel`}
+                    callerAvatar={null}
+                    mode="mesh"
+                    onEnd={() => { webrtc.leaveVoiceChannel(server?.id); setActiveVoiceChannelId(null); }}
+                    onToggleMute={webrtc.toggleMute}
+                    onToggleVideo={webrtc.toggleVideo}
+                    onToggleScreenShare={async () => {}}
+                />
             )}
         </div>
     );

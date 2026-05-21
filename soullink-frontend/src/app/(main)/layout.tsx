@@ -1,13 +1,9 @@
-import { Shell } from "@/components/layout/Shell";
+import { MainLayoutClient } from "./MainLayoutClient";
 
 export default function MainLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return (
-        <Shell>
-            {children}
-        </Shell>
-    );
+    return <MainLayoutClient>{children}</MainLayoutClient>;
 }

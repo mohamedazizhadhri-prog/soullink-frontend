@@ -2,12 +2,18 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./DirectMessageView.module.css";
-import { Phone, Video, Search, Smile, Paperclip, Send, X, Image as ImageIcon, Pin, Reply } from "lucide-react";
+import { Phone, Video, Search, Smile, Paperclip, Send, X, Image as ImageIcon, Pin, Reply, Flag } from "lucide-react";
 import { useNova } from "@/context/NovaContext";
 import { useChat } from "@/hooks/useChat";
+import { useWebRTCContext } from "@/context/WebRTCContext";
 import { chatService } from "@/services/chatService";
 import { UserProfileModal } from "../modals/UserProfileModal";
+import { ReportUserModal } from "../modals/ReportUserModal";
 import { MessageInput } from "../chat/MessageInput";
+import { CallOverlay } from "../chat/CallOverlay";
+import { WatchActivityPanel } from "../watch-party/WatchActivityPanel";
+import { socketService } from "@/lib/socket";
+import { useNovaProactive } from "@/hooks/useNovaProactive";
 
 export function DirectMessageView({ receiverId }: { receiverId: string }) {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -18,6 +24,8 @@ export function DirectMessageView({ receiverId }: { receiverId: string }) {
         handleUnifiedSend, emitTyping
     } = useChat(receiverId, () => setMood('sad'));
 
+    const webrtc = useWebRTCContext().oneToOne;
+
     const [isSearching, setIsSearching] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -26,6 +34,42 @@ export function DirectMessageView({ receiverId }: { receiverId: string }) {
     const [showPinned, setShowPinned] = useState(false);
     const [pinnedMessages, setPinnedMessages] = useState<any[]>([]);
     const [selectedProfileHandle, setSelectedProfileHandle] = useState<string | null>(null);
+    const [reportingMessage, setReportingMessage] = useState<any | null>(null);
+    const [watchSessionId, setWatchSessionId] = useState<string | null>(null);
+    const [watchInviteBanner, setWatchInviteBanner] = useState<{ sessionId: string; hostName: string } | null>(null);
+
+    const { fireEvent } = useNovaProactive();
+    const dormantCheckRef = useRef(false);
+
+    // Nova comments on reconnecting with a friend after 7+ days of silence
+    useEffect(() => {
+        if (dormantCheckRef.current || !messages?.length || !friend) return;
+        dormantCheckRef.current = true;
+        const lastMsg = messages[messages.length - 1];
+        if (!lastMsg?.createdAt) return;
+        const daysSince = Math.round((Date.now() - new Date(lastMsg.createdAt).getTime()) / 86400000);
+        if (daysSince >= 7) {
+            fireEvent('dormant_dm', {
+                friendName: friend.displayName || 'your friend',
+                daysSince,
+            });
+        }
+    }, [messages, friend]);
+
+    // Listen for activity started from the other user
+    useEffect(() => {
+        if (!receiverId) return;
+
+        const handleActivityStarted = (data: { sessionId: string; hostName: string }) => {
+            setWatchInviteBanner(data);
+        };
+        socketService.on('watch:activity-started', handleActivityStarted);
+        
+        // Request active session for this DM on mount
+        socketService.emit('watch:get-active', { context: 'dm', contextId: receiverId });
+
+        return () => socketService.off('watch:activity-started', handleActivityStarted);
+    }, [receiverId]);
 
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -123,6 +167,38 @@ export function DirectMessageView({ receiverId }: { receiverId: string }) {
                         <span style={{ textDecoration: 'underline' }}>Download File</span>
                     </a>
                 );
+            case 'CALL': {
+                try {
+                    const data = JSON.parse(msg.content);
+                    const isOutgoing = msg.senderId !== receiverId;
+                    const durationStr = data.duration > 0 
+                        ? `${Math.floor(data.duration / 60)}m ${data.duration % 60}s`
+                        : (isOutgoing ? 'No answer' : (data.status === 'rejected' ? 'Declined' : 'Missed'));
+
+                    return (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '4px 0' }}>
+                            <div style={{ 
+                                width: 40, height: 40, borderRadius: '50%', 
+                                background: isOutgoing ? 'rgba(108, 99, 255, 0.2)' : (data.duration === 0 ? 'rgba(255, 71, 87, 0.2)' : 'rgba(108, 99, 255, 0.2)'),
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                color: isOutgoing ? '#6C63FF' : (data.duration === 0 ? '#ff4757' : '#6C63FF')
+                            }}>
+                                {data.callType === 'video' ? <Video size={20} /> : <Phone size={20} />}
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>
+                                    {data.callType === 'video' ? 'Video Call' : 'Voice Call'}
+                                </span>
+                                <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>
+                                    {isOutgoing ? 'Outgoing' : (data.duration === 0 ? 'Missed call' : 'Incoming')} • {durationStr}
+                                </span>
+                            </div>
+                        </div>
+                    );
+                } catch (e) {
+                    return <span>Call ended</span>;
+                }
+            }
             default:
                 return <span>{msg.content}</span>;
         }
@@ -178,6 +254,8 @@ export function DirectMessageView({ receiverId }: { receiverId: string }) {
                         </div>
                     ) : (
                         <>
+                            <Phone size={22} style={{ cursor: 'pointer' }} onClick={() => webrtc.startCall(receiverId, 'audio', 'dm')} title="Audio Call" />
+                            <Video size={22} style={{ cursor: 'pointer' }} onClick={() => webrtc.startCall(receiverId, 'video', 'dm')} title="Video Call" />
                             <Search size={22} style={{ cursor: 'pointer' }} onClick={() => setIsSearching(true)} />
                             <Pin 
                                 size={22} 
@@ -240,6 +318,11 @@ export function DirectMessageView({ receiverId }: { receiverId: string }) {
                                         <button onClick={() => setReplyingTo(msg)} title="Reply">
                                             <Reply size={14} />
                                         </button>
+                                        {!isOwn && (
+                                            <button onClick={() => setReportingMessage(msg)} title="Report Message" style={{ color: '#ff4757' }}>
+                                                <Flag size={14} />
+                                            </button>
+                                        )}
                                         <button onClick={() => handleTogglePin(msg.id)} title={msg.isPinned ? "Unpin" : "Pin"}>
                                             <Pin size={14} />
                                         </button>
@@ -253,11 +336,73 @@ export function DirectMessageView({ receiverId }: { receiverId: string }) {
             </div>
 
             <div className={styles.inputAreaContainer}>
+                {/* Watch Activity Panel — Fixed Overlay like Discord */}
+                {watchSessionId && (
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        zIndex: 100,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        padding: '12px',
+                        background: 'rgba(10,10,18,0.97)',
+                        backdropFilter: 'blur(12px)',
+                    }}>
+                        <WatchActivityPanel
+                            sessionId={watchSessionId}
+                            onClose={() => setWatchSessionId(null)}
+                            receiverId={receiverId}
+                            messages={messages}
+                            friend={friend}
+                            isTyping={isTyping}
+                            onSendMessage={(text) => handleUnifiedSend(text)}
+                            onTyping={emitTyping}
+                        />
+                    </div>
+                )}
+
+                {/* Invite banner from the other user */}
+                {watchInviteBanner && !watchSessionId && (
+                    <div style={{
+                        display: 'flex', alignItems: 'center', gap: 10,
+                        padding: '10px 16px',
+                        background: 'rgba(123, 104, 238, 0.15)',
+                        border: '1px solid rgba(123, 104, 238, 0.3)',
+                        borderRadius: 12, margin: '0 12px 10px',
+                        fontSize: 13, zIndex: 50,
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                        animation: 'slideUp 0.3s ease-out'
+                    }}>
+                        <span style={{ fontSize: '1.2rem' }}>🎬</span>
+                        <span style={{ flex: 1, color: '#E0E0F5' }}>
+                            <strong>{watchInviteBanner.hostName === 'Someone' ? (friend?.displayName || 'The other user') : watchInviteBanner.hostName}</strong> is watching a video!
+                        </span>
+                        <button
+                            onClick={() => { setWatchSessionId(watchInviteBanner.sessionId); setWatchInviteBanner(null); }}
+                            style={{ background: '#7B68EE', color: '#fff', border: 'none', borderRadius: 8, padding: '6px 16px', cursor: 'pointer', fontWeight: 700, fontSize: 12 }}
+                        >
+                            Watch what {watchInviteBanner.hostName === 'Someone' ? (friend?.displayName || 'they') : watchInviteBanner.hostName} is watching
+                        </button>
+                        <button
+                            onClick={() => setWatchInviteBanner(null)}
+                            style={{ background: 'none', border: 'none', color: '#A0A0B5', cursor: 'pointer', fontSize: 20, padding: '0 4px' }}
+                        >
+                            ×
+                        </button>
+                    </div>
+                )}
+
                 <MessageInput 
                     placeholder={`Message @${friend?.handle || '...'}`}
                     onSend={onUnifiedSend}
                     replyingTo={replyingTo}
                     onCancelReply={() => setReplyingTo(null)}
+                    context="dm"
+                    contextId={receiverId}
+                    onWatchSession={(sid) => setWatchSessionId(sid)}
                 />
             </div>
 
@@ -300,6 +445,38 @@ export function DirectMessageView({ receiverId }: { receiverId: string }) {
                 handle={selectedProfileHandle} 
                 onClose={() => setSelectedProfileHandle(null)} 
             />
+
+            {reportingMessage && (
+                <ReportUserModal
+                    targetUserId={reportingMessage.senderId}
+                    targetDisplayName={friend?.displayName || "User"}
+                    contextType="DM"
+                    contextId={reportingMessage.id}
+                    onClose={() => setReportingMessage(null)}
+                />
+            )}
+
+            {/* Call Overlay — rendered in Shell globally; just keep local fallback for outgoing calls initiated here */}
+            {webrtc.callStatus !== 'idle' && !webrtc.incomingCall && (
+                <CallOverlay
+                    status={webrtc.callStatus}
+                    callType={webrtc.callType}
+                    duration={webrtc.callDuration}
+                    localStream={webrtc.localStream}
+                    remoteStream={webrtc.remoteStream}
+                    participants={[]}
+                    isMuted={webrtc.isMuted}
+                    isVideoOff={webrtc.isVideoOff}
+                    isScreenSharing={webrtc.isScreenSharing}
+                    callerName={friend?.displayName}
+                    callerAvatar={friend?.avatarUrl}
+                    mode="1:1"
+                    onEnd={webrtc.endCall}
+                    onToggleMute={webrtc.toggleMute}
+                    onToggleVideo={webrtc.toggleVideo}
+                    onToggleScreenShare={webrtc.toggleScreenShare}
+                />
+            )}
         </div>
     );
 }

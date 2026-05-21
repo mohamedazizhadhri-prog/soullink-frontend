@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNovaState } from "@/context/NovaContext";
 import styles from "./ServerSidebar.module.css";
 import { Home, Plus, Hash, Globe } from "lucide-react";
@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import api from "@/lib/api";
 import { socketService } from "@/lib/socket";
 import { CreateCommunityModal } from "../modals/CreateCommunityModal";
+import { useOnboardingOptional } from "@/context/OnboardingContext";
+import { DEMO_COMMUNITIES, isDemoEntityId } from "@/lib/onboardingDemo";
 
 interface Community {
     id: string;
@@ -17,6 +19,7 @@ interface Community {
 export function ServerSidebar() {
     const { isNightMode } = useNovaState();
     const pathname = usePathname();
+    const onboarding = useOnboardingOptional();
     const [communities, setCommunities] = useState<Community[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -43,22 +46,48 @@ export function ServerSidebar() {
         };
     }, []);
 
+    const mergedCommunities = useMemo(() => {
+        if (onboarding?.isTourActive && onboarding?.isDemoWorldVisible) {
+            return [...DEMO_COMMUNITIES, ...communities];
+        }
+        return communities;
+    }, [onboarding?.isTourActive, onboarding?.isDemoWorldVisible, communities]);
+
     return (
-        <nav className={styles.sidebar} data-eatid="server-section">
-            <Link
-                href="/"
-                className={`${styles.serverIcon} ${styles.homeIcon} ${pathname === '/' ? styles.active : ''}`}
-                title="Home"
-            >
-                <Home size={24} />
-                <div className={styles.pill} />
-            </Link>
+        <nav
+            className={styles.sidebar}
+            data-eatid="server-section"
+            data-onboarding-anchor="server-rail"
+        >
 
-            <div className={styles.separator} />
 
-            {/* Dynamic Communities */}
-            {communities.map(community => {
+            {/* Dynamic Communities (+ tour wax museum) */}
+            {mergedCommunities.map((community) => {
                 const isActive = pathname.startsWith(`/server/${community.id}`);
+                const isDemo = isDemoEntityId(community.id);
+                const inner = (
+                    <>
+                        {community.iconUrl ? (
+                            <img src={community.iconUrl} alt={community.name} className={styles.iconImage} />
+                        ) : (
+                            <div className={styles.iconPlaceholder}>{community.name[0]}</div>
+                        )}
+                        <div className={styles.pill} />
+                    </>
+                );
+                if (isDemo) {
+                    return (
+                        <button
+                            type="button"
+                            key={community.id}
+                            className={`${styles.serverIcon} ${isActive ? styles.active : ''}`}
+                            title={`${community.name} (tour preview)`}
+                            onClick={(e) => e.preventDefault()}
+                        >
+                            {inner}
+                        </button>
+                    );
+                }
                 return (
                     <Link
                         key={community.id}
@@ -66,12 +95,7 @@ export function ServerSidebar() {
                         className={`${styles.serverIcon} ${isActive ? styles.active : ''}`}
                         title={community.name}
                     >
-                        {community.iconUrl ? (
-                            <img src={community.iconUrl} alt={community.name} className={styles.iconImage} />
-                        ) : (
-                            <div className={styles.iconPlaceholder}>{community.name[0]}</div>
-                        )}
-                        <div className={styles.pill} />
+                        {inner}
                     </Link>
                 );
             })}

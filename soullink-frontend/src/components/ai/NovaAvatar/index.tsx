@@ -11,6 +11,7 @@ import chickenGif from "@/assets/chicken.gif";
 import { NovaBlackHole } from "../NovaBlackHole";
 import { NovaMoodParticles } from "./renderers/NovaMoodParticles";
 import { NovaSauronRenderer } from "./renderers/NovaSauronRenderer";
+import { NovaSuperSaiyanRenderer } from "./renderers/NovaSuperSaiyanRenderer";
 import { NovaCinematicRenderer } from "./renderers/NovaCinematicRenderer";
 import { aiService } from "@/services/aiService";
 
@@ -40,7 +41,7 @@ export function NovaAvatarComponent({ size: propSize, overrideMood, disableCurio
         isHunting, isSpitting, huntTarget, isSingularity,
         isKillingMachine, targetingData, isFiring,
         isHeartbroken, isMelting, temperature, isSmart, isEgg,
-        isDancing, isSauronMode, visionRadius, ashIntensity, followCursorMode,
+        isDancing, isSuperSaiyan, ssjLevel, isSauronMode, visionRadius, ashIntensity, followCursorMode,
         isNightMode, isAudioMuted
     } = state;
 
@@ -692,6 +693,7 @@ export function NovaAvatarComponent({ size: propSize, overrideMood, disableCurio
     // Color Configs
     const getColors = () => {
         if (isDancing) return { core: "discoBall", eye: "#FFFFFF" }; // Using class name as signal
+        if (isSuperSaiyan) return { core: "linear-gradient(135deg, #FFF7AE 0%, #FFD700 40%, #FFA500 100%)", eye: "#40E0D0" };
         if (isBashful) return { core: "linear-gradient(135deg, #ef4444 0%, #991b1b 100%)", eye: "#FFFFFF" };
         if (isDead || (deathPhase >= 2 && deathPhase < 5)) return { core: "linear-gradient(135deg, #2d3436 0%, #1e272e 100%)", eye: "#636e72" }; // Charcoal
         if (isAscending || mood === 'angelic') return { core: "linear-gradient(135deg, #FFD700 0%, #FFEC8B 50%, #FFFFFF 100%)", eye: "#FFFFFF" };
@@ -1670,6 +1672,9 @@ export function NovaAvatarComponent({ size: propSize, overrideMood, disableCurio
                             {/* Sauron — Lidless Eye, Tendrils, Inscription, Flare */}
                             <NovaSauronRenderer isSauronMode={isSauronMode} />
 
+                            {/* Super Saiyan — Golden Aura, Spiky Hair, Lightning, Ki Sparks */}
+                            <NovaSuperSaiyanRenderer isSuperSaiyan={isSuperSaiyan} ssjLevel={ssjLevel} />
+
 
                             {/* Extracted Mood Particles */}
                             <NovaMoodParticles
@@ -1696,7 +1701,7 @@ export function NovaAvatarComponent({ size: propSize, overrideMood, disableCurio
                             ) : (
                                 <>
                                     <motion.div
-                                        className={`${styles.core} ${colors.core === 'discoBall' ? styles.discoBall : ''} ${mood === 'sad' ? styles.sadCore : ''} ${mood === 'disgusted' ? styles.disgustedCore : ''} ${isSauronMode ? styles.sauronCore : ''} ${isNightMode ? styles.moonCore : ''}`}
+                                        className={`${styles.core} ${colors.core === 'discoBall' ? styles.discoBall : ''} ${mood === 'sad' ? styles.sadCore : ''} ${mood === 'disgusted' ? styles.disgustedCore : ''} ${isSauronMode ? styles.sauronCore : ''} ${isSuperSaiyan ? styles.ssjCore : ''} ${isNightMode ? styles.moonCore : ''} ${isSuperSaiyan ? styles.ssjShake : ''}`}
                                         id="nova-orb-core"
                                         key={`orb-core-${gulpTrigger}`}
                                         style={{

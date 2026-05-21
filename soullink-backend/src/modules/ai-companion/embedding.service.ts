@@ -2,6 +2,7 @@ import { CohereClient } from 'cohere-ai';
 import { env } from '../../config/env.js';
 import { logger } from '../../shared/utils/logger.js';
 import { MODELS } from './ai.constants.js';
+import { UsageTrackerService } from '../../cron/usageTracker.js';
 
 export class EmbeddingService {
     private client: CohereClient | null = null;
@@ -28,6 +29,8 @@ export class EmbeddingService {
             });
             const embeddings = response.embeddings;
             if (Array.isArray(embeddings) && embeddings.length > 0) {
+                // Track Cohere usage — 1 call per embed
+                UsageTrackerService.increment('COHERE', 'calls', 1).catch(() => {});
                 return embeddings[0] as number[];
             }
             return null;
@@ -47,6 +50,8 @@ export class EmbeddingService {
             });
             const embeddings = response.embeddings;
             if (Array.isArray(embeddings) && embeddings.length > 0) {
+                // Track Cohere usage — 1 call per embed
+                UsageTrackerService.increment('COHERE', 'calls', 1).catch(() => {});
                 return embeddings[0] as number[];
             }
             return null;

@@ -1,0 +1,65 @@
+.shell { display: flex; min-height: 100vh; width: 100%; background: #0A0A12; }
+.main  { flex: 1; padding: 32px 36px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+.header { display: flex; align-items: center; gap: 16px; }
+.title  { font-size: 24px; font-weight: 700; color: #F0F0F5; margin: 0; }
+.count  { font-size: 13px; color: #A0A0B5; background: rgba(255,255,255,0.06); border-radius: 999px; padding: 3px 10px; }
+
+.filters { display: flex; gap: 12px; flex-wrap: wrap; }
+.searchInput {
+    flex: 1; min-width: 220px;
+    background: #13131F; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 10px 14px; color: #F0F0F5; font-size: 14px;
+    outline: none; transition: border-color 0.2s;
+}
+.searchInput:focus { border-color: #7B68EE; }
+.select {
+    background: #13131F; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 10px 14px; color: #F0F0F5; font-size: 14px;
+    outline: none; cursor: pointer; transition: border-color 0.2s;
+}
+.select:focus { border-color: #7B68EE; }
+
+.errorBanner { background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.3); border-radius: 10px; padding: 14px 20px; color: #FF8888; font-size: 14px; }
+
+.tableWrapper { background: #13131F; border: 1px solid rgba(255,255,255,0.05); border-radius: 14px; overflow: hidden; overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; min-width: 700px; }
+.table thead tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.table th { padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 700; color: #A0A0B5; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+.table td { padding: 12px 16px; font-size: 14px; color: #D0D0E0; vertical-align: middle; }
+.row { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
+.row:last-child { border-bottom: none; }
+.row:hover { background: rgba(123,104,238,0.05); }
+
+.userCell { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: #292940; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #7B68EE; flex-shrink: 0; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.displayName { font-size: 14px; font-weight: 600; color: #F0F0F5; }
+.handle { font-size: 12px; color: #A0A0B5; }
+
+.chip { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; border: 1px solid; }
+.number { font-variant-numeric: tabular-nums; color: #A0A0B5; }
+.date { font-size: 12px; color: #A0A0B5; white-space: nowrap; }
+.empty { text-align: center; padding: 40px; color: #A0A0B5; font-size: 14px; }
+
+.actions { display: flex; gap: 6px; }
+.actionBtn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 7px; font-size: 14px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    color: #A0A0B5; cursor: pointer; text-decoration: none; transition: all 0.15s;
+}
+.actionBtn:hover { background: rgba(123,104,238,0.2); border-color: #7B68EE; color: #E0E0FF; }
+.actionBtn.danger:hover  { background: rgba(255,68,68,0.2);  border-color: #FF4444; color: #FF8888; }
+.actionBtn.success:hover { background: rgba(50,205,50,0.2);  border-color: #32CD32; color: #88FF88; }
+.actionBtn.muted:hover   { background: rgba(128,128,128,0.2); border-color: #808080; color: #C0C0C0; }
+.actionBtn.warn:hover    { background: rgba(255,215,0,0.2);  border-color: #FFD700; color: #FFE866; }
+
+.skeleton { height: 16px; border-radius: 4px; background: linear-gradient(90deg, #13131F 25%, #1A1A2E 50%, #13131F 75%); background-size: 200% 100%; animation: skeleton-shimmer 1.4s infinite; }
+@keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.pagination { display: flex; align-items: center; gap: 12px; justify-content: center; }
+.pageBtn { background: #13131F; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #F0F0F5; padding: 8px 16px; cursor: pointer; font-size: 14px; transition: all 0.15s; }
+.pageBtn:hover:not(:disabled) { border-color: #7B68EE; color: #C4B8FF; }
+.pageBtn:disabled { opacity: 0.3; cursor: not-allowed; }
+.pageInfo { font-size: 13px; color: #A0A0B5; }

@@ -1,0 +1,219 @@
+/* /admin — Overview Page */
+
+.shell {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: #0A0A12;
+}
+
+.main {
+    flex: 1;
+    padding: 32px 36px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    min-width: 0;
+}
+
+/* ── Header ─────────────────────────────────────────────────────── */
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #F0F0F5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.titleIcon {
+    filter: drop-shadow(0 0 10px rgba(123, 104, 238, 0.9));
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #A0A0B5;
+    margin-top: 4px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, rgba(123, 104, 238, 0.25), rgba(0, 191, 255, 0.1));
+    border: 1px solid rgba(123, 104, 238, 0.4);
+    color: #C4B8FF;
+}
+
+/* ── Error Banner ────────────────────────────────────────────────── */
+
+.errorBanner {
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    border-radius: 10px;
+    padding: 14px 20px;
+    color: #FF8888;
+    font-size: 14px;
+}
+
+/* ── Section Heading ─────────────────────────────────────────────── */
+
+.sectionTitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: #A0A0B5;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+}
+
+/* ── KPI Cards ───────────────────────────────────────────────────── */
+
+.kpiGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.kpiCard {
+    background: #13131F;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 3px solid transparent;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpiCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.kpiHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.kpiIcon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.kpiLabel {
+    font-size: 12px;
+    font-weight: 600;
+    color: #A0A0B5;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.kpiValue {
+    font-size: 32px;
+    font-weight: 700;
+    color: #F0F0F5;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.kpiSub {
+    font-size: 12px;
+    color: #A0A0B5;
+}
+
+/* ── Gauge Cards ─────────────────────────────────────────────────── */
+
+.gaugesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.gaugeCard {
+    background: #13131F;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.gaugeHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.serviceName {
+    font-size: 13px;
+    font-weight: 700;
+    color: #E0E0F5;
+    letter-spacing: 0.04em;
+}
+
+.gaugePercent {
+    font-size: 20px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s;
+}
+
+.gaugeTrack {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.gaugeFill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gaugeFooter {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #A0A0B5;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Skeleton Loading ────────────────────────────────────────────── */
+
+.loadingGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.skeletonCard {
+    height: 120px;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #13131F 25%, #1A1A2E 50%, #13131F 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

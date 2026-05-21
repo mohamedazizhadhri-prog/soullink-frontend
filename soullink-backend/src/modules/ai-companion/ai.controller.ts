@@ -57,3 +57,24 @@ export const streamTts = async (req: Request, res: Response) => {
     const truncated = text.trim().slice(0, 500);
     await elevenLabsService.streamSpeech(truncated, res);
 };
+
+export const triggerEvent = async (req: Request, res: Response) => {
+    const { trigger, payload } = req.body;
+    const userId = (req as any).user!.id;
+
+    if (!trigger || typeof trigger !== 'string') {
+        res.status(400).json({ status: 'error', message: 'trigger is required' });
+        return;
+    }
+
+    try {
+        const result = await aiService.generateEventResponse(userId, trigger, payload || {});
+        if (!result) {
+            res.json({ status: 'success', data: { skipped: true } });
+            return;
+        }
+        res.json({ status: 'success', data: result });
+    } catch (error: any) {
+        res.status(500).json({ status: 'error', message: error.message });
+    }
+};

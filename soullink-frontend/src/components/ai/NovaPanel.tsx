@@ -21,6 +21,7 @@ export function NovaPanel() {
     isMelting, setIsMelting, isSmart, setIsSmart, triggerRich,
     isEgg, triggerEgg,
     isDancing, setIsDancing,
+    isSuperSaiyan, setIsSuperSaiyan, ssjLevel, setSsjLevel,
     isSauronMode, setIsSauronMode,
     followCursorMode, setFollowCursorMode,
     isNightMode, setIsNightMode,
@@ -80,7 +81,7 @@ export function NovaPanel() {
   // ... (existing effects remain the same)
 
   return (
-    <div className={styles.panelContainer}>
+    <div className={styles.panelContainer} data-onboarding-anchor="nova-panel">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -184,6 +185,9 @@ export function NovaPanel() {
                     </button>
                     <button className={styles.moodBtn} onClick={() => triggerEmote('nod')} title="Nod">
                       <Smile size={14} />
+                    </button>
+                    <button className={styles.moodBtn} onClick={() => triggerEmote('shybounce')} title="Shy (👉👈)">
+                      👉👈
                     </button>
                   </div>
                 </div>
@@ -348,6 +352,61 @@ export function NovaPanel() {
                       <div style={{ marginTop: 6, fontSize: '0.6rem', color: 'rgba(255, 69, 0, 0.6)', textAlign: 'center' }}>
                         The Eye is watching...
                       </div>
+                    )}
+                  </div>
+
+                  {/* Super Saiyan Controls */}
+                  <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                    <div className={styles.sectionTitle} style={{ color: '#FFD700' }}>Super Saiyan</div>
+
+                    <div className={styles.statusRow}>
+                      <button
+                        className={`${styles.moodBtn} ${isSuperSaiyan ? styles.active : ""}`}
+                        onClick={() => {
+                          setIsSuperSaiyan(!isSuperSaiyan);
+                          if (!isSuperSaiyan) {
+                            // Disable conflicting modes
+                            setIsSauronMode(false);
+                            setIsNightMode(false);
+                          }
+                        }}
+                        style={{ flex: 1, gap: 4, background: isSuperSaiyan ? 'rgba(255, 215, 0, 0.2)' : undefined, borderColor: isSuperSaiyan ? '#FFD700' : undefined, color: isSuperSaiyan ? '#FFD700' : undefined }}
+                        title="Transform into Super Saiyan"
+                      >
+                        <Zap size={14} fill={isSuperSaiyan ? "#FFD700" : "none"} /> {isSuperSaiyan ? 'Power Down' : 'Transform!'}
+                      </button>
+                    </div>
+
+                    {isSuperSaiyan && (
+                      <>
+                        <div style={{ marginTop: 6, display: 'flex', gap: 4 }}>
+                          {[1, 2, 3].map((level) => (
+                            <button
+                              key={level}
+                              className={`${styles.moodBtn} ${ssjLevel === level ? styles.active : ""}`}
+                              onClick={() => setSsjLevel(level as 1 | 2 | 3)}
+                              style={{
+                                flex: 1,
+                                fontSize: '0.65rem',
+                                background: ssjLevel === level
+                                  ? level === 1 ? 'rgba(255, 215, 0, 0.2)'
+                                    : level === 2 ? 'rgba(255, 215, 0, 0.35)'
+                                      : 'rgba(255, 255, 200, 0.3)'
+                                  : undefined,
+                                borderColor: ssjLevel === level ? '#FFD700' : undefined,
+                                color: ssjLevel === level ? '#FFD700' : undefined
+                              }}
+                            >
+                              SSJ{level}
+                            </button>
+                          ))}
+                        </div>
+                        <div style={{ marginTop: 6, fontSize: '0.6rem', color: 'rgba(255, 215, 0, 0.6)', textAlign: 'center' }}>
+                          {ssjLevel === 1 && '⚡ HAAAAAA!'}
+                          {ssjLevel === 2 && '⚡⚡ Power is overflowing!'}
+                          {ssjLevel === 3 && '⚡⚡⚡ THIS IS TO GO EVEN FURTHER BEYOND!'}
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>

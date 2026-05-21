@@ -1,0 +1,130 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    height: 100%;
+}
+
+.searchBar {
+    display: flex;
+    gap: 8px;
+}
+
+.input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.input:focus {
+    border-color: #7B68EE;
+}
+
+.searchBtn {
+    background: #7B68EE;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.searchBtn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(123, 104, 238, 0.3);
+}
+
+.searchBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #FF8888;
+    font-size: 12px;
+    margin: 0;
+}
+
+.resultsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    flex: 1;
+    padding-right: 4px;
+}
+
+.resultsGrid::-webkit-scrollbar {
+    width: 4px;
+}
+
+.resultsGrid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.emptyState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: #A0A0B5;
+    padding: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.videoCard {
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.videoCard:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.thumbnail {
+    width: 120px;
+    height: 68px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #F0F0F5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.3;
+}
+
+.channel {
+    margin: 0;
+    font-size: 11px;
+    color: #A0A0B5;
+}

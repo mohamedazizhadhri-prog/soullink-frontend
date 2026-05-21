@@ -42,7 +42,7 @@ interface LoginFormProps {
     isSuccess: boolean;
     setIsSuccess: (val: boolean) => void;
     loginButtonRef: React.RefObject<HTMLButtonElement | null>;
-    onLoginSuccess: () => void;
+    onLoginSuccess: (role: string) => void;
     onFormStateChange: (state: FormState) => void;
 }
 
@@ -59,6 +59,24 @@ function LoginForm({
     onLoginSuccess,
     onFormStateChange,
 }: LoginFormProps) {
+
+    // ── Reference: SoulLink — Admin, Moderator & Analytics Walkthrough Plan §2 ──
+    // Determines the post-login redirect destination based on the user's role.
+    const getRoleRedirectPath = (role: string): string => {
+        if (role === 'ADMIN')     return '/admin';
+        if (role === 'MODERATOR') return '/moderation';
+        return '/match';
+    };
+
+    // Sets persistent role cookies so Next.js edge middleware can guard routes
+    // without needing to hit the DB on every request.
+    const setAuthCookies = (token: string, role: string) => {
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7); // 7-day window matches refresh token
+        const cookieOpts = `expires=${expires.toUTCString()}; path=/; SameSite=Strict`;
+        document.cookie = `sl_token=${token}; ${cookieOpts}`;
+        document.cookie = `sl_role=${role}; ${cookieOpts}`;
+    };
     const [loading, setLoading] = useState(false);
     const [viewMode, setViewMode] = useState<'login' | 'face' | 'forgot_email' | 'forgot_reset'>('login');
     const [identifier, setIdentifier] = useState("");
@@ -78,15 +96,34 @@ function LoginForm({
             const response = await api.post("/auth/login", { identifier, password });
             if (response.data.status === "success") {
                 const { accessToken, user } = response.data.data;
-                localStorage.setItem('token', accessToken);
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('sl_token', accessToken);
+                localStorage.setItem('sl_user', JSON.stringify(user));
+
+                // Set cookies for Next.js edge middleware route protection
+                // Reference: SoulLink — Admin, Moderator & Analytics Walkthrough Plan §2
+                setAuthCookies(accessToken, user.role);
+
+                // Check for active bans/suspensions
+                let isSuspended = false;
+                try {
+                    const susRes = await api.get("/users/me/suspension");
+                    if (susRes.data?.data) {
+                        isSuspended = true;
+                    }
+                } catch (e) {
+                    // Not suspended (returns 404)
+                }
 
                 setIsSuccess(true);
                 onFormStateChange('success');
-                setNovaMessage("I knew it was you! Welcome back. ✨");
-
-                // ⚡ Trigger the animation chain after a moment (let Nova react)
-                setTimeout(() => onLoginSuccess(), 600);
+                
+                if (isSuspended) {
+                    setNovaMessage("Hold on... your soul has been restricted.");
+                    setTimeout(() => onLoginSuccess("SUSPENDED"), 1500);
+                } else {
+                    setNovaMessage("I knew it was you! Welcome back. ✨");
+                    setTimeout(() => onLoginSuccess(user.role), 600);
+                }
             }
         } catch (err: any) {
             setIsError(true);
@@ -106,13 +143,34 @@ function LoginForm({
             const response = await api.post("/auth/login-face", { descriptor });
             if (response.data.status === "success") {
                 const { accessToken, user } = response.data.data;
-                localStorage.setItem('token', accessToken);
-                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('sl_token', accessToken);
+                localStorage.setItem('sl_user', JSON.stringify(user));
+
+                // Set cookies for Next.js edge middleware route protection
+                // Reference: SoulLink — Admin, Moderator & Analytics Walkthrough Plan §2
+                setAuthCookies(accessToken, user.role);
+
+                // Check for active bans/suspensions
+                let isSuspended = false;
+                try {
+                    const susRes = await api.get("/users/me/suspension");
+                    if (susRes.data?.data) {
+                        isSuspended = true;
+                    }
+                } catch (e) {
+                    // Not suspended (returns 404)
+                }
 
                 setIsScanning(false);
                 setIsSuccess(true);
-                setNovaMessage("Identity confirmed! Good to see you.");
-                setTimeout(() => onLoginSuccess(), 600);
+                
+                if (isSuspended) {
+                    setNovaMessage("Wait... your soul has been restricted.");
+                    setTimeout(() => onLoginSuccess("SUSPENDED"), 1500);
+                } else {
+                    setNovaMessage("Identity confirmed! Good to see you.");
+                    setTimeout(() => onLoginSuccess(user.role), 600);
+                }
             }
         } catch (err: any) {
             setIsScanning(false);
@@ -491,7 +549,17 @@ function LoginContent() {
         return () => document.removeEventListener('mousemove', handleMouseMove);
     }, [animPhase]);
 
-    const handleLoginSuccess = useCallback(() => {
+    // ── Reference: SoulLink — Admin, Moderator & Analytics Walkthrough Plan §2 ──
+    // Role-based destination: ADMIN → /admin | MODERATOR → /moderation | USER → /match | SUSPENDED → /suspended
+    const [redirectPath, setRedirectPath] = useState('/match');
+
+    const handleLoginSuccess = useCallback((role: string) => {
+        let dest = '/match';
+        if (role === 'SUSPENDED') dest = '/suspended';
+        else if (role === 'ADMIN') dest = '/admin';
+        else if (role === 'MODERATOR') dest = '/moderation';
+        
+        setRedirectPath(dest);
         if (loginButtonRef.current) {
             const rect = loginButtonRef.current.getBoundingClientRect();
             setButtonPos({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
@@ -566,7 +634,7 @@ function LoginContent() {
                         key="transition"
                         originX={buttonPos.x}
                         originY={buttonPos.y}
-                        onComplete={() => router.push('/match')}
+                        onComplete={() => router.push(redirectPath)}
                     />
                 )}
             </AnimatePresence>

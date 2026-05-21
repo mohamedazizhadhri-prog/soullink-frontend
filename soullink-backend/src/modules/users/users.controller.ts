@@ -15,6 +15,19 @@ export class UsersController {
         }
     }
 
+    async getMySuspension(req: AuthRequest, res: Response, next: NextFunction) {
+        try {
+            const data = await usersService.getMySuspension(req.user!.id);
+            if (!data) {
+                res.status(404).json({ status: 'error', message: 'No active suspension found' });
+                return;
+            }
+            res.status(200).json({ status: 'success', data });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async updateMe(req: AuthRequest, res: Response, next: NextFunction) {
         try {
             const user = await usersService.updateMe(req.user!.id, req.body);

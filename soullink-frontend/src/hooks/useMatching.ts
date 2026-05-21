@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { matchingService } from '@/services/matchingService';
 import { socketService } from '@/lib/socket';
+import { aiService } from '@/services/aiService';
 
 export type MatchStep = 'intent' | 'interests' | 'searching' | 'cards';
 
@@ -49,8 +50,13 @@ export function useMatching() {
         // Listen for real-time matches
         const handleMatchFound = (data: any) => {
             setMatchResult({ matched: true, matchId: data.matchId, partnerName: data.partnerName });
-            setStep('intent'); // Reset or move to a "Success" view
-            fetchMatches(); 
+            setStep('intent');
+            fetchMatches();
+            // Nova reacts to the match — response delivered via nova:proactive socket event
+            aiService.sendEvent('match_found', {
+                anonymousName: data.partnerName || 'Anonymous Soul',
+                score: data.score || '??',
+            }).catch(() => {});
         };
 
         socketService.on('match:found', handleMatchFound);

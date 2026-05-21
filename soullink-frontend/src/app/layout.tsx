@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 import { Shell } from "@/components/layout/Shell";
 import { NovaProvider } from "@/context/NovaContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export default function RootLayout({
   children,
@@ -28,10 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
-        <NovaProvider>
-          {children}
-        </NovaProvider>
+        <ThemeProvider>
+          <NovaProvider>
+            {children}
+          </NovaProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+

@@ -47,6 +47,138 @@
   --z-modal: 1000;
 }
 
+/* ─── Theme: Void (default — uses :root values) ─────────────────────────── */
+/* No overrides needed — :root IS the Void theme */
+
+/* ─── Theme: Midnight Ocean ─────────────────────────────────────────────── */
+.theme-midnight-ocean {
+  --color-brand-indigo: #1B3A5C;
+  --color-brand-purple: #64FFDA;
+  --color-brand-teal: #64FFDA;
+  --color-brand-green: #64FFDA;
+  --color-bg-app: #0A1628;
+  --color-bg-card: #112240;
+  --color-border: #1D3557;
+  --color-text-primary: #CCD6F6;
+  --color-text-secondary: #8892B0;
+  --color-accent-blue: #64FFDA;
+  --gradient-ai: linear-gradient(135deg, #64FFDA 0%, #00B4D8 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(100, 255, 218, 0.08) 0%, transparent 40%);
+}
+
+/* ─── Theme: Aurora ─────────────────────────────────────────────────────── */
+.theme-aurora {
+  --color-brand-indigo: #0B3D2E;
+  --color-brand-purple: #00E5A0;
+  --color-brand-teal: #00E5A0;
+  --color-brand-green: #00FF88;
+  --color-bg-app: #0B1A1A;
+  --color-bg-card: #12302C;
+  --color-border: #1A4A42;
+  --color-text-primary: #D0F0E8;
+  --color-text-secondary: #7FB8A8;
+  --color-accent-blue: #00CED1;
+  --gradient-ai: linear-gradient(135deg, #00E5A0 0%, #00CED1 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(0, 229, 160, 0.1) 0%, transparent 40%);
+}
+
+/* ─── Theme: Sunset Ember ───────────────────────────────────────────────── */
+.theme-sunset {
+  --color-brand-indigo: #5C2018;
+  --color-brand-purple: #FF7B54;
+  --color-brand-teal: #FFB26B;
+  --color-brand-green: #FFD56B;
+  --color-bg-app: #1A0F0F;
+  --color-bg-card: #2E1A1A;
+  --color-border: #4A2C2C;
+  --color-text-primary: #F5E6D8;
+  --color-text-secondary: #C4A08A;
+  --color-accent-blue: #FF7B54;
+  --gradient-ai: linear-gradient(135deg, #FF7B54 0%, #FFB26B 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(255, 123, 84, 0.1) 0%, transparent 40%);
+}
+
+/* ─── Theme: Cyberpunk ──────────────────────────────────────────────────── */
+.theme-cyberpunk {
+  --color-brand-indigo: #16213E;
+  --color-brand-purple: #FF2E97;
+  --color-brand-teal: #00F5FF;
+  --color-brand-green: #39FF14;
+  --color-bg-app: #0D0D0D;
+  --color-bg-card: #1A1A2E;
+  --color-border: #2A2A4A;
+  --color-text-primary: #EAEAEA;
+  --color-text-secondary: #9A9ABF;
+  --color-accent-blue: #00F5FF;
+  --gradient-ai: linear-gradient(135deg, #FF2E97 0%, #00F5FF 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(255, 46, 151, 0.1) 0%, transparent 40%);
+}
+
+/* ─── Theme: Lavender Dream ─────────────────────────────────────────────── */
+.theme-lavender {
+  --color-brand-indigo: #2E1A47;
+  --color-brand-purple: #C4A7FF;
+  --color-brand-teal: #B8A9FF;
+  --color-brand-green: #A8E6CF;
+  --color-bg-app: #1A1525;
+  --color-bg-card: #262038;
+  --color-border: #3D3558;
+  --color-text-primary: #E8E0F0;
+  --color-text-secondary: #A898C8;
+  --color-accent-blue: #B8A9FF;
+  --gradient-ai: linear-gradient(135deg, #C4A7FF 0%, #FF9CEE 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(196, 167, 255, 0.1) 0%, transparent 40%);
+}
+
+/* ─── Theme: Ivory (Light) ──────────────────────────────────────────────── */
+.theme-ivory {
+  --color-brand-indigo: #6C5CE7;
+  --color-brand-purple: #6C5CE7;
+  --color-brand-teal: #00B894;
+  --color-brand-green: #00B894;
+  --color-bg-app: #F5F5F0;
+  --color-bg-card: #FFFFFF;
+  --color-border: #E0DDD5;
+  --color-text-primary: #2D3436;
+  --color-text-secondary: #636E72;
+  --color-accent-blue: #0984E3;
+  --color-status-online: #00B894;
+  --color-status-away: #FDCB6E;
+  --color-status-dnd: #D63031;
+  --gradient-ai: linear-gradient(135deg, #6C5CE7 0%, #0984E3 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(108, 92, 231, 0.06) 0%, transparent 40%);
+}
+
+.theme-ivory ::-webkit-scrollbar-track {
+  background: #F0F0EB;
+}
+.theme-ivory ::-webkit-scrollbar-thumb {
+  background: #D0CCC5;
+}
+.theme-ivory ::-webkit-scrollbar-thumb:hover {
+  background: #B0ACA5;
+}
+.theme-ivory .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Theme: Crimson Abyss ──────────────────────────────────────────────── */
+.theme-crimson {
+  --color-brand-indigo: #3D0000;
+  --color-brand-purple: #DC143C;
+  --color-brand-teal: #FF6B6B;
+  --color-brand-green: #FF4757;
+  --color-bg-app: #0A0A0A;
+  --color-bg-card: #1A0A0A;
+  --color-border: #3A1515;
+  --color-text-primary: #E8D0D0;
+  --color-text-secondary: #9A7070;
+  --color-accent-blue: #FF6B6B;
+  --gradient-ai: linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%);
+  --gradient-bg-mesh: radial-gradient(circle at 50% 10%, rgba(220, 20, 60, 0.1) 0%, transparent 40%);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

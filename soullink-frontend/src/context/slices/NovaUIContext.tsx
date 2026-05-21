@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { NovaMood, NovaEmote, NovaMessage, NovaStatus } from "@/types/nova.types";
 import { ttsService } from "@/services/ttsService";
+import { socketService } from "@/lib/socket";
 
 interface NovaUIState {
     mood: NovaMood;
@@ -21,7 +22,7 @@ interface NovaUIDispatch {
     setStatus: (status: NovaStatus) => void;
     setTracking: (v: boolean) => void;
     triggerEmote: (emote: NovaEmote) => void;
-    addMessage: (text: string, sender?: 'nova' | 'user') => void;
+    addMessage: (text: string, sender?: 'nova' | 'user', options?: { speak?: boolean; isProactive?: boolean }) => void;
     loadMessages: (msgs: NovaMessage[]) => void;
     clearMessages: () => void;
     setCinematicMode: (v: boolean) => void;
@@ -48,12 +49,14 @@ export function NovaUIProvider({ children }: { children: React.ReactNode }) {
         setTimeout(() => setEmote(null), 2000);
     }, []);
 
-    const addMessage = useCallback((text: string, sender: 'nova' | 'user' = 'nova') => {
+    const addMessage = useCallback(
+        (text: string, sender: 'nova' | 'user' = 'nova', options?: { speak?: boolean; isProactive?: boolean }) => {
         const newMessage: NovaMessage = {
             id: Math.random().toString(36).substr(2, 9),
             sender,
             text,
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            isProactive: options?.isProactive ?? false,
         };
         setMessages(prev => [...prev.slice(-49), newMessage]);
         
@@ -61,7 +64,8 @@ export function NovaUIProvider({ children }: { children: React.ReactNode }) {
             setPulseTrigger(prev => prev + 1);
             
             // Stream TTS from backend — plays as first chunk arrives
-            if (!isAudioMuted) {
+            const shouldSpeak = options?.speak ?? true;
+            if (shouldSpeak && !isAudioMuted) {
                 ttsService.streamSpeech(text).catch(console.error);
             }
         }
@@ -83,6 +87,20 @@ export function NovaUIProvider({ children }: { children: React.ReactNode }) {
     const stateValue = useMemo(() => ({
         mood, status, isTracking, emote, messages, pulseTrigger, isCinematicMode, isChatDisabled, isAudioMuted
     }), [mood, status, isTracking, emote, messages, pulseTrigger, isCinematicMode, isChatDisabled, isAudioMuted]);
+
+    // ── Global socket listener for cron-generated proactive messages ──────────
+    useEffect(() => {
+        const handleProactive = (data: { message: string; mood?: string }) => {
+            if (!data?.message) return;
+            // Mark cron-pushed messages as proactive so they render distinctly
+            addMessage(data.message, 'nova', { isProactive: true });
+            if (data.mood) setMood(data.mood as NovaMood);
+        };
+        socketService.on('nova:proactive', handleProactive);
+        return () => {
+            socketService.off('nova:proactive', handleProactive);
+        };
+    }, [addMessage]);
 
     const dispatchValue = useMemo(() => ({
         setMood, setStatus, setTracking, triggerEmote, addMessage, loadMessages, clearMessages, setCinematicMode, setChatDisabled, setAudioMuted

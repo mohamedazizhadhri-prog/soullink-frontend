@@ -28,6 +28,9 @@ interface NovaInteractionState {
     isSmart: boolean;
     isEgg: boolean;
     isDancing: boolean;
+    // Super Saiyan
+    isSuperSaiyan: boolean;
+    ssjLevel: 1 | 2 | 3;
     // Sauron
     isSauronMode: boolean;
     visionRadius: number;
@@ -42,7 +45,9 @@ interface NovaInteractionState {
 interface NovaInteractionDispatch {
     setPacManMode: (v: boolean) => void;
     setConsumedFriendIds: (v: (string | number)[]) => void;
-    setGulpTrigger: (v: (prev: number) => number) => void;
+    setGulpTrigger: React.Dispatch<React.SetStateAction<number>>;
+    /** Bumps `gulpTrigger` so Nova replays the Pac-Man gulp animation. */
+    triggerPacManGulp: () => void;
     setIsHunting: (v: boolean) => void;
     setHuntTarget: (v: { x: number; y: number } | null) => void;
     setIsSingularity: (v: boolean) => void;
@@ -61,6 +66,8 @@ interface NovaInteractionDispatch {
     setIsSmart: (v: boolean) => void;
     setIsEgg: (v: boolean) => void;
     setIsDancing: (v: boolean) => void;
+    setIsSuperSaiyan: (v: boolean) => void;
+    setSsjLevel: (v: 1 | 2 | 3) => void;
     setIsSauronMode: (v: boolean) => void;
     setVisionRadius: (v: number) => void;
     setAshIntensity: (v: number) => void;
@@ -95,6 +102,8 @@ export function NovaInteractionProvider({ children }: { children: React.ReactNod
     const [isSmart, setIsSmart] = useState(false);
     const [isEgg, setIsEgg] = useState(false);
     const [isDancing, setIsDancing] = useState(false);
+    const [isSuperSaiyan, setIsSuperSaiyan] = useState(false);
+    const [ssjLevel, setSsjLevel] = useState<1 | 2 | 3>(1);
     const [isSauronMode, setIsSauronMode] = useState(false);
     const [visionRadius, setVisionRadius] = useState(200);
     const [ashIntensity, setAshIntensity] = useState(50);
@@ -109,16 +118,22 @@ export function NovaInteractionProvider({ children }: { children: React.ReactNod
         curiousTarget, novaPosition,
         homePosition, investigationContext, isKillingMachine, targetingData,
         isFiring, isHeartbroken, isMelting, isSmart, isEgg, isDancing,
+        isSuperSaiyan, ssjLevel,
         isSauronMode, visionRadius, ashIntensity, followCursorMode,
         isDead, deathPhase, isAscending
-    }), [isPacManMode, consumedFriendIds, gulpTrigger, isHunting, huntTarget, isSingularity, isNuclearSingularity, eatenElements, isSpitting, curiousTarget, novaPosition, homePosition, investigationContext, isKillingMachine, targetingData, isFiring, isHeartbroken, isMelting, isSmart, isEgg, isDancing, isSauronMode, visionRadius, ashIntensity, followCursorMode, isDead, deathPhase, isAscending]);
+    }), [isPacManMode, consumedFriendIds, gulpTrigger, isHunting, huntTarget, isSingularity, isNuclearSingularity, eatenElements, isSpitting, curiousTarget, novaPosition, homePosition, investigationContext, isKillingMachine, targetingData, isFiring, isHeartbroken, isMelting, isSmart, isEgg, isDancing, isSuperSaiyan, ssjLevel, isSauronMode, visionRadius, ashIntensity, followCursorMode, isDead, deathPhase, isAscending]);
 
     const dispatchValue = useMemo(() => ({
-        setPacManMode, setConsumedFriendIds, setGulpTrigger, setIsHunting, setHuntTarget,
+        setPacManMode,
+        setConsumedFriendIds,
+        setGulpTrigger,
+        triggerPacManGulp: () => setGulpTrigger((n) => n + 1),
+        setIsHunting, setHuntTarget,
         setIsSingularity, setIsNuclearSingularity, setEatenElements, setIsSpitting,
         setCuriousTarget, setNovaPosition,
         setHomePosition, setInvestigationContext, setIsKillingMachine, setTargetingData,
         setIsFiring, setIsHeartbroken, setIsMelting, setIsSmart, setIsEgg, setIsDancing,
+        setIsSuperSaiyan, setSsjLevel,
         setIsSauronMode, setVisionRadius, setAshIntensity, setFollowCursorMode,
         setIsDead, setDeathPhase, setIsAscending
     }), []);

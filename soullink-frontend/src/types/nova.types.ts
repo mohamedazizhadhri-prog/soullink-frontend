@@ -2,13 +2,14 @@ import React from "react";
 
 export type NovaMood = "neutral" | "thinking" | "curious" | "confused" | "oops" | "blushed" | "angry" | "angelic" | "bored" | "broken" | "crazy" | "cursed" | "laugh" | "sad" | "disgusted" | "love" | "happy" | "rich" | "jealous" | "nod" | "smart" | "glitched";
 export type NovaStatus = "online" | "offline";
-export type NovaEmote = "angry" | "angelic" | "blush" | "oops" | "success" | "nod" | "shake" | "lightbulb" | null;
+export type NovaEmote = "angry" | "angelic" | "blush" | "oops" | "success" | "nod" | "shake" | "lightbulb" | "shybounce" | null;
 
 export interface NovaMessage {
     id: string;
     sender: 'nova' | 'user';
     text: string;
     timestamp: number;
+    isProactive?: boolean;
 }
 
 export interface NovaStateContextType {
@@ -61,7 +62,7 @@ export interface NovaDispatchContextType {
     setStatus: (status: NovaStatus) => void;
     setTracking: (tracking: boolean) => void;
     triggerEmote: (emote: NovaEmote) => void;
-    addMessage: (text: string, sender?: 'nova' | 'user') => void;
+    addMessage: (text: string, sender?: 'nova' | 'user', options?: { speak?: boolean; isProactive?: boolean }) => void;
     setPacManMode: (val: boolean) => void;
     setConsumedFriendIds: React.Dispatch<React.SetStateAction<(string | number)[]>>;
     triggerPacManGulp: () => void;

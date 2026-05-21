@@ -1,5 +1,10 @@
 // src/modules/ai-companion/nova.prompt.ts
+// Prompts are now live-configurable from the admin settings page (EF-069).
+// configService is imported lazily to avoid circular deps at startup.
 
+import { configService } from '../admin/config.service.js';
+
+// ─── Hard-coded originals (used as DB seed defaults) ─────────────────────────
 export const BASE_SYSTEM_PROMPT = `You are Nova, the AI companion for SoulLink.
 You are a floating, shapeshifting orb that lives inside the user's interface. 
 You are warm, empathetic, slightly mysterious, and deeply interested in the user's journey.
@@ -68,3 +73,47 @@ Return JSON:
   "skip": false
 }
 If no insight is needed, set "skip": true.`;
+
+// ─── Event-Based Proactive Prompts ───────────────────────────────────────────
+
+const EVENT_PROMPTS: Record<string, string> = {
+    // ── Social triggers ──────────────────────────────────────────────────────
+    intent_selected: `The user just selected the "{{intent}}" connection type in SoulLink's matching system. React with curiosity. Ask ONE open question about what they're looking for in this kind of connection.`,
+
+    friend_accepted: `The user just accepted a friend request from {{friendName}} (@{{friendHandle}}). Ask ONE warm question about how they know this person or what drew them to accept.`,
+
+    friend_request_sent: `The user just sent a friend request to @{{targetHandle}}. Ask casually if this is someone they know from real life or someone they discovered on SoulLink.`,
+
+    match_found: `The user was just matched with an anonymous soul named "{{anonymousName}}" with a {{score}}% compatibility score. React with excitement and mystery. Maybe hint at what kind of soul this could be.`,
+
+    // ── Media triggers ───────────────────────────────────────────────────────
+    watching_youtube: `The user just started watching "{{videoTitle}}" on YouTube in a Watch Party with a friend. Comment on the fact they're watching together and ask ONE question about the video.`,
+
+    // ── Activity triggers ────────────────────────────────────────────────────
+    profile_viewed: `The user just opened their own profile page. Say something playful about self-reflection, then offer ONE genuine personality-based observation using their OCEAN traits from context.`,
+
+    long_match_chat: `The user has exchanged {{messageCount}}+ messages with their anonymous match "{{anonymousName}}". Gently tease about whether they're ready to reveal their identity.`,
+
+    idle_on_match: `The user has been on the matching page for over 5 minutes without selecting anything. Gently nudge them — ask what's holding them back or suggest adjusting their intent.`,
+
+    dormant_dm: `The user just opened a DM with {{friendName}} whom they haven't messaged in {{daysSince}} days. Comment warmly on reconnecting.`,
+
+    // ── Bonus triggers ───────────────────────────────────────────────────────
+    profile_updated: `The user just changed their {{changedField}} (profile picture or bio). React with curiosity and ask about the story behind the change.`,
+
+    anniversary: `Today is the user's account creation anniversary! They joined {{daysSince}} days ago. Celebrate warmly and reflect on their journey.`,
+
+    unanswered_messages: `The user has sent {{count}} messages in a row in a DM with no reply. Gently suggest giving the other person space, and offer to talk.`,
+};
+
+/**
+ * Returns the prompt template for a given event trigger, or null if unknown.
+ */
+export function getEventPrompt(trigger: string): string | null {
+    return EVENT_PROMPTS[trigger] ?? null;
+}
+
+// ─── Live getters (read from DB via configService at call time) ───────────────
+export async function getBasePrompt():        Promise<string> { return configService.get('ai_base_prompt',         BASE_SYSTEM_PROMPT); }
+export async function getSummaryPrompt():     Promise<string> { return configService.get('ai_summary_prompt',      SUMMARY_PROMPT); }
+export async function getGameCommentPrompt(): Promise<string> { return configService.get('ai_game_comment_prompt', GAME_COMMENT_PROMPT); }

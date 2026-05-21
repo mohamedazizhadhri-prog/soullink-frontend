@@ -3,10 +3,38 @@ import { AppError } from '../../middleware/errorHandler.js';
 
 // Whitelist of fields users are allowed to update on their own profile
 const ALLOWED_UPDATE_FIELDS = [
-    'displayName', 'bio', 'avatarUrl', 'bannerUrl', 'privacyProfile', 'notificationsOn'
+    'displayName', 'bio', 'avatarUrl', 'bannerUrl', 'privacyProfile', 'notificationsOn', 'onboardingCompleted'
 ];
 
 export class UsersService {
+    /** Get active suspension/ban details for a user to show on the /suspended page */
+    async getMySuspension(userId: string) {
+        // Look for the most recent active BAN or SUSPENSION action against the user
+        const modAction = await prisma.modAction.findFirst({
+            where: {
+                targetId: userId,
+                action: { in: ['BAN', 'SUSPENSION'] },
+                OR: [
+                    { expiresAt: null }, // Permanent ban
+                    { expiresAt: { gt: new Date() } } // Active suspension
+                ]
+            },
+            orderBy: { createdAt: 'desc' },
+            include: { report: { include: { appeal: true } } }
+        });
+
+        if (!modAction) return null;
+
+        return {
+            reportId: modAction.reportId,
+            action: modAction.action,
+            reason: modAction.reason,
+            expiresAt: modAction.expiresAt,
+            createdAt: modAction.createdAt,
+            hasAppealed: !!modAction.report?.appeal
+        };
+    }
+
     async getMe(userId: string) {
         const user = await prisma.user.findUnique({
             where: { id: userId },
@@ -82,7 +110,17 @@ export class UsersService {
             }
         });
 
-        if (!user || user.status !== 'ACTIVE') throw new AppError(404, 'User not found');
+        if (!user) throw new AppError(404, 'User not found');
+
+        // Banned/suspended/deleted users — show a restricted profile instead of 404
+        if (user.status !== 'ACTIVE') {
+            const statusMsg: Record<string, string> = {
+                BANNED:    'This account has been banned.',
+                SUSPENDED: 'This account is currently suspended.',
+                DELETED:   'This account no longer exists.',
+            };
+            throw new AppError(403, statusMsg[user.status] ?? 'This profile is unavailable.');
+        }
 
         // Privacy filter
         if (user.privacyProfile === 'PRIVATE' && currentUserId !== user.id) {

@@ -10,6 +10,7 @@ import {
     SUGGESTION_EXPIRY_H,
     CANDIDATE_POOL_SIZE,
 } from './matching.constants.js';
+import { configService } from '../admin/config.service.js';
 import type {
     CandidateUser,
     CompatibilityResult,
@@ -93,18 +94,19 @@ export class MatchingService {
 
         if (potentialPartners.length === 0) return null;
 
-        // Filter and sort by compatibility
-        let matches = potentialPartners.map((partner: any) => {
-            const compatibility = this.computeCompatibility(me.user, partner.user);
+        // Filter and sort by compatibility (async, so we map with Promise.all)
+        const onlineBoost = await configService.getNumber('match_online_boost', 0.20);
+        const rawScored = await Promise.all(potentialPartners.map(async (partner: any) => {
+            const compatibility = await this.computeCompatibility(me.user, partner.user);
             let score = compatibility.total;
 
             // Prioritize Online for Quick Match
             if (me.isQuickMatch && partner.user.onlineStatus === 'ONLINE') {
-                score += 0.2; // Significant boost for being online
+                score += onlineBoost;
             }
 
             return { partner, score, justification: compatibility.justification };
-        });
+        }));
 
         // Filter out anyone we already matched with recently
         const recentMatches = await (prisma as any).match.findMany({
@@ -112,14 +114,15 @@ export class MatchingService {
             select: { senderId: true, receiverId: true }
         });
         const matchedIds = new Set(recentMatches.flatMap((m: any) => [m.senderId, m.receiverId]));
-        
-        matches = matches.filter(m => !matchedIds.has(m.partner.userId));
+
+        const matches = rawScored.filter((m: any) => !matchedIds.has(m.partner.userId));
 
         // Sort by score
-        matches.sort((a, b) => b.score - a.score);
+        matches.sort((a: any, b: any) => b.score - a.score);
 
         const bestMatch = matches[0];
-        if (!bestMatch || (bestMatch.score < 0.5 && !me.isQuickMatch)) return null;
+        const minThreshold = await configService.getNumber('match_min_threshold', 0.50);
+        if (!bestMatch || (bestMatch.score < minThreshold && !me.isQuickMatch)) return null;
 
         // Found a match! Create it.
         return this.createMatch(userId, bestMatch.partner.userId, bestMatch.score, bestMatch.justification, me.isQuickMatch);
@@ -286,7 +289,8 @@ export class MatchingService {
             orderBy: { score: 'desc' },
         });
 
-        if (existing.length >= SUGGESTIONS_PER_DAY) return existing;
+        const suggestionsPerDay = await configService.getNumber('match_suggestions_per_day', SUGGESTIONS_PER_DAY);
+        if (existing.length >= suggestionsPerDay) return existing;
 
         return this.generateSuggestions(userId);
     }
@@ -411,11 +415,14 @@ export class MatchingService {
 
         if (candidates.length === 0) return [];
 
-        // Score + sort + cap at SUGGESTIONS_PER_DAY
-        const scored = candidates
-            .map((c) => ({ candidate: c, result: this.computeCompatibility(me, c) }))
+        // Score + sort + cap at suggestions_per_day config (async computeCompatibility)
+        const suggestionsPerDay = await configService.getNumber('match_suggestions_per_day', SUGGESTIONS_PER_DAY);
+        const scoredRaw = await Promise.all(
+            candidates.map(async (c) => ({ candidate: c, result: await this.computeCompatibility(me, c) }))
+        );
+        const scored = scoredRaw
             .sort((a, b) => b.result.total - a.result.total)
-            .slice(0, SUGGESTIONS_PER_DAY);
+            .slice(0, suggestionsPerDay);
 
         const expiresAt = new Date(Date.now() + SUGGESTION_EXPIRY_H * 60 * 60 * 1000);
 
@@ -490,15 +497,21 @@ export class MatchingService {
     //  PRIVATE — COMPATIBILITY ALGORITHM
     // ─────────────────────────────────────────────────────────────────────────
 
-    private computeCompatibility(userA: any, userB: any): CompatibilityResult {
+    private async computeCompatibility(userA: any, userB: any): Promise<CompatibilityResult> {
         const intentA: string = userA.matchPreference?.intent ?? 'FRIEND';
         const intentB: string = userB.matchPreference?.intent ?? 'FRIEND';
+
+        const [wOcean, wInterest, wIntent] = await Promise.all([
+            configService.getNumber('match_weight_ocean',    0.60),
+            configService.getNumber('match_weight_interest', 0.25),
+            configService.getNumber('match_weight_intent',   0.15),
+        ]);
 
         const ocean    = this.computeOceanScore(userA, userB, intentA);
         const interest = this.computeInterestScore(userA, userB);
         const intent   = INTENT_MATRIX[intentA]?.[intentB] ?? 0.5;
 
-        const total = Math.round(((0.60 * ocean.score) + (0.25 * interest.score) + (0.15 * intent)) * 100) / 100;
+        const total = Math.round(((wOcean * ocean.score) + (wInterest * interest.score) + (wIntent * intent)) * 100) / 100;
 
         return {
             total,

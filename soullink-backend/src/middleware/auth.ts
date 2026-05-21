@@ -63,9 +63,21 @@ export const protect = async (req: AuthRequest, res: Response, next: NextFunctio
             throw new AppError(401, 'You are not logged in. Please log in to get access.');
         }
 
+        // Helper to enforce status constraints while allowing access to appeal endpoints
+        const enforceStatus = (userStatus: string) => {
+            if (userStatus === 'BANNED' || userStatus === 'SUSPENDED') {
+                const allowedPaths = ['/api/users/me/suspension', '/api/moderation/appeals'];
+                const isAllowed = allowedPaths.some(p => req.originalUrl.includes(p));
+                if (!isAllowed) {
+                    throw new AppError(403, `Your account is ${userStatus.toLowerCase()}.`);
+                }
+            }
+        };
+
         // ── FAST PATH: cache hit (zero DB queries) ──────────────────────────
         const cached = authCache.get(token);
         if (cached && Date.now() < cached.expiresAt) {
+            enforceStatus(cached.user.status);
             req.user = cached.user;
             return next();
         }
@@ -90,9 +102,7 @@ export const protect = async (req: AuthRequest, res: Response, next: NextFunctio
             throw new AppError(401, 'The user belonging to this token no longer exists.');
         }
 
-        if (user.status === 'BANNED' || user.status === 'SUSPENDED') {
-            throw new AppError(403, `Your account is ${user.status.toLowerCase()}.`);
-        }
+        enforceStatus(user.status);
 
         // Store in cache — subsequent requests skip all of the above
         authCache.set(token, { user, expiresAt: Date.now() + CACHE_TTL_MS });

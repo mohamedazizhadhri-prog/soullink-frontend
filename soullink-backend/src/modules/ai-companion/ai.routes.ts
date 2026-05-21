@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { chatWithNova, getChatHistory, getGameComment, investigate, streamTts } from './ai.controller.js';
+import { chatWithNova, getChatHistory, getGameComment, investigate, streamTts, triggerEvent } from './ai.controller.js';
 import { protect, AuthRequest } from '../../middleware/auth.js';
 import rateLimit from 'express-rate-limit';
 
@@ -29,5 +29,8 @@ router.post('/game-comment', protect, chatLimiter, getGameComment);
 
 // POST /api/ai/tts — Stream Nova's voice as audio/mpeg (secured, free-plan safe)
 router.post('/tts', protect, streamTts);
+
+// POST /api/ai/event — Frontend-triggered proactive event (Nova reacts to user actions)
+router.post('/event', protect, chatLimiter, triggerEvent);
 
 export default router;

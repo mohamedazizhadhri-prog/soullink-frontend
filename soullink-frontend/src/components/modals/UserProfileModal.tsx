@@ -7,6 +7,7 @@ import { X, MessageSquare, UserPlus, Shield, Globe, Calendar, Loader2, Lock, Pen
 import styles from "./UserProfileModal.module.css";
 import api from "@/lib/api";
 import { useRef } from "react";
+import { ReportUserModal } from "./ReportUserModal";
 
 interface UserProfile {
     id: string;
@@ -38,14 +39,16 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [errorCode, setErrorCode] = useState<number | null>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [socialActionLoading, setSocialActionLoading] = useState(false);
     const [editData, setEditData] = useState({ displayName: "", bio: "" });
     const [mounted, setMounted] = useState(false);
+    const [showReportModal, setShowReportModal] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user") || "{}") : null;
+    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("sl_user") || "{}") : null;
     const isOwnProfile = profile?.id === storedUser?.id;
 
     useEffect(() => {
@@ -55,6 +58,7 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
             try {
                 setIsLoading(true);
                 setError(null);
+                setErrorCode(null);
                 const res = await api.get(`/users/${handle}`);
                 setProfile(res.data.data.user);
                 setEditData({
@@ -62,7 +66,7 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
                     bio: res.data.data.user.bio || ""
                 });
             } catch (err: any) {
-                console.error("Failed to fetch profile:", err);
+                setErrorCode(err.response?.status ?? null);
                 setError(err.response?.data?.message || "Soul signature not found.");
             } finally {
                 setIsLoading(false);
@@ -113,7 +117,7 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
             setProfile({ ...profile, avatarUrl: res.data.data.user.avatarUrl });
             // Update local storage if needed
             if (storedUser) {
-                localStorage.setItem("user", JSON.stringify({ ...storedUser, avatarUrl: res.data.data.user.avatarUrl }));
+                localStorage.setItem("sl_user", JSON.stringify({ ...storedUser, avatarUrl: res.data.data.user.avatarUrl }));
             }
         } catch (err) {
             console.error("Avatar upload failed:", err);
@@ -131,7 +135,7 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
             setProfile({ ...profile, ...res.data.data.user });
             setIsEditing(false);
             if (storedUser) {
-                localStorage.setItem("user", JSON.stringify({ ...storedUser, ...res.data.data.user }));
+                localStorage.setItem("sl_user", JSON.stringify({ ...storedUser, ...res.data.data.user }));
             }
         } catch (err) {
             console.error("Profile update failed:", err);
@@ -209,11 +213,13 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
                     </div>
                 ) : error ? (
                     <div className="flex flex-col items-center justify-center h-[400px] p-12 text-center gap-6">
-                        <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center text-red-500">
-                            <Lock size={32} />
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center ${errorCode === 403 ? 'bg-orange-500/10 text-orange-400' : 'bg-red-500/10 text-red-500'}`}>
+                            {errorCode === 403 ? <Shield size={32} /> : <Lock size={32} />}
                         </div>
                         <div>
-                            <h3 className="text-xl font-bold text-white mb-2">Access Restricted</h3>
+                            <h3 className="text-xl font-bold text-white mb-2">
+                                {errorCode === 403 ? 'Profile Unavailable' : 'Not Found'}
+                            </h3>
                             <p className="text-white/40">{error}</p>
                         </div>
                         <button className={styles.secondaryBtn} onClick={onClose}>Return to Core</button>
@@ -321,6 +327,15 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
                                                         Accept Request
                                                     </button>
                                                 ) : null}
+
+                                                {/* Report Button */}
+                                                <button 
+                                                    className={`${styles.actionBtn} ${styles.secondaryBtn}`}
+                                                    onClick={() => setShowReportModal(true)}
+                                                    style={{ border: "1px solid rgba(255, 71, 87, 0.3)", color: "#ff4757" }}
+                                                >
+                                                    🚩 Report User
+                                                </button>
                                             </>
                                         ) : (
                                             <button 
@@ -379,6 +394,15 @@ export function UserProfileModal({ handle, onClose }: UserProfileModalProps) {
                     </>
                 )}
             </motion.div>
+
+            {showReportModal && profile && (
+                <ReportUserModal
+                    targetUserId={profile.id}
+                    targetDisplayName={profile.displayName}
+                    contextType="PROFILE"
+                    onClose={() => setShowReportModal(false)}
+                />
+            )}
         </div>,
         document.body
     );

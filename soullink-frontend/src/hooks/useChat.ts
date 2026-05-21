@@ -70,7 +70,10 @@ export function useChat(receiverId: string, onSendMessageError?: () => void) {
     const handleSend = async (content: string, type: string = 'TEXT', replyToId?: string) => {
         try {
             const res = await chatService.sendMessage(receiverId, content, type, replyToId);
-            setMessages(prev => [...prev, res.message]);
+            setMessages(prev => {
+                if (prev.some(m => m.id === res.message.id)) return prev;
+                return [...prev, res.message];
+            });
             return res.message;
         } catch (error) {
             console.error("Failed to send message:", error);
@@ -109,7 +112,10 @@ export function useChat(receiverId: string, onSendMessageError?: () => void) {
     const handleUnifiedSend = async (content: string, attachment?: File, type: string = 'TEXT', replyToId?: string) => {
         try {
             const res = await chatService.sendUnifiedMessage(receiverId, content, attachment, type, replyToId);
-            setMessages(prev => [...prev, res.message]);
+            setMessages(prev => {
+                if (prev.some(m => m.id === res.message.id)) return prev;
+                return [...prev, res.message];
+            });
             return res.message;
         } catch (error) {
             console.error("Unified send failed:", error);

@@ -18,7 +18,7 @@ export function NovaEmotes() {
     return (
         <AnimatePresence>
             {(emote === "angry" || emote === "shake") && (
-                <motion.div {...popVariant} style={{ position: 'absolute', top: -10, right: -10, pointerEvents: 'none', zIndex: 10 }}>
+                <motion.div key="angry-shake" {...popVariant} style={{ position: 'absolute', top: -10, right: -10, pointerEvents: 'none', zIndex: 10 }}>
                     {/* Red Vein Mark */}
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF0000" strokeWidth="3" strokeLinecap="round">
                         <path d="M4 12h6M12 4v6M18 10l-4 4M8 16l4-4" />
@@ -29,6 +29,7 @@ export function NovaEmotes() {
             {/* Lightbulb Overlay */}
             {(emote === "lightbulb") && (
                 <motion.div
+                    key="lightbulb"
                     {...popVariant}
                     style={{ position: 'absolute', top: -40, pointerEvents: 'none', zIndex: 10, width: '100%', display: 'flex', justifyContent: 'center' }}
                 >
@@ -46,7 +47,7 @@ export function NovaEmotes() {
 
             {/* Anime Blush Overlay */}
             {(emote === "blush" || mood === "blushed" || mood === "love") && (
-                <motion.div {...popVariant} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 10 }}>
+                <motion.div key="blush" {...popVariant} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 10 }}>
                     {/* Anime Blush Lines */}
                     <div style={{ position: 'absolute', top: 25, left: 12, width: 12, height: 3, background: 'rgba(255,105,180, 0.8)', transform: 'rotate(-45deg)' }} />
                     <div style={{ position: 'absolute', top: 30, left: 16, width: 12, height: 3, background: 'rgba(255,105,180, 0.8)', transform: 'rotate(-45deg)' }} />
@@ -58,6 +59,7 @@ export function NovaEmotes() {
 
             {emote === "oops" && (
                 <motion.div
+                    key="oops"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{
                         opacity: [0, 1, 1, 0],
@@ -75,6 +77,59 @@ export function NovaEmotes() {
                     <svg width="24" height="32" viewBox="0 0 24 32" fill="#00BFFF">
                         <path d="M12 2C12 2 4 14 4 20C4 25 8 29 12 29C16 29 20 25 20 20C20 14 12 2 12 2Z" />
                     </svg>
+                </motion.div>
+            )}
+
+            {/* Anime Shy Bounce 👉👈 */}
+            {emote === "shybounce" && (
+                <motion.div
+                    key="shybounce"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    style={{ 
+                        position: 'absolute', 
+                        bottom: -10, 
+                        left: '50%', 
+                        transform: 'translateX(-50%)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 4,
+                        pointerEvents: 'none', 
+                        zIndex: 10 
+                    }}
+                >
+                    {/* Left finger 👉 - bounces right */}
+                    <motion.div
+                        animate={{
+                            x: [0, 8, 0, 8, 0],
+                            scale: [1, 1.1, 1, 1.1, 1],
+                        }}
+                        transition={{
+                            duration: 0.8,
+                            repeat: 2,
+                            ease: "easeInOut"
+                        }}
+                        style={{ fontSize: 20, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
+                    >
+                        👉
+                    </motion.div>
+                    {/* Right finger 👈 - bounces left */}
+                    <motion.div
+                        animate={{
+                            x: [0, -8, 0, -8, 0],
+                            scale: [1, 1.1, 1, 1.1, 1],
+                        }}
+                        transition={{
+                            duration: 0.8,
+                            repeat: 2,
+                            ease: "easeInOut"
+                        }}
+                        style={{ fontSize: 20, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
+                    >
+                        👈
+                    </motion.div>
                 </motion.div>
             )}
         </AnimatePresence>

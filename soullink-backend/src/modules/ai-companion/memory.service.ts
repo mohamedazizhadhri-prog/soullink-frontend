@@ -10,7 +10,9 @@ export type TrustEvent =
     | 'insult'
     | 'long_conversation'
     | 'returned_after_absence'
-    | 'completed_game';
+    | 'completed_game'
+    | 'interest_action'
+    | 'social_connection';
 
 const TRUST_EVENTS: Record<TrustEvent, number> = {
     shared_secret: 8,
@@ -20,6 +22,8 @@ const TRUST_EVENTS: Record<TrustEvent, number> = {
     long_conversation: 3,
     returned_after_absence: 4,
     completed_game: 6,
+    interest_action: 1,
+    social_connection: 2,
 };
 
 function getFriendshipStage(trustLevel: number): string {

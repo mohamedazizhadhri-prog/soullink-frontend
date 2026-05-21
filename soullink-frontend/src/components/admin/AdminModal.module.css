@@ -1,0 +1,187 @@
+/* AdminModal.module.css — shared modal styles for Admin & Moderation dashboards */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal {
+    background: #1a1a2e;
+    border: 1px solid rgba(123, 104, 238, 0.3);
+    border-radius: 16px;
+    padding: 28px 32px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.04);
+    animation: slideUp 0.18s ease;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    display: block;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #e8e8f0;
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.body {
+    font-size: 0.875rem;
+    color: #a0a0b5;
+    text-align: center;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #a0a0b5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #e8e8f0;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+.textarea:focus {
+    border-color: rgba(123, 104, 238, 0.5);
+}
+
+.input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #e8e8f0;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+.input:focus {
+    border-color: rgba(123, 104, 238, 0.5);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+/* Buttons */
+.cancelBtn {
+    padding: 9px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent;
+    color: #a0a0b5;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.cancelBtn:hover {
+    background: rgba(255,255,255,0.05);
+    color: #e8e8f0;
+}
+
+.confirmBtn {
+    padding: 9px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #7B68EE;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+}
+.confirmBtn:hover:not(:disabled) { background: #6a57dc; }
+.confirmBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.dangerBtn {
+    padding: 9px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #FF4444;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+}
+.dangerBtn:hover:not(:disabled) { background: #e03030; }
+.dangerBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.successBtn {
+    padding: 9px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #32CD32;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+}
+.successBtn:hover:not(:disabled) { background: #28a828; }
+.successBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.warnBtn {
+    padding: 9px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #FFD700;
+    color: #111;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+}
+.warnBtn:hover:not(:disabled) { background: #e6c200; }
+.warnBtn:disabled { opacity: 0.5; cursor: not-allowed; }

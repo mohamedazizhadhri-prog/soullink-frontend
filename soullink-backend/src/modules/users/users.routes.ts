@@ -10,6 +10,7 @@ const router = Router();
 const controller = new UsersController();
 
 router.get('/me', protect, controller.getMe);
+router.get('/me/suspension', protect, controller.getMySuspension);
 router.patch('/me', protect, validate(updateProfileSchema), controller.updateMe);
 router.post('/me/avatar', protect, upload.single('avatar'), controller.updateAvatar);
 router.post('/me/banner', protect, upload.single('banner'), controller.updateBanner);
